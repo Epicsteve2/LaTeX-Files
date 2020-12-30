@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in]{geometry}	
+\usepackage{amsmath,amsthm,amssymb,scrextend}			
+\usepackage{fancyhdr}				
+\usepackage{graphicx}				
+\usepackage{cancel}					
+\usepackage{changepage}
+\usepackage{color,soul}
+\usepackage{enumitem}
+\usepackage{array}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCB36 Assignment 2}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006323132}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\renewcommand{\qed}{\hfill$\blacksquare$}
+
+\begin{document}
+% ! Problem 5a
+{\LARGE \noindent \underline{\textbf{Problem 5(a)}}}\\
+
+\noindent \textbf{Proof of correctness for} \textsc{MaxOdd($L$)}:
+\\\\
+For a natural $n \geq 0$, we define predicate $Q(n)$ as follows:
+\begin{itemize}[leftmargin=20mm]
+	\item [$Q(n):$]If $L$ is a list of integers, $n = \text{len}(L)$, then \textsc{MaxOdd($L$)}
+	      terminates and returns the largest integer in $O(L)$ if $O(L)$ is non-empty. Otherwise, return 0.
+\end{itemize}
+By complete induction, we will prove $Q(n)$ holds for all $n \geq 0$ as follows:\\
+\vspace*{1mm}
+
+\noindent \textsc{Basis:} % ! Base cases
+\vspace*{1mm}
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	Let n = 0
+	\vspace*{1mm}
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+		Then $L = \varnothing$ which means $O(L) = \varnothing$\\
+		$\Longrightarrow$ \textsc{MaxOdd}$(L) = 0$ by Postcondition.
+		\\\\
+		Line 1 is run since len($L$) $\leq 1$, and line 2 is run which terminates and\\ returns 0 as wanted.\\
+	\end{minipage}\\\\
+	Let n = 1
+	\vspace*{1mm}
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+		then $L$ is a 1-element list which has no odd indicies.
+		By the definition of $O(L)$, it is empty.\\
+		$\Longrightarrow$ \textsc{MaxOdd}$(L) = 0$ by Postcondition.
+		\\\\
+		Line 1 is run since len($L$) $\leq 1$, and line 2 is run which terminates and returns 0 as wanted.
+	\end{minipage}
+\end{minipage}
+\\\\\\
+\noindent \textsc{Induction Step:} let $n > 1$ % ! Induction step
+\vspace*{1mm}
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	Let max$(L)$ return 0 if a list of integers $L$ is empty.\\
+	Suppose $Q(j)$ holds whenever $0 \leq j < n$. \qquad \qquad \qquad \,\,\,\,\textbf{[IH]}\\
+	WTP: $Q(n)$ holds.
+	\\\\
+	Since $\text{len}(L) = n > 1$, lines 4-8 is run.\\
+	There are 3 cases to consider:\\
+	Case 1: $L[1]$ is even
+	\vspace*{1mm}
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm} % ! Case 1
+		$O(L[:2]) = \varnothing$  by definition of $O(L)$\\
+		$result = m$ by line 5.\\
+		By line 8, $result$ is returned and program terminates\\
+		$\Longrightarrow$  \textsc{MaxOdd}$(L) = m$
+		\\\\
+		\emph{WTS:} \textsc{MaxOdd}$(L) = \text{max}(O(L))$
+		\\\\
+		$\begin{array}{l@{}>{\displaystyle}ll}
+				\text{\textsc{MaxOdd}}(L) & {}=  m                                                    &                                       \\
+				                          & {}=  \text{\textsc{MaxOdd}}(L[2:])                        & \text{by line 4}                      \\
+				                          & {}=  \text{max}(O(L[2:]))                                 & \text{by \textbf{[IH]}}               \\% 0 \leq len(L[2:]) < n \\
+				                          & {}=  \text{max}(\varnothing \ \cup \ O(L[2:]))            & \text{by union properties}            \\
+				                          & {}=  \text{max}(O(L[:2]) \ \cup \ O(L[2:])) \qquad \qquad & \text{since $O(L[:2]) = \varnothing$} \\
+				                          & {}=  \text{max}(O(L))                                     & \text{by union properties}            \\
+			\end{array}$
+		$\Longrightarrow Q(n)$ holds as wanted.\\
+	\end{minipage}
+	\\\\
+	Case 2: $L[1]$ is odd, $m = 0$
+	\vspace*{1mm}
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm} % ! Case 2
+		$O(L[2:]) = \varnothing$ by Postcondition of \textsc{MaxOdd}$(L[2:])$ from line 4 which terminates by \textbf{[IH]}.\\
+		$O(L[:2])$ is a 1-element list containing $L[1]$.\\
+		$result = L[1]$ by line 6.\\
+		By line 8, $result$ is returned and program terminates\\
+		$\Longrightarrow$  \textsc{MaxOdd}$(L) = L[1]$
+		\\\\
+		\emph{WTS:} \textsc{MaxOdd}$(L) = \text{max}(O(L))$
+		\\\\
+		$\begin{array}{l@{}>{\displaystyle}ll}
+				\text{\textsc{MaxOdd}}(L) & {}= L[1]                                                 &                                   \\
+				                          & {}= \text{max}(L[1])                                     & \text{by definition of max}(L)    \\
+				                          & {}= \text{max}(O(L[:2]))                                 & \text{since $O(L[:2]) = L[1]$}    \\
+				                          & {}= \text{max}(O(L[:2]) \ \cup \ \varnothing)            & \text{by union properties}        \\
+				                          & {}= \text{max}(O(L[:2]) \ \cup \ O(L[2:])) \qquad \qquad & \text{since $O(L[2:]) = \varnothing$} \\
+				                          & {}= \text{max}(O(L))                                     & \text{by union properties}        \\
+			\end{array}$
+		$\Longrightarrow Q(n)$ holds as wanted.\\
+	\end{minipage}
+\end{minipage}
+\newpage
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	%\\\\
+	Case 3: $L[1]$ is odd, $m \not = 0$
+	\vspace*{1mm}
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm} % ! Case 3
+		$O(L[2:])$ is non-empty.\\
+		$O(L[:2])$ is a 1-element list containing $L[1]$\\
+		$result = \text{max}(L[1], m)$ by line 7\\
+		By line 8, $result$ is returned and program terminates\\
+		$\Longrightarrow$  \textsc{MaxOdd}$(L) = \text{max}(L[1], m)$
+		\\\\
+		\emph{WTS:} \textsc{MaxOdd}$(L)=\text{max}(O(L))$
+		\\\\
+		$\begin{array}{l@{}>{\displaystyle}ll}
+				\text{\textsc{MaxOdd}}(L) & {}= \text{max}(L[1], m)                                  &                                \\
+				                          & {}= \text{max}(L[1], \text{\textsc{MaxOdd}}(L[2:]))      & \text{by line 4}               \\
+				                          & {}= \text{max}(L[1], \text{max}(O(L[2:])))               & \text{by \textbf{[IH]}}        \\
+				                          & {}= \text{max}(O(L[:2]), \text{max}(O(L[2:])))           & \text{since $O(L[:2]) = L[1]$} \\
+				                          & {}= \text{max}(O(L[:2]) \ \cup \ O(L[2:])) \qquad \qquad & \text{by definition of max}(L) \\
+				                          & {}= \text{max}(O(L))                                     & \text{by union properties}     \\
+			\end{array}$
+		$\Longrightarrow Q(n)$ holds as wanted.
+	\end{minipage}
+\end{minipage}
+\\\\
+$\therefore$ by Complete Induction, $Q(n)$ holds for all $n \in \mathbb{N}$ \qed
+\end{document}

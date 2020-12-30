@@ -1,0 +1,195 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in]{geometry}	
+\usepackage{amsmath,amsthm,amssymb,scrextend}			
+\usepackage{fancyhdr}				
+\usepackage{graphicx}				
+\usepackage{cancel}					
+\usepackage{changepage}
+\usepackage{color,soul}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage{pifont}
+\usepackage[table,x11names]{xcolor}
+\usepackage{colortbl}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCB36 Assignment 5}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand\myalign[1]{\alignShortstack{\strut#1\strut}}
+\usepackage{tabstackengine}
+\TABstackMath
+\TABstackMathstyle{\displaystyle}
+
+\newcount\arrowcount
+\newcommand\arrows[1]{
+    \global\arrowcount#1
+    \ifnum\arrowcount>0
+            \begin{matrix}[c]
+            \expandafter\nextarrow
+    \fi
+}
+
+\newcommand\nextarrow[1]{
+    \global\advance\arrowcount-1
+    \ifx\relax#1\relax\else \xrightarrow{#1}\fi
+    \ifnum\arrowcount=0
+    \end{matrix}
+    \else
+    \\
+    \expandafter\nextarrow
+    \fi
+} 
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+
+\newcommand{\timesSmall}{{\mkern-2mu\times\mkern-2mu}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\innerproduct}[2]{\left\langle #1, \ #2\right\rangle}
+\newcommand{\bigbracket}[1]{\big(#1\big)}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\newcommand{\heart}{\ensuremath\varheartsuit}
+\newcommand{\flower}{\text{\ding{95}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Define some useful colors %%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{ocre}{RGB}{243,102,25}
+\definecolor{epicPurple}{RGB}{162, 113, 255}
+\definecolor{epicOrange}{RGB}{254, 113, 69}
+\definecolor{mygray}{RGB}{243,243,244}
+\definecolor{deepGreen}{RGB}{26,111,0}
+\definecolor{shallowGreen}{RGB}{235,255,255}
+\definecolor{deepBlue}{RGB}{61,124,222}
+\definecolor{shallowBlue}{RGB}{235,249,255}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{proofindent}{\vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}}{\end{minipage}}
+
+\begin{document}
+{\LARGE \noindent \underline{\textbf{Problem 4.}}}\\
+
+(a) 
+\begin{center}
+    \begin{tabular}{|c|c|c|| ccc>{\columncolor[gray]{0.8}}cccc|}
+        \hline
+        $x$ & $y$ & $z$ &$\big(\neg x$&$\to$&$ (y \wedge z) \big)$&$ \wedge $&$\big(\neg y$&$ \to $&$ (x \wedge z)\big)$\\ 
+        \hline \hline 
+        0&0&0&  1&0&0&0&1&0&0 \\   
+        0&0&1&  1&0&0&0&1&0&0 \\
+        0&1&0&  1&0&0&0&0&1&0 \\  
+        0&1&1&  1&1&1&1&0&1&0 \\ 
+        \hline 
+        1&0&0&  0&1&0&0&1&0&0 \\  
+        1&0&1&  0&1&0&1&1&1&1 \\  
+        1&1&0&  0&1&0&1&0&1&0 \\  
+        1&1&1&  0&1&1&1&0&1&1 \\  
+        \hline 
+    \end{tabular}
+\end{center}
+
+\newpage
+(b)\\
+To get the DNF form, we highlight all rows that evaluate to true.
+\begin{center} \begin{tabular}{|c|c|c|| ccccccc|}
+    \hline
+    $x$ & $y$ & $z$ &$\big(\neg x$&$\to$&$ (y \wedge z) \big)$&$ \wedge $&$\big(\neg y$&$ \to $&$ (x \wedge z)\big)$\\ 
+    \hline \hline 
+    0&0&0&  1&0&0&0&1&0&0 \\   
+    0&0&1&  1&0&0&0&1&0&0 \\
+    0&1&0&  1&0&0&0&0&1&0 \\  
+    \rowcolor{epicPurple}0&1&1&  1&1&1&1&0&1&0 \\ 
+    \hline 
+    1&0&0&  0&1&0&0&1&0&0 \\  
+    \rowcolor{epicPurple}1&0&1&  0&1&0&1&1&1&1 \\  
+    \rowcolor{epicPurple}1&1&0&  0&1&0&1&0&1&0 \\  
+    \rowcolor{epicPurple}1&1&1&  0&1&1&1&0&1&1 \\  
+    \hline 
+\end{tabular} \end{center}
+So we end up with:
+\[(\neg x \wedge y \wedge z)\vee (x \wedge \neg y \wedge z)\vee  (x \wedge y \wedge \neg z)\vee  (x \wedge y \wedge z)\\
+\]
+
+\newpage
+(c)\\
+To get the CNF form, we negate our original expression.
+\begin{center}
+    \begin{tabular}{|c|c|c|| c|}
+        \hline
+        $x$ & $y$ & $z$ &$\neg \Big(\bigbracket{\neg x \to (y \wedge z)} \wedge \bigbracket{\neg y \to (x \wedge z)}\Big)$\\ 
+        \hline \hline 
+        \rowcolor{epicOrange}0&0&0&  1 \\   
+        \rowcolor{epicOrange}0&0&1&  1 \\
+        \rowcolor{epicOrange}0&1&0&  1 \\  
+        0&1&1&  0 \\ 
+        \hline 
+        \rowcolor{epicOrange}1&0&0&  1 \\  
+        1&0&1&  0 \\  
+        1&1&0&  0 \\  
+        1&1&1&  0 \\  
+        \hline 
+    \end{tabular}
+\end{center}
+Now negate the DNF for this truth table.
+\\\\
+$\neg\bigbracket{(\neg x \wedge \neg y \wedge \neg z) \vee (\neg x \wedge \neg y \wedge z) \vee (\neg x \wedge y \wedge \neg z) \vee (x \wedge \neg y \wedge \neg z)}$\\
+{\setstretch{1.5}$\begin{array}{rc>{\displaystyle}ll}
+    &\text{\textsc{leqv}}&
+    \neg(\neg x \wedge \neg y \wedge \neg z) \wedge \neg(\neg x \wedge \neg y \wedge z) \wedge \neg(\neg x \wedge y \wedge \neg z) \wedge \neg(x \wedge \neg y \wedge \neg z)&\text{}\\
+    &\text{\textsc{leqv}}&
+    (\neg \neg x \vee \neg\neg y \vee \neg \neg z) \wedge (\neg\neg  x \vee \neg \neg y \vee \neg z) \wedge (\neg \neg x \vee \neg y \vee \neg \neg z) \wedge (\neg  \vee \neg \neg y \vee \neg \neg z)&\text{}\\
+    &\text{\textsc{leqv}}&
+    (x \vee  y \vee  z) \wedge (  x \vee  y \vee \neg z) \wedge ( x \vee \neg y \vee  z) \wedge (\neg  \vee  y \vee  z)&\text{}\\
+    \end{array}$}
+\\[50mm]
+\textbf{Eaiser way:} (I watched this part of the lecture after I did this already D:)\\
+Highlight all rows that evaluate to false. Then negate all of the variables. 
+\begin{center} \begin{tabular}{|c|c|c|| ccccccc|}
+    \hline
+    $x$ & $y$ & $z$ &$\big(\neg x$&$\to$&$ (y \wedge z) \big)$&$ \wedge $&$\big(\neg y$&$ \to $&$ (x \wedge z)\big)$\\ 
+    \hline \hline 
+    \rowcolor{epicOrange}0&0&0&  1&0&0&0&1&0&0 \\   
+    \rowcolor{epicOrange}0&0&1&  1&0&0&0&1&0&0 \\
+    \rowcolor{epicOrange}0&1&0&  1&0&0&0&0&1&0 \\  
+    0&1&1&  1&1&1&1&0&1&0 \\ 
+    \hline 
+    \rowcolor{epicOrange}1&0&0&  0&1&0&0&1&0&0 \\  
+    1&0&1&  0&1&0&1&1&1&1 \\  
+    1&1&0&  0&1&0&1&0&1&0 \\  
+    1&1&1&  0&1&1&1&0&1&1 \\  
+    \hline 
+\end{tabular} \end{center}
+So we end up with:
+\[(x \vee  y \vee  z) \wedge (  x \vee  y \vee \neg z) \wedge ( x \vee \neg y \vee  z) \wedge (\neg  \vee  y \vee  z)\\
+\]
+\newpage (d)\\
+$\bigbracket{\neg x \to (y \wedge z)} \wedge \bigbracket{\neg y \to (x \wedge z)} $\\
+{\setstretch{1.5}$\begin{array}{rc>{\displaystyle}ll}
+        \hspace*{10mm}& \text{\textsc{leqv}} & \bigbracket{\neg\neg x \vee (y \wedge z)} \wedge \bigbracket{\neg \neg  y \vee (x \wedge z)}   & [\to \text{ law}] \\
+        & \text{\textsc{leqv}} & \bigbracket{ x \vee (y \wedge z)} \wedge \bigbracket{ y \vee (x \wedge z)}  & [\text{double negation}] \\
+        & \text{\textsc{leqv}} & \bigbracket{ (x \vee y) \wedge (x \vee z)} \wedge \bigbracket{ (y \vee x) \wedge (y \vee z)}  \hspace*{20mm} & [\text{distributive laws}] \\
+        & \text{\textsc{leqv}} &  (x \vee y) \wedge (x \vee z) \wedge  (y \vee x) \wedge (y \vee z)   & [\text{associative laws}] \\
+        & \text{\textsc{leqv}} &  \big((x \vee y) \wedge  (y \vee x)\big) \wedge (x \vee z)  \wedge (y \vee z)   & [\text{by reordering}] \\
+        & \text{\textsc{leqv}} &  (x \vee y)  \wedge (x \vee z)  \wedge (y \vee z)   & [\text{idempotency laws}] \\
+\end{array}$}
+\end{document}

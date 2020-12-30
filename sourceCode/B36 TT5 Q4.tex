@@ -1,0 +1,142 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}	
+\usepackage{amsmath,amsthm,amssymb}		
+\usepackage{fancyhdr}				
+\usepackage{setspace} % for \setspace
+\usepackage{tabularx} 
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+\usepackage{tabu}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCB36 Term Test 5}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{}
+\fancyfoot[RO,R]{}
+
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+
+\newcommand{\timesSmall}{{\mkern-2mu\times\mkern-2mu}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\bigbracket}[1]{\big(#1\big)}
+\newcommand{\Bigbracket}[1]{\Big(#1\Big)}
+
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\newcommand{\heart}{\ensuremath\varheart}
+\renewcommand{\diamond}{\ensuremath\vardiamond}
+\newcommand{\flower}{\text{\ding{95}}}
+\newcommand{\flowerOther}{\text{\ding{96}}}
+\newcommand{\blockX}{\text{\ding{54}}}
+
+\newenvironment{proofindent}{\vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}}{\end{minipage}}
+\newenvironment{customPageLength}[3]{\noindent \eject \pdfpagewidth=#1 \pdfpageheight=#2 \newgeometry{margin=1in, left=0.6in, right=0.6in, bottom=#3}}{\restoregeometry \eject \pdfpagewidth=8.5in \pdfpageheight=11in}
+% Third is 11.5 - argument3 + 0.5
+
+%{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}& {}= & [\text{}]\\\end{array}$}
+%\vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}\end{minipage}
+
+\begin{document}
+%\begin{customPageLength}{8.5in}{12in}{-0.5in}
+    
+
+% ! Problem 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Question 4}}}
+\begin{itemize}[leftmargin=7mm]
+    \item [a)] Define the domain D = $\{g_1,\ g_2,\ g_3,\ g_4\}$\\
+    \vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-16mm}
+        let $g_1$ be beautiful, and calls $g_2$\\
+        let $g_2$ be ugly, and calls $g_3$\\
+        let $g_3$ be ugly, and calls $g_4$\\
+        let $g_4$ be ugly, and calls $g_2$
+    \end{minipage}
+    \\\\
+    Let $d = g_1$
+    \\\\
+    Then $(F_1 \wedge F_2 \wedge F_2)$ is satisfied.
+    \\\\
+    This is because $d=g_1$ is beautiful, so $F_1$ is satisfied.
+    \\\\
+    $g_1$ calls $g_2$, which is ugly.\\
+    $g_2$ calls $g_3$, which is ugly.\\
+    $g_3$ calls $g_4$, which is ugly.\\
+    $g_4$ calls $g_2$, which is ugly.\\
+    So $F_2$ is satisfied
+    \\\\
+    Lastly, no 2 functions call each other, so $F_3$ is satisfied
+    \\\\
+    $\therefore (F_1 \wedge F_2 \wedge F_2)$ is satisfied.
+    \\[20mm]
+    
+
+
+
+
+
+
+
+\newpage
+    \noindent 
+    \item[b)] No, there does not exist a domain $\{h_1,\ h_2,\ h_3\}$ such that $(F_1 \wedge F_2 \wedge F_2)$ is satisfied.
+    \\\\
+    Suppose to the contrary that there exist a domain $\{h_1,\ h_2,\ h_3\}$ such that $(F_1 \wedge F_2 \wedge F_2)$ is satisfied.
+    \\ In order for $F_3$ to be satisfied, then no 2 functions call each other, so we have either
+    %\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+
+%        &
+ %       test
+  %  \end{tabularx}
+   % \\\\
+    \if(false) \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} c}
+        $\begin{tikzcd}
+            & h_1 \arrow[dr]& \\[12mm]
+            h_2 \arrow[ur]  & &\arrow[ll] h_3 
+        \end{tikzcd}$ 
+        & 
+        $\begin{tikzcd}
+            & \arrow[dl] h_1 & \\[12mm]
+            h_2 \arrow[rr]  & &\arrow[ul] h_3 
+        \end{tikzcd}$
+    \end{tabular*}
+    \\\\
+    $\begin{tikzcd}
+        & h_1 \arrow[dr]& \\[10mm]
+        h_2 \arrow[ur]  & &\arrow[ll] h_3 
+    \end{tikzcd}$\\
+    \fi
+\end{itemize}
+    \newlength\q
+\setlength\q{\dimexpr .5\textwidth -2\tabcolsep}
+\noindent\begin{tabular}{p{\q}p{\q}}
+    \[\begin{tikzcd}
+        & h_1 \arrow[dr]& \\[12mm]
+        h_2 \arrow[ur]   & &\arrow[ll] h_3 
+    \end{tikzcd}\]  & \[\begin{tikzcd}
+        & \arrow[dl] h_1 & \\[12mm]
+        h_2 \arrow[rr]  & &\arrow[ul] h_3 
+    \end{tikzcd}\] 
+\end{tabular}
+\begin{itemize}[leftmargin=7mm]
+    \item[\hspace*{2mm}] Where a function points to the function it calls.
+    \\\\ 
+    In order to sastify $F_2$, then all functions must be ugly since all functions are called. 
+    \\\\
+    However, $F_3$ cannot be satisfied since no functions are beautiful. All functions are called because $F_3$ is satisfied.
+    \\\\
+    Therefore our supposition was wrong, and there does not exist a domain $\{h_1,\ h_2,\ h_3\}$ such that $(F_1 \wedge F_2 \wedge F_2)$ is satisfied.
+\end{itemize}
+
+
+%\end{customPageLength}
+\end{document}

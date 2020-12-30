@@ -1,0 +1,876 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in]{geometry}	
+\usepackage{amsmath,amsthm,amssymb,scrextend}			
+\usepackage{fancyhdr}				
+\usepackage{graphicx}				
+\usepackage{cancel}					
+\usepackage{changepage}
+\usepackage{color,soul}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{hyperref}
+
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{MATB24 Homework 3}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand\myalign[1]{\alignShortstack{\strut#1\strut}}
+\usepackage{tabstackengine}
+\TABstackMath
+\TABstackMathstyle{\displaystyle}
+
+\newcount\arrowcount
+\newcommand\arrows[1]{
+    \global\arrowcount#1
+    \ifnum\arrowcount>0
+            \begin{matrix}[c]
+            \expandafter\nextarrow
+    \fi
+}
+
+\newcommand\nextarrow[1]{
+    \global\advance\arrowcount-1
+    \ifx\relax#1\relax\else \xrightarrow{#1}\fi
+    \ifnum\arrowcount=0
+    \end{matrix}
+    \else
+    \\
+    \expandafter\nextarrow
+    \fi
+} 
+
+\newcommand{\timesSmall}{{\mkern-2mu\times\mkern-2mu}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+
+%$\begin{array}{r@{}>{\displaystyle}ll}& {}= & [\text{}]\\\end{array}$
+%\vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}\end{minipage}
+
+\begin{document}
+\begin{center}
+	\hypertarget{toc}{\LARGE \noindent \underline{\textbf{Table of contents}}}\\
+\end{center}
+\textbf{Problem 1:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{1.1}{1.1}\\
+\hyperlink{1.2}{1.2}\\
+\hyperlink{1.3}{1.3}\\
+
+\noindent \textbf{Problem 2:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{2.1}{2.1}\\
+\hyperlink{2.2}{2.2}\\
+\hyperlink{2.3}{2.3}\\
+
+\noindent \textbf{Problem 3:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{3}{3}\\
+
+\noindent \textbf{Problem 4:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{4.1}{4.1}\\
+\hyperlink{4.2}{4.2}\\
+\hyperlink{4.3}{4.3}\\
+\hyperlink{4.4}{4.4}\\
+
+\noindent \textbf{Problem 5:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{5.1}{5.1}\\
+\hyperlink{5.2}{5.2}\\
+\hyperlink{5.3}{5.3}\\
+\hyperlink{5.4}{5.4}\\
+\hyperlink{5.5}{5.5}\\
+\newpage
+% ! Problem 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 1.}}}\\
+
+\hyperlink{toc}{\hypertarget{1.1}{(1)}}\\
+Suppose we differentiate a polynomial with degree $n$.\\
+Then our matrix will have $n$ rows and $n+1$ columns.\\
+If both the domain and codomain are the same, then it'll be $n+1$ rows and $n+1$ columns.\\
+For this question, we will have a $4\times 4$ matrix
+\\\\\\\\\\\\
+
+\hyperlink{toc}{\hypertarget{1.2}{(2)}}\\
+\begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} ccc}
+	$T(1) = 0$ & $T(x) = 1$ & $T(x^2) = 2x$ & $T(x^3) = 3x^2$\\\\
+	$[T(1)]_\mathcal{B} = \begin{bmatrix}
+			0 \\
+			0 \\
+			0 \\
+			0 \\
+		\end{bmatrix}$ &
+	$[T(x)]_\mathcal{B} = \begin{bmatrix}
+			1 \\
+			0 \\
+			0 \\
+			0 \\
+		\end{bmatrix}$&
+	$[T(x^2)]_\mathcal{B} = \begin{bmatrix}
+			0 \\
+			2 \\
+			0 \\
+			0 \\
+		\end{bmatrix}$&
+	$[T(x^3)]_\mathcal{B} = \begin{bmatrix}
+			0 \\
+			0 \\
+			3 \\
+			0 \\
+		\end{bmatrix}$
+\end{tabular*}
+\\\\
+$$[T]_\mathcal{B} = \begin{bmatrix}[cccc]
+		|                  & |                  & |                    & |                    \\
+		[T(1)]_\mathcal{B} & [T(x)]_\mathcal{B} & [T(x^2)]_\mathcal{B} & [T(x^3)]_\mathcal{B} \\
+		|                  & |                  & |                    & |
+	\end{bmatrix}
+	=
+	\begin{bmatrix}[cccc]
+		0 & 1 & 0 & 0 \\
+		0 & 0 & 2 & 0 \\
+		0 & 0 & 0 & 3 \\
+		0 & 0 & 0 & 0 \\
+	\end{bmatrix}$$
+\\\\\\\\\\\\
+
+\hyperlink{toc}{\hypertarget{1.3}{(3)}}\\
+$\displaystyle A^4x = \overbrace{T(T(T\left( T(x) \right) ))}^{\text{differentiate 4 times}}= 0$\\
+\qquad \text{since we differentiate a polynomial of degree 3, 4 times.}
+$$\therefore A^4 =\begin{bmatrix}[cccc]
+		0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 \\
+	\end{bmatrix}$$\\
+
+\newpage
+% ! Problem 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 2.}}}\\
+
+\hyperlink{toc}{\hypertarget{2.1}{(1)}}\\
+Let $\vec{w} \in \text{Im}(T) \ \Longrightarrow \ \exists \ \vec{v} \in V \ \text{ st } \ T(\vec{v}) = \vec{w}$
+\\\\
+Since $\{T(b_1), \cdots , T(b_r)\}$ is a basis for $\text{Im}(T)$
+\\\\
+$\begin{array}{l@{}>{\displaystyle}ll}
+		\vec{w} & {}= \lambda_1T(b_1) + \ldots + \lambda_rT(b_r) \qquad \qquad & \text{[where } \lambda_1, \cdots, \lambda_r \in \mathbb{F}] \\
+		        & {}=T(\lambda_1b_1 + \ldots + \lambda_rb_r)                   & \text{[by linearity]}                                       \\
+		        & {}=T(\vec{v})                                                & \text{[by given]}                                           \\
+		%& {}=&[\text{}]\\
+	\end{array}$
+\\\\
+$\Longrightarrow \ \vec{v} = \lambda_1b_1 + \ldots + \lambda_rb_r + \vec{k}$\qquad for some $\vec{k} \in \text{Ker}(T)$\\
+Since $\{v_1, \cdots, v_d\}$ is a basis for $\text{Ker}(T)$\\
+$\vec{k} = \alpha_1v_1 + \ldots + \alpha_dv_d \qquad \text{where }\alpha_1, \cdots, \alpha_d \in \mathbb{F}$\\
+$\Longrightarrow \ \vec{v} = \lambda_1b_1 + \ldots + \lambda_rb_r + \alpha_1v_1 + \ldots + \alpha_dv_d$
+\\\\
+Since $\vec{v}$ is an arbitrary element in $V$,\\ and $\vec{v}$ is a linear combination of vectors in $\{b_1, \cdots ,b_r,v_1,\cdots ,v_d\}$\\
+$\therefore \text{Span}(b_1, \cdots ,b_r,v_1,\cdots ,v_d) = V$ \qed
+
+\newpage
+
+\hyperlink{toc}{\hypertarget{2.2}{(2)}}
+\begin{itemize}[leftmargin=12mm]
+	\item [\emph{WTS:}] if $\lambda_1b_1 + \ldots + \lambda_rb_r + \alpha_1v_1 + \ldots + \alpha_dv_d = 0 \text{\qquad for some } \alpha_1, \cdots, \alpha_d, \lambda_1, \cdots, \lambda_r \in \mathbb{F}\\
+		      \Longrightarrow \ \lambda_1 = \ldots = \lambda_r = \alpha_1 = \ldots = \alpha_d = 0$\\
+\end{itemize}
+
+$\begin{array}{rr@{}>{\displaystyle}ll}
+		                & \lambda_1b_1 + \ldots + \lambda_rb_r + \alpha_1v_1 + \ldots + \alpha_dv_d    & {}= 0               &                                                        \\
+		\Longrightarrow & T(\lambda_1b_1 + \ldots + \lambda_rb_r + \alpha_1v_1 + \ldots + \alpha_dv_d) & {}= T(0) \ \ \ \ \  & [\text{applying T to both sides}]                      \\
+		\Longrightarrow & T(\lambda_1b_1 + \ldots + \lambda_rb_r + \vec{k})                            & {}= 0               & \text{[since } k = \alpha_1v_1 + \ldots + \alpha_dv_d] \\
+		\Longrightarrow & \lambda_1T(b_1) + \ldots + \lambda_rT(b_r) + T(\vec{k})                      & {}= 0               & [\text{by linearity}]                                  \\
+		\Longrightarrow & \lambda_1T(b_1) + \ldots + \lambda_rT(b_r)                                   & {}= 0               & [\text{since } T(\vec{k}) = 0]                         \\
+	\end{array}$
+\\\\
+$\Longrightarrow \ \lambda_1 = \ldots = \lambda_r = 0 \qquad \text{[since }T(b_1), \cdots , T(b_r) \text{ is a basis}]$
+\\\\
+So we are left with:\\
+$\alpha_1v_1 + \ldots + \alpha_dv_d=0$\\
+$\Longrightarrow \ \alpha_1 = \ldots = \alpha_d = 0$ \qquad [since $\{v_1, \cdots, v_d\}$ is a basis].
+\\\\
+Since $\lambda_1b_1 + \ldots + \lambda_rb_r + \alpha_1v_1 + \ldots + \alpha_dv_d = 0$ has only one solution which is the trivial solution,
+This means that the set $\{b_1, \cdots ,b_r,v_1,\cdots ,v_d\}$ is linearly independent. \qed
+\\\\\\\\\\\\\\\\\\\\
+
+\hyperlink{toc}{\hypertarget{2.3}{(3) }}\\
+$\text{Since }\{b_1, \cdots ,b_r,v_1,\cdots ,v_d\} \text{ is a basis for } V$, \\
+$\begin{array}{r@{}>{\displaystyle}ll}
+		\text{Dim$(V)$} & {}= |\{b_1, \cdots ,b_r,v_1,\cdots ,v_d\}|               & \\
+		                & {}=  r + d                                               & \\
+		                & {}=|\{T(b_1), \cdots , T(b_r)\}| + |\{v_1,\cdots ,v_d\}| & \\
+		                & {}=  \text{Dim(Im$(T)$) + Dim(Ker$(T)$) }                & \\
+	\end{array}$
+\\\\
+$\Longrightarrow \text{Dim$(V)$} = \text{Dim(Im$(T)$) + Dim(Ker$(T)$) }$ \qed
+
+\newpage
+% ! Problem 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\hyperlink{toc}{\hypertarget{3}{{\LARGE \noindent \underline{\textbf{Problem 3.}}}}}
+\\\\
+Let $\mathcal{B}_1, \mathcal{B}_2,\mathcal{B}_3, \cdots$ be different basis for $V$\\
+Let the matrix representation of $T$ be $A = \begin{bmatrix}
+		a & b & c \\
+		d & e & f \\
+		g & h & i \\
+	\end{bmatrix}$\\
+We know $A=[T]_{\mathcal{B}_1} =[T]_{\mathcal{B}_2} =[T]_{\mathcal{B}_3}=\ldots$\\
+By a theorem we learned in class, we know any different matrix representations of $T$ are similar, so
+$A= C_1[T]_{\mathcal{B}_1}C_1^{-1} =C_2[T]_{\mathcal{B}_2}C_2^{-1} =C_3[T]_{\mathcal{B}_3}C_3^{-1} = \ldots\\ \qquad $ where $C_i$ is an invertible $3\times 3$ matrix
+\\\\
+$\Longrightarrow C_iA=AC_i$\\
+or\\
+$CA=AC \qquad \forall$ invertible matrix $C$
+\\\\\\\\\\\\\\\\
+Choose $C = \begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & 2 & 0 \\
+		0 & 0 & 1 \\
+	\end{bmatrix}$
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	then $AC=CA
+		\\\\
+		\Longrightarrow\begin{bmatrix}
+			1 & 0 & 0 \\
+			0 & 2 & 0 \\
+			0 & 0 & 1 \\
+		\end{bmatrix}\begin{bmatrix}
+			a & b & c \\
+			d & e & f \\
+			g & h & i \\
+		\end{bmatrix} = \begin{bmatrix}
+			a & b & c \\
+			d & e & f \\
+			g & h & i \\
+		\end{bmatrix}\begin{bmatrix}
+			1 & 0 & 0 \\
+			0 & 2 & 0 \\
+			0 & 0 & 1 \\
+		\end{bmatrix}$\\
+	$\Longrightarrow \begin{bmatrix}
+			a  & b  & c  \\
+			2d & 2e & 2f \\
+			g  & h  & i  \\
+		\end{bmatrix}=\begin{bmatrix}
+			a & 2b & c \\
+			d & 2e & f \\
+			g & 2h & i \\
+		\end{bmatrix}$\\
+	$\Longrightarrow \left\{
+		\begin{aligned}
+			2b & = b \\
+			2d & = d \\
+			2f & = f \\
+			2h & = h \\
+		\end{aligned}
+		\right. \qquad \Longrightarrow \qquad \left\{
+		\begin{aligned}
+			b & = 0    \\
+			d & =  0   \\
+			f & =   0  \\
+			h & =    0 \\
+		\end{aligned}\right. $
+	\\\\
+	$\therefore A = \begin{bmatrix}
+			a & 0 & c \\
+			0 & e & 0 \\
+			g & 0 & i \\
+		\end{bmatrix}$
+\end{minipage}
+\newpage
+\noindent Choose $C = \begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 2 \\
+	\end{bmatrix}$
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	then $AC=CA
+		\\\\
+		\Longrightarrow\begin{bmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 2 \\
+		\end{bmatrix}\begin{bmatrix}
+			a & 0 & c \\
+			0 & e & 0 \\
+			g & 0 & i \\
+		\end{bmatrix} = \begin{bmatrix}
+			a & 0 & c \\
+			0 & e & 0 \\
+			g & 0 & i \\
+		\end{bmatrix}\begin{bmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 2 \\
+		\end{bmatrix}$\\
+	$\Longrightarrow \begin{bmatrix}
+			a  & 0 & c  \\
+			0  & e & 0  \\
+			2g & 0 & 2i \\
+		\end{bmatrix}=\begin{bmatrix}
+			a & 0 & 2c \\
+			0 & e & 0  \\
+			g & 0 & 2i \\
+		\end{bmatrix}$\\
+	$\Longrightarrow  \left\{
+		\begin{aligned}
+			2g & = g \\
+			2c & = c \\
+		\end{aligned}
+		\right. \qquad \Longrightarrow \qquad \left\{
+		\begin{aligned}
+			g & = 0  \\
+			c & =  0 \\
+		\end{aligned}\right. $
+	\\\\
+	$\therefore A = \begin{bmatrix}
+			a & 0 & 0 \\
+			0 & e & 0 \\
+			0 & 0 & i \\
+		\end{bmatrix}$
+\end{minipage}\\\\\\\\\\\\\\\\
+
+\noindent Choose $C = \begin{bmatrix}
+		1 & 1 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1 \\
+	\end{bmatrix}$
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	then $AC=CA
+		\\\\
+		\Longrightarrow\begin{bmatrix}
+			1 & 1 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1 \\
+		\end{bmatrix}\begin{bmatrix}
+			a & 0 & 0 \\
+			0 & e & 0 \\
+			0 & 0 & i \\
+		\end{bmatrix} = \begin{bmatrix}
+			a & 0 & 0 \\
+			0 & e & 0 \\
+			0 & 0 & i \\
+		\end{bmatrix}\begin{bmatrix}
+			1 & 1 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1 \\
+		\end{bmatrix}$\\
+	$\Longrightarrow\begin{bmatrix}
+			a & e & 0 \\
+			0 & e & 0 \\
+			0 & 0 & i \\
+		\end{bmatrix} = \begin{bmatrix}
+			a & a & 0 \\
+			0 & e & 0 \\
+			0 & 0 & i \\
+		\end{bmatrix}
+		\\\\
+		\Longrightarrow a = e$
+	\\\\
+	$\therefore A = \begin{bmatrix}
+			a & 0 & 0 \\
+			0 & a & 0 \\
+			0 & 0 & i \\
+		\end{bmatrix}$
+
+\end{minipage}
+\newpage
+\noindent\noindent Choose $C = \begin{bmatrix}
+		1 & 0 & 1 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1 \\
+	\end{bmatrix}$
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	then $AC=CA
+		\\\\
+		\Longrightarrow\begin{bmatrix}
+			1 & 0 & 1 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1 \\
+		\end{bmatrix}\begin{bmatrix}
+			a & 0 & 0 \\
+			0 & a & 0 \\
+			0 & 0 & i \\
+		\end{bmatrix} = \begin{bmatrix}
+			a & 0 & 0 \\
+			0 & a & 0 \\
+			0 & 0 & i \\
+		\end{bmatrix}\begin{bmatrix}
+			1 & 0 & 1 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1 \\
+		\end{bmatrix}$\\
+	$\Longrightarrow\begin{bmatrix}
+			a & 0 & i \\
+			0 & a & 0 \\
+			0 & 0 & i \\
+		\end{bmatrix} = \begin{bmatrix}
+			a & 0 & a \\
+			0 & a & 0 \\
+			0 & 0 & i \\
+		\end{bmatrix}
+		\\\\
+		\Longrightarrow a = i$
+	\\\\
+	$\therefore A = \begin{bmatrix}
+			a & 0 & 0 \\
+			0 & a & 0 \\
+			0 & 0 & a \\
+		\end{bmatrix} = a\begin{bmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1 \\
+		\end{bmatrix}$\\
+\end{minipage}
+\\\\
+So the matrix representation of $T$ is a scalar multiple of the identity matrix\\
+$\Longrightarrow T$ is a scalar multiple of the identity transformation \qed
+\newpage
+% ! Problem 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 4.}}}\\
+
+
+\hyperlink{toc}{\hypertarget{4.1}{(a)}}\\
+Let $B = \begin{bmatrix}[cccc]
+		\lambda_{11} & \lambda_{12} & \cdots & \lambda_{1n} \\
+		\lambda_{21} & \lambda_{22} & \cdots & \lambda_{2n} \\
+		\vdots       & \vdots       & \ddots & \vdots       \\
+		\lambda_{n1} & \lambda_{n2} & \cdots & \lambda_{nn} \\
+	\end{bmatrix}$ \qquad where $\lambda_{ij} \in \mathbb{F}$
+\\\\
+Define $\overline{T} : V \longrightarrow \mathbb{F}^n$ as follows: $\overline{T}(\vec{v}) = [\vec{v}]_\mathcal{B}$\\
+Define $T : V \longrightarrow V$ as follows: $T(\vec{v}) = \overline{T}^{-1}(B[\vec{v}]_\mathcal{B})$
+\\\\
+Showing $T$ is linear:\\
+Let $\vec{a}, \vec{b} \in V \qquad r\in \mathbb{F}$\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+		T\left(\vec{a} + r\vec{b}\right) & {}= \overline{T}^{-1}\left(B\left[\vec{a} + r\vec{b} \right]_\mathcal{B}\right)                                                                    & [\text{by def of }T]                                   \\
+		                                 & {}= \overline{T}^{-1}\left(B\Big[\vec{a}\Big]_\mathcal{B} + rB\left[\vec{b} \right]_\mathcal{B}\right)                                             & [\text{by linearity of matrix multiplication}]         \\
+		                                 & {}= \overline{T}^{-1}\left(B\Big[\vec{a}\Big]_\mathcal{B}\right) + r\overline{T}^{-1}\left(B\left[\vec{b} \right]_\mathcal{B}\right) \qquad \qquad & [\text{since } \overline{T} \text{ is an isomorphism}] \\
+		                                 & {}= T\Big(\vec{a}\Big) + rT\Big(\vec{b}\Big)                                                                                                       & [\text{by definition of }T]                            \\
+	\end{array}$\\
+$\therefore T$ is linear.
+\\\\
+WTS: $[T]_\mathcal{B} = B$
+\\\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+		[T(f_i)]_\mathcal{B}                                         & {}= \overline{T}\left(\overline{T}^{-1}(B[f_i]_\mathcal{B})\right) & [\text{by def of }\overline{T}]                          \\
+		                                                             & {}= B[f_i]_\mathcal{B}                                             & [\text{since } \overline{T} \circ \overline{T}^{-1} = I] \\
+		                                                             & {}= \begin{bmatrix}[cccc]
+			\lambda_{11} & \lambda_{12} & \cdots & \lambda_{1n} \\
+			\lambda_{21} & \lambda_{22} & \cdots & \lambda_{2n} \\
+			\vdots       & \vdots       & \ddots & \vdots       \\
+			\lambda_{n1} & \lambda_{n2} & \cdots & \lambda_{nn} \\
+		\end{bmatrix}
+		\begin{bmatrix}[c]
+			0      \\
+			\vdots \\
+			1      \\
+			\vdots \\
+			0
+		\end{bmatrix} \leftarrow i^\text{th}\text{ row} & [\text{since } f_i = 0f_1 + \ldots + f_i + \ldots + 0f_n]                                                                     \\
+		                                                             & {}=\begin{bmatrix}[c]
+			\lambda_{1i} \\
+			\lambda_{2i} \\
+			\vdots       \\
+			\lambda_{ni} \\
+		\end{bmatrix} \text{ where } 1 \leq i \leq n.      & [\text{by matrix multiplication}]                        \\
+	\end{array}$
+\\\\\\
+$\Longrightarrow [T]_\mathcal{B} =\begin{bmatrix}[cccc]
+		|                            & |                            &        & |                            \\
+		\big[T(f_1)\big]_\mathcal{B} & \big[T(f_2)\big]_\mathcal{B} & \cdots & \big[T(f_n)\big]_\mathcal{B} \\
+		|                            & |                            &        & |                            \\
+	\end{bmatrix} = \begin{bmatrix}[cccc]
+		\lambda_{11} & \lambda_{12} & \cdots & \lambda_{1n} \\
+		\lambda_{21} & \lambda_{22} & \cdots & \lambda_{2n} \\
+		\vdots       & \vdots       & \ddots & \vdots       \\
+		\lambda_{n1} & \lambda_{n2} & \cdots & \lambda_{nn} \\
+	\end{bmatrix}
+	=B$
+\\\\$\therefore B$ is the $\mathcal{B}$-matrix of $T$. \qed \newpage
+	\hyperlink{toc}{\hypertarget{4.2}{(b)}}\\
+	Let $T: V \longrightarrow V, \qquad T': V \longrightarrow V, \qquad \mathcal{B} = (f_1, \cdots, f_n)$\\
+	Suppose $[T]_\mathcal{B} = [T']_\mathcal{B}$\\
+	WTS: $T = T'$
+	\\\\
+	Let $[T]_\mathcal{B} = [T']_\mathcal{B} = B = \begin{bmatrix}[cccc]
+	\lambda_{11} & \lambda_{12} & \cdots & \lambda_{1n} \\
+	\lambda_{21} & \lambda_{22} & \cdots & \lambda_{2n} \\
+	\vdots       & \vdots       & \ddots & \vdots       \\
+	\lambda_{n1} & \lambda_{n2} & \cdots & \lambda_{nn} \\
+\end{bmatrix}$ \qquad where $\lambda_{ij} \in \mathbb{F}$
+	\\\\\\
+	Let $v \in V$ be arbitrary. \\
+	Suppose $T(v) = w \qquad T'(v) = w'$\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+	T(v) & {}= \overline{T}^{-1}\big( [T]_\mathcal{B} [v]_\mathcal{B} \big)                & [\text{by definition of }T]         \\
+	     & {}= \overline{T}^{-1}\big( B [v]_\mathcal{B} \big)                              & [\text{since } [T]_\mathcal{B} = B] \\
+	     & {}= \overline{T}^{-1}\big( [T']_\mathcal{B} [v]_\mathcal{B} \big) \qquad \qquad & [\text{since } [T']_\mathcal{B}]    \\
+	     & {}= T'(v)                                                                       & [\text{by definition of }T']        \\
+\end{array}$\\
+$\Longrightarrow w = w'$
+	\\\\
+	So $\forall  v \in V,\ T(v) = T'(v)$\\
+$\Longrightarrow T = T'$ \qed
+	\\\\
+	\newpage
+	\hyperlink{toc}{\hypertarget{4.3}{(c)}}\\
+	Let $\mathcal{T}_\mathcal{B} : \mathcal{L}(V,V) \longrightarrow M_{n\times n} $\\
+	to be defined as: $\mathcal{T}_\mathcal{B} \left(T\right) = \begin{bmatrix}[cccc]
+	|                            & |                            &        & |                            \\
+	\big[T(f_1)\big]_\mathcal{B} & \big[T(f_2)\big]_\mathcal{B} & \cdots & \big[T(f_n)\big]_\mathcal{B} \\
+	|                            & |                            &        & |                            \\
+\end{bmatrix}$
+	\\\\
+	Showing $\mathcal{T}_\mathcal{B}$ is linear:\\
+	Let $A, B \in \mathcal{L}(V,V) \qquad r \in \R$\\
+$\mathcal{T}_\mathcal{B}\left( A + rB \right) $\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+	 & {}= \begin{bmatrix}[cccc]
+		|                                 & |                                 &        & |                                 \\
+		\big[(A+rB)(f_1)\big]_\mathcal{B} & \big[(A+rB)(f_2)\big]_\mathcal{B} & \cdots & \big[(A+rB)(f_n)\big]_\mathcal{B} \\
+		|                                 & |                                 &        & |                                 \\
+	\end{bmatrix}                               & \\
+	 & {}= \begin{bmatrix}[cccc]
+		|                                    & |                                    &        & |                                    \\
+		\big[A(f_1)+rB(f_1)\big]_\mathcal{B} & \big[A(f_2)+rB(f_2)\big]_\mathcal{B} & \cdots & \big[A(f_n)+rB(f_n)\big]_\mathcal{B} \\
+		|                                    & |                                    &        & |                                    \\
+	\end{bmatrix}                               & \\
+	 & {}= \begin{bmatrix}[cccc]
+		|                            & |                            &        & |                            \\
+		\big[A(f_1)\big]_\mathcal{B} & \big[A(f_2)\big]_\mathcal{B} & \cdots & \big[A(f_n)\big]_\mathcal{B} \\
+		|                            & |                            &        & |                            \\
+	\end{bmatrix} + r\begin{bmatrix}[cccc]
+		|                            & |                            &        & |                            \\
+		\big[B(f_1)\big]_\mathcal{B} & \big[B(f_2)\big]_\mathcal{B} & \cdots & \big[B(f_n)\big]_\mathcal{B} \\
+		|                            & |                            &        & |                            \\
+	\end{bmatrix} & \\
+	 & {}= \mathcal{T}_\mathcal{B}(A) + r\mathcal{T}_\mathcal{B}(B) & \\
+\end{array}$\\
+$\therefore \mathcal{T}_\mathcal{B}$ is linear.
+	\\\\\\\\
+	From part (a), we know that $\forall \mathcal{M} \in M_{n\times n} (\mathbb{R}) \ \exists T \in \mathcal{L}(V,V) \text{ st } [T]_\mathcal{B} = \mathcal{M}$\\
+	This shows that $\mathcal{T}_\mathcal{B}$ is surjective since we have a $T$ for every possible matrix.
+	\\\\
+	From part (b), we know that the linear transformation $T$ is unique.\\
+	This shows that $\mathcal{T}_\mathcal{B}$ is injective since no two $T$'s will map to the same matrix.\\
+$\therefore \mathcal{T}_\mathcal{B} $ is an isomorphism $\Longrightarrow \mathcal{L}(V,V) \cong  M_{n\times n}$
+	\\\\
+	We also know that $M_{n\times n}(\mathbb{R}) \cong \R^{n\times n} $ and an isomorphism composed with an isomorphism is an isomorphism.\\
+$\therefore  \mathcal{L}(V,V) \cong  M_{n\times n} \cong \R^{n\times n}$ \\
+$\Longrightarrow \mathcal{L}(V,V) \cong \R^{n\times n}$\qed
+
+	\newpage
+	\hyperlink{toc}{\hypertarget{4.4}{(d)}}\\
+	From (c), we know that $\mathcal{L}(V,V) \cong \R^{n\times n}$, so \\
+$a_0I + a_1T + \ldots + a_mT^m = 0$\\
+	is equivalent to\\
+$a_0v_0 + a_1v_1 + \ldots + a_mv_m = 0$
+	\\\\
+	Choose $m = n\times n$
+	\\\\
+	So we have $a_0v_0 + a_1v_1 + \ldots + a_{n\times n}v_{n\times n}= 0$\\
+	We know for a vector space of dimension $n\times n$, there are max $n\times n$ linearly independent vectors.
+	The set $\left\{ v_0, \cdots, v_{n\times n}\right\} \text{ has } n\times n + 1$ elements.\\
+$\Longrightarrow \left\{ v_0, \cdots, v_{n\times n}\right\}$ is a linearly dependent relationship.\\
+	So $\exists a_i \in \left\{ a_0, \cdots, a_{n\times n} \right\} \text{ st } a_i \not = 0$ \qed
+
+	\newpage
+	% ! Problem 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	{\LARGE \noindent \underline{\textbf{Problem 5.}}}\\
+
+	\hyperlink{toc}{\hypertarget{5.1}{(1)}}\\
+	4 Equiangular lines:\\
+	Suppose a cube is cenetered around the origin\\
+	Let 4 lines connect from the origin to the top 4 corners of the cube. Those 4 lines are equiangular.
+	\\\\
+	6 Equiangular lines:\\
+	Suppose an icosohedron is centered around the origin\\
+	Let 6 lines connect from the origin to the top 6 verticies of the icosohedron. Those 6 lines are equiangular.
+	\\\\
+	Dodecahedron:\\
+	We cannot construct equiangular lines using a dodecahedron.
+	\\\\\\\\\\\\\\\\\\
+
+	\hyperlink{toc}{\hypertarget{5.2}{(2)}}\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+	\text{Let } A & {}=  \big( 1-cos^2(\theta) \big)\text{id}_n + cos^2(\theta)J_n & \\
+	              & {}=  sin^2(\theta) \text{id}_n + cos^2(\theta)J_n              & \\
+	              & {}= \begin{bmatrix}[cccc]
+		sin^2(\theta) +cos^2(\theta) & cos^2(\theta)                & \cdots & cos^2(\theta)               \\
+		cos^2(\theta)                & sin^2(\theta) +cos^2(\theta) & \cdots & cos^2(\theta)               \\
+		\vdots                       & \vdots                       & \ddots & \vdots                      \\
+		cos^2(\theta)                & cos^2(\theta)                & \cdots & sin^2(\theta)+cos^2(\theta) \\
+	\end{bmatrix}                                 & \\
+	              & {}= \begin{bmatrix}[cccc]
+		1             & cos^2(\theta) & \cdots & cos^2(\theta) \\
+		cos^2(\theta) & 1             & \cdots & cos^2(\theta) \\
+		\vdots        & \vdots        & \ddots & \vdots        \\
+		cos^2(\theta) & cos^2(\theta) & \cdots & 1             \\
+	\end{bmatrix}                                 & \\
+\end{array}$
+	\\\\
+	Let $x = \begin{bmatrix}
+	x_1    \\
+	\vdots \\x_n
+\end{bmatrix} \qquad x_i \in \mathbb{F}$\\
+	Suppose $A\vec{x} = \vec{0}$\\
+	WTS: $\vec{x} = \vec{0}$
+	\\\\
+$(\clubsuit): \qquad \begin{bmatrix}[cccc]
+	1             & cos^2(\theta) & \cdots & cos^2(\theta) \\
+	cos^2(\theta) & 1             & \cdots & cos^2(\theta) \\
+	\vdots        & \vdots        & \ddots & \vdots        \\
+	cos^2(\theta) & cos^2(\theta) & \cdots & 1             \\
+\end{bmatrix}
+\begin{bmatrix}
+	x_1    \\x_2\\
+	\vdots \\x_n
+\end{bmatrix} = \begin{bmatrix}
+	0      \\0\\
+	\vdots \\0
+\end{bmatrix}$\\
+$\Longrightarrow \left\{
+\begin{array}{r>{\displaystyle}r@{}l}
+	(1)                     & x_1 + x_2cos^2(\theta) + \ldots + x_ncos^2(\theta) & {} = 0                    \\
+	(2)                     & x_1cos^2(\theta) + x_2 + \ldots + x_ncos^2(\theta) & {} = 0                    \\
+	\vdots  \hspace*{2.1mm} & \multicolumn{1}{c}{\vdots}                         & {} \hspace*{2.4mm} \vdots \\
+	(n)                     & x_1cos^2(\theta) + x_2cos^2(\theta) + \ldots + x_n & {} = 0                    \\
+\end{array}
+\right. $
+	\\\\\\
+	Let $i,j \in \{1, \cdots, n\} \qquad i \not = j$\\
+	Subtract $(i) - (j)$\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+	(i) - (j) & {}= x_i  + x_jcos^2(\theta) - x_icos^2(\theta) - x_j            &                                                                         \\
+	          & {}= x_i\big(1-cos^2(\theta)\big) + x_j\big(cos^2(\theta)-1\big) &                                                                         \\
+	          & {}= x_i\big(1-cos^2(\theta)\big) - x_j\big(1-cos^2(\theta)\big) &                                                                         \\
+	          & {}=  \big(1-cos^2(\theta)\big)(x_i -x_j)                        &                                                                         \\
+	          & {}=  0                                                          &                                                                         \\
+	          & {}\Longrightarrow x_i =x_j                                      & \text{since }1-cos^2(\theta) \not = 0 \text{ for }\theta \in (0, \pi/2] \\
+\end{array}$\\
+$\Longrightarrow x= \begin{bmatrix}
+	x_1    \\x_2\\
+	\vdots \\x_n
+\end{bmatrix} = \lambda \begin{bmatrix}
+	1      \\1\\
+	\vdots \\1
+\end{bmatrix} \qquad \lambda \in \mathbb{F}$\\
+$(\clubsuit) : \qquad \lambda \begin{bmatrix}[cccc]
+	1             & cos^2(\theta) & \cdots & cos^2(\theta) \\
+	cos^2(\theta) & 1             & \cdots & cos^2(\theta) \\
+	\vdots        & \vdots        & \ddots & \vdots        \\
+	cos^2(\theta) & cos^2(\theta) & \cdots & 1             \\
+\end{bmatrix}
+\begin{bmatrix}
+	1      \\1\\
+	\vdots \\1
+\end{bmatrix} = \begin{bmatrix}
+	0      \\0\\
+	\vdots \\0
+\end{bmatrix}$\\
+	The only way to sastify $(\clubsuit)$ is if $\lambda = \vec{x} = 0$\\
+$\therefore A $ is invertible. \qed
+
+	\newpage
+	\hyperlink{toc}{\hypertarget{5.3}{(3)}}\\
+	Suppose $L_1, \cdots, L_n$ are equiangular.\\
+	Let $v_i = (a_i, b_i, c_i) \qquad a_i, b_i, c_i \in \R \qquad i,j \in \{1, \cdots, n\} \qquad i \not = j$ \\\\
+	Then $\displaystyle \big|\left\langle v_i,v_j \right\rangle \big| = cos(\theta) \qquad \theta \in \Big(0, \frac{\pi}{2} \Big]$\\
+$\Longrightarrow |a_ia_j + b_ib_j + c_ic_j| = cos(\theta)$\\
+	So $(a_ia_j + b_ib_j + c_ic_j)^2 = cos^2(\theta)$\\
+$\Longrightarrow a_i^2 a_j^2 + b_i^2 b_j^2+ c_i^2 c_j^2 + 2a_ia_jb_ib_j + 2a_ia_jc_ic_j + 2b_ib_jc_ic_j = cos^2(\theta)$
+	\\\\
+$\displaystyle v_i v_i^t =  \begin{pmatrix}
+	a_i \\b_i\\c_i
+\end{pmatrix} (a_i, b_i, c_i)= \begin{bmatrix}
+	a_i^2  & a_ib_i & a_ic_i \\
+	a_ib_i & b_i^2  & b_ic_i \\
+	a_ic_i & b_ic_i & c_i^2  \\
+\end{bmatrix}$
+	\\\\\\\\\\\\
+	Let $\lambda_1 \begin{bmatrix}
+	a_1^2  & a_1b_1 & a_1c_1 \\
+	a_1b_1 & b_1^2  & b_1c_1 \\
+	a_1c_1 & b_1c_1 & c_1^2  \\
+\end{bmatrix} + \cdots + \lambda_n \begin{bmatrix}
+	a_n^2  & a_nb_n & a_nc_n \\
+	a_nb_n & b_n^2  & b_nc_n \\
+	a_nc_n & b_nc_n & c_n^2  \\
+\end{bmatrix} = \begin{bmatrix}
+	0 & 0 & 0 \\
+	0 & 0 & 0 \\
+	0 & 0 & 0 \\
+\end{bmatrix} \qquad \lambda_i \in \R$
+	\\\\
+	WTS: $\lambda_i = 0 \qquad \forall i \in \{1, \cdots, n\}$
+	\\\\\\\\\\\\
+$\lambda_1 \begin{bmatrix}
+	a_1^2  & a_1b_1 & a_1c_1 \\
+	a_1b_1 & b_1^2  & b_1c_1 \\
+	a_1c_1 & b_1c_1 & c_1^2  \\
+\end{bmatrix} + \cdots + \lambda_n \begin{bmatrix}
+	a_n^2  & a_nb_n & a_nc_n \\
+	a_nb_n & b_n^2  & b_nc_n \\
+	a_nc_n & b_nc_n & c_n^2  \\
+\end{bmatrix}\\\\\\ =  \begin{bmatrix}
+	\lambda_1a_1^2  & \lambda_1a_1b_1 & \lambda_1a_1c_1 \\
+	\lambda_1a_1b_1 & \lambda_1b_1^2  & \lambda_1b_1c_1 \\
+	\lambda_1a_1c_1 & \lambda_1b_1c_1 & \lambda_1c_1^2  \\
+\end{bmatrix} + \cdots + \begin{bmatrix}
+	\lambda_na_n^2  & \lambda_na_nb_n & \lambda_na_nc_n \\
+	\lambda_na_nb_n & \lambda_nb_n^2  & \lambda_nb_nc_n \\
+	\lambda_na_nc_n & \lambda_nb_nc_n & \lambda_nc_n^2  \\
+\end{bmatrix}
+\\\\\\= \begin{bmatrix}
+	\lambda_1a_1^2 +\ldots+ \lambda_na_n^2  & \lambda_1a_1b_1 +\ldots+\lambda_na_nb_n & \lambda_1a_1c_1 +\ldots+\lambda_na_nc_n \\
+	\lambda_1a_1b_1 +\ldots+\lambda_na_nb_n & \lambda_1b_1^2  +\ldots+\lambda_nb_n^2  & \lambda_1b_1c_1 +\ldots+\lambda_nb_nc_n \\
+	\lambda_1a_1c_1 +\ldots+\lambda_na_nc_n & \lambda_1b_1c_1 +\ldots+\lambda_nb_nc_n & \lambda_1c_1^2  +\ldots+ \lambda_nc_n^2 \\
+\end{bmatrix}
+\\\\\\ = \begin{bmatrix}
+	0 & 0 & 0 \\
+	0 & 0 & 0 \\
+	0 & 0 & 0 \\
+\end{bmatrix}$
+	\newpage
+$\left\{
+\begin{array}{r>{\displaystyle}r@{}l}
+	(1) & \sum_{i = 1}^{n} \lambda_ia_i^2  & {} = 0 \\
+	(2) & \sum_{i = 1}^{n} \lambda_ib_i^2  & {} = 0 \\
+	(3) & \sum_{i = 1}^{n} \lambda_ic_i^2  & {}= 0  \\
+	    & \sum_{i = 1}^{n} \lambda_ia_ib_i & {}= 0  \\
+	    & \sum_{i = 1}^{n} \lambda_ia_ic_i & {}= 0  \\
+	    & \sum_{i = 1}^{n} \lambda_ib_ic_i & {}= 0  \\
+\end{array}
+\right. \quad \Longrightarrow \quad \left\{
+\begin{array}{r>{\displaystyle}r@{}l}
+	(4) & \sum_{i = 1}^{n} \lambda_ia_i^2a_j^2   & {} = 0 \\
+	(5) & \sum_{i = 1}^{n} \lambda_ib_i^2b_j^2   & {} = 0 \\
+	(6) & \sum_{i = 1}^{n}  \lambda_ic_i^2c_j^2  & {}= 0  \\
+	(7) & \sum_{i = 1}^{n} \lambda_ia_ib_ia_jb_j & {}= 0  \\
+	(8) & \sum_{i = 1}^{n}\lambda_ia_ic_ia_jc_j  & {}= 0  \\
+	(9) & \sum_{i = 1}^{n} \lambda_ib_ic_ib_jc_j & {}= 0  \\
+\end{array}
+\right. \qquad \text{for some } j \in \{1 , \cdots , n\}$
+	\\\\\\
+	Adding (1) + (2) + (3) results in:\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+	\displaystyle \sum_{i = 1}^{n} \lambda_ia_i^2+\sum_{i = 1}^{n}\lambda_ib_i^2+\sum_{i = 1}^{n}\lambda_ic_i^2 & {}=\displaystyle \sum_{i = 1}^{n} \lambda_i\big(a_i^2+b_i^2+c_i^2\big) \qquad \qquad & [\text{sum rules}]                          \\
+	                                                                                                            & {}= \displaystyle \sum_{i = 1}^{n} \lambda_i                                         & [\text{since $\vec{v_i}$ is a unit vector}] \\
+	                                                                                                            & {}= 0                                                                                & [\text{since all equations} = 0]            \\
+\end{array}$\\
+	\\\\
+	Adding $(4) +(5)+ (6) + 2\timesSmall(7)+ 2\timesSmall(8)+ 2\timesSmall(9)$ results in\\
+$\displaystyle \sum_{i = 1}^{n} \lambda_ia_i^2a_j^2   + \lambda_ib_i^2b_j^2  +\lambda_ic_i^2c_j^2  +2\lambda_ia_ib_ia_jb_j +2\lambda_ia_ic_ia_jc_j +2\lambda_ib_ic_ib_jc_j\\\\
+= \left(\sum_{i = 1}^{n} \lambda_i cos^2(\theta)\right) - \lambda_j \left( a_j^4   + b_j^4  +c_j^4  +2a_j^2b_j^2 +2a_j^2c_j^2+2b_j^2c_j^2 \right)$\\\\
+$\displaystyle = \left(\sum_{i = 1}^{n} \lambda_i cos^2(\theta)\right) - \lambda_j \left( a_j^2 + b_j^2 + c_j^2 \right)^2$\\\\
+$\displaystyle = \left(\sum_{i = 1}^{n} \lambda_i cos^2(\theta)\right) - \lambda_j$ \qquad \qquad [since $\vec{v}_j$ is a unit vector]\\\\
+	\noindent $=0$ \hspace*{52mm} [since all equations add to 0]
+	\\\\
+$\displaystyle \Longrightarrow \lambda_j = \sum_{i = 1}^{n} \lambda_i cos^2(\theta)$\\
+$\Longrightarrow \lambda_1 = \lambda_2 = \ldots = \lambda_j = \ldots = \lambda_n$
+	\newpage
+	\noindent Since $\displaystyle \sum_{i = 1}^{n} \lambda_i = 0$\\
+	and $\lambda_1 = \lambda_2 = \ldots = \lambda_j = \ldots = \lambda_n$\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+	\displaystyle \text{Then }\sum_{i = 1}^{n} \lambda_j & {}= \lambda_j \sum_{i = 1}^{n}1 \qquad \qquad & [\text{since $j$ doesn't depend on }i] \\
+	                                                     & {}= n\lambda_j                                & [\text{by summing 1 } n \text{-times}] \\
+	                                                     & {}= 0                                         & [\text{by given}]                      \\
+\end{array}$
+	\\\\\\
+$\therefore \lambda_j = 0 \qquad \forall j \in \{1, \cdots, n\}$\\
+	as wanted. \qed
+	\\\\\\\\\\\\\\\\
+
+	\hyperlink{toc}{\hypertarget{5.4}{(4)}}\\
+	A basis for symmetric matricies are:\\
+$\mathcal{B} = \displaystyle \left\{\begin{bmatrix}
+	a & 0 & 0 \\
+	0 & 0 & 0 \\
+	0 & 0 & 0 \\
+\end{bmatrix},
+\begin{bmatrix}
+	0 & b & 0 \\
+	b & 0 & 0 \\
+	0 & 0 & 0 \\
+\end{bmatrix},
+\begin{bmatrix}
+	0 & 0 & 0 \\
+	0 & c & 0 \\
+	0 & 0 & 0 \\
+\end{bmatrix},
+\begin{bmatrix}
+	0 & 0 & d \\
+	0 & 0 & 0 \\
+	d & 0 & 0 \\
+\end{bmatrix},
+\begin{bmatrix}
+	0 & 0 & 0 \\
+	0 & 0 & e \\
+	0 & e & 0 \\
+\end{bmatrix},
+\begin{bmatrix}
+	0 & 0 & 0 \\
+	0 & 0 & 0 \\
+	0 & 0 & f \\
+\end{bmatrix}\right\}\\
+\left|\mathcal{B}\right| = 6$
+	\\\\
+	Because the matrix $v_i v_i^T$ for $i \in \{1, \cdots, \text{\#of equiangular lines}\}$ are linearly independent, and they're all symmetric, then the max number of equiangular lines is the dimension of symmetric matricies.
+	\\\\
+$\therefore$ The largest number of equiangular lines in $\R^3$ is 6. \qed
+	\newpage
+	\hyperlink{toc}{\hypertarget{5.5}{(5)}}\\
+	The dimension of an $n\times n$ symmetric matrix is:\\
+	A symmetric $n\times n$ matrix is of the form:\\
+$A =\begin{bmatrix}
+	\lambda_{11} & \lambda_{12} & \cdots & \lambda_{1n} \\
+	\lambda_{12} & \lambda_{22} & \cdots & \lambda_{2n} \\
+	\vdots       & \vdots       & \ddots & \vdots       \\
+	\lambda_{1n} & \lambda_{2n} & \cdots & \lambda_{nn}
+\end{bmatrix}$\\
+	So the number of basis matricies that can be made is determined by the number of elemnts in an upper triangle matrix. This is because the bottom triangle is determined by the top part of the triangle.
+	\\\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+	\text{dim}(A) & {}= \sum_{n = 1}^{n}n                                                               & [\text{sum of a triangle}]               \\
+	              & {}= \frac{n(n+1)}{2}                                                                & [\text{by sum rules}]                    \\
+	              & {}= \frac{(n+1)(n)(n-1)(n-2)\cdots(2)(1)}{(2!)(n-1)(n-2)\cdots(2)(1)} \qquad \qquad & [\text{multiplying both top and bottom}] \\
+	              & {}= \binom{n+1}{2}                                                                  & [\text{by combination roles}]
+\end{array}$
+	\\\\\\
+	So there are max $\displaystyle \binom{n+1}{2}$ number of equiangular lines. \qed
+\end{document}

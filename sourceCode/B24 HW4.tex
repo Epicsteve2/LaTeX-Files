@@ -1,0 +1,508 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in]{geometry}	
+\usepackage{amsmath,amsthm,amssymb,scrextend}			
+\usepackage{fancyhdr}				
+\usepackage{graphicx}				
+\usepackage{cancel}					
+\usepackage{changepage}
+\usepackage{color,soul}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage{pifont}
+%\usepackage{dingbat}
+%\usepackage{graphicx,txfonts}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{MATB24 Homework 3}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand\myalign[1]{\alignShortstack{\strut#1\strut}}
+\usepackage{tabstackengine}
+\TABstackMath
+\TABstackMathstyle{\displaystyle}
+
+\newcount\arrowcount
+\newcommand\arrows[1]{
+    \global\arrowcount#1
+    \ifnum\arrowcount>0
+            \begin{matrix}[c]
+            \expandafter\nextarrow
+    \fi
+}
+
+\newcommand\nextarrow[1]{
+    \global\advance\arrowcount-1
+    \ifx\relax#1\relax\else \xrightarrow{#1}\fi
+    \ifnum\arrowcount=0
+    \end{matrix}
+    \else
+    \\
+    \expandafter\nextarrow
+    \fi
+} 
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+
+\newcommand{\timesSmall}{{\mkern-2mu\times\mkern-2mu}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\innerproduct}[2]{\left\langle #1, \ #2\right\rangle}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\newcommand{\heart}{\ensuremath\varheartsuit}
+\newcommand{\flower}{\text{\ding{95}}}
+
+\newenvironment{proofindent}{\vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}}{\end{minipage}}
+
+%{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}& {}= & [\text{}]\\\end{array}$}
+%\vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}\end{minipage}
+
+\begin{document}
+\begin{center}
+	\hypertarget{toc}{\LARGE \noindent \underline{\textbf{Table of contents}}}\\
+\end{center}
+\noindent\hyperlink{1}{\textbf{Problem 1:}}
+\vspace{1mm}
+\hrule
+\leavevmode \\
+
+\noindent \textbf{Problem 2:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{2.1}{(a)}\\
+\hyperlink{2.2}{(b)}\\
+
+\noindent \textbf{Problem 3:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{3.1}{(a)}\\
+\noindent\hyperlink{3.2}{(b)}\\
+
+\noindent \textbf{Problem 4:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{4.1}{(a)}\\
+\hyperlink{4.2}{(b)}\\
+\hyperlink{4.3}{(c)}\\
+\hyperlink{4.4}{(d)}\\
+
+\noindent \textbf{Problem 5:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{5.1}{(a)}\\
+\hyperlink{5.2}{(b)}\\
+\hyperlink{5.3}{(c)}\\
+\hyperlink{5.4}{(d)}\\
+\hyperlink{5.5}{(e)}\\
+\newpage
+
+% ! Problem 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\hyperlink{toc}{\hypertarget{1}{\LARGE \noindent \underline{\textbf{Problem 1.}}}}
+\\\\
+Let $\displaystyle \mathcal{B} = \{b_1, b_2, \cdots, b_n \}$ be an orthonormal basis for $\R^n$ such that\\
+$B_i \subseteq \mathcal{B} \qquad \text{sp}(B_i) = V_i \qquad \text{for } i \in \{1,2,\cdots,p\}$
+\\\\
+Let $\vec{v}_i \in V_i \qquad \vec{v}_j \in V_j$ be arbitrary. Then\\
+$\vec{v}_i \in \text{sp}(B_i) \qquad \vec{v}_j \in \text{sp}(B_j)$\\
+%$\vec{v}_i = \alpha_1 b_{a_1} + \ldots + \alpha_k b_{a_k} \qquad \vec{v}_i = \beta_1 b_{b_1} + \ldots + \beta_k b_{b_k} $\\
+Since $\vec{v}_i \perp \vec{v}_j \qquad \Longrightarrow \qquad \langle \vec{v}_i, \ \vec{v}_j\rangle = 0$\\
+But we know that $\vec{v}_i$ is a linear combination of vectors in $B_i$, and $\vec{v}_j$ is a linear combination of vectors in $B_j$\\
+$\langle x, \ y\rangle = 0 \qquad \forall x \in B_i \qquad \forall y \in B_j$ \\
+We also know that $b \not = 0 \qquad \forall b \in \mathcal{B}$ since $\mathcal{B}$ is a basis.\\
+This means that no 2 vectors in $\mathcal{B}$ is orthogonal to itself. \\
+In order for the above statement to hold, we must have $B_i \cap B_j = \varnothing$\\
+since $V_i$ is mutually orthogonal to $V_j$.
+\\\\
+$\therefore$ for a collection of mutually orthogonal subspaces $V_1, \cdots, V_p$, they must all strictly share
+the elements in $\mathcal{B}$. We know the dimension of $R^n$ is $n$, and $V_1, \cdots, V_p$ are all spanned
+by a subset of vectors in $\mathcal{B}$.
+\\\\
+$\therefore \dim V_1 + \ldots + \dim V_p \leq n$ \qed
+
+\newpage
+% ! Problem 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 2.}}}\\
+
+\hyperlink{toc}{\hypertarget{2.1}{(a)}}\\
+Suppose $U$ is an orthogonal $n\timesSmall n$ matrix. \\
+$\Longrightarrow U U^T= U^T U = I \qquad \qquad U^T = U^{-1}$
+\\\\
+Define $T^{-1} : \R^n \rightarrow \R^n$ to be \\
+$\vec{v} \rightarrow U^T\vec{v}$\\
+This is the inverse of $T$ since
+\\
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+	{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+				T^{-1} \circ T & {}=U^T U & \text{} \\
+				               & {}=I     & \text{} \\
+			\end{array}$} &
+	{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+					T \circ T^{-1} & {}=U U^T & \text{} \\
+					               & {}=I     & \text{} \\
+				\end{array}$}
+\end{tabularx}
+\\
+$\Longrightarrow T$ is an isomorphism.
+\\\\
+We are given that $T(W) \subseteq W$, and we know that $T$ of a subspace is also a subspace.
+So it is enough to show: $\text{dim}(W) = \text{dim}\big(T(W)\big)$\\
+since this implies $T(W) = W$
+\\\\
+We know that $T$ is an isomorphism, so $T$ preserves dimension\\
+$\Longrightarrow \text{dim}(W) = \text{dim}\big(T(W)\big)$\\
+$\therefore T(W) = W$ \qed
+\\\\
+
+\hyperlink{toc}{\hypertarget{2.2}{(b)}}\\
+We know by a theorem we learned in class that $\R^n =W \oplus W^{\perp}$\\
+We also know from part \hyperlink{2.1}{(a)} that  $T(W)^\perp = W^\perp$\\
+WTS: $T(W)^\perp = T(W^\perp)$
+\\\\
+Let $\vec{v} \in T(W)^\perp \qquad \vec{w}\in W$\\
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+		\Longrightarrow & \vec{v} \cdot \vec{w}                    & {}=0 \hspace*{20mm} & [\text{since they're orthogonal}]                      \\
+		\Longrightarrow & \vec{v} \cdot U\vec{w}                   & {}=0                & [\text{since } U\vec{w} \in W]                         \\
+		\Longrightarrow & \vec{v}^T  U\vec{w}                      & {}=0                & [\text{changing dot product to matrix multiplication}] \\
+		\Longrightarrow & \big(U^T \vec{v}\big)^T \vec{w}          & {}=0                & [\text{transpose properties}]                          \\
+		\Longrightarrow & \big(U^{-1} \vec{v}\big)^T \vec{w}       & {}=0                & [\text{since }U^T = T^{-1}]                            \\
+		\Longrightarrow & \big(T^{-1} (\vec{v})\big)^T \vec{w}     & {}=0                & [\text{since } T^{-1}(\vec{x}) = U^{-1}(\vec{x})]      \\
+		\Longrightarrow & \big(T^{-1} (\vec{v})\big) \cdot \vec{w} & {}=0                & [\text{changing dot product to matrix multiplication}] \\
+		\Longrightarrow & T^{-1} (\vec{v})                         & {}\in W^\perp       & [\text{since } \vec{w} \perp T^{-1} (\vec{v})]         \\
+		\Longrightarrow & \vec{v}                                  & {}\in T(W^\perp)    & [\text{applying }T \text{ to both sides}]              \\
+	\end{array}$}
+\\\\
+Since $\vec{v}$ is arbitrary, we can say that $T(W^\perp) \subseteq W^\perp$ \\
+By the same arguments in \hyperlink{2.1}{(a)}, this implies $T(W^\perp) = W^\perp$ \qed
+
+
+
+\newpage
+% ! Problem 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 3.}}}\\
+
+\hyperlink{toc}{\hypertarget{3.1}{(a)}}\\
+Let $\mathcal{B} = \{b_1, \cdots, b_n\} \qquad \text{where }\mathcal{B}$ is an orthonormal basis.\\
+$\Longrightarrow \innerproduct{b_i}{b_j} = \left\{
+	\begin{aligned}
+		1 \qquad & \text{ if } i = j      \\
+		0 \qquad & \text{ if } i \not = j \\
+	\end{aligned}
+	\right.$
+\\\\\\
+Define $T: V \rightarrow \R^n $ to be\\
+$T(\vec{v}) \rightarrow [\vec{v}]_\mathcal{B}$\\
+Which is an isomorphism.\\
+WTS: $\innerproduct{f}{g} = T(f)\cdot T(g)$
+\\\\
+Since $\mathcal{B}$ is a basis, let \\
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+	{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+				f & {}=\alpha_1b_1 + \ldots + \alpha_nb_n & \text{} \\
+				  & {}= \sum_{i = 1}^{n}\alpha_ib_i       & \text{} \\
+			\end{array}$} &
+	{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+					g & {}=\lambda_1b_1 + \ldots + \lambda_nb_n & \text{} \\
+					  & {}=\sum_{j = 1}^{n}\lambda_jb_j         & \text{} \\
+				\end{array}$} & where $\alpha_i, \ \lambda_i \in \R $
+\end{tabularx}
+\\\\\\
+{\setstretch{1.9}$\begin{array}{r@{}>{\displaystyle}ll}
+		\innerproduct{f}{g} & {}= \innerproduct{\sum_{i = 1}^{n}\alpha_ib_i}{\sum_{j = 1}^{n}\lambda_jb_j}      & [\text{by given}]                                                  \\
+		                    & {}= \sum_{i = 1}^{n} \alpha_i \innerproduct{b_i}{\sum_{j = 1}^{n}\lambda_jb_j}    & [\text{since inner product is linear}]                             \\
+		                    & {}= \sum_{i = 1}^{n}  \sum_{j = 1}^{n}  \alpha_i\lambda_j \innerproduct{b_i}{b_j} & [\text{since inner product is linear over reals}]                  \\
+		                    & {}= \sum_{i = 1}^{n}   \alpha_i\lambda_i \innerproduct{b_i}{b_i}                  & [\text{since } \innerproduct{b_i}{b_j} = 0 \text{ if } i \not = j] \\
+		                    & {}= \sum_{i = 1}^{n}   \alpha_i\lambda_i                                          & [\text{since } \innerproduct{b_i}{b_j} = 1 \text{ if } i = j]      \\
+		                    & {}= T(f)\cdot T(g)                                                                & [\text{by definition of dot product}]                              \\
+	\end{array}$}
+\\\\
+as wanted. \qed \newpage
+\hyperlink{toc}{\hypertarget{3.2}{(b)}}\\
+Suppose $A$ is an $n\timesSmall n$ matrix such that\\
+$\forall \vec{v} \in \R^n, \qquad \vec{v} \not = 0 \Longrightarrow \vec{v}^T A\vec{v} > 0 \qquad (\bigstar)$
+\\\\
+Consider $\innerproduct{v}{w} = v^T A w$
+\begin{itemize}[leftmargin=12mm]
+	\item[WTS:] $(1)\ \langle v, \ v \rangle \geq 0 $\\
+	      $(2)\ \langle v, \ v \rangle = 0  \iff  v = 0$\\
+	      $(3)\ \langle u+\lambda v, \ w \rangle = \langle u, \ w \rangle + \lambda\langle v, \ w \rangle$\\
+	      $(4)\ \langle u, \ v \rangle = \langle v, \ u \rangle $
+\end{itemize}
+\leavevmode\\
+(1)\\ {\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle v, \ v \rangle & {}= v^T A v \qquad \qquad & [\text{by given}]      \\
+		                       & {}\geq 0                  & [\text{by }(\bigstar)] \\
+	\end{array}$}
+\\\\
+(2)\\ $\Longrightarrow \text{ direction :}$\\{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle v, \ v \rangle & {}= v^T A v \qquad \qquad & [\text{by given}] \\
+		                       & {}= 0                     & [\text{by given}] \\
+	\end{array}$}\\
+By contrapositive of $(\bigstar)$, we have $\vec{v}^T A\vec{v} \leq 0\Longrightarrow \vec{v} = 0 $\\
+$\therefore v = 0$ in this case.
+\\\\
+$\Longleftarrow \text{ direction :}$\\
+If $v = 0$ we have:\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle v, \ v \rangle & {}= v^T A v  \qquad \qquad & [\text{by given}]               \\
+		                       & {}= 0^T A 0                & [\text{by given}]               \\
+		                       & {}= 0                      & [\text{since multiplying by }0] \\
+	\end{array}$}
+\\\\ \newpage \noindent
+(3)\\ {\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle u+\lambda v, \ w \rangle & {}= (u+\lambda v)^T A w                                                   & [\text{by given}]                           \\
+		                                 & {}= (u^T+\lambda v^T) A w                                                 & [\text{by transpose properties}]            \\
+		                                 & {}= u^T A w +\lambda v^T A w                                              & [\text{by expanding}]                       \\
+		                                 & {}= \langle u, \ w \rangle + \lambda\langle v, \ w \rangle \hspace*{10mm} & [\text{by definition of the inner product}] \\
+	\end{array}$}
+\\\\
+(4)\\ {\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle u, \ v\rangle & {}= u^T A v                                & [\text{by given}]                                    \\
+		                      & {}= \big(u^T A v\big)^T                    & [\text{since the transpose of a scalar is the same}] \\
+		                      & {}= (Av)^T \big(u ^T\big)^T \hspace*{20mm} & [\text{by transpose properties}]                     \\
+		                      & {}= v^T A^T u                              & [\text{by transpose properties}]                     \\
+		                      & {}= v^T A u                                & [\text{since }A^T = A]                               \\
+		                      & {}= \langle v, \ u\rangle                  & [\text{by definition of the inner product}]          \\
+	\end{array}$}
+\\\\
+$\therefore \innerproduct{-}{-}$ is an inner product.
+\\\\\\ \newpage \noindent
+From part \hyperlink{3.1}{(a)}, we know that\\
+if $T:\R^n \rightarrow \R^n$ is defined as $T:\vec{v} \rightarrow [\vec{v}]_\mathcal{B}$,\\
+then $\innerproduct{v}{w} = T(v)\cdot T(w) \qquad (\varheart)$
+\\\\
+Choose $B = $ the change of basis matrix from $v \rightarrow [\vec{v}]_\mathcal{B}$\\
+$\Longrightarrow B$ is invertible
+\\\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\innerproduct{v}{w} & {}= v^T A w                       & [\text{by given}]                                      \\
+		                    & {}= T(v)\cdot T(w) \hspace*{20mm} & [\text{by } (\varheart)]                               \\
+		                    & {}= Bv\cdot Bw                    & [\text{by our choice of }B]                            \\
+		                    & {}= (Bv)^T Bw                     & [\text{changing dot product to matrix multiplication}] \\
+		                    & {}= v^T B^T Bw                    & [\text{by transpose properties}]                       \\
+	\end{array}$}
+\\\\
+$\Longrightarrow v^T A w =v^T B^T Bw$
+\\\\
+\noindent Since the above equation holds $\forall v, w \in \R^n$, choose $w = e_j$ \qquad $v = e_i$ \qquad $i,j \in \{1,2,\cdots, n\}$\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		v^TAw & {}= v^T (A e_j)                                                                    & [\text{by given}]                 \\
+		      & {}= v^T (j^{\text{th}}\text{ column of }A)                                         & [\text{by matrix multiplication}] \\
+		      & {}= e_i^{\ T} (j^{\text{th}}\text{ column of }A)                                   & [\text{by given}]                 \\
+		      & {}= i^{\text{th}}\text{ row of } (j^{\text{th}}\text{ column of }A) \hspace*{10mm} & [\text{by matrix multiplication}] \\
+		      & {}= A_{ij}                                                                         & [\text{matrix notation}]          \\
+	\end{array}$}
+\\\\
+A similar argument holds for the matrix $B^TB$
+\\\\
+$\Longrightarrow A_{ij} = B^TB_{ij}$\\
+Since $i,j$ are arbitrary, this means all entries in the matrix are equal.\\
+$\therefore A = B^TB$, as wanted \qed
+
+
+
+\newpage
+% ! Problem 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 4.}}}\\
+
+\hyperlink{toc}{\hypertarget{4.1}{(a)}}\\
+Let $\vec{w} \in V$ be arbitrary\\
+$\vec{w} = (w_1, \cdots, w_n)$\\
+Let $\vec{v}_1, \vec{v}_2 \in V \qquad r \in \F$\\
+WTS: $\langle \vec{v}_1 + r\vec{v}_2, \ \vec{w}\rangle = \langle \vec{v}_1, \ \vec{w}\rangle + r\langle \vec{v}_2, \ \vec{w}\rangle$
+\\\\
+{\setstretch{1.0}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle \vec{v}_1 + r\vec{v}_2, \ \vec{w}\rangle & {}= \langle \vec{v}_1, \ \vec{w}\rangle +\langle r\vec{v}_2, \ \vec{w}\rangle & [\text{by linearity of inner product}] \\
+		                                                 & {}= \langle \vec{v}_1, \ \vec{w}\rangle +r\langle \vec{v}_2, \ \vec{w}\rangle & [\text{by linearity of inner product}] \\
+	\end{array}$}
+\\\\
+$\therefore$ the function $\vec{v}\ \mapsto\ \langle \vec{v}, \ \vec{w}\rangle$ is linear \qed
+\\\\\\
+
+\hyperlink{toc}{\hypertarget{4.2}{(b)}}\\
+Let $\mathcal{U} = \{u_1, \cdots, u_n\}$ be an orthonormal basis for $V$\\
+WTS: $\exists \vec{w} \in V$ such that $T(\vec{v}) =\langle \vec{v}, \ \vec{w} \rangle$
+\\\\
+Since $\mathcal{U}$ is an orthonormal basis, then $\vec{v} = \langle v_1, \ u_1 \rangle u_1 + \langle v_2, \ u_2 \rangle u_2 +\ldots +\langle v_n, \ u_n \rangle u_n$\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		T(\vec{v}) & {}= T\big(\langle \vec{v}, \ u_1 \rangle u_1 + \ldots +\langle \vec{v}, \ u_n \rangle u_n\big)                                                       & [\text{by given}]                                                 \\
+		           & {}=  T\big(\langle \vec{v}, \ u_1 \rangle u_1 \big) + \ldots +T\big(\langle \vec{v}, \ u_n \rangle u_n\big)                                          & [\text{by linearity of }T]                                        \\
+		           & {}= \langle \vec{v}, \ u_1 \rangle T(u_1 ) + \ldots +\langle \vec{v}, \ u_n \rangle T(u_n)                                                           & [\text{since }\langle \vec{v}, \ u_i \rangle \text{ is a scalar}] \\
+		           & {}= \left\langle \vec{v}, \ \overline{T(u_1 )}u_1 \right\rangle  + \ldots +\left\langle \vec{v}, \ \overline{T(u_n )}u_n \right\rangle \qquad \qquad & [\text{bringing a scalar into the second slot}]                   \\
+		           & {}= \left\langle \vec{v}, \ \overline{T(u_1)}u_1 + \ldots + \overline{T(u_n)}u_n \right\rangle                                                       & [\text{by linearity of inner product}]                            \\
+	\end{array}$}
+\\\\
+So choose $\displaystyle \vec{w} = \overline{T(u_1)}u_1 + \ldots + \overline{T(u_n)}u_n \qquad \vec{w} \in V$\\
+$\therefore T(\vec{v}) = \left\langle \vec{v}, \ \vec{w} \right\rangle$
+\\\\\\
+WTS: $\vec{w}$ is unique.
+\\\\
+Suppose $T(\vec{v}) = \langle \vec{v}, \ \vec{w}_1 \rangle = \langle \vec{v}, \ \vec{w}_1 \rangle \qquad \forall \vec{v} \in V$\\
+Enough to prove: $\vec{w}_2 = \vec{w}_2$
+\\\\
+{\setstretch{1.0}$\begin{array}{r>{\displaystyle}l}
+		\langle \vec{v}, \ \vec{w}_1 \rangle = \langle \vec{v}, \ \vec{w}_1 \rangle & \Longrightarrow\ \langle \vec{v}, \ \vec{w}_1 \rangle - \langle \vec{v}, \ \vec{w}_1 \rangle = 0 \\
+		                                                                            & \Longrightarrow\ \langle \vec{v}, \ \vec{w}_1 -\vec{w}_2\rangle = 0                              \\
+	\end{array}$}
+\\\\
+Since this holds $\forall \vec{v} \in V$, choose $\vec{v} = \vec{w}_1 -\vec{w}_2$\\
+$\Longrightarrow\ \langle \vec{w}_1 -\vec{w}_2, \ \vec{w}_1 -\vec{w}_2\rangle = 0$\\
+Since an inner product is zero-definite, then this means\\
+$\vec{w}_1 -\vec{w}_2 = 0 \qquad \Longrightarrow\qquad \vec{w}_1 =\vec{w}_2$ \qed\newpage
+
+
+
+
+\hyperlink{toc}{\hypertarget{4.3}{(c)}}\\
+Let $t \in \R$ be arbitrary.\\
+Define an inner product:\\
+$\innerproduct{f}{g} = \displaystyle \int_{0}^{1}  f(x)g(x)\,\mathrm{d}x$
+\\\\\\
+Define $T:\mathcal{P}_3(\R) \rightarrow \R$ to be \vspace*{1mm}\\
+$T\big(p(x)\big)= p(t)$
+\\\\
+By the Riesz Representation Theorem we proved in \hyperlink{4.2}{\hypertarget{4.2}{(b)}}, we know that \\
+for all polynomials $p \in \mathcal{P}_3(\R)$, we have a unique polynomial $q_t \in \mathcal{P}_3(\R)$ such that \\
+$T\big(p(x)\big) = \innerproduct{p}{q_t}$\\
+$\Longrightarrow p(t) = \displaystyle \int_{0}^{1}  p(x)q_t(x)\,\mathrm{d}x$\\
+as wanted. \qed
+\\\\\\\\
+
+\hyperlink{toc}{\hypertarget{4.4}{(d)}}\\
+From part \hyperlink{4.2}{(b)}, we know that $\vec{w} = \overline{T(u_1)}u_1 + \ldots + \overline{T(u_n)}u_n$\\
+The orthonormal basis for $\mathcal{P}_3(\R)$ is \\
+$\mathcal{U} =\displaystyle \left\{ 1, \ 2\sqrt{3}\left(x-\frac{1}{2}\right), \ 6 \sqrt{5}\left(x^2-x-\frac{1}{6}\right), \ 20\sqrt{7}\left(x^3-\frac{3}{2}x^2+\frac{3}{5}x-\frac{1}{20}\right) \right\}$
+\\\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+	 \vec{w} & {}= \overline{T(u_1)}u_1 + \overline{T(u_2)}u_2 + \overline{T(u_3)}u_3  + \overline{T(u_4)}u_4 & [\text{by given}]\\
+	 & {}= {T(u_1)}u_1 + {T(u_2)}u_2 + {T(u_3)}u_3  + {T(u_4)}u_4 & [\text{since real polynomials}]\\
+	 & {}= u_1\left(\frac{1}{2}\right)u_1 + u_2\left(\frac{1}{2}\right)u_2 +u_3\left(\frac{1}{2}\right)u_3 +u_4\left(\frac{1}{2}\right)u_4  & [\text{by definition of } T]\\
+	 & {}= (1)u_1 + 2\sqrt{3}\left(\frac{1}{2}-\frac{1}{2}\right)u_2 &\\
+	 &{} \qquad +
+	 \left(6 \sqrt{5}\left(\left(\frac{1}{2}\right)^2-\frac{1}{2}+\frac{1}{6}\right)\right)u_3 & [\text{plugging in numbers}]\\ 
+	 &{}\qquad + 
+	 \left(20\sqrt{7}\left(\left(\frac{1}{2}\right)^3-\frac{3}{2}\left(\frac{1}{2}\right)^2+\frac{3}{5}\left(\frac{1}{2}\right)-\frac{1}{20}\right)\right)u_4  & \text{}\\
+
+	 & {}=(1) + 0 + \left(\frac{-\sqrt{5}}{2}\right)\left(6 \sqrt{5}\left(x^2-x+\frac{1}{6}\right)\right) + 0 & [\text{by algebra}]\\
+	 & {}=1 + \left(-15\right)\left(x^2-x+\frac{1}{6}\right) & [\text{by algebra}]\\
+	 & {}= -15x^2+15x-\frac{3}{2} & [\text{by algebra}]\\
+
+\end{array}$}
+
+\newpage
+% ! Problem 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 5.}}}\\
+
+\hyperlink{toc}{\hypertarget{5.1}{(a)}}\\
+No.\\
+This is because the graph looks like a sinusoidal wave, so a straight line wouldn't be an accurate model of the graph. It would be better to use a sin function as a model for the graph.
+\\\\\\
+
+\hyperlink{toc}{\hypertarget{5.2}{(b)}}\\
+To do this, we would modify the matrix A to be:
+\\\\
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+	 $A = \begin{bmatrix}
+		 \sin(x_1) & 1\\
+		 \sin(x_2) & 1\\
+		 \vdots & \vdots\\
+		 \sin(x_n) & 1\\
+	 \end{bmatrix}$ & $\vec{y} = \begin{bmatrix}
+		y_1\\
+		y_1\\
+		\vdots\\
+		y_n\\
+	\end{bmatrix}$
+\end{tabularx}
+\\\\\\
+To match the function to our new model.
+\\\\\\
+
+\hyperlink{toc}{\hypertarget{5.3}{(c)}}\\
+Let $\displaystyle D = \begin{bmatrix}
+	\mu_1 & 0 & \cdots & 0 \\
+	0 & \mu_2  & \cdots & 0 \\
+	\vdots & \vdots & \ddots & \vdots \\
+	0 & 0 & \cdots & \mu_n \\
+\end{bmatrix} \mu_i \in \R^+ \qquad \qquad \text{Let }\innerproduct{\vec{v}}{\vec{w}} = \vec{v}^TD\vec{w}$
+\\\\
+\begin{itemize}[leftmargin=12mm]
+	\item[WTS:] $(1)\ \langle v, \ v \rangle \geq 0 $\\
+	      $(2)\ \langle v, \ v \rangle = 0  \iff  v = 0$\\
+	      $(3)\ \langle u+\lambda v, \ w \rangle = \langle u, \ w \rangle + \lambda\langle v, \ w \rangle$\\
+	      $(4)\ \langle u, \ v \rangle = \langle v, \ u \rangle $
+\end{itemize}
+\leavevmode\\
+(1)\\ {\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle v, \ v \rangle & {}= v^T D v  & [\text{by given}]      \\
+							   & {}= D v^T  v  & [\text{since diagonal matricies commute}]      \\
+							   & {}= D (v\cdot v) \hspace*{20mm} & [\text{changing matrix multiplication to dot product}]      \\
+
+
+		                       & {}\geq 0                  & [\text{by dot product properties}] \\
+	\end{array}$}
+\\\\ \newpage \noindent
+(2)\\ $\Longrightarrow \text{ direction :}$\\{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle v, \ v \rangle & {}= D (v\cdot v) & [\text{by (1)}] \\
+		                       & {}= 0                     & [\text{by given}] \\
+	\end{array}$}\\
+Since $D$ is a positive matrix, then the only solution to this equation is if $v = 0$ 
+$\therefore v = 0$.
+\\\\
+$\Longleftarrow \text{ direction :}$\\
+If $v = 0$ we have:\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle v, \ v \rangle & {}= v^T D v  \qquad \qquad & [\text{by given}]               \\
+		                       & {}= 0^T D 0                & [\text{by given}]               \\
+		                       & {}= 0                      & [\text{since multiplying by }0] \\
+	\end{array}$}
+\\\\
+(3)\\ {\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle u+\lambda v, \ w \rangle & {}= (u+\lambda v)^T D w                                                   & [\text{by given}]                           \\
+		                                 & {}= (u^T+\lambda v^T) D w                                                 & [\text{by transpose properties}]            \\
+		                                 & {}= u^T D w +\lambda v^T D w                                              & [\text{by expanding}]                       \\
+		                                 & {}= \langle u, \ w \rangle + \lambda\langle v, \ w \rangle \hspace*{10mm} & [\text{by definition of the inner product}] \\
+	\end{array}$}
+\\\\
+(4)\\ {\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		\langle u, \ v\rangle & {}= u^T D v                                & [\text{by given}]                                    \\
+		                      & {}= \big(u^T D v\big)^T                    & [\text{since the transpose of a scalar is the same}] \\
+		                      & {}= (Dv)^T \big(u ^T\big)^T \hspace*{20mm} & [\text{by transpose properties}]                     \\
+		                      & {}= v^T D^T u                              & [\text{by transpose properties}]                     \\
+		                      & {}= v^T D u                                & [\text{since }D^T = D]                               \\
+		                      & {}= \langle v, \ u\rangle                  & [\text{by definition of the inner product}]          \\
+	\end{array}$}
+\\\\
+$\therefore \innerproduct{-}{-}$ is an inner product.
+\\\\\\
+WTS: proj$_{\text{col}(A)}v = A(A^TDA)^{-1}A^TDv$
+\\\\
+Showing 
+
+
+\hyperlink{toc}{\hypertarget{5.4}{(d)}}\\
+
+\hyperlink{toc}{\hypertarget{5.5}{(e)}}\\
+\end{document}

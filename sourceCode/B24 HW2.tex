@@ -1,0 +1,419 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in]{geometry}		% For setting margins
+\usepackage{amsmath,amsthm,amssymb,scrextend}				% For Math
+\usepackage{fancyhdr}				% For fancy header/footer
+\usepackage{graphicx}				% For including figure/image
+\usepackage{cancel}					% To use the slash to cancel out stuff in work
+\usepackage{changepage}
+\usepackage{physics}
+\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Set up fancy header/footer
+\pagestyle{fancy}
+\fancyhead[LO,L]{MATB24 Homework 2}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006323132}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand\myalign[1]{\alignShortstack{\strut#1\strut}}
+\usepackage{tabstackengine}
+\TABstackMath
+\TABstackMathstyle{\displaystyle}
+
+\newcount\arrowcount
+\newcommand\arrows[1]{
+        \global\arrowcount#1
+        \ifnum\arrowcount>0
+                \begin{matrix}[c]
+                \expandafter\nextarrow
+        \fi
+}
+
+\newcommand\nextarrow[1]{
+        \global\advance\arrowcount-1
+        \ifx\relax#1\relax\else \xrightarrow{#1}\fi
+        \ifnum\arrowcount=0
+                \end{matrix}
+        \else
+                \\
+                \expandafter\nextarrow
+        \fi
+} %https://tex.stackexchange.com/questions/3145/formatting-arrows-between-rows-of-corresponding-matrices
+
+%\usepackage{lipsum}
+
+\begin{document}
+% ! Problem 1 MAKE THIS RIGUOUROUS
+{\LARGE \noindent \underline{\textbf{Problem 1.}}}\\
+
+(1) \emph{True.}\\
+This is because if the dimension of $V$ is $m$, then there is max $m$ linear independent vectors.\\
+So for all linearly independent set of vectors $\in V$, there must be $\leq m$ elements in that set.
+This is a theorem we used in the lectures.\\
+
+
+(2) \emph{False.}\\
+\myalign{
+\text{Let }
+U\ &=\ \R ^2  \\
+W\ &=\ \R\\
+\vec{v_1}\ &=\ [1,0]\\
+\vec{x}\ &=\ [x_1, x_2] \in U\\
+T\ &:\ U \rightarrow W
+}
+
+\noindent Define $T(\vec{x}) = x_1$
+\\\\
+\myalign{
+\text{\emph{span}}(T(\vec{v_1}))\ &=\ \text{\emph{span}}(1) \\
+&=\ \R \\
+&=\ U
+}
+\\\\
+\myalign{
+	\text{but \emph{span}}([1,0])\ &\not =\ \R ^2 \\
+	&=\ W
+}\\
+
+(3) \emph{True.}\\
+\noindent \emph{Given:} $\{\vec{v}_1, \vec{v}_2, \cdots , \vec{v}_{k}\}$ is linearly independent.\\
+
+\noindent Suppose to the contrary that $\vec{v_k} \in \text{Span}\{\vec{v}_1, \vec{v}_2, \cdots , \vec{v}_{k-1}\}$
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	This means there exists a linear combination of $\{\vec{v}_1, \vec{v}_2, \cdots, \vec{v}_{k-1}\}$ that equals $\vec{v}_k$\\
+	So $\exists \ a_1, \cdots , a_{k-1} \text{\emph{ s.t. }} a_1\vec{v}_1 + a_2 \vec{v}_2 + \ldots + a_{k-1}\vec{v}_{k-1} = \vec{v}_k$\\
+	This means that $\vec{v_k}$ is linearly dependent to $\{\vec{v}_1, \vec{v}_2, \cdots, \vec{v}_{k-1}\}$, which contradicts our \emph{given}.
+\end{minipage}
+$\therefore$ Our supposition is wrong, and $\vec{v}_k \not \in \text{ Span}\{\vec{v}_1, \vec{v}_2, \cdots , \vec{v}_{k-1}\}$\\
+\newpage
+(4) \emph{True.}\\
+\noindent Let $\mathcal{B}_1 = \{x, x^2+x, x^3 + x^2 + x, \cdots,  x^n + \cdots + x^3 + x^2 + x\}$\\
+Let $\mathcal{B}_2 = \{x^n, \cdots, x^3, x^2, x \}$
+\\\\
+\myalign{W\ &=\ \text{\emph{span}}(\mathcal{B}_2) \\
+	&=\ \{b_1x + b_2x^2 + b_3x^3 + \ldots + b_nx^n \ | \ b_1, \cdots, b_n \in \mathbb{F}\}
+}
+\\\\
+\myalign{V\ &=\ \text{\emph{span}}(\mathcal{B}_1)\\
+	&=\ \{a_1x + a_2(x^2+x) + \ldots + a_n(x^n + \cdots + x^3 + x^2 + x) \
+	| \ a_1, \cdots, a_n \in \mathbb{F}\} \\
+	&=\ \{(a_1 + \ldots + a_n)x + (a_2 + \ldots + a_n)x^2 + \ldots + (a_n)x^n \
+	| \ a_1, \cdots, a_n \in \mathbb{F}\}\\
+	&=\ \{b_1x + b_2x^2 + b_3x^3 + \ldots + b_nx^n \ | \ b_1, \cdots, b_n \in \mathbb{F}\}\\
+	&=\ \text{\emph{span}}(\mathcal{B}_2)\\
+	&=\ W,\\
+	&\text{as wanted.}
+}
+
+% ! Problem 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+{\LARGE \noindent \underline{\textbf{Problem 2.}}}\\
+
+(1) \emph{W.T.S.} $U + W$ is non-empty, closed under addition, and closed under scalar multiplication.\\\\
+\textbf{Non-empty:}\\
+Since we know $U$ and $W$ are subspaces, then there exists $\vec{0}$ for both subspaces.
+Therefore, we can choose $u = \vec{0} \in U$, and $w = \vec{0} \in W$ such that
+$\{u + w \ | \  u\in U, w \in W\}$. This means $\vec{0}$ is in $U + W$\\
+
+\noindent \textbf{Closed under addition:}\\
+Let $a, b \in U + W$\\
+\myalign{\text{This means: }a\ &= u_1 + w_1\\
+	b\ &= u_2 + w_2}\\
+\myalign{\text{Where: }u_1, u_2 \ &\in U\\
+	w_1, w_2 \ &\in W}
+\\\\
+\myalign{a + b\ &= (u_1 + w_1) + (u_2 + w_2)\\
+	&= (u_1 + u_2) + (w_1 + w_2)\\ &\in U + W}\\
+since $(u_1 + u_2) \in U$ and $(w_1 + w_2) \in W$ which sastifies
+$\{u + w \ | \  u\in U, w \in W\}$
+\\\\
+Since $a$ and $b$ are arbitrary elements in $U + W$, and $a + b \in U + W$,
+$U + W$ is closed under addition.\\
+
+\noindent \textbf{Closed under scalar multiplication:}\\
+Let $a \in U + W, \qquad c \in \R$\\
+This means $a = u_1 + w_1$
+\\\\
+\myalign{ca\ &= cu_1 + cw_1\\ & \in U + W}\\
+since $cu_1 \in U$ and $cw_1 \in W$ which sastifies
+$\{u + w \ | \  u\in U, w \in W\}$
+\\\\
+Since $a$ and $b$ are arbitrary, and $ca \in U + W$,
+$U + W$ is closed under scalar multiplication.
+\\\\\\
+Since $U + W$ is non-empty, closed under addition, and closed under scalar multiplication,
+$U + W$ is a subspace of $V$ \qed \\
+
+\newpage
+(2) \emph{sp(}$\mathcal{U} \cup \mathcal{W}) =
+	\{(a_1 u_1+ \cdots+ a_r u_r) + (b_1 w_1+ \cdots+ b_s w_s) \ | \ a_1, \cdots, a_r, b_1, \cdots, b_s \in \R\}$
+\\\\
+If \emph{sp(}$\mathcal{U}) = U$, then all elements in $U$ can be written as a linear combination of
+elements in $\mathcal{U}$. The same can be said for $W = $ \emph{sp(}$\mathcal{W})$\\
+\myalign{\text{This means: }U\ &= \{ a_1 u_1+ \cdots+ a_r u_r \ | \ a_1, \cdots, a_r \in \R\}\\
+	W\ &= \{ b_1 w_1+ \cdots+ b_s w_s \ | \ b_1, \cdots, b_s \in \R\}}
+\\\\
+All elements in $U + W$ can be written as a linear combination of elements in $\mathcal{U}$ and $\mathcal{W}$.\\
+
+\myalign{U + W\ &=\ \{u + w \ | \  u\in U, w \in W\}\\
+	&=\ \{(a_1 u_1+ \cdots+ a_r u_r) + (b_1 w_1+ \cdots+ b_s w_s) \ | \ a_1, \cdots, a_r, b_1, \cdots, b_s \in \R\}\\
+	&=\ \text{\emph{sp(}}\mathcal{U} \cup \mathcal{W}),\\
+	&\text{as wanted.}
+} \qed
+\\\\
+
+(3)\\
+\emph{W.T.S.} $(a_1 u_1+ \cdots+ a_r u_r) + (b_1 w_1+ \cdots+ b_s w_s) = 0$
+only has 1 unique solution, where
+$a_1 = \ldots = a_r = b_1 = \ldots = b_s = 0$
+\\\\
+This is equivalent to saying $u + w = \vec{0}$ since\\
+\myalign{U\ &= \{ a_1 u_1+ \cdots+ a_r u_r \ | \ a_1, \cdots, a_r \in \R\}\\
+	W\ &= \{ b_1 w_1+ \cdots+ b_s w_s \ | \ b_1, \cdots, b_s \in \R\}}
+\\\\
+This means we \emph{W.T.S.} $u = w = \vec{0}$
+\\\\
+\myalign{
+	\text{\emph{Given: }}& u + w = \vec{0}\\
+	&w \in W\\
+	&u \in U\\
+	&U \cap W = \{0\}
+}
+\\\\
+Suppose to the contrary that $u \not = 0$
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	Then $w$ must be the inverse elemnt of $u$ such that $u + w = 0$\\
+	This means $w = -u$ \\
+	This contradicts our \emph{given}, since $w = -u \not \in W$
+\end{minipage}
+$\therefore$ Our supposition is wrong, and $u = 0$\\
+Without loss of generality, this also applies if $w \not = 0$.
+\\\\
+This means that $u = w = \vec{0}$\\
+$\Longrightarrow a_1 = \ldots = a_r = b_1 = \ldots = b_s = 0$ \\
+$\Longrightarrow \mathcal{U} \cup \mathcal{W}$ are linearly independent. \qed
+\\\\
+
+\newpage
+(4) \\
+\myalign{\text{\emph{Dim}}(U + W)\ &= \left\lvert \{u_1, \cdots, u_r, w_1, \cdots , w_s\}\right\rvert\\
+	&= r + s}
+\\\\
+\myalign{\text{\emph{Dim}}U + \text{\emph{Dim}}W \ &= \left\lvert \{u_1, \cdots, u_r\}\right\rvert
+	+ \left\lvert \{w_1, \cdots, w_s\}\right\rvert \\
+	&= r + s}
+\\\\
+$\therefore$ \emph{Dim}(U + W) = \emph{Dim}U + \emph{Dim}W
+
+% ! Problem 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+{\LARGE \noindent \underline{\textbf{Problem 3.}}}\\
+
+(1) \underline{Proving $V$ is finite-dimensional $\Longrightarrow V$ has finitely many elements}\\
+Suppose $\mathcal{B} = \{b_1, \cdots, b_n\}$ is the set of basis vectors for $V$.\\
+This means $V = \{a_1 b_1 + \ldots + a_n b_n \ | \ a_1, \cdots, a_n \in \mathbb{F}\}$\\
+Since $|\mathbb{F}|$ is finite, that means that there is a finite set of scalars
+for the set of basis vectors $\mathcal{B}$\\
+This means the set of linear combinations is finite, which proves $V$ has a finite number of elements.
+\\\\
+\underline{Proving $V$ has finitely many elements $\Longrightarrow V$ is finite-dimensional}\\
+Suppose $V$ has finitely many elements\\
+This means that the set of basis is $\mathcal{B}$ finite, since $\mathbb{F}$ is also finite.
+A linear combination of a finite set with a finite set of scalars is finite.\\
+This means \emph{dim}$(V) = |\mathcal{B}|$ which is a finite number.
+Also, \emph{span}$(\mathcal{B}) = V$ which is a finite spanning set.\qed
+\\\\
+
+(2)\\
+Suppose $\mathcal{B} = \{b_1, \cdots, b_n\}$ is the set of basis vectors for $V$.\\
+This means $V = \{a_1 b_1 + \ldots + a_n b_n \ | \ a_1, \cdots, a_n \in \mathbb{F}\}$\\
+For all $n \ b_i$ vectors, there is $|\mathbb{F}|$ choices for scalars for each $b_i$.\\
+\myalign{\text{This means there is }\underbrace{|\mathbb{F}| \times |\mathbb{F}| \times \ldots \times |\mathbb{F}|}_\text{n-times}
+\ &=\ |\mathbb{F}|^n\\
+&=\ |\mathbb{F}|^{\text{dim}(V)}}\\
+number of elements in $V$
+\\\\
+
+(3) \\
+We know that $\mathcal{V} = \{(a_1, a_2, \dots, a_n) \ | \ a_1, \cdots, a_n \in \mathbb{F}_3 \}$\\
+Where $\mathbb{F}_3 = \{0, 1 ,2\}$\\
+is the set of all tricolorings, where $n$ is the number of line segments.
+\\\\
+From what we found in (2), there must be $|\mathbb{F}|^{\text{dim}(V)} = 3^n$ number of tricolorings. \qed
+
+
+% ! Problem 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+{\LARGE \noindent \underline{\textbf{Problem 4.}}}\\
+
+(1)\\
+\myalign{\text{Let } f\ &=\ a_0 + a_1x + a_2x^2\\
+	g\ &=\ b_0 + b_1x + b_2x^2
+	\\ r\ &\in \R}
+\\\\
+\emph{W.T.S.} $T_{\vec{c}}(rf + g) = r T_{\vec{c}}(f) + T_{\vec{c}}(g)$\\
+Where $T_{\vec{c}} : \mathcal{P}_2 \rightarrow \mathbb{R}^3$
+\begin{flalign*}
+	\text{\emph{L.S.}}\ &=\ T_{\vec{c}}(rf + g) &&\\
+	&=\ \begin{bmatrix}
+		rf(1) + g(1) \\
+		rf(2) + g(2) \\
+		rf(1) + g(1) \\
+	\end{bmatrix} &&\\
+	&=\ \begin{bmatrix}
+		ra_0 + ra_1 + ra_2 + b_0 + b_1 + b_2     \\
+		ra_0 + 2ra_1 + 4ra_2 + b_0 + 2b_1 + 4b_2 \\
+		ra_0 + ra_1 + ra_2 + b_0 + b_1 + b_2     \\
+	\end{bmatrix} &&\\
+\end{flalign*}
+\begin{flalign*}
+	\text{\emph{R.S.}}\ &=\ rT_{\vec{c}}(f) + T_{\vec{c}}(g) &&\\
+	&=\ r\begin{bmatrix}
+		f(1) \\
+		f(2) \\
+		f(1) \\
+	\end{bmatrix} +
+	\begin{bmatrix}
+		g(1) \\
+		g(2) \\
+		g(1) \\
+	\end{bmatrix}&&\\
+	&=\ r\begin{bmatrix}
+		a_0 + a_1 + a_2   \\
+		a_0 + 2a_1 + 4a_2 \\
+		a_0 + a_1 + a_2   \\
+	\end{bmatrix} +
+	\begin{bmatrix}
+		b_0 + b_1 + b_2   \\
+		b_0 + 2b_1 + 4b_2 \\
+		b_0 + b_1 + b_2   \\
+	\end{bmatrix} &&\\
+	&=\ \begin{bmatrix}
+		ra_0 + ra_1 + ra_2 + b_0 + b_1 + b_2     \\
+		ra_0 + 2ra_1 + 4ra_2 + b_0 + 2b_1 + 4b_2 \\
+		ra_0 + ra_1 + ra_2 + b_0 + b_1 + b_2     \\
+	\end{bmatrix}
+\end{flalign*}
+Since \emph{L.S. = R.S.}\\
+$\therefore T_{\vec{c}}$ is linear for $\vec{c} = \begin{bmatrix}
+		1 \\
+		2 \\
+		1
+	\end{bmatrix}$\\\\
+
+(2)\\
+\begin{flalign*}
+	\text{\emph{ker}}(T_{\vec{c}}(f))\ &=\ \begin{bmatrix}
+		a_0 + a_1 + a_2   \\
+		a_0 + 2a_1 + 4a_2 \\
+		a_0 + a_1 + a_2   \\
+	\end{bmatrix} = \begin{bmatrix}
+		0 \\
+		0 \\
+		0
+	\end{bmatrix} && \\
+	&=\ \begin{bmatrix}[ccc|c]
+		1 & 1 & 1 & 0 \\
+		1 & 2 & 4 & 0 \\
+		1 & 1 & 1 & 0 \\
+	\end{bmatrix}
+	\arrows1{r_3-r_1}
+	\begin{bmatrix}[ccc|c]
+		1 & 1 & 1 & 0 \\
+		1 & 2 & 4 & 0 \\
+		0 & 0 & 0 & 0 \\
+	\end{bmatrix}
+	\arrows1{r_2-r_1}
+	\begin{bmatrix}[ccc|c]
+		1 & 1 & 1 & 0 \\
+		0 & 1 & 3 & 0 \\
+		0 & 0 & 0 & 0 \\
+	\end{bmatrix}
+	\arrows1{r_1-r_2} \begin{bmatrix}[ccc|c]
+		1 & 0 & -2 & 0 \\
+		0 & 1 & 3  & 0 \\
+		0 & 0 & 0  & 0 \\
+	\end{bmatrix}
+\end{flalign*}
+$\Longrightarrow\left\{
+	\begin{aligned}
+		a_0 -2a_2 & = 0            \\
+		a_1 +3a_2 & = 0            \\
+		a_2       & \in \mathbb{F}
+	\end{aligned}\right.$\\
+$\Longrightarrow\left\{
+	\begin{aligned}
+		a_0 & = 2s           \\
+		a_1 & = -3s          \\
+		a_2 & = s            \\
+		s   & \in \mathbb{F}
+	\end{aligned}
+	\right.$\\
+$\Longrightarrow \text{\emph{ker}}(T_{\vec{c}}(f)) = \text{\emph{span}}
+	\left(\begin{bmatrix}
+			2   \\
+			-3x \\
+			x^2
+		\end{bmatrix}\right)$\\\\
+
+(3)\\
+$C= \left\{ [c_0, \cdots, c_n] \ | \ a_i \not = c_j, \ \forall i \not = j\right\}$\\
+Let $f = [a_0, a_1, \cdots, a_n]$
+\\\\
+\emph{W.T.S.} $T_{\vec{c}}(f)$ is an isomorphism.\\
+It is enough to show $det(A) \not = 0$ where $T_{\vec{c}}(f) = Af \qquad \forall \ \vec{c} \in C$
+\\\\
+\myalign{
+	\text{\emph{dim}}(\R ^{n+1})\ &=\ n+1 \\
+	\text{\emph{dim}}(\mathcal{P}_n)\ &=\ n+1
+}
+\\\\
+$T_{\vec{c}}(f) = \begin{bmatrix}
+		1      & c_1     & c_1^2     & \cdots & c_1^n     \\
+		1      & c_2     & c_2^2     & \cdots & c_2^n     \\
+		1      & c_3     & c_3^2     & \cdots & c_3^n     \\
+		\vdots & \vdots  & \vdots    & \ddots & \vdots    \\
+		1      & c_{n+1} & c_{n+1}^2 & \cdots & c_{n+1}^n \\
+	\end{bmatrix} f$
+\\\\
+$A$ satisfies the definition of \href{https://en.wikipedia.org/wiki/Vandermonde_matrix}{Vandermonde matrix}. \\
+The determinant of Vandermonde matrix is
+\[\text{det}(A) = \prod_{1\leq i<j\leq n+1} (c_j -c_i)\]
+By definition of $C$, all vectors in $\vec{c} \in C$ have different values for all parts of the vector. \\
+This means $(c_j -c_i) \not = 0 \qquad \forall \ i,j$\\
+The product of non-zero real numbers is non-zero $\ \Longrightarrow \ \text{det}(A) \not = 0$\\
+$\therefore A$ is invertible $\ \Longrightarrow \ T_{\vec{c}}(f)$ is an isomorphism\qed\\
+
+% ! Problem 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+{\LARGE \noindent \underline{\textbf{Problem 5.}}}\\
+
+(1) The \textbf{[I.H.]} states that a set of $n$ vectors are linearly independent.
+This only means that the set $\{v_1, \cdots, v_n\}$ is linearly independent.
+So for the set $\{v_1, \cdots, v_n, v_{n+1}\}$, you can only claim that
+$\{v_1, \cdots, v_n\}$ is linearly independent. Not $\{v_2, \cdots, v_n, v_{n+1}\}$\\
+
+(2) They did not state that $n < m$. This is because you cannot assume that $n$
+vectors is linearly independent if $n > m$. By the proof in \textbf{\underline{Problem 1.1}},
+you can only have max $m$ linearly independent vectors.
+\end{document}

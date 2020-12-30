@@ -1,0 +1,132 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}	
+\usepackage{amsmath,amsthm,amssymb}		
+\usepackage{fancyhdr}				
+%\usepackage{graphicx}				
+%\usepackage{cancel}					
+%\usepackage{changepage}
+%\usepackage{color,soul}
+%\usepackage{enumitem}
+%\usepackage{array}
+%\usepackage{hyperref}
+\usepackage{setspace} % for \setspace
+\usepackage{tabularx} 
+%\usepackage{pifont} % for symbols
+%\usepackage{mathabx} % for star
+%\usepackage{halloweenmath}
+%\usepackage{realhats} % for hats!
+%\usepackage{cancel} % cancelling out shit
+%\usepackage{extarrows} % arrows
+%\usepackage{skak} % chess
+%\usepackage{fontawesome} % a lot of symbols including big companies
+%\let\Asterisk = \undefined % conflict
+%\usepackage{bbding} % four leaf clover
+% one of these fucks up symbol size
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCB36 Term Test 5}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{}
+\fancyfoot[RO,R]{}
+
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+
+\newcommand{\timesSmall}{{\mkern-2mu\times\mkern-2mu}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\bigbracket}[1]{\big(#1\big)}
+\newcommand{\Bigbracket}[1]{\Big(#1\Big)}
+
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\newcommand{\heart}{\ensuremath\varheart}
+\renewcommand{\diamond}{\ensuremath\vardiamond}
+\newcommand{\flower}{\text{\ding{95}}}
+\newcommand{\flowerOther}{\text{\ding{96}}}
+\newcommand{\blockX}{\text{\ding{54}}}
+
+\newenvironment{proofindent}{\vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}}{\end{minipage}}
+\newenvironment{customPageLength}[3]{\noindent \eject \pdfpagewidth=#1 \pdfpageheight=#2 \newgeometry{margin=1in, left=0.6in, right=0.6in, bottom=#3}}{\restoregeometry \eject \pdfpagewidth=8.5in \pdfpageheight=11in}
+% Third is 11.5 - argument3 + 0.5
+
+%{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}& {}= & [\text{}]\\\end{array}$}
+%\vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}\end{minipage}
+
+\begin{document}
+\begin{customPageLength}{8.5in}{12in}{-0.5in}
+    
+
+% ! Problem 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Question 2}}}\\[1mm]
+\textbf{[step 1]}\\
+Define the set $\mathcal{G}$ of formulas that uoc \{$\neg$, $\wedge$\}\\
+\begin{proofindent}
+    Let $\mathcal{G}$ be the smallest set such that\\
+    \textsc{Basis:} If $x$ is a propositional variable, then $x \in \mathcal{G}$\\
+    \textsc{Induction Step:} If $F_1, F_2 \in \mathcal{G}, \text{ then } \neg F, (F_1 \wedge F_2) \in G$
+\end{proofindent}
+\\\\\\\\\\
+\textbf{[step 2]}\\
+WTS: For all $F \in \mathcal{G}$ there exists $F'$ such that \\
+$F'$ uoc from \{\underline{1},\ $\ll$\}
+\\\\
+\textsc{Basis:} Let $F = x$, where $x$ is a propositional variable.\\
+\begin{proofindent}
+    Let $F' = x$\\
+    Then $F'$ uoc \{\underline{1},\ $\ll$\}\\
+    and $F' \text{\textsc{ leqv }} F$, as wanted 
+\end{proofindent}
+\\\\
+\textsc{Induction Step:} Let $F_1, F_2 \in \mathcal{G}$\\
+\begin{proofindent}
+    Suppose $F_1', F_2'$ uoc \{\underline{1},\ $\ll$\} and\\
+    $F_1' \text{\textsc{ leqv }} F_1 \text{ and } F_2' \text{\textsc{ leqv }} F_2$ \hspace*{15mm} \textbf{[IH]}
+    \\\\
+    Case 1: $F = \neg F_1$\\
+    \begin{proofindent}
+        Let $F' = (\underline{1} F_1 \ll \underline{1} F_1) \ll (F_1\ll \underline{1}F_1)$
+        \\\\
+        then $F'$ uoc \{\underline{1},\ $\ll$\} and
+        \\\\
+        {\setstretch{1.0}$\begin{array}{r@{}>{\displaystyle}ll}
+            F'& {}=  (\underline{1} F_1' \ll \underline{1} F_1') \ll (F_1'\ll \underline{1}F_1')& [\text{by given}]\\
+            & {}\text{\textsc{ leqv }} (\underline{1} F_1 \ll \underline{1} F_1) \ll (F_1\ll \underline{1}F_1) \hspace*{10mm} & [\text{by \textbf{IH}}]\\
+            & {}\text{\textsc{ leqv }}  (\underline{1} F_1 \ll \underline{1} F_1) \ll (\neg F_1) & [\text{since $F_1 \ll \underline{1}F_1$ sastified if $F_1$ falsified}]\\
+            & {}\text{\textsc{ leqv }}  (\underline{0} F_1 ) \ll (\neg F_1) & [\text{since $x \ll x$ always falsified}]\\
+            & {}\text{\textsc{ leqv }}  \neg F_1 & [\text{since $\underline{0} F_1  \ll \neg F_1$ sastified if $\neg F_1$ sastified}]\\
+            & {}= F & [\text{by given}]\\
+        \end{array}$}\\
+        as wanted.
+    \end{proofindent}
+    \\\\\\
+    Case 2: $F =  F_1 \wedge F_2$\\
+    \begin{proofindent}
+        Let $F' = (F_1 \ll \underline{1}F_1) \ll F_2$
+        \\\\
+        Then $F'$ uoc \{\underline{1},\ $\ll$\} and 
+        \\\\
+        {\setstretch{1.0}$\begin{array}{r@{}>{\displaystyle}ll}
+            F'& {}=  (F_1' \ll \underline{1}F_1') \ll F_2' & [\text{by given}]\\
+            & {}\text{\textsc{ leqv }}  (F_1 \ll \underline{1}F_1) \ll F_2 \hspace*{10mm} & [\text{by \textbf{IH}}]\\
+            & {}\text{\textsc{ leqv }}  (\neg F_1) \ll F_2 & [\text{since $F_1 \ll \underline{1}F_1$ sastified if $F_1$ falsified}]\\
+            & {}\text{\textsc{ leqv }}  F_1 \wedge F_2 & [\text{since they have the same truth tables}]\\
+            & {}= F &\text{[by given]}\\
+
+        \end{array}$}\\
+        as wanted.
+    \end{proofindent}
+\end{proofindent}
+\\\\\\\\\\
+\textbf{[step 3]}\\
+Since \{$\neg$, $\wedge$\} is complete, therefore \{\underline{1}, $\ll$\} is also complete. \qed
+\end{customPageLength}\end{document}

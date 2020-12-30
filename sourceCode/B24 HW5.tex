@@ -1,0 +1,412 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in]{geometry}	
+\usepackage{amsmath,amsthm,amssymb,scrextend}			
+\usepackage{fancyhdr}				
+\usepackage{graphicx}				
+\usepackage{cancel}					
+\usepackage{changepage}
+\usepackage{color,soul}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage{pifont}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{MATB24 Homework 5}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand\myalign[1]{\alignShortstack{\strut#1\strut}}
+\usepackage{tabstackengine}
+\TABstackMath
+\TABstackMathstyle{\displaystyle}
+
+\newcount\arrowcount
+\newcommand\arrows[1]{
+    \global\arrowcount#1
+    \ifnum\arrowcount>0
+            \begin{matrix}[c]
+            \expandafter\nextarrow
+    \fi
+}
+
+\newcommand\nextarrow[1]{
+    \global\advance\arrowcount-1
+    \ifx\relax#1\relax\else \xrightarrow{#1}\fi
+    \ifnum\arrowcount=0
+    \end{matrix}
+    \else
+    \\
+    \expandafter\nextarrow
+    \fi
+} 
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+
+\newcommand{\timesSmall}{{\mkern-2mu\times\mkern-2mu}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\innerproduct}[2]{\left\langle #1, \ #2\right\rangle}
+\newcommand{\bigInnerproduct}[2]{\big\langle #1, \ #2\big\rangle}
+\newcommand{\bigbracket}[1]{\big(#1\big)}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\newcommand{\heart}{\ensuremath\varheartsuit}
+\newcommand{\flower}{\text{\ding{95}}}
+
+\newenvironment{proofindent}{\vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}}{\end{minipage}}
+
+%{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}& {}= & [\text{}]\\\end{array}$}
+%\vspace*{1mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}\end{minipage}
+
+\begin{document}
+\begin{center}
+	\hypertarget{toc}{\LARGE \noindent \underline{\textbf{Table of contents}}}\\
+\end{center}
+\noindent \textbf{Problem 1:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{1.1}{(1)}\\
+\hyperlink{1.2}{(2)}\\
+\hyperlink{1.3}{(3)}\\
+\hyperlink{1.4}{(4)}\\
+
+\noindent \textbf{Problem 2:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{2.1}{(1)}\\
+\hyperlink{2.2}{(2)}\\
+\hyperlink{2.3}{(3)}\\
+
+\noindent \textbf{Problem 3:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{3.1}{(1)}\\
+\noindent\hyperlink{3.2}{(2)}\\
+\noindent\hyperlink{3.3}{(3)}\\
+
+\noindent \textbf{Problem 4:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{4.1}{(1)}\\
+\hyperlink{4.2}{(2)}\\
+\hyperlink{4.3}{(3)}\\[50mm]
+%{\LARGE \textbf{FUCK DIAGIONAL IS WRONG}}
+\newpage
+
+
+% ! Problem 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 1.}}}\\
+
+\hyperlink{toc}{\hypertarget{1.1}{(1)}}\\
+Suppose $A \in M_{n\timesSmall n}(\mathbb{C})$ is unitarily diagonalizbale\\
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X  >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+	$ D = PAP^{-1}$ & $D \text{ is a diagonal matrix}$ & $P \text{ is a unitary matrix}$
+\end{tabularx}\\\\
+WTS: $AA^* = A^*A$
+\\\\
+%So $D = PAP^{-1} \qquad D \text{ is a diagonal matrix} \qquad P \text{ is a unitary matrix}$\\ 
+%$\hspace*{2mm} A = P^{-1}DP $\\\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		A   & {}= P^{-1}DP                                 & [\text{by given}]\vspace*{1.2mm}                  \\
+		A^* & {}= \bigbracket{P^{-1}DP}^{*} \hspace*{20mm} & [\text{by definition of } A]                      \\
+		    & {}= P^*D^*{P^{-1}}^{*}                       & [\text{by properties of } ^*]                     \\
+		    & {}=  P^{-1}D^*P                              & [\text{by properties of } ^*]                     \\
+		    & {}=  P^{-1}\overline{D^T}P                   & [\text{by definition of } ^*]                     \\
+		    & {}=  P^{-1}\overline{D}P                     & [\text{since diagonal matricies are symmetrical}] \\
+	\end{array}$}\\
+%$\displaystyle \Longrightarrow A^* = \bigbracket{P^{-1}DP}^{*} = P^*D^*{P^{-1}}^{*} =  P^{-1}D^*P$
+\\\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+		AA^* & {}= P^{-1}DP P^{-1}\overline{D}P \hspace*{20mm} & [\text{by given}]                            \\
+		     & {}=  P^{-1}D\overline{D}P                       & [\text{since } PP^{-1}=I]                    \\
+		     & {}=  P^{-1}\overline{D}DP                       & [\text{since diagonal matricies commute}]    \\
+		     & {}=  P^{-1}\overline{D}P P^{-1}DP               & [\text{since } PP^{-1}=I]                    \\
+		     & {}=  A^*A                                       & [\text{by definition of }A \text{ and } A^*] \\
+	\end{array}$}\\
+$\therefore A $ is normal \qed \newpage
+
+\hyperlink{toc}{\hypertarget{1.2}{(2)}}\\
+Suppose\\
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X  >{\centering\arraybackslash}X}
+	$A = UBU^*$ & $U$ is unitary or $U^* = U^{-1}$
+\end{tabularx}\\\\
+WTS: $A \text{ is normal } \iff \ B \text{ is normal}$\\\\
+Case 1: $A$ is normal
+
+\begin{proofindent}
+	$AA^* = A^*A$
+	\\\\
+	WTS: $BB^* = B^*B$
+	\\\\
+	%$B = U^*AU$\\
+	{\setstretch{1.0}$\begin{array}{r@{}>{\displaystyle}ll}
+			B   & {}= U^*AU                  & [\text{by given}]\vspace*{0mm} \\
+			B^* & {}= U^*A^*U \hspace*{20mm} & [\text{by definition of } B]   \\
+		\end{array}$}
+	\\\\
+	{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+			BB^* & {}= U^*AU U^*A^*U  \hspace*{20mm} & [\text{by definition of } B]       \\
+			     & {}= U^*AA^*U                      & [\text{since } UU^* = UU^{-1} = I] \\
+			     & {}= U^*A^*AU                      & [\text{since } AA^* = A^*A]        \\
+			     & {}= U^*A^* UU^* AU                & [\text{since } UU^* = UU^{-1} = I] \\
+			     & {}= B^*B                          & [\text{by definition of } B]       \\
+		\end{array}$}\\\\
+	$\therefore B$ is normal, as wanted.\\
+\end{proofindent}\\\\
+
+\noindent Case 2: $B$ is normal
+
+\begin{proofindent}
+	$BB^* = B^*B$
+	\\\\
+	WTS: $AA^* = A^*A$
+	\\\\
+	{\setstretch{1.0}$\begin{array}{r@{}>{\displaystyle}ll}
+			A   & {}= UBU^*                  & [\text{by given}]\vspace*{0mm} \\
+			A^* & {}= UB^*U^* \hspace*{20mm} & [\text{by definition of } B]   \\
+		\end{array}$}
+	\\\\
+	{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+			AA^* & {}= UBU^* UB^*U^* \hspace*{20mm} & [\text{by definition of } A]       \\
+			     & {}= UBB^*U^*                     & [\text{since } UU^* = UU^{-1} = I] \\
+			     & {}= UB^*BU^*                     & [\text{since } BB^* = B^*B]        \\
+			     & {}= UB^*U^*UBU^*                 & [\text{since } UU^* = UU^{-1} = I] \\
+			     & {}= A^*A                         & [\text{by definition of } A]       \\
+		\end{array}$}\\\\
+	$\therefore A$ is normal, as wanted.
+\end{proofindent}\\\\
+$\therefore A \text{ is normal } \iff \ B \text{ is normal}$ \newpage
+
+\hyperlink{toc}{\hypertarget{1.3}{(3)}}\\
+\begin{tabularx}{\textwidth}{>{\centering\arraybackslash}X  >{\centering\arraybackslash}X}
+
+	Let $B = \begin{bmatrix}
+			\lambda_{11} & \lambda_{12} & \lambda_{13} & \cdots & \lambda_{1n} \\[1.7mm]
+			0            & \lambda_{22} & \lambda_{23} & \cdots & \lambda_{2n} \\[1.7mm]
+			0            & 0            & \lambda_{33} & \cdots & \lambda_{3n} \\
+			\vdots       & \vdots       & \vdots       & \ddots & \vdots       \\[1.7mm]
+			0            & 0            & 0            & \cdots & \lambda_{nn} \\
+		\end{bmatrix} $ & $B^* = \begin{bmatrix}
+			\overline{\lambda_{11}} & 0                       & 0                       & \cdots & 0                       \\[1.7mm]
+			\overline{\lambda_{12}} & \overline{\lambda_{22}} & 0                       & \cdots & 0                       \\[1.7mm]
+			\overline{\lambda_{13}} & \overline{\lambda_{23}} & \overline{\lambda_{33}} & \cdots & 0                       \\
+			\vdots                  & \vdots                  & \vdots                  & \ddots & \vdots                  \\[1.7mm]
+			\overline{\lambda_{1n}} & \overline{\lambda_{2n}} & \overline{\lambda_{3n}} & \cdots & \overline{\lambda_{nn}}
+		\end{bmatrix} $
+\end{tabularx}
+\\\\
+Given: $BB^* = B^*B$ \\
+WTS: $\lambda_{ij} = 0 \qquad $ if $i \not = j$
+\\\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+	A & {}= BB^* & \text{}\\
+		 & {}= B^*B & \text{} \\
+		 & {}= \begin{bmatrix}
+			\lambda_{11} & \lambda_{12} & \lambda_{13} & \cdots & \lambda_{1n} \\[1.7mm]
+			0            & \lambda_{22} & \lambda_{23} & \cdots & \lambda_{2n} \\[1.7mm]
+			0            & 0            & \lambda_{33} & \cdots & \lambda_{3n} \\
+			\vdots       & \vdots       & \vdots       & \ddots & \vdots       \\[1.7mm]
+			0            & 0            & 0            & \cdots & \lambda_{nn} \\
+		\end{bmatrix}\begin{bmatrix}
+			\overline{\lambda_{11}} & 0                       & 0                       & \cdots & 0                       \\[1.7mm]
+			\overline{\lambda_{12}} & \overline{\lambda_{22}} & 0                       & \cdots & 0                       \\[1.7mm]
+			\overline{\lambda_{13}} & \overline{\lambda_{23}} & \overline{\lambda_{33}} & \cdots & 0                       \\
+			\vdots                  & \vdots                  & \vdots                  & \ddots & \vdots                  \\[1.7mm]
+			\overline{\lambda_{1n}} & \overline{\lambda_{2n}} & \overline{\lambda_{3n}} & \cdots & \overline{\lambda_{nn}}
+		\end{bmatrix}  & \text{}\\[20mm]
+		&{}=\begin{bmatrix}
+			\overline{\lambda_{11}} & 0                       & 0                       & \cdots & 0                       \\[1.7mm]
+			\overline{\lambda_{12}} & \overline{\lambda_{22}} & 0                       & \cdots & 0                       \\[1.7mm]
+			\overline{\lambda_{13}} & \overline{\lambda_{23}} & \overline{\lambda_{33}} & \cdots & 0                       \\
+			\vdots                  & \vdots                  & \vdots                  & \ddots & \vdots                  \\[1.7mm]
+			\overline{\lambda_{1n}} & \overline{\lambda_{2n}} & \overline{\lambda_{3n}} & \cdots & \overline{\lambda_{nn}}
+		\end{bmatrix} \begin{bmatrix}
+			\lambda_{11} & \lambda_{12} & \lambda_{13} & \cdots & \lambda_{1n} \\[1.7mm]
+			0            & \lambda_{22} & \lambda_{23} & \cdots & \lambda_{2n} \\[1.7mm]
+			0            & 0            & \lambda_{33} & \cdots & \lambda_{3n} \\
+			\vdots       & \vdots       & \vdots       & \ddots & \vdots       \\[1.7mm]
+			0            & 0            & 0            & \cdots & \lambda_{nn} \\
+		\end{bmatrix} \hspace*{10mm}&\text{}\\
+		%&{}=&[\text{}]\\
+\end{array}$}
+\\\\[5mm] \newpage \noindent
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+	A_{11} & {}= \lambda_{11} \overline{\lambda_{11}}  \hspace*{20mm} & [\text{from } BB^*]\\
+	& {}= |\lambda_{11}|^2 & \text{}\\
+	& {}= \sum_{i = 1}^{n} \lambda_{1i} \overline{\lambda_{1i}}   & [\text{from }B^*B]\\
+	& {}= \sum_{i = 1}^{n} |\lambda_{1i}|^2   & \text{}\\
+
+		%&{}=&[\text{}]\\
+\end{array}$} \hspace*{25mm}%\\[10mm]
+{\setstretch{1.5}$\begin{array}{l>{\displaystyle}r@{}>{\displaystyle}ll}
+	 & \sum_{i = 1}^{n} |\lambda_{1i}|^2  & {}= |\lambda_{11}|^2 \hspace*{0mm} & \text{}                     \\
+	\Longrightarrow & \sum_{i = 2}^{n}|\lambda_{1i}|^2 & {}=0                & \text{}                          \\
+	\Longrightarrow & |\lambda_{1i}|^2                     & {}=0                & \text{} \\
+	\Longrightarrow & |\lambda_{1i}|         & {}=0                & \text{}                          \\
+	\Longrightarrow & \lambda_{1i}       & {}=0                & \text{}                            \\
+\end{array}$}
+\\\\[15mm]
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+	A_{22} & {}= \lambda_{22} \overline{\lambda_{22}} +  \lambda_{12} \overline{\lambda_{12}} \hspace*{3.5mm} & [\text{from } BB^*]\\
+	& {}= |\lambda_{22}|^2 + 0 & \text{}\\
+	& {}= |\lambda_{22}|^2 & \text{}\\
+
+	& {}= \sum_{i = 2}^{n} \lambda_{2i} \overline{\lambda_{2i}}   & [\text{from }B^*B]\\
+	& {}= \sum_{i = 2}^{n} |\lambda_{2i}|^2   & \text{}\\
+
+		%&{}=&[\text{}]\\
+\end{array}$} \hspace*{25mm}%\\[10mm]
+{\setstretch{1.5}$\begin{array}{l>{\displaystyle}r@{}>{\displaystyle}ll}
+	 & \sum_{i = 2}^{n} |\lambda_{2i}|^2  & {}= |\lambda_{22}|^2 \hspace*{0mm} & \text{}                     \\
+	\Longrightarrow & \sum_{i = 3}^{n}|\lambda_{2i}|^2 & {}=0                & \text{}                          \\
+	\Longrightarrow & |\lambda_{2i}|^2                     & {}=0                & \text{} \\
+	\Longrightarrow & |\lambda_{2i}|         & {}=0                & \text{}                          \\
+	\Longrightarrow & \lambda_{2i}       & {}=0                & \text{}                            \\
+\end{array}$}
+\\\\[5mm]
+\noindent we can continue this pattern for all $i \in \{1, \ \cdots , \ n\}$\\
+This means that for every $i \not = j,\ A_{ij} = 0$\\
+$\therefore A $ is a diagonal matrix. 
+\newpage
+\hyperlink{toc}{\hypertarget{1.4}{(4)}}\\
+Suppose $A\in M_{n\timesSmall n}(\C)$ is normal\\%  $\ \Longrightarrow \ $  $AA^* = A^*A$\\
+WTS: $\exists U,D \in M_{n\timesSmall n}(\C) \text{ such that } D = UAU^{-1},\ U$ is unitary, $D$ is diagonal. 
+\\\\
+\\\\
+By Schur's diagonalizbale lemma, $\exists B,\ U \in M_{n\timesSmall n}(\C) \text{ such that }\\ B = U^{-1}AU,\ U$ is unitary, $B$ is an upper triangular matrix.
+\\\\
+By \hyperlink{1.2}{(2)}, $A$ is normal $\iff B$ is normal.\\
+We know $A$ is normal since it is given in the question, so this means $B$ is normal.
+\\\\
+by \hyperlink{1.3}{(3)}, we know that a normal upper triangular matrix is diagonal.\\
+Since $B$ sastifies these conditions, this means $B$ is diagonal.
+\\\\
+In the end, we have $B = U^{-1}AU,\ U$ is unitary, $B$ is diagonal. \\
+$\therefore $ Any normal matrix is unitarily diagonalizbale \qed
+\newpage
+% ! Problem 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 2.}}}\\
+
+\hyperlink{toc}{\hypertarget{2.1}{(1)}}\\
+Suppose $T$ is unitarily diagonalizbale with real eigenvalues. \qquad $\Longrightarrow \qquad [T]_{\mathcal{U}} $ is diagonal.\\
+WTS: %$\bigInnerproduct{T(v)}{w} = \bigInnerproduct{v}{T(w)} \qquad \forall v,\ w \in V$\\
+$\displaystyle [T]_{\mathcal{U}} = {[T]_{\mathcal{U}}}^*$
+\\\\
+Since $[T]_{\mathcal{U}}$ is diagonal, let \\[2mm]
+$\hspace*{1.5mm}\displaystyle [T]_{\mathcal{U}} = \begin{bmatrix}
+	\lambda_1 & 0 & \cdots & 0 \\
+	0 & \lambda_2  & \cdots & 0 \\
+	\vdots & \vdots & \ddots & \vdots \\
+	0 & 0 & \cdots & \lambda_n \\
+\end{bmatrix} \qquad \lambda_i \in \C$ 
+\\\\[2mm]
+$\displaystyle {[T]_{\mathcal{U}}}^* = \begin{bmatrix}
+	\overline{\lambda_1} & 0 & \cdots & 0 \\
+	0 & \overline{\lambda_2}  & \cdots & 0 \\
+	\vdots & \vdots & \ddots & \vdots \\
+	0 & 0 & \cdots & \overline{\lambda_n} \\
+\end{bmatrix} = \begin{bmatrix}
+	\lambda_1 & 0 & \cdots & 0 \\
+	0 & \lambda_2  & \cdots & 0 \\
+	\vdots & \vdots & \ddots & \vdots \\
+	0 & 0 & \cdots & \lambda_n \\
+\end{bmatrix}$\\[2mm]
+Since the eigenvalues are real.\\
+Since $T$ is hermitian, $T$ is self-adjoint. \qed
+\\\\\\[30mm]
+
+\hyperlink{toc}{\hypertarget{2.2}{(2)}}\\
+Suppose $T$ is an isometry. \qquad $\Longrightarrow \qquad \innerproduct{v}{w} = \bigInnerproduct{T(v)}{T(w)}$\\
+WTS: $\forall v \not = 0 \text{ such that } T(v) = \lambda v,\  \|\lambda \| = 1 $
+\\\\
+Let $v \in V$ be an arbitrary eigenvector.\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+	\innerproduct{v}{v} & {}= \bigInnerproduct{T(v)}{T(v)} \hspace*{20mm} & [\text{since T is an isometry}] \\
+						& {}= \innerproduct{\lambda v}{\lambda v} & [\text{since $v$ us an eigenvector}]   \\
+						& {}= \lambda \overline{\lambda}\innerproduct{ v}{ v} & [\text{by taking scalars out of inner product}]   \\
+						& {}= |\lambda| \innerproduct{ v}{ v} & [\text{by definition of magnitude of a complex number}]   \\
+\end{array}$}\\[5mm]
+We know that $\innerproduct{v}{v} > 0$ by the property of positive-definite, and that $v \not = 0$ since it is an eigenvector.\\
+This means in order for $\innerproduct{v}{v} = | \lambda|\innerproduct{v}{v},\ | \lambda|$ must equal 1. \qed \newpage
+
+\hyperlink{toc}{\hypertarget{2.3}{(3)}}\\
+Suppose $T$ is unitarily diagonalizbale, and all eigenvalues of $T$ has absolute value 1.\\
+WTS: $T$ is an isometry.
+\\\\
+Let $\mathcal{U} = \{u_1,\ \cdots,\ u_n\}$ be an orthonormal basis of $V$.\\
+So, for all $i \in \{1,\ \cdots,\ n\},\  u_i$ is an eigenvector.\\
+Let $T(u_i) = \lambda_i u_i$
+\\\\
+${[T]_{\mathcal{U}}} = \begin{bmatrix}
+	\lambda_1 & 0 & \cdots & 0 \\
+	0 & \lambda_2  & \cdots & 0 \\
+	\vdots & \vdots & \ddots & \vdots \\
+	0 & 0 & \cdots & \lambda_n \\
+\end{bmatrix} \qquad |\lambda_i| = 1$
+\\\\
+%WTS: $T$ is an isometry $\iff$ ${[T]_{\mathcal{U}}}$ is unitary $\iff$ columns of ${[T]_{\mathcal{U}}}$ are orthonormal. 
+\\\\
+Since for every column of ${[T]_{\mathcal{U}}}$, we have\\
+i$^\text{th} \text{ column of } T = \begin{bmatrix}
+	0\\\vdots\\\lambda_i\\\vdots\\0
+\end{bmatrix} \leftarrow $ i$^{\text{th}}$ row
+\\\\
+So \big(i$^\text{th} \text{ column of } T\big)\ \cdot $ \big(j$^\text{th} \text{ column of } T\big) \\[2mm]= \left\{
+	\begin{aligned}
+		|\lambda_i|^2 \qquad & \text{ if } i = j &  \text{\qquad since }\lambda_i \cdot \lambda_i =  |\lambda_i|^2  \\
+		0\hspace*{1.5mm} \qquad & \text{ if } i \not = j &\text{\hspace*{20mm} since all other entires are 0}\\
+	\end{aligned}
+	\right. \\[2mm]= \left\{
+		\begin{aligned}
+			1 \qquad & \hspace*{5.5mm}\text{ if } i = j\\
+			0 \qquad & \hspace*{5.5mm}\text{ if } i \not = j\\
+		\end{aligned}
+		\right.$\\[2mm]
+$\therefore$ columns of ${[T]_{\mathcal{U}}}$ are orthonormal\\
+$\hspace*{4.5mm}\Longrightarrow {[T]_{\mathcal{U}}}$ is unitary\\
+$\hspace*{4.5mm}\Longrightarrow T$ is an isometry. \qed
+\newpage
+% ! Problem 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 3.}}}\\
+
+\hyperlink{toc}{\hypertarget{3.1}{(1)}}\\
+
+\hyperlink{toc}{\hypertarget{3.2}{(2)}}\\
+
+\hyperlink{toc}{\hypertarget{3.3}{(3)}}\\
+
+
+
+\newpage
+% ! Problem 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\LARGE \noindent \underline{\textbf{Problem 4.}}}\\
+
+\hyperlink{toc}{\hypertarget{4.1}{(1)}}\\
+
+\hyperlink{toc}{\hypertarget{4.2}{(2)}}\\
+
+\hyperlink{toc}{\hypertarget{4.3}{(3)}}\\
+\end{document}

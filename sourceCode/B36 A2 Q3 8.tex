@@ -1,0 +1,366 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in]{geometry}		% For setting margins
+\usepackage{amsmath,amsthm,amssymb,scrextend}				% For Math
+\usepackage{fancyhdr}				% For fancy header/footer
+\usepackage{graphicx}				% For including figure/image
+\usepackage{cancel}					% To use the slash to cancel out stuff in work
+\usepackage{changepage}
+\usepackage{color,soul}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Set up fancy header/footer
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCB36 Assignment 2}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006323132}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+
+\newcommand\myalign[1]{\alignShortstack{\strut#1\strut}}
+\usepackage{tabstackengine}
+\TABstackMath
+\TABstackMathstyle{\displaystyle}
+
+%\usepackage{lipsum}
+%\hfill\begin{minipage}{\dimexpr\textwidth-10mm}\end{minipage}
+
+\begin{document}
+% ! Problem 8 Step 1
+{\LARGE \noindent \underline{\textbf{Problem 8. (Page 72 \#8 in course notes)}}}\\
+
+\noindent \textbf{Step 1:}
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	Loop invariants\\
+	\hspace*{10 pt} (a) $x$ is even and $\geq 0$$\ \Longrightarrow \ x = 2k, \ k\in \N$\\
+		\hspace*{10 pt} (b) $y \geq -2$\\
+\end{minipage}
+\textbf{Step 2:} % ! Problem 8 Step 2
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	\textsc{Basis:} 
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+		$y = 0, \ x = 0$\\
+		So $x$ is even and $\geq 0$, and $y \geq -2$, as wanted
+	\end{minipage}\\
+
+	\textsc{Induction Step:} Consider an arbitrary iteration of the loop
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+		Suppose LI holds before the loop iteration \qquad [IH]\\
+		WTP: LI holds after the iteration
+		\\\\
+		$x \not = 0 \qquad \text{[line 1]}\\
+			\Longrightarrow \ x \geq 2$ since 2 is the next even number after 0. \qquad \textbf{($\clubsuit $)}
+		\\\\
+		Case 1: $y \geq 1$
+
+		\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+			\myalign{
+				y'\ &=\ y - 3\qquad \text{[line 3]}\\
+				&\geq\ 1 - 3\qquad [\text{line 2}]\\
+				&=\ -2
+			}\\
+			as wanted fo LI(a)
+			\\\\
+			$\begin{array}{lcll}
+					x' & =    & x+2 \qquad \qquad & \text{[line 3]}      \\
+					   & =    & 2k + 2            & [\text{IH}]          \\
+					   & =    & 2(k+1)            & \text{which is even} \\
+					   & \geq & 0                 & \text{[IH]}
+				\end{array}$\\
+			as wanted for LI(b)\\
+
+		\end{minipage}\\
+		Case 2: $y < 1$
+
+		\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+			$\begin{array}{lcll}
+					y' & =    & y \qquad \qquad & \text{[line 3]} \\
+					   & \geq & -2              & [\text{IH}]     \\
+				\end{array}$\\
+			as wanted fo LI(a)
+			\\\\
+			$\begin{array}{lcll}
+					x' & = & x-2 \qquad \qquad & \text{[line 3]}      \\
+					   & = & 2k - 2            & [\text{IH}]          \\
+					   & = & 2(k-1)            & \text{which is even}
+				\end{array}$
+			\\\\
+			Also,\\
+			$\begin{array}{lcll}
+					x' & =    & x-2 \qquad \qquad & \text{[line 3]} \\
+					   & \geq & 2 - 2             & (\clubsuit)     \\
+					   & =    & 0                 &
+				\end{array}$\\
+			as wanted for LI(b)\\
+
+		\end{minipage}
+	\end{minipage}
+\end{minipage}
+\\\\\newpage
+\noindent \textbf{Step 4:} % ! Problem 8 Step 4
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	Let $e = y + x + 2$
+\end{minipage}
+\\\\
+\textbf{Step 5:} % ! Problem 8 Step 5
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	\begin{itemize}
+		\item [(A)] Proving $e \geq 0$\\
+		      $\begin{array}{lcll}
+				      e & =    & y + x + 2         &                   \\
+				        & \geq & -2 + x + 2 \qquad & \text{[by LI(a)]} \\
+				        & =    & x                 &                   \\
+				        & \geq & 0                 & \text{[By LI(b)]}
+			      \end{array}$
+		\item [(B)] Consider an arbitrary interation.
+		      \\\\
+		      Case 1: $y \geq 1$
+
+		      \hfill\begin{minipage}{\dimexpr\textwidth-20mm}
+			      $y' = y-3$\qquad [line 3]\\
+			      $x' = x+2$\qquad [line 3]
+			      \\\\
+			      $\begin{array}{lcll}
+					      e' & = & y' + x' + 2     & \\
+					         & = & y-3 + x + 2 + 2 & \\
+					         & = & y + x + 2 - 1   & \\
+					         & = & e - 1           & \text{[definition of $e$]}\\
+					         & < & e               &
+				      \end{array}$\\
+		      \end{minipage}
+		      \\\\
+		      Case 2: $y < 1$
+
+		      \hfill\begin{minipage}{\dimexpr\textwidth-20mm}
+			      $y' = y$\\
+			      $x' = x-2$ \qquad [line 5]
+			      \\\\
+			      $\begin{array}{lcll}
+					      e' & = & y'+x'+2       & \\
+					         & = & y + x - 2 + 2 \qquad& \\
+					         & = & e-2           & \text{[definition of $e$]}\\
+					         & < & e             &
+				      \end{array}$\\
+		      \end{minipage}\\
+		      as wanted. \qed
+
+	\end{itemize}
+\end{minipage}
+% ! PART 2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\newpage
+\noindent \hl{If line 3 were changed to $y := y-1$}\\
+
+\noindent \textbf{Step 1:}
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	Loop invariants\\
+	\hspace*{10 pt} (a) $x$ is even and $\geq 0$$\ \Longrightarrow \ x = 2k, \ k\in \N$\\
+	\hspace*{10 pt} \hl{(b) $y \geq 0$}\\
+\end{minipage}
+\textbf{Step 2:} % ! Problem 8 Step 2
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	\textsc{Basis:}
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+		$y = 0, \ x = 0$\\
+		So $x$ is even and $\geq 0$, and $y \geq 0$, as wanted
+	\end{minipage}\\
+
+	\textsc{Induction Step:} Consider an arbitrary iteration of the loop
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+		Suppose LI holds before the loop iteration \qquad [IH]\\
+		WTP: LI holds after the iteration
+		\\\\
+		$x \not = 0 \qquad \text{[line 1]}\\
+			\Longrightarrow \ x \geq 2$ since 2 is the next even number after 0. \qquad \textbf{($\clubsuit $)}
+		\\\\
+		Case 1: $y \geq 1$
+
+		\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+			\myalign{
+				y'\ &=\ y - 1\qquad \text{[line 3]}\\
+				&\geq\ 1 - 1\qquad [\text{line 2}]\\
+				&=\ 0
+			}\\
+			as wanted fo LI(a)
+			\\\\
+			$\begin{array}{lcll}
+					x' & =    & x+2 \qquad \qquad & \text{[line 3]}      \\
+					   & =    & 2k + 2            & [\text{IH}]          \\
+					   & =    & 2(k+1)            & \text{which is even} \\
+					   & \geq & 0                 & \text{[IH]}
+				\end{array}$\\
+			as wanted for LI(b)\\
+
+		\end{minipage}\\
+		Case 2: $y < 1$
+
+		\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+			$\begin{array}{lcll}
+					y' & =    & y \qquad \qquad & \text{[line 3]} \\
+					   & \geq & 0               & [\text{IH}]     \\
+				\end{array}$\\
+			as wanted fo LI(a)
+			\\\\
+			$\begin{array}{lcll}
+					x' & = & x-2 \qquad \qquad & \text{[line 3]}      \\
+					   & = & 2k - 2            & [\text{IH}]          \\
+					   & = & 2(k-1)            & \text{which is even}
+				\end{array}$
+			\\\\
+			Also,\\
+			$\begin{array}{lcll}
+					x' & =    & x-2 \qquad \qquad & \text{[line 3]} \\
+					   & \geq & 2 - 2             & (\clubsuit)     \\
+					   & =    & 0                 &
+				\end{array}$\\
+			as wanted for LI(b)\\
+
+		\end{minipage}
+	\end{minipage}
+\end{minipage}
+\\\\\newpage
+\noindent \textbf{Step 4:} % ! Problem 8 Step 4
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	\hl{Let $e = 3y + x$}
+\end{minipage}
+\\\\
+\textbf{Step 5:} % ! Problem 8 Step 5
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	\begin{itemize}
+		\item [(A)] Proving $e \geq 0$\\
+		      $\begin{array}{lcll}
+				      e & =    & 3y + x          &                             \\
+				        & \geq & 3(0) + 0 \qquad & \text{[by LI(a) and LI(b)]} \\
+				        & =    & 0               &                             \\
+			      \end{array}$
+		\item [(B)] Consider an arbitrary interation.
+		      \\\\
+		      Case 1: $y \geq 1$
+
+		      \hfill\begin{minipage}{\dimexpr\textwidth-20mm}
+			      $y' = y-1$ \qquad [line 3]\\
+			      $x' = x+2$ \qquad [line 3]
+			      \\\\
+			      $\begin{array}{lcll}
+					      e' & = & 3y' + x'       & \\
+					         & = & 3(y-1) + x + 2 & \\
+					         & = & 3y + x -1      & \\
+					         & = & e - 1          & \text{[definition of $e$]}\\
+					         & < & e              &
+				      \end{array}$\\
+		      \end{minipage}
+		      \\\\
+		      Case 2: $y < 1$
+
+		      \hfill\begin{minipage}{\dimexpr\textwidth-20mm}
+			      $y' = y$\\
+			      $x' = x-2$ \qquad [line 5]
+			      \\\\
+			      $\begin{array}{lcll}
+					      e' & = & 3y'+x'     & \\
+					         & = & 3y + x - 2 \qquad& \\
+					         & = & e-2        & \text{[definition of $e$]}\\
+					         & < & e          &
+				      \end{array}$\\
+		      \end{minipage}\\
+		      as wanted. \qed
+
+	\end{itemize}
+\end{minipage}
+
+% ! question 9 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\newpage
+{\LARGE \noindent \underline{\textbf{Problem 9. (Page 73 \#9 in course notes)}}}\\
+
+\noindent \textbf{Step 1:}
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	Loop invariants\\
+	\hspace*{10 pt} (a) $y = x^2$\\
+	\hspace*{10 pt} {(b) $x \geq 0$}\\
+\end{minipage}
+\textbf{Step 2:} % ! Problem 8 Step 2
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	\textsc{Basis:}
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+		$y = 0, \ x = 0$\\
+		So $x\geq 0$, and $y =x^2$, as wanted
+	\end{minipage}\\
+
+	\textsc{Induction Step:} Consider an arbitrary iteration of the loop
+
+	\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+		Suppose LI holds before the loop iteration \qquad [IH]\\
+		WTP: LI holds after the iteration
+		\\\\
+		$y \not = 0 \text{ [line 2]}\ \Longrightarrow \ x \geq 1$ \qquad $(\clubsuit)$\\
+		since $y = x^2$ and the next natural number after 0 is 1
+		\\\\
+		$\begin{array}{lcll}
+				x' & =    & x-1          & \text{[line 3]} \\
+				   & \geq & 1 - 1 \qquad & (\clubsuit)     \\
+				   & =    & 0            &                 \\
+			\end{array}$\\
+		as wanted fo LI(b)
+		\\\\
+		$\begin{array}{lcll}
+				y' & = & y-2x-1 \qquad & \text{[line 4]}         \\
+				   & = & x^2 -2x -1    &                         \\
+				   & = & (x-1)^2       &                         \\
+				   & = & (x')^2        & \text{[since $x'=x-1$]} \\
+			\end{array}$\\
+		as wanted fo LI(a)
+	\end{minipage}
+\end{minipage}\\\\
+
+\noindent \textbf{Step 4:} % ! Problem 8 Step 4
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	{Let $e = x$}
+\end{minipage}
+\\\\
+\textbf{Step 5:} % ! Problem 8 Step 5
+
+\hfill\begin{minipage}{\dimexpr\textwidth-10mm}
+	\begin{itemize}
+		\item [(A)] Proving $e \geq 0$\\
+		      $\begin{array}{lcll}
+				      e & =    & x        &                   \\
+				        & \geq & 0 \qquad & \text{[by LI(b)]} \\
+			      \end{array}$
+		\item [(B)] Consider an arbitrary interation.
+		      \\
+		      $x' = x-1$ \qquad [line 3]
+		      \\\\
+		      $\begin{array}{lcll}
+				      e' & = & x'    & \\
+				         & = & x-1   & \\
+				         & = & e - 1 \qquad& \text{[definition of $e$]}\\
+				         & < & e     &
+			      \end{array}$\\
+		      as wanted. \qed
+
+	\end{itemize}
+\end{minipage}
+\end{document}
