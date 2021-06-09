@@ -1,0 +1,163 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}	
+\usepackage{fancyhdr}
+\usepackage{multirow} % marging 2 rows
+\usepackage{array}
+\usepackage{karnaugh-map}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCB58 Lab 2}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\begin{document}
+\setlength\extrarowheight{2pt}
+\leavevmode\\[-9mm]
+{\LARGE \noindent \underline{\textbf{Lab 2}}}
+\begin{center}
+  \begin{tabular}{|c|c|c| |c|c|c|c|c|c|c|}
+    \hline
+    \multicolumn{3}{|c||}{\textbf{Input}}& \multicolumn{7}{c|}{\textbf{Segment \#}}\\
+		\hline
+		A & B & C & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline \hline
+		0 & 0 & 0 & 1 &   & 1 & 1 &   & 1 & 1 \\ \hline
+		0 & 0 & 1 &   &   &   & 1 & 1 & 1 & 1 \\ \hline
+		0 & 1 & 0 & 1 &   &   & 1 & 1 & 1 & 1 \\ \hline
+		0 & 1 & 1 & 1 & 1 &   &   & 1 & 1 & 1 \\ \hline
+		1 & 0 & 0 &   &   & 1 &   & 1 & 1 & 1 \\ \hline
+		1 & 0 & 1 & 1 &   &   & 1 & 1 & 1 & 1 \\ \hline
+		1 & 1 & 0 &   &   & 1 &   & 1 &   & 1 \\ \hline
+		1 & 1 & 1 &   &   &   &   &   &   &   \\ \hline
+  \end{tabular} \leavevmode \\[2mm]
+  *All blanks mean 0 \\[10mm]
+\end{center}
+\begin{center}
+	\begin{tabular}{|c|c| |c|c|c|c|}
+		\hline
+		\multicolumn{2}{|c||}{\multirow{2}{*}{\textbf{Segment 0}}} & 00                                & 01                     & 11          & 10                         \\ \cline{3-6}
+		\multicolumn{2}{|c||}{}                           & $\overline{B} \cdot \overline{C}$ & $\overline{B} \cdot C$ & $B \cdot C$ & $B \cdot \overline{C}$     \\  \cline{3-6}  \hline \hline
+		0                                                 & $\overline{A}$                    & 1                      &             & 1                      & 1 \\ \hline
+		1                                                 & $A$                               &                        & 1           &                        &   \\ \hline
+	\end{tabular} \hspace*{15mm}
+	\begin{tabular}{|c|c| |c|c|c|c|}
+		\hline
+		\multicolumn{2}{|c||}{\multirow{2}{*}{\textbf{Segment 1}}} & 00                                & 01                     & 11          & 10                       \\ \cline{3-6}
+		\multicolumn{2}{|c||}{}                           & $\overline{B} \cdot \overline{C}$ & $\overline{B} \cdot C$ & $B \cdot C$ & $B \cdot \overline{C}$   \\  \cline{3-6}  \hline \hline
+		0                                                 & $\overline{A}$                    &                        &             & 1                      & \\ \hline
+		1                                                 & $A$                               &                        &             &                        & \\ \hline
+	\end{tabular}
+	\leavevmode \\\leavevmode\\[15mm]
+	\begin{tabular}{|c|c| |c|c|c|c|}
+		\hline
+		\multicolumn{2}{|c||}{\multirow{2}{*}{\textbf{Segment 2}}} & 00                                & 01                     & 11          & 10                         \\ \cline{3-6}
+		\multicolumn{2}{|c||}{}                           & $\overline{B} \cdot \overline{C}$ & $\overline{B} \cdot C$ & $B \cdot C$ & $B \cdot \overline{C}$     \\  \cline{3-6}  \hline \hline
+		0                                                 & $\overline{A}$                    & 1                      &             &                        & 1 \\ \hline
+		1                                                 & $A$                               & 1                      &             &                        &   \\ \hline
+	\end{tabular} \hspace*{15mm}
+	\begin{tabular}{|c|c| |c|c|c|c|}
+		\hline
+		\multicolumn{2}{|c||}{\multirow{2}{*}{\textbf{Segment 3}}} & 00                                & 01                     & 11          & 10                         \\ \cline{3-6}
+		\multicolumn{2}{|c||}{}                           & $\overline{B} \cdot \overline{C}$ & $\overline{B} \cdot C$ & $B \cdot C$ & $B \cdot \overline{C}$     \\  \cline{3-6}  \hline \hline
+		0                                                 & $\overline{A}$                    & 1                      & 1           &                        & 1 \\ \hline
+		1                                                 & $A$                               &                        & 1           &                        &   \\ \hline
+	\end{tabular} \leavevmode \\\leavevmode\\ [15mm]
+	\begin{tabular}{|c|c| |c|c|c|c|}
+		\hline
+		\multicolumn{2}{|c||}{\multirow{2}{*}{\textbf{Segment 4}}} & 00                                & 01                     & 11          & 10                         \\ \cline{3-6}
+		\multicolumn{2}{|c||}{}                           & $\overline{B} \cdot \overline{C}$ & $\overline{B} \cdot C$ & $B \cdot C$ & $B \cdot \overline{C}$     \\  \cline{3-6}  \hline \hline
+		0                                                 & $\overline{A}$                    &                        & 1           & 1                      & 1 \\ \hline
+		1                                                 & $A$                               & 1                      & 1           &                        & 1 \\ \hline
+	\end{tabular} \hspace*{15mm}
+	\begin{tabular}{|c|c| |c|c|c|c|}
+		\hline
+		\multicolumn{2}{|c||}{\multirow{2}{*}{\textbf{Segment 5}}} & 00                                & 01                     & 11          & 10                         \\ \cline{3-6}
+		\multicolumn{2}{|c||}{}                           & $\overline{B} \cdot \overline{C}$ & $\overline{B} \cdot C$ & $B \cdot C$ & $B \cdot \overline{C}$     \\  \cline{3-6}  \hline \hline
+		0                                                 & $\overline{A}$                    & 1                      & 1           & 1                      & 1 \\ \hline
+		1                                                 & $A$                               & 1                      & 1           &                        &   \\ \hline
+	\end{tabular} \leavevmode \\\leavevmode\\ [15mm]
+	\begin{tabular}{|c|c| |c|c|c|c|}
+		\hline
+		\multicolumn{2}{|c||}{\multirow{2}{*}{\textbf{Segment 6}}} & 00                                & 01                     & 11          & 10                         \\ \cline{3-6}
+		\multicolumn{2}{|c||}{}                           & $\overline{B} \cdot \overline{C}$ & $\overline{B} \cdot C$ & $B \cdot C$ & $B \cdot \overline{C}$     \\  \cline{3-6}  \hline \hline
+		0                                                 & $\overline{A}$                    & 1                      & 1           & 1                      & 1 \\ \hline
+		1                                                 & $A$                               & 1                      & 1           &                        & 1 \\ \hline
+	\end{tabular}
+\end{center}
+\newpage
+\begin{center}
+  \begin{tabular}{c c}
+    
+  
+\begin{karnaugh-map}[4][2][1][\textbf{Segment 0}][][][omg]
+\minterms{0,2,3,5}
+\maxterms{1,4,6,7}
+\implicant{3}{2}
+\implicantedge{0}{0}{2}{2}
+\implicant{5}{5}
+\end{karnaugh-map} &
+\begin{karnaugh-map}[4][2][1][\textbf{Segment 1}][]
+\manualterms{0,0,0,1,0,0,0,0}
+\implicant{3}{3}
+\end{karnaugh-map} 
+\\[-10mm] $S_0 = A\overline{B}C\ \cdot \ \overline{A}B \ \cdot \ \overline{A}\overline{C}$& $S_1 = \overline{A}BC$
+\\[19mm]
+
+\begin{karnaugh-map}[4][2][1][\textbf{Segment 2}][]
+\manualterms{1,0,0,0,1,0,1,0}
+\implicant{0}{4}
+\implicantedge{4}{4}{6}{6}
+\end{karnaugh-map} &
+\begin{karnaugh-map}[4][2][1][\textbf{Segment 3}][]
+\manualterms{1,1,1,0,0,1,0,0}
+\implicant{1}{5}
+\implicantedge{0}{0}{2}{2}
+\end{karnaugh-map} 
+\\[-10mm] $S_2 = A\overline{C} \ \cdot \ \overline{B}\overline{C}$& $S_3 = \overline{B}C \ \cdot \ \overline{A}\overline{C}$
+\\[19mm]
+
+\begin{karnaugh-map}[4][2][1][\textbf{Segment 4}][]
+\manualterms{0,1,1,1,1,1,1,0}
+\implicant{1}{5}
+\implicant{3}{2}
+\implicantedge{4}{4}{6}{6}
+\end{karnaugh-map} &
+\begin{karnaugh-map}[4][2][1][\textbf{Segment 5}][]
+\manualterms{1,1,1,1,1,1,0,0}
+\implicant{0}{5}
+\implicant{0}{2}
+\end{karnaugh-map} 
+\\[-10mm] $S_4 = A\overline{C}\ \cdot \ \overline{B}C \ \cdot \ \overline{A}B$& $S_5 = \overline{A}\overline{B}$
+\\[19mm]
+\end{tabular}
+
+\begin{karnaugh-map}[4][2][1][\textbf{Segment 6}][]
+\manualterms{1,1,1,1,1,1,1,0}
+\implicant{0}{5}
+\implicantedge{0}{4}{2}{6}
+\implicant{0}{2}
+\end{karnaugh-map}
+\\[-9mm]$S_6 = \overline{A}\overline{B}\overline{C}$
+\end{center}
+
+% i seriously don't know what i spent so much time fuck me 
+%\begin{tabular}{|c|c |c|c|c|c|}
+%	\cline{3-6} \multicolumn{1}{c}{} & \multicolumn{1}{c|}{}&&   &   & \\[-5.7mm] 
+%	\multicolumn{1}{c}{} & \multicolumn{1}{c|}{}& \cellcolor{gray!25} 00 &  \cellcolor{gray!25}01 &  \cellcolor{gray!25}11 & \cellcolor{gray!25} 10 \\
+%	\cline{3-6} \multicolumn{1}{c}{} & \multicolumn{1}{c|}{}&&   &   & \\[-5.7mm] 
+%	\multicolumn{1}{c}{}& \multicolumn{1}{c|}{}& \cellcolor{gray!25}$\overline{B} \cdot \overline{C}$&\cellcolor{gray!25} $\overline{B} \cdot C$ & \cellcolor{gray!25}$B \cdot C$ & \cellcolor{gray!25}$B \cdot \overline{C}$ \\  \cline{3-6}  \hline
+%	\cellcolor{gray!25}0& \cellcolor{gray!25}$\overline{A}$ &1&&1&1 \\ \hline 
+%	\cellcolor{gray!25}1& \cellcolor{gray!25}$A$            &&1&& \\ \hline 
+%\end{tabular}
+
+%\begin{tabular}{|c|c| |c|c|c|c|}
+%	\hline \xrowht[()]{10pt}
+%	&& 00 & 01 & 11 & 10 \\ \cline{3-6} \xrowht[()]{10pt}
+%	&& $\overline{B} \cdot \overline{C}$& $\overline{B} \cdot C$ & $B \cdot C$ & $B \cdot \overline{C}$ \\  \hline \hline \xrowht[()]{10pt}
+%	0&$\overline{A}$ &1&&1&1 \\ \hline \xrowht[()]{10pt}
+%	1&$A$            &&1&& \\ \hline 
+%\end{tabular}
+\end{document}

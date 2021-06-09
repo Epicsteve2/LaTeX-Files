@@ -1,0 +1,38 @@
+\documentclass[12pt]{article}
+	
+\usepackage[landscape, margin=1in, left=0.6in, right=0.6in]{geometry}	
+\usepackage{fancyhdr}
+% \usepackage{relsize}
+\usepackage[table]{xcolor}
+% \usepackage{lscape}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCB58 Lab 6}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+% \setlength\extrarowheight{2pt}
+\renewcommand{\arraystretch}{1.4}
+
+\begin{document}
+{\LARGE \noindent \underline{\textbf{Lab 6}}}
+
+\begin{center}
+	\begin{tabular}{|c|l|c|c||c|c|c|c|c|c|c|c|c|}
+		\hline \cellcolor{gray!25}Step & \multicolumn{1}{c|}{\cellcolor{gray!25}Operation} & \cellcolor{gray!25}In R1 & \cellcolor{gray!25}In R2 & \cellcolor{gray!25}R1mul & \cellcolor{gray!25}R1en & \cellcolor{gray!25}R2mul & \cellcolor{gray!25}R2en & \cellcolor{gray!25}InSel & \cellcolor{gray!25}ASel & \cellcolor{gray!25}BSel & \cellcolor{gray!25}Done? & \cellcolor{gray!25}NextStep \\
+		\hline\hline
+		\texttt{0}                     & $R1=X       $                                     & $X$                      & ?                        & \texttt{0}               & \texttt{1}              & \texttt{x}               & \texttt{0}              & \texttt{00}              & \texttt{11}             & \texttt{00}             & \texttt{0}               & \texttt{1}                  \\\hline
+		\texttt{1}                     & $R2 = R1  \times  B$                              & $X$                      & $BX$                     & \texttt{x}               & \texttt{0}              & \texttt{1}               & \texttt{1}              & \texttt{10}              & \texttt{01}             & \texttt{11}             & \texttt{0}               & \texttt{2}                  \\\hline
+		\texttt{2}                     & $R1 = R1 \times R1 $                              & $X^2$                    & $BX$                     & \texttt{1}               & \texttt{1}              & \texttt{x}               & \texttt{0}              & \texttt{xx}              & \texttt{01}             & \texttt{01}             & \texttt{0}               & \texttt{3}                  \\\hline
+		\texttt{3}                     & $R1 = R1 \times A  $                              & $AX^2$                   & $BX$                     & \texttt{1}               & \texttt{1}              & \texttt{x}               & \texttt{0}              & \texttt{01}              & \texttt{11}             & \texttt{01}             & \texttt{0}               & \texttt{4}                  \\\hline
+		\texttt{4}                     & $R2 = R2+R1 $                                     & $AX^2$                   & $AX^2+BX$                & \texttt{x}               & \texttt{0}              & \texttt{0}               & \texttt{1}              & \texttt{xx}              & \texttt{01}             & \texttt{10}             & \texttt{0}               & \texttt{5}                  \\\hline
+		\texttt{5}                     & $R2=R2+C    $                                     & $AX^2$                   & $AX^2+BX+C$              & \texttt{x}               & \texttt{0}              & \texttt{0}               & \texttt{1}              & \texttt{11}              & \texttt{11}             & \texttt{10}             & \texttt{0}               & \texttt{6}                  \\\hline
+		\texttt{6}                     & $R2=R1      $                                     & $AX^2+BC+C$              & $AX^2+BX+C$              & \texttt{0}               & \texttt{1}              & \texttt{x}               & \texttt{0}              & \texttt{xx}              & \texttt{10}             & \texttt{00}             & \texttt{0}               & \texttt{7}                  \\\hline
+		\texttt{7}                     & \multicolumn{1}{c|}{hold}                         & $AX^2+BC+C$              & $AX^2+BC+C$              & \texttt{x}               & \texttt{0}              & \texttt{x}               & \texttt{0}              & \texttt{xx}              & \texttt{xx}             & \texttt{xx}             & \texttt{1}               & \texttt{7}                  \\\hline
+		% &                  &       &       &       &      &       &      &       &      &      &       &          \\\hline
+	\end{tabular}
+\end{center}
+\end{document}
