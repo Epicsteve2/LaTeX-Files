@@ -1,0 +1,375 @@
+\documentclass[12pt]{article}
+	
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
+\usepackage{fancyhdr}	% header
+\usepackage{hyperref} % links
+
+
+\usepackage{amsmath,amsthm,amssymb}	%math stuff
+\usepackage{graphicx} \graphicspath{ {./images/} }
+\usepackage{setspace} % increase line spacing
+\usepackage{tabularx} % long tables
+\usepackage{enumitem} % labelling itmes
+\usepackage{color, soul}
+\usepackage{lmodern} % bolding \texttt{}
+\usepackage[T1]{fontenc} % for {} in \texttt{}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage[edges]{forest}
+% \usepackage{alltt}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCB63 A3}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rplus}{\mathbb{R}^{+}}
+\newcommand{\bigbracket}[1]{\big(#1\big)}
+\newcommand{\Bigbracket}[1]{\Big(#1\Big)}
+\newcommand{\floorSurround}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\ceilingSurround}[1]{\left\lceil#1\right\rceil}
+\newcommand{\code}[1]{{\ttfamily \fontseries{b}\selectfont #1}}
+\definecolor{codegray}{gray}{0.9}
+\def \calO {\mathcal{O}}
+\newcommand{\bigO}[1]{\ensuremath{\calO(#1)}}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\newenvironment{proofindent}{\vspace*{2mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}}{\end{minipage}}
+
+\everymath{\displaystyle}
+
+\begin{document}
+%----------------------------------------------------------------------------------
+%                              Table of Contents
+%----------------------------------------------------------------------------------
+\begin{center}
+	\hypertarget{toc}{\LARGE \noindent \underline{\textbf{Table of Contents}}}\\
+\end{center}
+
+\noindent \hyperlink{1}{\textbf{Question 1:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\noindent {\textbf{Question 2:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+\noindent\hyperlink{2.1}{(a)}\\
+\hyperlink         {2.2}{(b)}\\
+\hyperlink         {2.3}{(c)}\\
+
+
+\noindent {\textbf{Question 3:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{3.1}{(a)}\\
+\hyperlink         {3.2}{(b)}\\
+\hyperlink         {3.3}{(c)}\\
+\hyperlink         {3.3}{(d)}\\
+
+\noindent {\textbf{Question 4:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{4.1}{(a)}\\
+\hyperlink         {4.2}{(b)}\\
+\hyperlink         {4.3}{(c)}\\
+\newpage
+
+%{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}l}  \end{array}$}
+% {\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}l}  
+% 	&{} \\
+% 	&{} \\
+% 	&{} \\
+% 	&{} \\
+% 	&{} \\
+% \end{array}$}
+%----------------------------------------------------------------------------------
+%                                   Questions
+%----------------------------------------------------------------------------------
+\setstretch{1.2}
+%----------------------------------------------------------------------------------
+% !                                    1
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}
+\\\\
+Let $T$ be the random variable for the final value of $t$.\\
+Let $R_i$ be the number of times \code{random(1, 2\char`\^{}c)} is called when $c=i$.\\
+Notice $\Delta T_i$ (change in $T$ during the i\textsuperscript{th} iteration) is equal to $R_i$.\\
+$R_i$ is a geometric distribution, since it runs until it gets a success.\\
+The probability of a random number from $1 \text{ to } 2^c$ being equal to 1 is $\frac{1}{2^i}$\\
+So $E[R_i] = 2^i$ by the expected value of a geometric distribution.
+\\\\
+The outer while loop loops until $c > n$, so $T$ is just the sum of all $R_i$.
+{\setstretch{1.5}$$\begin{array}{r@{}>{\displaystyle}l}  
+	E[T]&{}= \sum_{i=1}^{n} E[R_i]\\
+	% &{} \\
+	&{} = \sum_{i=1}^{n}2^i\\
+	&{} = 2(2^n-1)\\
+	% &{} \\
+\end{array}$$}
+% \texttt{}
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    2
+%----------------------------------------------------------------------------------
+{{\LARGE \noindent \underline{\textbf{Question 2.}}}}
+\\\\
+\noindent \hyperlink{toc}{\hypertarget{2.1}{(a)}}\\
+Since there are only 7 nodes, I can manually calculate the number of comparisons for each node.
+\begin{center}\begin{forest}
+	for tree={
+		grow = south,
+		circle, draw, minimum size = 3ex, inner sep = 1pt,
+		s sep = 7mm
+	}
+	[$4$, label={\footnotesize $1$}
+		[$2$, label={\footnotesize $3$}
+			[$1$, label={\footnotesize $5$}
+				[,phantom]
+				[,phantom]
+			]
+			[$3$, label={\footnotesize $5$}
+				[,phantom]
+				[,phantom]
+			]
+		]
+		[$6$, label={\footnotesize $3$}
+			[$5$, label={\footnotesize $5$}
+				[,phantom]
+				[,phantom]
+			]
+			[$7$, label={\footnotesize $5$}
+				[,phantom]
+				[,phantom]
+			]
+		]
+	]
+\end{forest}\end{center}
+% \begin{center}\begin{tabular}{|c|c|}
+% 		\hline \cellcolor{gray!25}Node & \cellcolor{gray!25}Cost of Current Operation \\
+% 		\hline\hline
+% 		\texttt{4}  & \texttt{2}  \\\hline
+% 		\texttt{2}  & \texttt{4}  \\\hline
+% 		\texttt{6}  & \texttt{2}  \\\hline
+% 		\texttt{1}  & \texttt{8}  \\\hline
+% 		\texttt{3}  & \texttt{2}  \\\hline
+% 		\texttt{5}  & \texttt{4}  \\\hline
+% 		\texttt{7}  & \texttt{2}  \\\hline
+% 		% &&\\\hline
+% \end{tabular}\end{center}
+% \ \\\\ 
+Since node $k$ is chosen at random, then every node has a $\frac{1}{7}$ chance of being selected. So \\
+{\setstretch{2.2}$\begin{array}{r@{}>{\displaystyle}l}  
+		E[\text{Comparisons}]&{}= \frac{1}{7}(1) +\frac{1}{7}(3) +\frac{1}{7}(3) +\frac{1}{7}(5) +\frac{1}{7}(5) +\frac{1}{7}(5) +\frac{1}{7}(5)\\
+		&{}= \frac{27}{7}\\
+		% &{}= \\
+		% &{}= \\
+		% &{}= \\
+\end{array}$}
+\\[5cm]
+\noindent \hyperlink{toc}{\hypertarget{2.2}{(b)}}
+\begin{center}\begin{forest}
+	for tree={
+		grow = south,
+		circle, draw, minimum size = 3ex, inner sep = 1pt,
+		s sep = 7mm
+	}
+	[$4$, label={\footnotesize $2$}
+		[$2$, label={\footnotesize $4$}
+			[$1$, label={\footnotesize $6$}
+				[,phantom]
+				[,phantom]
+			]
+			[$3$, label={\footnotesize $5$}
+				[,phantom]
+				[,phantom]
+			]
+		]
+		[$6$, label={\footnotesize $3$}
+			[$5$, label={\footnotesize $5$}
+				[,phantom]
+				[,phantom]
+			]
+			[$7$, label={\footnotesize $4$}
+				[,phantom]
+				[,phantom]
+			]
+		]
+	]
+\end{forest}\end{center}
+{\setstretch{2.2}$\begin{array}{r@{}>{\displaystyle}l}  
+	E[\text{Comparisons}]&{}= \frac{1}{7}(2) +\frac{1}{7}(4) +\frac{1}{7}(3) +\frac{1}{7}(6) +\frac{1}{7}(5) +\frac{1}{7}(5) +\frac{1}{7}(4)\\
+	&{}= \frac{29}{7}\\
+	% &{}= \\
+	% &{}= \\
+	% &{}= \\
+\end{array}$}\\
+\newpage
+\noindent \hyperlink{toc}{\hypertarget{2.3}{(c)}}\\
+I think that for bigger trees, \code{SEARCH2(r, k)} uses less comparisons than \code{SEARCH1(r, k)}. 
+\\\\
+This is because for \code{SEARCH1(r, k)}, it takes 1 comparison if the current node is \code{k}, and \code{2 + rchild(r)} to go left, and \code{2 + lchild(r)} to go right.
+\begin{center}\begin{forest}
+	for tree={
+		grow = south,
+		circle, draw, minimum size = 3ex, inner sep = 1pt,
+		s sep = 7mm
+	}
+	[$\text{\ \ \ Cost: } 1\ \ \ $,
+		[$\text{Cost: } 2+\dots$,
+			[,phantom]
+			[,phantom]
+		]
+		[$\text{Cost: } 2+\dots$,
+			[,phantom]
+			[,phantom]
+		]
+	]
+\end{forest}\end{center}
+For \code{SEARCH2(r, k)}, It takes 2 comparisons if the current node is \code{k}, and \code{2 + rchild(r)} to go left, and \code{1 + lchild(r)} to go right.
+\begin{center}\begin{forest}
+	for tree={
+		grow = south,
+		circle, draw, minimum size = 3ex, inner sep = 1pt,
+		s sep = 7mm
+	}
+	[$\text{\ \ \ Cost: } 2\ \ \ $,
+		[$\text{Cost: } 2+\dots$,
+			[,phantom]
+			[,phantom]
+		]
+		[$\text{Cost: } 1+\dots$,
+			[,phantom]
+			[,phantom]
+		]
+	]
+\end{forest}\end{center}
+This means that the more you go right, the more comparisons you start to save. So for bigger trees, you'll save more than the small trees, where you only go right 3 times. 
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    3
+%----------------------------------------------------------------------------------
+\renewcommand{\arraystretch}{1.7}
+{{\LARGE \noindent \underline{\textbf{Question 3.}}}}
+\\\\
+\noindent \hyperlink{toc}{\hypertarget{3.1}{(a)}}
+\begin{center}\begin{tabular}{|c|c|c|}
+		\hline \cellcolor{gray!25}Operation 1 & \cellcolor{gray!25}Operation 2 & \cellcolor{gray!25}Probability\\
+		\hline\hline
+		\code{PREPEND(x, S)}  & \code{PREPEND(x, S)} & $p^2$              \\\hline
+		\code{PREPEND(x, S)}  & \code{ACCESS(S, 1)}  & $p \times \frac{1-p}{2}$  \\[2mm]\hline
+		\code{PREPEND(x, S)}  & \code{ACCESS(S, 2)}  &  $p \times \frac{1-p}{2}$ \\[2mm]\hline
+		\code{ACCESS(S, 1)}   & \code{PREPEND(x, S)} & $p \times (1-p)$          \\\hline
+		\code{ACCESS(S, 1)}   & \code{ACCESS(S, 1)}  & $(1-p)^2$        \\\hline
+		  % &  \\\hline
+		  % &  \\\hline
+		  % &  \\\hline
+		% &&\\\hline
+\end{tabular}\end{center} \renewcommand{\arraystretch}{1}\ \\[5cm]
+\noindent \hyperlink{toc}{\hypertarget{3.2}{(b)}}\\
+Let $L_i = \left\{\begin{aligned}
+	\ \ \ 1 & \hspace*{3mm}\text{ if the $i$\textsuperscript{th} operation is \code{PREPEND}}\\
+	\ \ \ 0 & \hspace*{3mm}\text{ if the $i$\textsuperscript{th} operation is \code{ACCESS}} \\
+\end{aligned}\right.$
+\\\\
+The probability of any operation being \code{PREPEND} is $p$.\\
+Since $L_i$ is an indicator random variable, then $E[L_i] = p$
+\\\\
+Let $X = $ length of $S$. $S$ is just the sum of all $L_i$ plus one since it starts with one element.\\
+{\setstretch{2.2}$\begin{array}{r@{}>{\displaystyle}l}  
+	E[\text{S}]&{}= 1+\sum_{i=1}^{k-1} L_i\\
+	&{}= 1+\sum_{i=1}^{k-1} p\\
+	&{}= 1+(k-1)p\\
+\end{array}$}\\
+\newpage
+\noindent \hyperlink{toc}{\hypertarget{3.3}{(c)}}\\
+Let $X_k = $ number of steps required to perform the $k^{\text{th}}$ operation\\
+Let $A_k = $ number of steps needed to perform \code{ACCESS} during the $k^{\text{th}}$ operation.
+\\\\
+$\text{so } X_k = \left\{\begin{aligned}
+	\ \ 1 \ & \hspace*{3mm}\text{ if the $k$\textsuperscript{th} operation is \code{PREPEND}}\\
+	\ \ A_k & \hspace*{3mm}\text{ if the $k$\textsuperscript{th} operation is \code{ACCESS}} \\
+\end{aligned}\right.$
+\\\\
+$A_k$ is a uniform distribution over $\{1, \cdots, |S|\}$\\
+The expected value of $|S|$ is $1+(k-1)p$, so\\
+{\setstretch{2.2}$\begin{array}{r@{}>{\displaystyle}l}  
+	E[A_k]&{}= \frac{1 + 1+(k-1)p}{2}\\
+	&{}= 1 + \frac{(k-1)p}{2}\\
+	% &{}= 1+(k-1)p\\
+\end{array}$}
+% $E[A_k] = \frac{1 + 1+(k-1)p}{2}$
+\ \\\\\\\\
+{$\begin{array}{r@{}>{\displaystyle}l}  
+	E[X_k]&{}= \left\{\begin{aligned}
+		1 \ \ \  & \hspace*{3mm}\text{ if the $k$\textsuperscript{th} operation is \code{PREPEND}}\\
+		\ \ E[A_k] & \hspace*{3mm}\text{ if the $k$\textsuperscript{th} operation is \code{ACCESS}} \\
+	\end{aligned}\right.\\[6mm]
+	&{}= \left\{\begin{aligned}
+		1 \ \ \ \ \ \ \  & \hspace*{3mm}\text{ if the $k$\textsuperscript{th} operation is \code{PREPEND}}\\
+		\ \ 1 + \frac{(k-1)p}{2} & \hspace*{3mm}\text{ if the $k$\textsuperscript{th} operation is \code{ACCESS}} \\
+	\end{aligned}\right.\\[6mm]
+	&{}= 1(p) + \left(1 + \frac{(k-1)p}{2}\right)(1-p)\\[6mm]
+	&{}= p + 1 + \frac{(k-1)p}{2} - p - \frac{(k-1)p^2}{2}\\[6mm]
+	&{}= 1 + \frac{p(k-1)(1-p)}{2}\\[6mm]
+\end{array}$}
+
+\ \\\\ \newpage
+\noindent \hyperlink{toc}{\hypertarget{3.4}{(d)}}\\
+Let $Y = $ number of steps needed for $n$ operations\\
+{\setstretch{2.2}$\begin{array}{r@{}>{\displaystyle}l}  
+	E[Y]&{}= \sum_{i=1}^{n} X_i\\
+	    &{}= \sum_{i=1}^{n} 1 + \frac{p(i-1)(1-p)}{2}\\
+	    &{}= \sum_{i=1}^{n} 1 + \sum_{i=1}^{n} \frac{p(i-1)(1-p)}{2}\\
+	    &{}= n + \frac{p(1-p)}{2}\sum_{i=1}^{n} (i-1)\\
+	    &{}= n + \frac{p(1-p)}{2}(-n + \sum_{i=1}^{n} i)\\
+	    &{}= n + \frac{p(1-p)}{2}(-n + \frac{n+n^2}{2})\\
+	    &{}= n - \frac{np(1-p)}{2} + \frac{np(1-p)(n+1)}{4}\\
+			&{}= \frac{4n}{4} - \frac{2np(1-p)}{4} + \frac{np(1-p)(n+1)}{4}\\
+			&{}= \frac{4n - 2np(1-p) + np(1-p)(n+1)}{4}\\
+			&{}= \frac{4n - 2np + 2np^2 + (np - np^2)(n+1)}{4}\\
+			&{}= \frac{4n - 2np + 2np^2 + n^2p - n^2p^2 + np - np^2}{4}\\
+			&{}= \frac{4n - np + np^2 + n^2p - n^2p^2}{4}\\
+	    % &{}= \\
+	% &{}= 1+(k-1)p\\
+\end{array}$}
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    4
+%----------------------------------------------------------------------------------
+{{\LARGE \noindent \underline{\textbf{Question 4.}}}}
+\\\\
+\noindent \hyperlink{toc}{\hypertarget{4.1}{(a)}}\\
+If $S_i$ is \code{INSERT}
+
+\begin{proofindent}
+	$C_{1,i}$ always takes $\calO(1)$ comparisons since the node is inserted at the front of the list.\\
+	$C_{2,i}$ takes on average $\frac{1}{1-a}$ comparisons, where $a$ is the load factor of the bucket.
+\end{proofindent}\\
+If $S_i$ is \code{DELETE}
+
+\begin{proofindent}
+	$C_{1,i}$ takes the same or less than amount of comparisons as $C_{2,i}$. This is because for both hash tables, you must traverse the bucket to delete the node. In this case, there will be $\calO(a)$ comparisons for both cases.
+	\\\\
+	$C_{1,i}$ could take less comparisons than $C_{2,i}$ because you could \code{DELETE} a node in the middle of the bucket. This will shorten the bucket for $C_{1,i}$, but not for $C_{2,i}$.
+\end{proofindent}
+\ \\\\
+\noindent \hyperlink{toc}{\hypertarget{4.2}{(b)}}\\
+If you insert 2 keys \code{a} and \code{b} with the same hash, then $T_1$ will have a linked list \code{b -> a}. However in $T_2$, it will have \code{a, b} for the buckets. So \code{SEARCH(a)} will take less comparisons for $T_2$ than $T_1$.\\
+
+\noindent \hyperlink{toc}{\hypertarget{4.3}{(c)}}\\
+\end{document}
