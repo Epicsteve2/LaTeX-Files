@@ -1,0 +1,1418 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
+\usepackage{fancyhdr}	% header
+\usepackage{hyperref} % links
+
+\usepackage{amsmath,amsthm,amssymb}	%math stuff
+% \usepackage{graphicx} \graphicspath{ {./images/} }
+\usepackage{setspace} % increase line spacing
+% \usepackage{tabularx} % long tables
+% \usepackage{enumitem} % labelling itmes
+% \usepackage{lmodern} % bolding \texttt{}
+% \usepackage[T1]{fontenc} % for {} in \texttt{}
+% \usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+\usepackage{relsize} % Scaling the font
+\usepackage{tikz-er2} % need local './tikz-er2.sty'
+% Entity relation!
+\usepackage{bm} % bold in math mode
+
+\usepackage{pifont} % \ding
+\usepackage{harmony} % \AAcht (music symbol)
+\usepackage{bclogo} % a lot of cool bc logos. should google / read docs
+\usepackage{fontawesome} % a lot of icons ofc
+\usepackage{textcomp} % Leaf symbol
+\usepackage{marvosym} % Coffeecup and Football
+
+\tikzstyle{every entity} = [top color=white, bottom color=blue!30,
+                            draw=blue!50!black!100, drop shadow]
+\tikzstyle{every weak entity} = [drop shadow={shadow xshift=.7ex,
+                                 shadow yshift=-.7ex}]
+\tikzstyle{every attribute} = [top color=white, bottom color=yellow!20,
+                               draw=yellow, node distance=1cm, drop shadow]
+\tikzstyle{every relationship} = [top color=white, bottom color=red!20,
+                                  draw=red!50!black!100, drop shadow]
+\tikzstyle{every isa} = [top color=white, bottom color=green!20,
+                         draw=green!50!black!100, drop shadow]
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{shadows}
+
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+\newcommand{\heart}{\ensuremath\varheartsuit}
+\newcommand{\flower}{\text{\ding{95}}}
+
+\newcommand{\bigbracket}[1]{\big(#1\big)}
+\newcommand{\Bigbracket}[1]{\Big(#1\Big)}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCC43 A1}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\newenvironment{proofindent}{\vspace*{2mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}}{\end{minipage}}
+
+\everymath{\displaystyle}
+
+\begin{document}
+%----------------------------------------------------------------------------------
+%                              Table of Contents
+%----------------------------------------------------------------------------------
+\begin{center}
+    \hypertarget{toc}{\LARGE \noindent \underline{\textbf{Table of Contents}}}\\
+\end{center}
+
+\noindent \hyperlink{1}{\textbf{Exercise 1:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\noindent \hyperlink{2}{\textbf{Exercise 2:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\noindent \hyperlink{3}{\textbf{Exercise 3:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\noindent {\textbf{Exercise 4:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{4.1}{(1)}\\
+\hyperlink         {4.2}{(2)}\\
+\hyperlink         {4.3}{(3)}\\
+\hyperlink         {4.4}{(4)}\\
+
+\noindent {\textbf{Exercise 5:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{5.1}{(1)}\\
+\hyperlink         {5.2}{(2)}\\
+
+\noindent {\textbf{Exercise 6:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent\hyperlink{6.1}{(1)}\\
+\hyperlink         {6.2}{(2)}\\
+\hyperlink         {6.3}{(3)}\\
+\hyperlink         {6.4}{(4)}\\
+\hyperlink         {6.5}{(5)}\\
+\hyperlink         {6.6}{(6)}\\
+
+\noindent \hyperlink{7}{\textbf{Exercise 7:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\noindent \hyperlink{8}{\textbf{Exercise 8:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\noindent \hyperlink{9}{\textbf{Exercise 9:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\newpage
+
+%----------------------------------------------------------------------------------
+%                                   Questions
+%----------------------------------------------------------------------------------
+\setstretch{1.2}
+%----------------------------------------------------------------------------------
+% !                                    1
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Exercise 1.}}}}\\\\
+% \centering
+\scalebox{.87}{
+    \begin{tikzpicture}[node distance=1.5cm, every edge/.style={link}]
+        % \node[] (PLACEHOLDER2) [above=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ⬆️
+        % \node[] (PLACEHOLDER2) [above right=of PLACEHOLDER1] {PLACEHOLDER2} edge (PLACEHOLDER1); ↗️
+        % \node[] (PLACEHOLDER2) [right=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ➡️
+        % \node[] (PLACEHOLDER2) [below right=of PLACEHOLDER1] {PLACEHOLDER2} edge (PLACEHOLDER1); ↘️
+        % \node[] (PLACEHOLDER2) [below=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ⬇️
+        % \node[] (PLACEHOLDER2) [below left=of PLACEHOLDER1]  {PLACEHOLDER2} edge (PLACEHOLDER1); ↙️
+        % \node[] (PLACEHOLDER2) [left=of PLACEHOLDER1]        {PLACEHOLDER2} edge (PLACEHOLDER1); ⬅️
+        % \node[] (PLACEHOLDER2) [above left=of PLACEHOLDER1]  {PLACEHOLDER2} edge (PLACEHOLDER1); ↖️
+
+        \node[entity] (Customers) {Customers};
+        \node[attribute] () [above=of Customers] {Name} edge (Customers);
+        \node[attribute] () [above right=of Customers] {\key{License \#}} edge (Customers);
+        \node[attribute] () [above left=of Customers] {Level} edge (Customers);
+        \node[attribute] () [left=of Customers] {Birthday} edge (Customers);
+        \node[attribute] () [below left=of Customers] {Address} edge (Customers);
+
+        \node[relationship] (CustomerOwnsCar) [right=4cm of Customers] {Owns} edge (Customers);
+
+        \node[entity] (Vehicle) [right=4cm of CustomerOwnsCar] {Vehicle} edge (CustomerOwnsCar);
+        \node[attribute] () [above right=of Vehicle] {Model} edge (Vehicle);
+        \node[attribute] () [below right=of Vehicle] {Brand} edge (Vehicle);
+        \node[attribute] () [below left=of  Vehicle]  {Year} edge (Vehicle);
+        \node[attribute] () [above left=of  Vehicle]  {\key{License Plate}} edge (Vehicle);
+
+        \node[relationship] (Participated) [below=of Customers] {Participated} edge (Customers);
+        \node[attribute] () [below left=of Participated]  {liable} edge (Participated);
+
+        \node[relationship] (In) [below=of Vehicle]  {In} edge (Vehicle);
+
+        \node[entity] (Accident) [below right=6cm of Participated] {Accident} edge (Participated) edge (In);
+        \node[attribute] () [below right=of Accident] {\key{Time}} edge (Accident);
+        \node[attribute] () [below=of Accident]       {\key{place}} edge (Accident);
+        \node[attribute] () [below left=of Accident]  {damage} edge (Accident);
+
+
+
+    \end{tikzpicture}
+}
+Everything is many to many
+\newpage
+
+% \scalebox{.87}{
+%     \begin{tikzpicture}[node distance=1.5cm, every edge/.style={link}]
+%         \node[entity] (emp) {Employee};
+%         \node[attribute] (ename) [above=of emp] {Name} edge (emp);
+%         \node[attribute] (enum) [above right=of emp] {\key{Number}} edge (emp);
+
+%         \node[isa] (isa) [below=1cm of emp] {ISA} edge (emp);
+
+%         \node[entity] (mec) [below left=1cm of isa] {Mechanic} edge (isa);
+%         \node[entity] (sal) [below right=1cm of isa] {Salesman} edge (isa);
+
+%         \node[relationship] (does) [left=of mec] {Does} edge (mec);
+
+%         \node[weak entity] (rep) [below=of does] {RepairJob} edge (does);
+%         \node[attribute] (rnum) [left=of rep] {\discriminator{Number}} edge (rep);
+%         \node[attribute] (desc) [above left=of rep] {Description} edge (rep);
+%         \node[attribute] (cost) [below left=of rep] {Cost} edge (rep);
+%         \node[attribute] (mat) [left=0.5cm of cost] {Parts} edge (cost);
+%         \node[attribute] (work) [below left=0.5cm of cost] {Work} edge (cost);
+
+%         \node[ident relationship] (reps) [below=of rep] {Repairs} edge [total] (rep);
+
+%         \node[entity] (car) [right=of reps] {Car} edge [<-] (reps);
+%         \node[attribute] (lic) [above=of car] {\key{License}} edge (car);
+%         \node[attribute] (mod) [below=of car] {Model} edge (car);
+%         \node[attribute] (year) [below right=of car] {Year} edge (car);
+%         \node[attribute] (manu) [below left=1.5cm of car] {Manufacturer} edge (car);
+
+%         \node[relationship] (buy) [below=of sal] {Buys};
+%         \node[attribute] (pri) [above left=of buy] {Price} edge (buy);
+%         \node[attribute] (sdate) [left=of buy] {Date} edge (buy);
+%         \node[attribute] (bval) [below left=of buy] {Value} edge (buy);
+
+%         \node[relationship] (sel) [right=of buy] {Sells};
+%         \node[attribute] (sdate) [above right=of sel] {Date} edge (sel);
+%         \node[derived attribute] (sval) [right=of sel] {Value} edge (sel);
+%         \node[attribute] (com) [below right=of sel] {Comission} edge (sel);
+
+%         \draw[link] (car.10) -| (buy) (buy) edge (sal);
+%         \draw[link] (car.-10) -| (sel) (sel) |- (sal);
+
+%         \node[entity] (cli) [below right=0.5cm and 3.7cm of car] {Client};
+%         \node[attribute] (cid) [right=of cli] {\key{ID}} edge (cli);
+%         \node[attribute] (cname) [below left=of cli] {Name} edge (cli);
+%         \node[multi attribute] (cphone) [below right=of cli] {Phone} edge (cli);
+%         \node[attribute] (cadd) [below=of cli] {Address} edge (cli);
+
+%         \draw[link] (cli.70) |- node [pos=0.05, auto, swap] {buyer} (sel);
+%         \draw[link] (cli.110) |- node [pos=0.05, auto] {seller} (buy);
+
+%     \end{tikzpicture}
+% }
+
+%----------------------------------------------------------------------------------
+% !                                    2
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Exercise 2.}}}}\\[1cm]
+
+\scalebox{.65}{
+    % \node[] (PLACEHOLDER2) [above=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ⬆️
+    % \node[] (PLACEHOLDER2) [above right=of PLACEHOLDER1] {PLACEHOLDER2} edge (PLACEHOLDER1); ↗️
+    % \node[] (PLACEHOLDER2) [right=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ➡️
+    % \node[] (PLACEHOLDER2) [below right=of PLACEHOLDER1] {PLACEHOLDER2} edge (PLACEHOLDER1); ↘️
+    % \node[] (PLACEHOLDER2) [below=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ⬇️
+    % \node[] (PLACEHOLDER2) [below left=of PLACEHOLDER1]  {PLACEHOLDER2} edge (PLACEHOLDER1); ↙️
+    % \node[] (PLACEHOLDER2) [left=of PLACEHOLDER1]        {PLACEHOLDER2} edge (PLACEHOLDER1); ⬅️
+    % \node[] (PLACEHOLDER2) [above left=of PLACEHOLDER1]  {PLACEHOLDER2} edge (PLACEHOLDER1); ↖️
+    \begin{tikzpicture}[node distance=2.5cm, every edge/.style={link}]
+        \node[entity] (Department) {Departments};
+        \node[attribute] () [above right=of Department]  {Name} edge (Department);
+        \node[attribute] () [above=of Department]       {\key{Id}} edge (Department);
+
+        \node[relationship] (In) [below=of Department]  {In} edge [->] (Department);
+
+
+        \node[entity] (People) [below=of In] {People} edge (In);
+        \node[attribute] () [below left=of People] {Name} edge (People);
+        \node[attribute] () [below=of People]       {Birthday} edge (People);
+        % \node[attribute] () [above left=of People]  {} edge (People);
+
+        \node[] (EmptyRightPeople) [right=1.5cm of People] {};
+        \node[isa] (PeopleISAResearcher) [above=of EmptyRightPeople] {ISA} edge (People);
+        \node[isa] (PeopleISAContract) [below=of EmptyRightPeople] {ISA} edge (People);
+
+        \node[entity] (Researcher) [right=1.25cm of PeopleISAResearcher] {Researchers} edge (PeopleISAResearcher);
+        \node[] (EmptyAnoveResearcher) [above=2cm of Researcher]{};
+        \node[attribute] () [left=0.1cm of EmptyAnoveResearcher]       {Area of Research} edge (Researcher);
+        \node[attribute] () [right=0.1cm of EmptyAnoveResearcher]       {\key{Employee ID}} edge (Researcher);
+
+        \node[entity] (Contract) [right=1.25cm of PeopleISAContract] {Contractors} edge (PeopleISAContract);
+        \node[attribute] () [above=0.5cm of Contract]       {Contract Date} edge (Contract);
+
+        \node[isa] (ContractISAEmployee) [below left=of Contract]  {ISA} edge (Contract);
+        \node[isa] (ContractISAPreviousEmployee) [below right=1.25cm of Contract]  {ISA} edge (Contract);
+
+        \node[entity] (CurrentEmployee) [below=of ContractISAEmployee]       {Current Employees} edge (ContractISAEmployee);
+        \node[attribute] () [below=of CurrentEmployee]  {\key{SIN}} edge (CurrentEmployee);
+
+
+        \node[entity] (PreviousEmployee) [below=of ContractISAPreviousEmployee]       {Previous Employees} edge (ContractISAPreviousEmployee);
+        \node[attribute] () [below=of PreviousEmployee]  {\key{Old Employee ID}} edge (PreviousEmployee);
+
+        \node[relationship] (ContractWrite) [right=1.25cm of Contract]  {Write} edge (Contract);
+        \node[relationship] (ResearcherWrite) [right=1.25cm of Researcher]  {Write} edge (Researcher);
+
+        \node[entity] (Publication) [right=1.25cm of ResearcherWrite]       {Publication} edge (ResearcherWrite);
+        \node[] (EmptyAnovePublication) [above=of Publication]{};
+        \node[attribute] () [left=0.5cm of EmptyAnovePublication] {Title} edge (Publication);
+        \node[attribute] () [right=0.5cm of EmptyAnovePublication] {\key{Code}} edge (Publication);
+
+        \node[entity] (Report) [right=1.25cm of ContractWrite]       {Reports} edge (ContractWrite);
+        \node[] (EmptyBelowReport) [below=of Report]{};
+        \node[attribute] () [left=0.5cm of EmptyBelowReport] {Title} edge (Report);
+        \node[attribute] () [right=0.5cm of EmptyBelowReport] {\key{Code}} edge (Report);
+
+        \node[relationship] (PublicationTopic) [right=1.25cm of Publication]  {Has Topic} edge (Publication);
+        \node[relationship] (ReportTopic) [right=1.25cm of Report]  {Has Topic} edge (Report);
+        \node[entity] (Topics) [above right=1.25cm of ReportTopic]       {Topics} edge (ReportTopic) edge (PublicationTopic);
+        \node[attribute] () [right=0.5cm of Topics] {Name} edge (Topics);
+
+    \end{tikzpicture}
+}\\[1cm]
+I assume that people can only belong to one Department.\\
+I assume that Researchers are separate from Contractors, and that only Researchers get Employee ID since Current Employees only require a SIN.\\
+I assume people can write many reports/publications and reports/publications can be written by multiple people.\\
+Lastly, people can only be a Current Contractor, Previous Employee, or a Researcher. They cannot be in any parent entity set.
+\newpage
+\begin{center}
+    \relscale{0.8}
+    \begin{tabular}{|c|c||c|c||c|c|}
+        \hline
+        \multicolumn{6}{|c|}{\cellcolor{gray!25}Department and Researchers}                                                                      \\
+        \hline
+        \hline
+        \multicolumn{2}{|c||}{\cellcolor{gray!25}Department}
+                & \multicolumn{2}{c||}{\cellcolor{gray!25}People}
+                & \multicolumn{2}{c|}{\cellcolor{gray!25}Researcher}                                                                             \\
+        \hline
+        \cellcolor{gray!25} \underline{ID}
+                & \cellcolor{gray!25}Name
+                & \cellcolor{gray!25}Name
+                & \cellcolor{gray!25}Birthday
+                & \cellcolor{gray!25}Area of Research
+                & \cellcolor{gray!25}\underline{Employee ID}                                                                                     \\
+        \hline \hline
+        4819753 & Psychology                                         & Mashiro Tsukino & August 19 1996 & Dreams                   & 10035283874 \\ \hline
+        1935517 & Computer Science                                   & Mei Hiuchidani  & April 10  2000 & Computational Complexity & 10048173772 \\ \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+    \relscale{0.7}
+    \begin{tabular}{|c|c||c|c||c||c|}
+        \hline
+        \multicolumn{6}{|c|}{\cellcolor{gray!25}Department and Current Contractor}                                                                       \\
+        \hline
+        \hline
+        \multicolumn{2}{|c||}{\cellcolor{gray!25}Department}
+                & \multicolumn{2}{c||}{\cellcolor{gray!25}People}
+                & {\cellcolor{gray!25}Contractor}
+                & {\cellcolor{gray!25}Current Contractor}                                                                                                \\
+        \hline
+        \cellcolor{gray!25} \underline{ID}
+                & \cellcolor{gray!25}Name
+                & \cellcolor{gray!25}Name
+                & \cellcolor{gray!25}Birthday
+                & \cellcolor{gray!25}Contract Date
+                & \cellcolor{gray!25}\underline{SIN}                                                                                                     \\
+        \hline \hline
+        8457199 & Math                                            & Misaki Tobisawa        & April 16 2003 & May 2022 - December 2022       & 9271628316 \\ \hline
+        1935517 & Law                                             & Limbo Scott Fitzgerald & April 10 1991 & December 2021 - September 2022 & 9346336378 \\ \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+    \relscale{0.7}
+    \begin{tabular}{|c|c||c|c||c||c|}
+        \hline
+        \multicolumn{6}{|c|}{\cellcolor{gray!25}Department and Previous Employee}                                                                  \\
+        \hline
+        \hline
+        \multicolumn{2}{|c||}{\cellcolor{gray!25}Department}
+                & \multicolumn{2}{c||}{\cellcolor{gray!25}People}
+                & {\cellcolor{gray!25}Contractor}
+                & {\cellcolor{gray!25}Previous Employee}                                                                                           \\
+        \hline
+        \cellcolor{gray!25} \underline{ID}
+                & \cellcolor{gray!25}Name
+                & \cellcolor{gray!25}Name
+                & \cellcolor{gray!25}Birthday
+                & \cellcolor{gray!25}Contract Date
+                & \cellcolor{gray!25}\underline{Old Employee ID}                                                                                   \\
+        \hline \hline
+        8457199 & Sailor                                          & Odette Malencon & November 3 1979 & January 2015 - December 2017 & 10090218575 \\ \hline
+        1935517 & Police                                          & Shu Lyn O'Keefe & June 26 1987    & January 2022 - May 2022      & 10052155526 \\ \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+    \relscale{0.7}
+    \begin{tabular}{|c|c||c|c||c | c|}
+        \hline
+        \multicolumn{6}{|c|}{\cellcolor{gray!25}Researcher and Publication}                                                                      \\
+        \hline
+        \hline
+        \multicolumn{2}{|c||}{\cellcolor{gray!25}People}
+                        & \multicolumn{2}{c||}{\cellcolor{gray!25}Researcher}
+                        & \multicolumn{2}{c|}{\cellcolor{gray!25}Publication}                                                                    \\
+        \hline
+        \cellcolor{gray!25} Name
+                        & \cellcolor{gray!25}Birthday
+                        & \cellcolor{gray!25}Area of Research
+                        & \cellcolor{gray!25}\underline{Employee ID}
+                        & \cellcolor{gray!25}Title
+                        & \cellcolor{gray!25}\underline{Code}                                                                                    \\
+        \hline \hline
+        Kyou Tsukishima & August 20 2003                                      & Basketball & 10052155526 & What's the best shooting form? & 9892 \\ \hline
+        Maya Tokizaki   & April 26 2003                                       & Acting     & 10038172316 & Effects of exercise on acting  & 9887 \\ \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+    \relscale{0.7}
+    \begin{tabular}{|c|c||c||c ||c| c|}
+        \hline
+        \multicolumn{6}{|c|}{\cellcolor{gray!25}Current Contractors and Reports}                                                                                        \\
+        \hline
+        \hline
+        \multicolumn{2}{|c||}{\cellcolor{gray!25}People}
+                       & {\cellcolor{gray!25}Contractor}
+                       & {\cellcolor{gray!25}Current Employee}
+                       & \multicolumn{2}{c|}{\cellcolor{gray!25}Report}                                                                                                 \\
+        \hline
+        \cellcolor{gray!25} Name
+                       & \cellcolor{gray!25}Birthday
+                       & \cellcolor{gray!25}Contract Date
+                       & \cellcolor{gray!25}\underline{SIN}
+                       & \cellcolor{gray!25}Title
+                       & \cellcolor{gray!25}\underline{Code}                                                                                                            \\
+        \hline \hline
+        Rikka Narusawa & June 29 2003                                   & May 2022 - December 2022 & 9474987529 & Correlation between hand size and piano skills & 9799 \\ \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+    \relscale{0.7}
+    \begin{tabular}{|c|c||c||c ||c| c|}
+        \hline
+        \multicolumn{6}{|c|}{\cellcolor{gray!25}Previous Employees and Reports}                                                                                            \\
+        \hline
+        \hline
+        \multicolumn{2}{|c||}{\cellcolor{gray!25}People}
+                         & {\cellcolor{gray!25}Contractor}
+                         & {\cellcolor{gray!25}Previous Employee}
+                         & \multicolumn{2}{c|}{\cellcolor{gray!25}Report}                                                                                                  \\
+        \hline
+        \cellcolor{gray!25} Name
+                         & \cellcolor{gray!25}Birthday
+                         & \cellcolor{gray!25}Contract Date
+                         & \cellcolor{gray!25}\underline{Old Employee ID}
+                         & \cellcolor{gray!25}Title
+                         & \cellcolor{gray!25}\underline{Code}                                                                                                             \\
+        \hline \hline
+        Marika Shinozaki & March 3 2003                                   & December 2021 - May 2022 & 10071291083 & Effects of sexual intercourse during pregnency & 9801 \\ \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+    \relscale{0.7}
+    \begin{tabular}{|c|c||c|}
+        \hline
+        \multicolumn{3}{|c|}{\cellcolor{gray!25}Publication and Topic}                               \\
+        \hline
+        \hline
+        \multicolumn{2}{|c||}{\cellcolor{gray!25}Publication}
+                                                       & {\cellcolor{gray!25}Topic}                  \\
+        \hline
+        \cellcolor{gray!25}Title
+                                                       & \cellcolor{gray!25}\underline{Code}
+                                                       & \cellcolor{gray!25}Topic                    \\
+        \hline \hline
+        Effects of sexual intercourse during pregnency & 9801                                & Sex   \\ \hline
+        Correlation between hand size and piano skills & 9799                                & Music \\ \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+    \relscale{0.7}
+    \begin{tabular}{|c|c||c|}
+        \hline
+        \multicolumn{3}{|c|}{\cellcolor{gray!25}Reports and Topic}                     \\
+        \hline
+        \hline
+        \multicolumn{2}{|c||}{\cellcolor{gray!25}Reports}
+                                       & {\cellcolor{gray!25}Topic}                    \\
+        \hline
+        \cellcolor{gray!25}Title
+                                       & \cellcolor{gray!25}\underline{Code}
+                                       & \cellcolor{gray!25}Topic                      \\
+        \hline \hline
+        What's the best shooting form? & 9892                                & Physics \\ \hline
+        Effects of exercise on acting  & 9887                                & Gym     \\ \hline
+    \end{tabular}
+\end{center}
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    3
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\hypertarget{3}{\LARGE \underline{\textbf{Exercise 3.}}}}\\[1cm]
+\scalebox{.65}{
+    \begin{tikzpicture}[node distance=2.5cm, every edge/.style={link}]
+        % \node[] (PLACEHOLDER2) [above=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ⬆️
+        % \node[] (PLACEHOLDER2) [above right=of PLACEHOLDER1] {PLACEHOLDER2} edge (PLACEHOLDER1); ↗️
+        % \node[] (PLACEHOLDER2) [right=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ➡️
+        % \node[] (PLACEHOLDER2) [below right=of PLACEHOLDER1] {PLACEHOLDER2} edge (PLACEHOLDER1); ↘️
+        % \node[] (PLACEHOLDER2) [below=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ⬇️
+        % \node[] (PLACEHOLDER2) [below left=of PLACEHOLDER1]  {PLACEHOLDER2} edge (PLACEHOLDER1); ↙️
+        % \node[] (PLACEHOLDER2) [left=of PLACEHOLDER1]        {PLACEHOLDER2} edge (PLACEHOLDER1); ⬅️
+        % \node[] (PLACEHOLDER2) [above left=of PLACEHOLDER1]  {PLACEHOLDER2} edge (PLACEHOLDER1); ↖️
+        \node[entity] (Courses) {Courses};
+        \node[attribute] () [above left=of Courses]  {\key{Course Number}} edge (Courses);
+        \node[attribute] () [left=of Courses]       {Credits} edge (Courses);
+        \node[attribute] () [below left=of Courses]       {Syllabus} edge (Courses);
+        \node[attribute] () [above right=of Courses]       {Title} edge (Courses);
+        \node[attribute] () [above=of Courses]       {Pre-requisites} edge (Courses);
+
+        \node[relationship] (CourseOffering) [right=3.25cm of Courses]  {CourseOffering} edge [->] (Courses);
+
+        \node[entity] (Offerings) [right =10cm of Courses] {Offerings} edge (CourseOffering);
+        \node[] (EmptyAboveRightOfferings) [above=2.25cm of Offerings]{};
+        \node[attribute] () [above right=of Offerings]       {Course Number} edge (Offerings);
+        \node[attribute] () [above=of Offerings]       {\key{Year}} edge (Offerings);
+        \node[attribute] () [above left=of Offerings]       {\key{Semester}} edge (Offerings);
+        \node[attribute] () [right=of Offerings]       {\key{Timings}} edge (Offerings);
+        \node[attribute] () [below right=of Offerings]       {\key{Classroom}} edge (Offerings);
+
+        \node[attribute] () [left=0cm of EmptyAboveRightOfferings]       {Section Number} edge (Offerings);
+        \node[attribute] () [right=0.5cm of EmptyAboveRightOfferings]       {Instructor} edge (Offerings);
+
+        \node[relationship] (StudentTakes) [below=3cm of Courses]  {StudentTakes} edge [->] (Courses);
+
+        % \node[weak entity] (Grades) [left = of StudentTakes] {Grades} edge (StudentTakes);
+        % \node[attribute] () [below=1cm of Grades]       {Mark} edge (Grades);
+        \node[attribute] () [left = of StudentTakes]       {Mark} edge (StudentTakes);
+
+        \node[entity] (Students) [below =10cm of Courses] {Students} edge (StudentTakes);
+        \node[attribute] () [below=of Students]       {\key{Student ID}} edge (Students);
+        \node[attribute] () [below left=of Students]       {Name} edge (Students);
+        \node[attribute] () [below right=of Students]       {Program} edge (Students);
+
+        \node[relationship] (InstructorTeaches) [below=3cm of Offerings]  {InstructorTeaches} edge (Offerings);
+
+        \node[entity] (Instructors) [right =10cm of Students] {Instructors} edge (InstructorTeaches);
+        \node[attribute] () [below=of Instructors]       {\key{ID}} edge (Instructors);
+        \node[attribute] () [below left=of Instructors]       {Name} edge (Instructors);
+        \node[attribute] () [below right=of Instructors]       {Department} edge (Instructors);
+        \node[attribute] () [right=of Instructors]       {Title} edge (Instructors);
+    \end{tikzpicture}
+}\\[1cm]
+I assume multiple instructors can teach a course\\
+I assume the exact time and place of an offering is unique\\
+
+\newpage
+\begin{center}
+    \relscale{0.6}
+    \begin{tabular}{|c|c|c|c|c||c|c|c||c|}
+        \hline
+        \multicolumn{9}{|c|}{\cellcolor{gray!25}Student Takes}                                                                                                       \\
+        \hline
+        \hline
+        \multicolumn{5}{|c||}{\cellcolor{gray!25}Courses}
+                    & \multicolumn{3}{c||}{\cellcolor{gray!25}Students} & {\cellcolor{gray!25}Mark}                                                                  \\
+        \hline
+        \cellcolor{gray!25}Title
+                    & \cellcolor{gray!25}Pre-requisites
+                    & \cellcolor{gray!25}\underline{Course Number}
+                    & \cellcolor{gray!25}Credits
+                    & \cellcolor{gray!25}Syllabus
+
+                    & \cellcolor{gray!25}Name
+                    & \cellcolor{gray!25}\underline{Student ID}
+                    & \cellcolor{gray!25}Program
+                    & \cellcolor{gray!25}Mark
+        \\
+        \hline \hline
+        Compilers   & CSCB58                                            & CSCD70                    & 0.5 & PDF Link & Shiki Natsume  & 1004811742 & CS         & 86 \\ \hline
+        Imagination & PSYC16                                            & STAB22                    & 0.5 & PDF Link & Kengo Miyazawa & 1004848631 & Psychology & 61 \\ \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+    \relscale{0.4}
+    \begin{tabular}{|c|c|c|c|c||c|c|c|c|c|c|}
+        \hline
+        \multicolumn{11}{|c|}{\cellcolor{gray!25}Course Offerings}                                                                                        \\
+        \hline
+        \hline
+        \multicolumn{5}{|c||}{\cellcolor{gray!25}Courses}
+               & \multicolumn{6}{c|}{\cellcolor{gray!25}Offerings}                                                                                        \\
+        \hline
+        \cellcolor{gray!25}\underline{Course \#}
+               & \cellcolor{gray!25}Title
+               & \cellcolor{gray!25}Pre-requisites
+               & \cellcolor{gray!25}Credits
+               & \cellcolor{gray!25}Syllabus
+
+               & \cellcolor{gray!25}\underline{Semester}
+               & \cellcolor{gray!25}\underline{Year}
+               & \cellcolor{gray!25}\underline{Timings}
+               & \cellcolor{gray!25}\underline{Classroom}
+               & \cellcolor{gray!25}Section \#
+               & \cellcolor{gray!25}Instructor
+        \\
+        \hline \hline
+        MATD01 & Rings                                             & MATC01 & 0.5 & Link & Fall   & 2022 & 9:00 - 11:00  & HL B101 & 001 & Alice Bedford  \\ \hline
+        MDSB09 & Kids                                              & MDSA01 & 0.5 & Link & Summer & 2021 & 18:00 - 21:00 & IC 130  & 002 & Taichi Hoshina \\ \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \relscale{0.5}
+    \begin{tabular}{|c|c|c|c|c|c||c|c|c|c|}
+        \hline
+        \multicolumn{10}{|c|}{\cellcolor{gray!25}Instructor Teaches}                                                                                             \\
+        \hline
+        \hline
+        \multicolumn{6}{|c||}{\cellcolor{gray!25}Offerings}
+               & \multicolumn{4}{c|}{\cellcolor{gray!25}Instructors}                                                                                             \\
+        \hline
+        \cellcolor{gray!25}\underline{Semester}
+               & \cellcolor{gray!25}\underline{Year}
+               & \cellcolor{gray!25}\underline{Timings}
+               & \cellcolor{gray!25}\underline{Classroom}
+               & \cellcolor{gray!25}Section Number
+               & \cellcolor{gray!25}Course Number
+
+               & \cellcolor{gray!25}\underline{ID}
+               & \cellcolor{gray!25}Name
+               & \cellcolor{gray!25}Title
+               & \cellcolor{gray!25}Department
+        \\
+        \hline \hline
+        Summer & 2016                                                & 11:00 - 13:00 & SW 319 & 004 & PHYC54 & 9993713655 & Rino Ibaraki       & Dr & Physics    \\ \hline
+        Summer & 2021                                                & 3:00 - 4:00   & IC 212 & 001 & VPSC04 & 9990840738 & Ryuunosuke Arihara & Dr & Studio Art \\ \hline
+    \end{tabular}
+\end{center}
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    4
+%----------------------------------------------------------------------------------
+{{\LARGE \noindent \underline{\textbf{Exercise 4.}}}}
+\\\\
+\noindent \hyperlink{toc}{\hypertarget{4.1}{(1)}}\\
+% Given $A \rightarrow B$, $A \rightarrow C$\\
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & A  & {}\rightarrow C \hspace*{20mm} & [\text{By given}]                                  \\
+        \Longleftrightarrow & AB & {}\rightarrow BC               & [\text{By Augmentation}] \hspace*{20mm} (\bigstar) \\
+    \end{array}$}\\[1cm]
+
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & A  & {}\rightarrow B \hspace*{20mm} & [\text{By given}]                       \\
+        \Longleftrightarrow & AA & {}\rightarrow AB               & [\text{By Augmentation}]                \\
+        \Longleftrightarrow & A  & {}\rightarrow AB               & [\text{Simplifying}]                    \\
+        \Longleftrightarrow & A  & {}\rightarrow BC               & [\text{By Transivity from } (\bigstar)] \\
+    \end{array}$}\\[1cm]
+
+\noindent \hyperlink{toc}{\hypertarget{4.2}{(2)}}\\
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & B  & {}\subseteq BC \hspace*{20mm} & [\text{Trivial}]                                   \\
+        \Longleftrightarrow & BC & {}\rightarrow B               & [\text{By Reflexivity}] \hspace*{20mm} (\varheart) \\
+    \end{array}$}\\[1cm]
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & C  & {}\subseteq BC \hspace*{20mm} & [\text{Trivial}]                                 \\
+        \Longleftrightarrow & BC & {}\rightarrow C               & [\text{By Reflexivity}] \hspace*{20mm} (\flower) \\
+    \end{array}$}\\[1cm]
+
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & A & {}\rightarrow BC \hspace*{20mm} & [\text{By given}]                        \\
+        \Longleftrightarrow & A & {}\rightarrow C                 & [\text{By Transivity from } (\varheart)] \\
+        \text{and}          & A & {}\rightarrow B                 & [\text{By Transivity from } (\flower)]   \\
+    \end{array}$}\\[1cm]
+\noindent \hyperlink{toc}{\hypertarget{4.3}{(3)}}\\
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & A  & {}\rightarrow B \hspace*{20mm} & [\text{By given}]                                   \\
+        \Longleftrightarrow & AC & {}\rightarrow BC               & [\text{Augmentation}]                               \\
+        \Longleftrightarrow & AC & {}\rightarrow D                & [\text{By Transivity from given } BC \rightarrow D] \\
+    \end{array}$}\\[1cm]
+\noindent \hyperlink{toc}{\hypertarget{4.4}{(4)}}\\
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & C  & {}\rightarrow F \hspace*{20mm} & [\text{By given}]                                          \\
+        \Longleftrightarrow & CG & {}\rightarrow FG               & [\text{Augmentation with } G] \hspace*{20mm} (\vardiamond) \\
+    \end{array}$}\\[1cm]
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & AB  & {}\rightarrow CD \hspace*{20mm} & [\text{By given}]                                                                       \\
+        \Longleftrightarrow & ABE & {}\rightarrow CDE               & [\text{Augmentation with } E]                                                           \\
+        \Longleftrightarrow & ABE & {}\rightarrow CDG               & [E \rightarrow G \Longrightarrow CDE \rightarrow CDG]                                   \\
+        \Longleftrightarrow & ABE & {}\rightarrow CG                & [CG \subseteq CGD \Longrightarrow CGD \rightarrow CG] \hspace*{20mm} (\text{\textleaf}) \\
+    \end{array}$}\\[1cm]
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & A & {}\rightarrow B \hspace*{20mm} & [\text{By given}]                                 \\
+        \Longleftrightarrow & A & {}\rightarrow DE               & [B \rightarrow DE]                                \\
+        \Longleftrightarrow & A & {}\rightarrow E                & [E \subseteq DE \Longrightarrow DE \rightarrow E] \\
+    \end{array}$}\\[1cm]
+
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & A  & {}\rightarrow BE  & [\text{Union of } A \rightarrow B \text{ and } A \rightarrow E] \\
+        \Longleftrightarrow & AA & {}\rightarrow ABE & [\text{Augmentation with } A]                                   \\
+        \Longleftrightarrow & A  & {}\rightarrow ABE & [\text{Simplification}]                                         \\
+        \Longleftrightarrow & A  & {}\rightarrow CG  & [\text{Transivity with } (\text{\textleaf})]                    \\
+        \Longleftrightarrow & A  & {}\rightarrow FG  & [\text{Transivity with } (\vardiamond)]                         \\
+    \end{array}$}\\[1cm]
+
+$\clubsuit$ $\blacklozenge$ $\blacksquare$ $\blacktriangle$ $\blacktriangledown$ \Coffeecup \Football
+\textleaf %\twonotes
+\AAcht
+\bcstop
+\bcetoile
+\bcyin
+\bctrefle
+\faPlane
+
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    5
+%----------------------------------------------------------------------------------
+{{\LARGE \noindent \underline{\textbf{Exercise 5.}}}}
+\\\\
+\noindent \hyperlink{toc}{\hypertarget{5.1}{(1)}}\\
+1. $A \rightarrow C$, $A \rightarrow D$\\
+2. The only key is $A$ since $A \rightarrow$ every other attribute. By the union property, $A \rightarrow ABCD$ \\
+3. All possible sets with $A$ in it. So:
+\begin{center}
+
+    {\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}l}
+                 & AB   & {}\rightarrow ABCD \\
+                 & AC   & {}\rightarrow ABCD \\
+                 & AD   & {}\rightarrow ABCD \\
+                 & ABC  & {}\rightarrow ABCD \\
+                 & ABD  & {}\rightarrow ABCD \\
+                 & ACD  & {}\rightarrow ABCD \\
+                 & ABCD & {}\rightarrow ABCD \\
+            \end{array}$}\\[1cm]
+\end{center}
+
+\noindent \hyperlink{toc}{\hypertarget{5.2}{(2)}}\\
+1. \\
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & BC  & {}\rightarrow D  & [\text{given}]                                                  \\
+        \Longleftrightarrow & ABC & {}\rightarrow AD & [\text{Augmentation with }A]                                    \\
+        \Longleftrightarrow & ABC & {}\rightarrow D  & [\text{by decomposition rule}] \hspace*{20mm} (\text{\faPlane}) \\
+    \end{array}$}\\[1cm]
+
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & AB   & {}\rightarrow C   & [\text{given}]                                \\
+        \Longleftrightarrow & AABB & {}\rightarrow ABC & [\text{Augmentation with }A\text{ and } B]    \\
+        \Longleftrightarrow & AB   & {}\rightarrow ABC & [\text{Simplifying}]                          \\
+        \Longleftrightarrow & AB   & {}\rightarrow D   & [\text{Augmentation with } (\text{\faPlane})] \\
+    \end{array}$}\\[1cm]
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                                & CD  & {}\rightarrow A  & [\text{given}]                                                    \\
+            \Longleftrightarrow & BCD & {}\rightarrow BA & [\text{augmentation with }B]                                      \\
+            \Longleftrightarrow & BCD & {}\rightarrow A  & [\text{by decomposition rule}] \hspace*{20mm} (\text{\Coffeecup}) \\
+        \end{array}$}\\[1cm]
+
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & BC   & {}\rightarrow D   & [\text{given}]                                  \\
+        \Longleftrightarrow & BBCC & {}\rightarrow BCD & [\text{augmentation with }B\text{ and } C]      \\
+        \Longleftrightarrow & BC   & {}\rightarrow BCD & [\text{Simplifying}]                            \\
+        \Longleftrightarrow & BC   & {}\rightarrow A   & [\text{augmentation with } (\text{\Coffeecup})] \\
+    \end{array}$}\\[1cm]
+\noindent\rule{\textwidth}{1pt}
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                                & DA  & {}\rightarrow B  & [\text{given}]                                                \\
+            \Longleftrightarrow & CDA & {}\rightarrow CB & [\text{augmentation with }C]                                  \\
+            \Longleftrightarrow & CDA & {}\rightarrow B  & [\text{by decomposition rule}] \hspace*{20mm} (\text{\AAcht}) \\
+        \end{array}$}\\[1cm]
+
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & CD   & {}\rightarrow A   & [\text{given}]                              \\
+        \Longleftrightarrow & CCDD & {}\rightarrow CDA & [\text{augmentation with }C\text{ and } D]  \\
+        \Longleftrightarrow & CD   & {}\rightarrow CDA & [\text{Simplifying}]                        \\
+        \Longleftrightarrow & CD   & {}\rightarrow B   & [\text{augmentation with } (\text{\AAcht})] \\
+    \end{array}$}\\[1cm]
+\noindent\rule{\textwidth}{1pt}
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                                & AB  & {}\rightarrow C  & [\text{given}]                                                   \\
+            \Longleftrightarrow & DAB & {}\rightarrow DC & [\text{augmentation with }D]                                     \\
+            \Longleftrightarrow & DAB & {}\rightarrow C  & [\text{by decomposition rule}] \hspace*{20mm} (\text{\bcetoile}) \\
+        \end{array}$}\\[1cm]
+
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}ll}
+                            & DA   & {}\rightarrow B   & [\text{given}]                                 \\
+        \Longleftrightarrow & DDAA & {}\rightarrow DAB & [\text{augmentation with }D\text{ and } A]     \\
+        \Longleftrightarrow & DA   & {}\rightarrow DAB & [\text{Simplifying}]                           \\
+        \Longleftrightarrow & DA   & {}\rightarrow C   & [\text{augmentation with } (\text{\bcetoile})] \\
+    \end{array}$}\\[1cm]
+\noindent\rule{\textwidth}{1pt}
+So there is:\\
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}l}
+         & AB & {}\rightarrow D \\
+         & BC & {}\rightarrow A \\
+         & CD & {}\rightarrow B \\
+         & DA & {}\rightarrow C \\
+    \end{array}$}\\[1cm]
+2. By union property of the given and above, we have:\\
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}l}
+         & AB & {}\rightarrow ABCD \\
+         & BC & {}\rightarrow ABCD \\
+         & CD & {}\rightarrow ABCD \\
+         & DA & {}\rightarrow ABCD \\
+    \end{array}$}\\[1cm]
+3. All possible sets with $AB$, $BC$, $CD$, and $DA$ in it. So:\\
+{\setstretch{1.5}$\begin{array}{lr@{}>{\displaystyle}l}
+         & ABC  & {}\rightarrow ABCD \\
+         & BCD  & {}\rightarrow ABCD \\
+         & CDA  & {}\rightarrow ABCD \\
+         & DAB  & {}\rightarrow ABCD \\
+
+         & ABD  & {}\rightarrow ABCD \\
+         & BCA  & {}\rightarrow ABCD \\
+         & CDB  & {}\rightarrow ABCD \\
+         & DAC  & {}\rightarrow ABCD \\
+
+         & ABCD & {}\rightarrow ABCD \\
+    \end{array}$}\\[1cm]
+
+% for the above, i used a nice script to automate replace A -> B, b -> C and so on
+% sed --expression 's|A|?|g' --expression 's|D|A|g' --expression 's|C|D|g' --expression 's|B|C|g' --expression 's|?|B|g' test.sh | xclip -sel clip
+
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    6
+%----------------------------------------------------------------------------------
+{{\LARGE \noindent \underline{\textbf{Exercise 6.}}}}\\\\
+\noindent \hyperlink{toc}{\hypertarget{6.1}{(1)}}\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        A^+ & {}= (ABC)^+  & [\text{given } A \rightarrow BC] \\
+            & {}= (ABCD)^+ & [\text{given } B \rightarrow D]  \\
+            & {}= ABCDE    & [\text{given } CD \rightarrow E] \\
+    \end{array}$}\\[0.5cm]
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        E^+ & {}= (EA)^+ & [\text{given } E \rightarrow A] \\
+            & {}= ABCDE  & [\text{since } A^+ = ABCDE]     \\
+    \end{array}$}\\[0.5cm]
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        B^+ & {}= BD & [\text{given } B \rightarrow D] \\
+    \end{array}$}\\[0.5cm]
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        C^+ & {}= C & [\text{nothing}] \\
+    \end{array}$}\\[0.5cm]
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        D^+ & {}= D & [\text{nothing}] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        (BD)^+ & {}= BD & [\text{nothing}] \\
+    \end{array}$}\\[0.5cm]
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        (CD)^+ & {}= (CDE)^+ & [\text{given } CD \rightarrow E] \\
+               & {}= ABCDE   & [\text{since } E^+ = ABCDE]      \\
+    \end{array}$}\\[0.5cm]
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        (BC)^+ & {}= (BCD)^+ & [\text{given } B \rightarrow D] \\
+               & {}= ABCDE   & [\text{since } (CD)^+ = ABCDE]  \\
+    \end{array}$}\\[0.5cm]
+So $A$, $E$, $CD$, and $BC$ are candidate keys. since they functionally determines all other attributes. There
+exists no non-empty subset of $A$ and $E$. And both subsets of $BC$ ($B$ and $C$) and $CD$ ($C$ and $D$) are not superkeys.\\
+
+There cannot be a candidate key with 3 attributes because it must be a superset of one of $\{A, E, CD, BC\}$.
+All attributes exist in that set. Since those are candidate keys, then supersets of those attributes are
+by definition not candidate keys.\\
+
+\noindent \hyperlink{toc}{\hypertarget{6.2}{(2)}}\\
+No. $B$ is not a superkey of $R$ since $B$ is not a superset of $\{A, E, CD, BC\}$. Since $B \rightarrow D$ is a non-trivial
+Functional Dependency of $R$, $R$ is not in BCNF.\\
+
+\noindent \hyperlink{toc}{\hypertarget{6.3}{(3)}}\\
+Yes. The $D$ in $B \rightarrow D$ is a member of $CD$ which is a superkey. So $\{A, E, CD\}$ are superkeys, and $D$ from the last Functional Dependency $B \rightarrow D$
+is a member of the superkey $CD$\\
+% No. The $D$ in $B \rightarrow D$ is not prime. It is not a member of any of the given Functional Dependencies.\\
+
+\noindent \hyperlink{toc}{\hypertarget{6.4}{(4)}}\\
+Initial Tableau:\\[0.5cm]
+\begin{tabular}{|c||c|c|c|c|c|}
+    \hline
+    {\cellcolor{gray!25}Decomposed Relations} & \multicolumn{5}{c|}{\cellcolor{gray!25}Attributes}                                 \\
+    \hline
+    \hline
+    {\cellcolor{gray!25}}                     &
+    {\cellcolor{gray!25}A}                    &
+    {\cellcolor{gray!25}B}                    &
+    {\cellcolor{gray!25}C}                    &
+    {\cellcolor{gray!25}D}                    &
+    {\cellcolor{gray!25}E}                                                                                                         \\
+    \hline
+    \hline
+    $R_1 (A, B, C)$                           & $a$                                                & $b$   & $c$   & $d_1$ & $e_1$ \\
+    \hline
+    $R_2 (A, D, E)$                           & $a$                                                & $b_2$ & $c_2$ & $d$   & $e$   \\
+    \hline
+\end{tabular}\\[0.5cm]
+Given $A \rightarrow BC$\\[0.5cm]
+\begin{tabular}{|c||c|c|c|c|c|}
+    \hline
+    {\cellcolor{gray!25}Decomposed Relations} & \multicolumn{5}{c|}{\cellcolor{gray!25}Attributes}                                       \\
+    \hline
+    \hline
+    {\cellcolor{gray!25}}                     &
+    {\cellcolor{gray!25}A}                    &
+    {\cellcolor{gray!25}B}                    &
+    {\cellcolor{gray!25}C}                    &
+    {\cellcolor{gray!25}D}                    &
+    {\cellcolor{gray!25}E}                                                                                                               \\
+    \hline
+    \hline
+    $R_1 (A, B, C)$                           & $a$                                                & $b$      & $c$      & $d_1$ & $e_1$ \\
+    \hline
+    $R_2 (A, D, E)$                           & $a$                                                & $\bm{b}$ & $\bm{c}$ & $d$   & $e$   \\
+    \hline
+\end{tabular}\\[0.5cm]
+Since we have a row without any subscripts, this means we have a lossless decomposition.
+
+Checking dependency preserving: Let $F=\{A\rightarrow BC,\ CD \rightarrow E,\ B \rightarrow D,\ E \rightarrow A\}$
+Check if $(F_{R_1} \cup F_{R_2})^+ = F^+$\\\\
+
+$R_1 = (A, B, C),\ R_2 = (A, D, E)$
+
+Given the Closures of everything in (1), we have:\\
+$F_{R_1} = \{A \rightarrow BC,\ BC \rightarrow A\}$\\
+$F_{R_2} = \{A \rightarrow DE,\ E \rightarrow AD\}$\\
+
+$F_{R_1} \cup F_{R_2} = \{A \rightarrow BCDE,\ BC \rightarrow A,\ E \rightarrow A\}$\\
+
+Calculating closure of $F_{R_1} \cup F_{R_2}$\\\\
+
+$A^+ =ABCDE$\\
+${B}^+=B \leftarrow$ This is not equal to $F^+$ \\
+${C}^+=C$\\
+${D}^+=D$\\
+${E}^+=ABCDE$\\
+${BC}^+= ABCDE$\\
+${CD}^+=CD \leftarrow$  This is not equal to $F^+$\\
+${BD}^+=BD$\\
+
+$\therefore \{CD \rightarrow E,\ B \rightarrow D\}$ are not preserved
+
+
+\noindent\rule{\textwidth}{1pt}
+Initial Tableau:\\[0.5cm]
+\begin{tabular}{|c||c|c|c|c|c|}
+    \hline
+    {\cellcolor{gray!25}Decomposed Relations} & \multicolumn{5}{c|}{\cellcolor{gray!25}Attributes}                             \\
+    \hline
+    \hline
+    {\cellcolor{gray!25}}                     &
+    {\cellcolor{gray!25}A}                    &
+    {\cellcolor{gray!25}B}                    &
+    {\cellcolor{gray!25}C}                    &
+    {\cellcolor{gray!25}D}                    &
+    {\cellcolor{gray!25}E}                                                                                                     \\
+    \hline
+    \hline
+    $R_1 (A, B, C, D)$                        & $a$                                                & $b$   & $c$ & $d$ & $e_1$ \\
+    \hline
+    $R_2 (C, D, E)$                           & $a_2$                                              & $b_2$ & $c$ & $d$ & $e$   \\
+    \hline
+\end{tabular}\\[0.5cm]
+Given $CD \rightarrow E$\\[0.5cm]
+\begin{tabular}{|c||c|c|c|c|c|}
+    \hline
+    {\cellcolor{gray!25}Decomposed Relations} & \multicolumn{5}{c|}{\cellcolor{gray!25}Attributes}                                \\
+    \hline
+    \hline
+    {\cellcolor{gray!25}}                     &
+    {\cellcolor{gray!25}A}                    &
+    {\cellcolor{gray!25}B}                    &
+    {\cellcolor{gray!25}C}                    &
+    {\cellcolor{gray!25}D}                    &
+    {\cellcolor{gray!25}E}                                                                                                        \\
+    \hline
+    \hline
+    $R_1 (A, B, C, D)$                        & $a$                                                & $b$   & $c$ & $d$ & $\bm{e}$ \\
+    \hline
+    $R_2 (C, D, E)$                           & $a_2$                                              & $b_2$ & $c$ & $d$ & $e$      \\
+    \hline
+\end{tabular}\\[0.5cm]
+Since we have a row without any subscripts, this means we have a lossless decomposition.
+
+Checking dependency preserving: Let $F=\{A\rightarrow BC,\ CD \rightarrow E,\ B \rightarrow D,\ E \rightarrow A\}$
+Check if $(F_{R_1} \cup F_{R_2})^+ = F^+$\\\\
+
+$R_1 = (A, B, C, D),\ R_2 = (C, D, E)$\\
+
+Given the Closures of everything in (1), we have:\\
+$F_{R_1} = \{A \rightarrow BCD,\ B \rightarrow D,\ BC \rightarrow A,\ CD \rightarrow A\}$\\
+$F_{R_2} = \{E \rightarrow CD,\ CD \rightarrow E\}$\\
+
+$F_{R_1} \cup F_{R_2} = \{A \rightarrow BCD,\ B \rightarrow D,\ BC \rightarrow A,\ CD \rightarrow A,\ E \rightarrow A\}$\\
+
+Calculating closure of $F_{R_1} \cup F_{R_2}$\\\\
+
+$A^+ =ABCDE$\\
+${B}^+=BD$\\
+${C}^+=C$\\
+${D}^+=D$\\
+${E}^+=ABCDE$\\
+${BC}^+= ABCDE$\\
+${CD}^+= ABCDE$\\
+${BD}^+=BD$\\
+
+$\because (F_{R_1} \cup F_{R_2})^+ = F^+$\\
+$\therefore$ FD's are preserved\\
+
+\noindent \hyperlink{toc}{\hypertarget{6.5}{(5)}}\\
+$R_1$'s Functional Dependencies: $A\rightarrow BC$ which is a superkey\\
+$\therefore R_1$ is in BCNF\\
+$\Longrightarrow R_1$ is in 3NF\\
+
+$R_2$'s Functional Dependencies: $E\rightarrow A$ which is neither a superkey or prime\\
+$\therefore R_2$ is none\\
+
+$R_3$'s Functional Dependencies: $\{A\rightarrow BC,\ B \rightarrow D \}$\\
+$A$ is a superkey, so the first Functional Dependency is valid\\
+The second Functional Dependency is neither a superkey or prime\\
+$\therefore R_2$ is none\\
+
+$R_3$'s Functional Dependencies: $CD\rightarrow E$, which is a superkey\\
+$\therefore R_4$ is in BCNF\\
+$\therefore R_4$ is in 3NF\\
+
+
+\noindent \hyperlink{toc}{\hypertarget{6.6}{(6)}}\\
+$A^+ = ABCDE$\\
+$(CD)^+ = ABCDE$\\
+$B^+ = BD$ [Violation of BCNF]\\
+$E^+ = ABCDE$\\\\
+
+$R_1 = BD$\\
+$R_2 = ABCE$\\\\
+
+Projecting FD's onto $R_1$\\
+$B^+ = BD \Longrightarrow B \rightarrow D$ which is a superkey\\
+$D^+ = D$\\
+$\therefore R_1$ sastifies BCNF\\\\
+
+Projecting FD's onto $R_2$\\
+$A^+ = ABCE \Longrightarrow A \rightarrow BCE$ which is a superkey\\
+$B^+ = B$\\
+$C^+ = C$\\
+$E^+ = ABCE \Longrightarrow E \rightarrow ABC$ which is a superkey\\
+$BC^+ = BC$\\
+$\therefore R_2$ sastifies BCNF\\\\
+
+So the relations $R_1 = BD$ and $R_2 = ABCE$ is in BCNF.\\
+
+Checking dependency preserving: Let $F=\{A\rightarrow BC,\ CD \rightarrow E,\ B \rightarrow D,\ E \rightarrow A\}$
+Check if $(F_{R_1} \cup F_{R_2})^+ = F^+$\\\\
+
+$R_1 = (B, D),\ R_2 = (A, B, C, E)$\\
+
+Given the Closures of everything in (1), we have:\\
+$F_{R_1} = \{B \rightarrow D\}$\\
+$F_{R_2} = \{A \rightarrow BCE,\ E \rightarrow A,\ BC \rightarrow A\}$\\
+
+$F_{R_1} \cup F_{R_2} = \{A \rightarrow BCDE,\ B \rightarrow D,\ E \rightarrow A,\ CD \rightarrow A,\ BC \rightarrow A\}$\\
+
+Calculating closure of $F_{R_1} \cup F_{R_2}$\\\\
+
+$A^+ =ABCDE$\\
+${B}^+=BD$\\
+${C}^+=C$\\
+${D}^+=D$\\
+${E}^+=ABCDE$\\
+${BC}^+= ABCDE$\\
+${CD}^+= ABCDE$\\
+${BD}^+=BD$\\
+
+$\because (F_{R_1} \cup F_{R_2})^+ = F^+$\\
+$\therefore$ FD's are preserved\\
+
+
+% \scalebox{.87}{
+%     \begin{tikzpicture}[node distance=1.5cm, every edge/.style={link}]
+%         \node[entity] (emp) {Employee};
+%         \node[attribute] (ename) [above=of emp] {Name} edge (emp);
+%         \node[attribute] (enum) [above right=of emp] {\key{Number}} edge (emp);
+
+%         \node[isa] (isa) [below=1cm of emp] {ISA} edge (emp);
+
+%         \node[entity] (mec) [below left=1cm of isa] {Mechanic} edge (isa);
+%         \node[entity] (sal) [below right=1cm of isa] {Salesman} edge (isa);
+
+%         \node[relationship] (does) [left=of mec] {Does} edge (mec);
+
+%         \node[weak entity] (rep) [below=of does] {RepairJob} edge (does);
+%         \node[attribute] (rnum) [left=of rep] {\discriminator{Number}} edge (rep);
+%         \node[attribute] (desc) [above left=of rep] {Description} edge (rep);
+%         \node[attribute] (cost) [below left=of rep] {Cost} edge (rep);
+%         \node[attribute] (mat) [left=0.5cm of cost] {Parts} edge (cost);
+%         \node[attribute] (work) [below left=0.5cm of cost] {Work} edge (cost);
+
+%         \node[ident relationship] (reps) [below=of rep] {Repairs} edge [total] (rep);
+
+%         \node[entity] (car) [right=of reps] {Car} edge [<-] (reps);
+%         \node[attribute] (lic) [above=of car] {\key{License}} edge (car);
+%         \node[attribute] (mod) [below=of car] {Model} edge (car);
+%         \node[attribute] (year) [below right=of car] {Year} edge (car);
+%         \node[attribute] (manu) [below left=1.5cm of car] {Manufacturer} edge (car);
+
+%         \node[relationship] (buy) [below=of sal] {Buys};
+%         \node[attribute] (pri) [above left=of buy] {Price} edge (buy);
+%         \node[attribute] (sdate) [left=of buy] {Date} edge (buy);
+%         \node[attribute] (bval) [below left=of buy] {Value} edge (buy);
+
+%         \node[relationship] (sel) [right=of buy] {Sells};
+%         \node[attribute] (sdate) [above right=of sel] {Date} edge (sel);
+%         \node[derived attribute] (sval) [right=of sel] {Value} edge (sel);
+%         \node[attribute] (com) [below right=of sel] {Comission} edge (sel);
+
+%         \draw[link] (car.10) -| (buy) (buy) edge (sal);
+%         \draw[link] (car.-10) -| (sel) (sel) |- (sal);
+
+%         \node[entity] (cli) [below right=0.5cm and 3.7cm of car] {Client};
+%         \node[attribute] (cid) [right=of cli] {\key{ID}} edge (cli);
+%         \node[attribute] (cname) [below left=of cli] {Name} edge (cli);
+%         \node[multi attribute] (cphone) [below right=of cli] {Phone} edge (cli);
+%         \node[attribute] (cadd) [below=of cli] {Address} edge (cli);
+
+%         \draw[link] (cli.70) |- node [pos=0.05, auto, swap] {buyer} (sel);
+%         \draw[link] (cli.110) |- node [pos=0.05, auto] {seller} (buy);
+
+%     \end{tikzpicture}
+% }
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    7
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\hypertarget{7}{\LARGE \underline{\textbf{Exercise 7.}}}}
+Candidate keys:\\\\
+$B^+ = (BO)^+ \ \ [\text{given } B \rightarrow O]$\\
+$O^+ = O^+$ \ \ [\text{nothing}]\\
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        I^+ & {}= (IB)^+ & [\text{given } I \rightarrow B] \\
+            & {}= BOI    & [\text{given } B \rightarrow O] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        S^+ & {}= SD & [\text{given } S \rightarrow D] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        Q^+ & {}= Q & [\text{nothing}] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        D^+ & {}= D & [\text{nothing}] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        BO^+ & {}= BO & [\text{nothing}] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        BI^+ & {}= BOI & [\text{given } B \rightarrow O] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        BS^+ & {}= BOSD & [\text{given } S \rightarrow D \text{ and }  B \rightarrow O] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        BQ^+ & {}= BOQ & [\text{given } B \rightarrow O] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        BD^+ & {}= BOD & [\text{given } B \rightarrow O] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        OI^+ & {}= BOI & [] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        OS^+ & {}= OSD & [] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        OQ^+ & {}= OQ & [] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        OD^+ & {}= OD & [] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        IS^+ & {}= BOISQD & [] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        IQ^+ & {}= BOIQ & [] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        ID^+ & {}= BOID & [] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        SQ^+ & {}= SQD & [] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        SD^+ & {}= SD & [] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        QD^+ & {}= QD & [] \\
+    \end{array}$}\\[0.5cm]
+
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}ll}
+        BOI^+ & {}= BOI & [] \\
+    \end{array}$}\\[0.5cm]
+
+$BOS = BOSD$ \\
+$BOQ = BOQ$ \\
+$BOD = BOD$ \\
+% $BIS = BOISDQ$ \\
+$BIQ = BOIQ$ \\
+$BID = BOID$ \\
+$BSQ = BOSQD$ \\
+$BSD = BOSD$ \\
+$BQD = BOQD $ \\
+% $OIS = OIS $ \\
+$OIQ = BOIQ $ \\
+$OID = BOID $ \\
+
+$OSQ = OSQD $ \\
+$OSD = OSD $ \\
+
+$OQD = OQD$\\
+
+% $ISQ$
+% $ISD$
+
+$IQD = BOIQD$\\
+
+$SQD = SQD$\\
+
+% There's no way I have to do this huh
+
+% $BOIS=BOISD$\\
+$BOIQ=BOIQ$\\
+$BOID=BOID$\\
+$BOSQ=BOSQD$\\
+$BOSD=BOSD$\\
+$BOQD=BOQD$\\
+% $BISQ=$\\
+% $BISD=$\\
+$BIQD=BOID$\\
+$BSQD=BOSQD$\\
+$OIQD=BOIQD$\\
+$OSQD=OSQD$\\
+% $ISQD=$\\
+
+$BOIQD=BOIQD$\\
+$BOSQD=BOSQD$\\
+
+So the only candidate key is $IS$.\\
+
+\newpage
+
+BCNF:\\
+$I^+ = BOI$\\
+$I \rightarrow BO$ violates BCNF
+\begin{center}
+    $\Downarrow$
+\end{center}
+\begin{minipage}[t]{0.5\textwidth} %[t] aligns at the top
+    Let $R_1 = \{B,\ O,\ I\}$\\
+
+    Projecting FD's onto $R_1$\\
+    $B^+ = BO$ \\
+    $B \rightarrow O$ Violates BCNF\\
+
+    % % This works, but we just don't have enough space lol
+    % \begin{minipage}[t]{0.25\textwidth}
+    %     Let $R_3 = \{B,\ O\}$\\
+    % \end{minipage}
+    % \begin{minipage}[t]{0.25\textwidth}
+    %     Let $R_4 = \{B,\ I\}$\\
+    % \end{minipage}
+
+    Let $R_3 = \{B,\ O\}$\\
+    Let $R_4 = \{B,\ I\}$\\
+
+    Projecting FD's onto $R_3$\\
+    $B^+ = BO$ satisfies BCNF\\
+    $O^+ = O$\\
+
+    Projecting FD's onto $R_4$\\
+    $B^+ = B$ \\
+    $I^+ = IB$ satisfies BCNF\\
+
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+    Let $R_2 = \{I,\ S,\ Q,\ D\}$\\
+
+    Projecting FD's onto $R_2$\\
+    $I^+ = I$ \\
+    $S^+ = SD$ \\
+    $S \rightarrow D$ Violates BCNF\\
+
+    Let $R_5 = \{S,\ D\}$\\
+    Let $R_6 = \{I,\ S,\ Q\}$\\
+
+    Projecting FD's onto $R_5$\\
+    $S^+ = SD$ satisfies BCNF\\
+    $D^+ = D$ \\
+
+    Projecting FD's onto $R_6$\\
+    $I ^+ = I$ \\
+    $S ^+ = S$ \\
+    $Q ^+ = Q$ \\
+    $(IS) ^+ = ISQ$ satisfies BCNF\\
+    $(IQ) ^+ = IQ$ \\
+    $(SQ) ^+ = SQ$ \\
+\end{minipage}
+
+$\therefore R_3 = \{B,\ O\},\\ R_4 = \{B,\ I\},\\ R_5 = \{S,\ D\},\\ R_6 = \{I,\ S,\ Q\}$ is in BCNF.\\
+\newpage
+
+3NF:\\
+$I^+ = BOI$\\
+$I \rightarrow BO$ violates 3NF
+\begin{center}
+    $\Downarrow$
+\end{center}
+\begin{minipage}[t]{0.5\textwidth} %[t] aligns at the top
+    Let $R_1 = \{B,\ O,\ I\}$\\
+
+    Projecting FD's onto $R_1$\\
+    $B^+ = BO$ \\
+    $B \rightarrow O$ Violates 3NF\\
+
+    % % This works, but we just don't have enough space lol
+    % \begin{minipage}[t]{0.25\textwidth}
+    %     Let $R_3 = \{B,\ O\}$\\
+    % \end{minipage}
+    % \begin{minipage}[t]{0.25\textwidth}
+    %     Let $R_4 = \{B,\ I\}$\\
+    % \end{minipage}
+
+    Let $R_3 = \{B,\ O\}$\\
+    Let $R_4 = \{B,\ I\}$\\
+
+    Projecting FD's onto $R_3$\\
+    $B^+ = BO$ satisfies 3NF\\
+    $O^+ = O$\\
+
+    Projecting FD's onto $R_4$\\
+    $B^+ = B$ \\
+    $I^+ = IB$ satisfies 3NF\\
+
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+    Let $R_2 = \{I,\ S,\ Q,\ D\}$\\
+
+    Projecting FD's onto $R_2$\\
+    $I^+ = I$ \\
+    $S^+ = SD$ \\
+    $S \rightarrow D$ Violates 3NF\\
+
+    Let $R_5 = \{S,\ D\}$\\
+    Let $R_6 = \{I,\ S,\ Q\}$\\
+
+    Projecting FD's onto $R_5$\\
+    $S^+ = SD$ satisfies 3NF\\
+    $D^+ = D$ \\
+
+    Projecting FD's onto $R_6$\\
+    $I ^+ = I$ \\
+    $S ^+ = S$ \\
+    $Q ^+ = Q$ \\
+    $(IS) ^+ = ISQ$ satisfies 3NF\\
+    $(IQ) ^+ = IQ$ \\
+    $(SQ) ^+ = SQ$ \\
+\end{minipage}
+
+$\therefore R_3 = \{B,\ O\},\\ R_4 = \{B,\ I\},\\ R_5 = \{S,\ D\},\\ R_6 = \{I,\ S,\ Q\}$ is in 3NF and BCNF.\\
+
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    8
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\hypertarget{8}{\LARGE \underline{\textbf{Exercise 8.}}}}\\\\
+\begin{enumerate}
+    \item $\pi_{\text{name}}\bigbracket{\sigma_{\text{sno}=5}(\text{students})}$\\\\
+    \item $\pi_{\text{universities.addr}}\Bigbracket{\sigma_{\text{study.uname}=\text{universities.uname},\ \text{name}=\text{jones}}\bigbracket{(\text{students} \Join \text{study}) \times \text{universities}}}$\\\\
+    \item Students in Experiemnts = $(\text{students} \Join \text{participate}) \Join \text{experiment}$\\
+          $\pi_{\text{uname, universities.addr}}\Big(\sigma_{\text{study.uname}=\text{universities.uname}} \big((\text{Students in Experiemnts}\Join \text{study})\times \text{universities}\big)\Big)$\\\\
+          % $\pi_{\text{universities.uname, universities.addr}}\Bigg(\sigma_{\text{study.uname}=\text{universities.uname}} \bigg(\Bigbracket{\bigbracket{(\text{students} \Join \text{participate}) \Join \text{experiment}}\Join study}\times \text{universities}\bigg)\Bigg)$\\
+    \item Students in Experiemnts = $(\text{students} \Join \text{participate}) \Join \text{experiment}$\\
+          Universities with students participating in Experiemnts =\\
+          $\pi_{\text{uname, universities.addr}}\Big(\sigma_{\text{study.uname}=\text{universities.uname}} \big((\text{Students in Experiemnts}\Join \text{study})\times \text{universities}\big)\Big)$\\
+          Universities $-$ Universities with students participating in Experiemnts\\\\
+
+    \item Students at Universities = $\sigma_{\text{study.uname}=\text{universities.uname}}\bigbracket{(\text{students} \Join \text{study}) \times \text{universities}}$\\
+          $\pi_{\text{eno, num-of-p, date}}\big($(Students at Universities $ \Join \text{took-place}) \Join \text{experiment}\big)$
+\end{enumerate}
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    9
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\hypertarget{9}{\LARGE \underline{\textbf{Exercise 9.}}}}
+\begin{enumerate}
+    \item All floor department sales $=(\text{dept}\Join \text{sales}) \Join \text{item}$\\
+          $2^{\text{nd}}$ floor department sales $=\Big(\big(\sigma_{\text{floor}=2}(\text{dept})\big)\Join \text{sales}\Big) \Join \text{item}$\\
+          $\pi_{\text{iname, type, color}}$(All floor department sales $-$ $2^{\text{nd}}$ floor department sales)
+          %   $\pi_{\text{iname, type, color}}\Big(\big(\sigma_{\text{floor}=2}(\text{dept})\big)\Join \text{sales}\Big) \Join item$\\\\
+    \item  Assuming there is one manager per department.\\
+          Managers $= \sigma_{\text{eno}=\text{mgr}}(\text{employee})$\\
+          Non-managers = employee $-$ Managers\\
+          %   Max salary of non-managers = MAX$_{\text{salary}}$(Non-managers)\\
+          %   Min salary of managers = MIN$_{\text{salary}}$(Managers)\\
+          %   $\pi_{\text{dname}, \text{floor}}\Big(\text{dept} \Join \big(\text{employee}\big)\Big)$\\\\
+          Max employee salary of each Department $=\gamma_{\text{dept, MAX(salary)}}(\text{Non-managers}) $\\
+          $\sigma_{\text{salary}>\text{MAX(salary)}}$(Managers $\Join$ Max employee salary of each Department)\\
+
+    \item $2^{\text{nd}}$ floor department sales $=\Big(\big(\sigma_{\text{floor}=2}(\text{dept})\big)\Join \text{sales}\Big) \Join \text{item}$\\
+          Items with number of departments $= \gamma_{\text{iname, COUNT(departments)}}(2^{\text{nd}}\text{floor department sales})$\\
+          Items with more than two departments = $\sigma_{\text{COUNT(departments)}>2}$(Items with number of departments)\\
+          $\pi_{\text{iname, type, color}}(\text{Items with more than two departments} \Join 2^{\text{nd}}\text{floor department sales})$
+    \item  %All floor department sales $=(\text{dept}\Join \text{sales}) \Join \text{item}$\\
+          %   Supply equal to sales = $\sigma_{\text{sales.dept}=\text{supply.dept},\ \text{sales.item}=\text{supply.item}}$(All floor department sales $\times$ supply)\\
+          Supply equal to sales $=\big((\text{dept}\Join \text{sales}) \Join \text{item}\big) \Join \text{supply}$\\
+          $\pi_{\text{iname, type, color}}$(Supply equal to sales)
+\end{enumerate}
+\end{document}
