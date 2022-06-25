@@ -1,11 +1,35 @@
-\documentclass[preview]{standalone}
+\documentclass[preview]{standalone} % for mkaing this into an image
 % pdflatex playground.tex
 % convert -density 300 playground.pdf -quality 90 file.png
+
 \usepackage{amsmath}
+
+\usepackage{pifont} % \ding
+\usepackage{harmony} % \AAcht (music symbol)
+\usepackage{bclogo} % a lot of cool bc logos. should google / read docs
+\usepackage{fontawesome} % a lot of icons ofc
+\usepackage{textcomp} % Leaf symbol
+\usepackage{marvosym} % Coffeecup and Football
+
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+\newcommand{\heart}{\ensuremath\varheartsuit}
+\newcommand{\flower}{\text{\ding{95}}}
+
 \begin{document}
 A key is from a set of attributes $K$ from entity set $E$
 
 such that given two entites $e_1$ and $e_2 \in E,\ e_1 \not = e_2$
+
+$\clubsuit$ $\blacklozenge$ $\blacksquare$ $\blacktriangle$ $\blacktriangledown$ \Coffeecup \Football
+\textleaf %\twonotes
+\AAcht
+\bcstop
+\bcetoile
+\bcyin
+\bctrefle
+\faPlane
 
 % $$\text{A \textit{key} is from a set of attributes } K \text{from entity set E such that given two entities } e_1 \text{ and } e_2 \in E. e_1 \not = e_2$$
 \end{document}
