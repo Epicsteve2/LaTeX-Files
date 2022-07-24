@@ -1,6 +1,6 @@
 \documentclass[preview]{standalone} % for mkaing this into an image
 % pdflatex CSCC43_Project.tex
-% convert -density 300 CSCC43_Project.pdf -quality 90 file.png
+% convert -density 300 CSCC43_Project.pdf -quality 90 CSCC43_Project.png
 % \usepackage{amsmath,amsthm,amssymb}	%math stuff
 % \usepackage[table]{xcolor}
 % \usepackage{graphicx}
@@ -47,20 +47,21 @@
   \node[attribute] (PostalCode) [left=of Listings] {PostalCode} edge (Listings);
   \node[attribute] (City) [below left=of Listings] {City} edge (Listings);
   \node[attribute] (Country) [left=of EmptyAboveListings] {Country} edge (Listings);
-  \node[attribute] (Amenities) [right=of EmptyAboveListings] {Amenities} edge (Listings);
+  % \node[attribute] (Amenities) [right=of EmptyAboveListings] {Amenities} edge (Listings);
   \node[attribute] (Owner) [above=0.5cm of EmptyLeftListings] {Owner???} edge (Listings);
   \node[attribute] (Owner) [above=1.5cm of EmptyLeftListings] {\key{Listing ID}} edge (Listings);
   \node[attribute] (Latitude) [above left=of Listings] {Latitude} edge (Listings);
 
   \node[ident relationship] (AvailableListings) [right =2cm of Listings] {AvailableListings} edge [->] (Listings);
 
-  \node[weak entity] (Availibility) [right =7cm of Listings] {Availibility} edge (AvailableListings);
+  \node[entity] (Availibility) [right =7cm of Listings] {Availibility} edge (AvailableListings);
   \node[] (EmptyAboveAvailibility) [above=2.5cm of Availibility] {};
   \node[] (EmptyLeftAvailibility) [left=3.5cm of Availibility] {};
   \node[] (EmptyRightAvailibility) [right=3.5cm of Availibility] {};
   \node[] (EmptyBelowAvailibility) [below=2.5cm of Availibility] {};
-  \node[attribute] (DateRange) [above=of Availibility] {DateRange} edge (Availibility);
-  \node[attribute] (Price) [above right=of Availibility] {Price} edge (Availibility);
+  \node[attribute] (DateRange) [above=of Availibility] {\key{DateRange}} edge (Availibility);
+  \node[attribute] (Price) [above right=of Availibility] {\key{Price}} edge (Availibility);
+  \node[attribute] (ListingID) [right=of Availibility] {\key{Listing ID}} edge (Availibility);
 
   \node[entity] (Users) [below = 2.5cm of AvailableListings]  {Users};
   \node[] (EmptyAboveUsers) [above=2.5cm of Users] {};
@@ -71,7 +72,7 @@
   \node[attribute] (DateOfBirth) [above right=of Users] {DateOfBirth} edge (Users);
   \node[attribute] (Occupation) [below=of EmptyLeftUsers] {Occupation} edge (Users);
   \node[attribute] (SIN) [left=of Users] {\key{SIN}} edge (Users);
-  \node[attribute] (Address) [right=of Users] {Address (Maybe split this???)} edge (Users);
+  \node[attribute] (Address) [right=of Users] {Address} edge (Users);
 
   \node[isa] (RenterIsaUser) [below left=3cm of Users] {ISA} edge (Users);
   \node[isa] (BookerIsaUser) [below right=3cm of Users] {ISA} edge (Users);
@@ -94,31 +95,46 @@
 
   % \node[relationship] (ListingHistory) [below = 1cm of Availibility]  {ListingHistory} edge [->] (Listings);
   \node[entity] (ListingHistory) [right = 2cm of Address]  {ListingHistory} ;
-  \node[relationship] (BookerRents) [right =9cm of BookerIsaUser] {BookerRents} edge (Booker) edge (ListingHistory);
-  \node[attribute] (DateRange) [below=of BookerRents] {DateRange} edge (BookerRents);
-  \node[relationship] (ListingHistoryRelation) [above left =2cm of ListingHistory] {ListingHistoryRelation} edge (ListingHistory) edge [->] (Listings);
+  \node[attribute] (HistoryListingID) [below=of ListingHistory] {\key{Listing ID}} edge (ListingHistory);
+  \node[attribute] (HistoryUser) [below left=of ListingHistory] {\key{User}} edge (ListingHistory);
+  \node[attribute] (HistoryDateRange) [below right=of ListingHistory] {\key{Date Range}} edge (ListingHistory);
+
+  \node[relationship] (BookerRents) [right =9cm of BookerIsaUser] {BookerRents} edge [->] (Booker) edge (ListingHistory);
+  % \node[attribute] (DateRange) [below=of BookerRents] {DateRange} edge (BookerRents);
+  \node[relationship] (ListingHistoryRelation) [above right =2cm of ListingHistory] {ListingHistoryRelation} edge (ListingHistory) edge [->] (Listings);
 
   \node[entity] (Comments) [below= 16cm of Users]  {Comments} ;
   \node[attribute] (content) [below= of Comments]  {content} edge (Comments);
   \node[attribute] (CommentUser) [below right= of Comments]  {user} edge (Comments);
-  \node[isa] (ListingCommentsIsaComment) [above left=1cm of Comments] {ISA} edge (Comments);
-  \node[isa] (RenterCommentsIsaComment) [above =1cm of Comments] {ISA} edge (Comments);
+  \node[attribute] (CommentID) [below left= of Comments]  {\key{comment ID}} edge (Comments);
+  \node[attribute] (CommentRatomg) [left= of Comments]  {rating} edge (Comments);
+  \node[isa] (ListingCommentsIsaComment) [above =1cm of Comments] {ISA} edge (Comments);
+  \node[isa] (RenterCommentsIsaComment) [above left=1cm of Comments] {ISA} edge (Comments);
   \node[isa] (BookerCommentsIsaComment) [above right=1cm of Comments] {ISA} edge (Comments);
 
-  \node[entity] (ListingComments) [above left=1cm of ListingCommentsIsaComment]  {ListingComments} edge (ListingCommentsIsaComment);
-  \node[entity] (BookerComments) [above =1cm of RenterCommentsIsaComment]  {BookerComments} edge (RenterCommentsIsaComment);
+  \node[entity] (ListingComments) [above =1cm of ListingCommentsIsaComment]  {ListingComments} edge (ListingCommentsIsaComment);
+  \node[attribute] (ListingCommentsListing) [left=0.2cm of ListingComments]  {Listing ID} edge (ListingComments);
+  \node[entity] (BookerComments) [above left=1cm of RenterCommentsIsaComment]  {BookerComments} edge (RenterCommentsIsaComment);
+  \node[attribute] (BookerCommentsBooker) [below =1cm of BookerComments]  {User} edge (BookerComments);
   \node[entity] (RenterComments) [above right=1cm of BookerCommentsIsaComment]  { RenterComments} edge (BookerCommentsIsaComment);
+  \node[attribute] (RenterCommentsRenter) [below =1cm of RenterComments]  {User} edge (RenterComments);
 
   \node[relationship] (CommentsOnBooker) [above =1cm of BookerComments] {CommentsOnBooker} edge (BookerComments) edge [->] (Renter);
   \node[relationship] (CommentsOnRenter) [above =1cm of RenterComments] {CommentsOnRenter} edge (RenterComments) edge [->] (Booker);
   \node[relationship] (CommentsOnListings) [above =1cm of ListingComments] {CommentsOnListings} edge (ListingComments) edge [->] (Booker);
 
-  \node[entity] (Amenities) [above right=8cm of Listings]       {Amenities} edge [->] (Listings);
-  \node[attribute] (AmenitiesAttribute) [below=of Amenities]       {Amenity} edge (Amenities);
-  \node[attribute] (AmenitiyListing) [below left=of Amenities]       {\key{Listing ID}} (Amenities);
+  \node[entity] (Amenities) [above right=8cm of Listings]       {Amenities};
+  \node[attribute] (AmenitiesAttribute) [below=of Amenities]       {\key{Amenity}} edge (Amenities);
+  \node[attribute] (AmenitiyListing) [below left=of Amenities]       {\key{Listing ID}} edge (Amenities);
+  \node[relationship] (ListingAmenities) [left =2cm of Amenities] {ListingAmenities} edge (Amenities) edge [->] (Listings);
 
-  \node[entity] (Cancellations) [right= 4cm of Booker]       {Cancellations};
-  \node[attribute] (CalcellationUser) [below left=of Cancellations]       {User} edge (Cancellations);
+  \node[entity] (Cancellations) [below right= 7cm of Booker]       {Cancellations};
+  % \node[isa] (BookingCancellationIsa) [below left = of Cancellations] {ISA} edge (Cancellations);
+  % \node[isa] (BookingCancellationIsa) [below right = of Cancellations] {ISA} edge (Cancellations);
+  \node[relationship] (UserCancel) [left =0.2cm of Cancellations] {UserCancel} edge (Cancellations) edge [->] (Users);
+  \node[relationship] (AvailibilityCancel) [right =0.2cm of Cancellations] {AvailibilityCancel} edge (Cancellations) edge (Availibility);
+  \node[attribute] (CalcellationUser) [below left=of Cancellations]       {\key{User}} edge (Cancellations);
+  \node[attribute] (CalcellationBooking) [below=of Cancellations]       {\key{Booking}} edge (Cancellations);
 
   % \node[] (PLACEHOLDER2) [below=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1);
   % \node[] (PLACEHOLDER2) [below=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1);
