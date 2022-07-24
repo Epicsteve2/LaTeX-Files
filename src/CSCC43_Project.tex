@@ -1,0 +1,139 @@
+\documentclass[preview]{standalone} % for mkaing this into an image
+% pdflatex CSCC43_Project.tex
+% convert -density 300 CSCC43_Project.pdf -quality 90 file.png
+% \usepackage{amsmath,amsthm,amssymb}	%math stuff
+% \usepackage[table]{xcolor}
+% \usepackage{graphicx}
+% \usepackage{relsize} % Scaling the font
+\usepackage{tikz-er2} % need local './tikz-er2.sty'
+
+\tikzstyle{every entity} = [top color=white, bottom color=blue!30,
+                            draw=blue!50!black!100, drop shadow]
+\tikzstyle{every weak entity} = [drop shadow={shadow xshift=.7ex,
+                                 shadow yshift=-.7ex}]
+\tikzstyle{every attribute} = [top color=white, bottom color=yellow!20,
+                               draw=yellow, node distance=1cm, drop shadow]
+\tikzstyle{every relationship} = [top color=white, bottom color=red!20,
+                                  draw=red!50!black!100, drop shadow]
+\tikzstyle{every isa} = [top color=white, bottom color=green!20,
+                         draw=green!50!black!100, drop shadow]
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{shadows}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\begin{document}
+\begin{tikzpicture}[node distance=2.5cm, every edge/.style={link}]
+  % \node[] (PLACEHOLDER2) [above=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ⬆️
+  % \node[] (PLACEHOLDER2) [above right=of PLACEHOLDER1] {PLACEHOLDER2} edge (PLACEHOLDER1); ↗️
+  % \node[] (PLACEHOLDER2) [right=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ➡️
+  % \node[] (PLACEHOLDER2) [below right=of PLACEHOLDER1] {PLACEHOLDER2} edge (PLACEHOLDER1); ↘️
+  % \node[] (PLACEHOLDER2) [below=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1); ⬇️
+  % \node[] (PLACEHOLDER2) [below left=of PLACEHOLDER1]  {PLACEHOLDER2} edge (PLACEHOLDER1); ↙️
+  % \node[] (PLACEHOLDER2) [left=of PLACEHOLDER1]        {PLACEHOLDER2} edge (PLACEHOLDER1); ⬅️
+  % \node[] (PLACEHOLDER2) [above left=of PLACEHOLDER1]  {PLACEHOLDER2} edge (PLACEHOLDER1); ↖️
+
+  \node[entity] (Listings) {Listings};
+  \node[] (EmptyAboveListings) [above=2.5cm of Listings] {};
+  \node[] (EmptyLeftListings) [left=3.5cm of Listings] {};
+  \node[] (EmptyRightListings) [right=3.5cm of Listings] {};
+  \node[] (EmptyBelowListings) [below=2.5cm of Listings] {};
+  \node[attribute] (Type) [above=of Listings] {Type} edge (Listings);
+  \node[attribute] (Longitude) [above right=of Listings] {Longitude} edge (Listings);
+  \node[attribute] (PostalCode) [left=of Listings] {PostalCode} edge (Listings);
+  \node[attribute] (City) [below left=of Listings] {City} edge (Listings);
+  \node[attribute] (Country) [left=of EmptyAboveListings] {Country} edge (Listings);
+  \node[attribute] (Amenities) [right=of EmptyAboveListings] {Amenities} edge (Listings);
+  \node[attribute] (Owner) [above=0.5cm of EmptyLeftListings] {Owner???} edge (Listings);
+  \node[attribute] (Owner) [above=1.5cm of EmptyLeftListings] {\key{Listing ID}} edge (Listings);
+  \node[attribute] (Latitude) [above left=of Listings] {Latitude} edge (Listings);
+
+  \node[ident relationship] (AvailableListings) [right =2cm of Listings] {AvailableListings} edge [->] (Listings);
+
+  \node[weak entity] (Availibility) [right =7cm of Listings] {Availibility} edge (AvailableListings);
+  \node[] (EmptyAboveAvailibility) [above=2.5cm of Availibility] {};
+  \node[] (EmptyLeftAvailibility) [left=3.5cm of Availibility] {};
+  \node[] (EmptyRightAvailibility) [right=3.5cm of Availibility] {};
+  \node[] (EmptyBelowAvailibility) [below=2.5cm of Availibility] {};
+  \node[attribute] (DateRange) [above=of Availibility] {DateRange} edge (Availibility);
+  \node[attribute] (Price) [above right=of Availibility] {Price} edge (Availibility);
+
+  \node[entity] (Users) [below = 2.5cm of AvailableListings]  {Users};
+  \node[] (EmptyAboveUsers) [above=2.5cm of Users] {};
+  \node[] (EmptyLeftUsers) [left=3.5cm of Users] {};
+  \node[] (EmptyRightUsers) [right=3.5cm of Users] {};
+  \node[] (EmptyBelowUsers) [below=2.5cm of Users] {};
+  \node[attribute] (Name) [above=of Users] {Name} edge (Users);
+  \node[attribute] (DateOfBirth) [above right=of Users] {DateOfBirth} edge (Users);
+  \node[attribute] (Occupation) [below=of EmptyLeftUsers] {Occupation} edge (Users);
+  \node[attribute] (SIN) [left=of Users] {\key{SIN}} edge (Users);
+  \node[attribute] (Address) [right=of Users] {Address (Maybe split this???)} edge (Users);
+
+  \node[isa] (RenterIsaUser) [below left=3cm of Users] {ISA} edge (Users);
+  \node[isa] (BookerIsaUser) [below right=3cm of Users] {ISA} edge (Users);
+
+  \node[entity] (Renter) [below = 1cm of RenterIsaUser]  {Renter} edge (RenterIsaUser);
+  \node[] (EmptyAboveRenter) [above=2.5cm of Renter] {};
+  \node[] (EmptyLeftRenter) [left=3.5cm of Renter] {};
+  \node[] (EmptyRightRenter) [right=3.5cm of Renter] {};
+  \node[] (EmptyBelowRenter) [below=2.5cm of Renter] {};
+
+  \node[entity] (Booker) [below = 1cm of BookerIsaUser]  {Booker} edge (BookerIsaUser);
+  \node[] (EmptyAboveBooker) [above=2.5cm of Booker] {};
+  \node[] (EmptyLeftBooker) [left=3.5cm of Booker] {};
+  \node[] (EmptyRightBooker) [right=3.5cm of Booker] {};
+  \node[] (EmptyBelowBooker) [below=2.5cm of Booker] {};
+  \node[attribute] (CreditCardInfo) [below=of Booker] {CreditCardInfo} edge (Booker);
+
+  \node[relationship] (RenterLists) [left =2cm of Renter] {RenterLists} edge [->] (Renter) edge (Listings);
+  % \node[ident relationship] (BookerLists) [right=2cm of Booker] {BookerLists} edge [->] (Booker);
+
+  % \node[relationship] (ListingHistory) [below = 1cm of Availibility]  {ListingHistory} edge [->] (Listings);
+  \node[entity] (ListingHistory) [right = 2cm of Address]  {ListingHistory} ;
+  \node[relationship] (BookerRents) [right =9cm of BookerIsaUser] {BookerRents} edge (Booker) edge (ListingHistory);
+  \node[attribute] (DateRange) [below=of BookerRents] {DateRange} edge (BookerRents);
+  \node[relationship] (ListingHistoryRelation) [above left =2cm of ListingHistory] {ListingHistoryRelation} edge (ListingHistory) edge [->] (Listings);
+
+  \node[entity] (Comments) [below= 16cm of Users]  {Comments} ;
+  \node[attribute] (content) [below= of Comments]  {content} edge (Comments);
+  \node[attribute] (CommentUser) [below right= of Comments]  {user} edge (Comments);
+  \node[isa] (ListingCommentsIsaComment) [above left=1cm of Comments] {ISA} edge (Comments);
+  \node[isa] (RenterCommentsIsaComment) [above =1cm of Comments] {ISA} edge (Comments);
+  \node[isa] (BookerCommentsIsaComment) [above right=1cm of Comments] {ISA} edge (Comments);
+
+  \node[entity] (ListingComments) [above left=1cm of ListingCommentsIsaComment]  {ListingComments} edge (ListingCommentsIsaComment);
+  \node[entity] (BookerComments) [above =1cm of RenterCommentsIsaComment]  {BookerComments} edge (RenterCommentsIsaComment);
+  \node[entity] (RenterComments) [above right=1cm of BookerCommentsIsaComment]  { RenterComments} edge (BookerCommentsIsaComment);
+
+  \node[relationship] (CommentsOnBooker) [above =1cm of BookerComments] {CommentsOnBooker} edge (BookerComments) edge [->] (Renter);
+  \node[relationship] (CommentsOnRenter) [above =1cm of RenterComments] {CommentsOnRenter} edge (RenterComments) edge [->] (Booker);
+  \node[relationship] (CommentsOnListings) [above =1cm of ListingComments] {CommentsOnListings} edge (ListingComments) edge [->] (Booker);
+
+  \node[entity] (Amenities) [above right=8cm of Listings]       {Amenities} edge [->] (Listings);
+  \node[attribute] (AmenitiesAttribute) [below=of Amenities]       {Amenity} edge (Amenities);
+  \node[attribute] (AmenitiyListing) [below left=of Amenities]       {\key{Listing ID}} (Amenities);
+
+  \node[entity] (Cancellations) [right= 4cm of Booker]       {Cancellations};
+  \node[attribute] (CalcellationUser) [below left=of Cancellations]       {User} edge (Cancellations);
+
+  % \node[] (PLACEHOLDER2) [below=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1);
+  % \node[] (PLACEHOLDER2) [below=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1);
+  % \node[] (PLACEHOLDER2) [below=of PLACEHOLDER1]       {PLACEHOLDER2} edge (PLACEHOLDER1);
+
+
+
+
+  % \node[weak entity] (BookingList) [right= 1cm of BookerLists]  {BookingList} edge (BookerLists);
+  % \node[] (EmptyAboveBookingList) [above=2.5cm of BookingList] {};
+  % \node[] (EmptyLeftBookingList) [left=3.5cm of BookingList] {};
+  % \node[] (EmptyRightBookingList) [right=3.5cm of BookingList] {};
+  % \node[] (EmptyBelowBookingList) [below=2.5cm of BookingList] {};
+  % \node[attribute] (User) [below=of BookingList] {User} edge (BookingList);
+  % \node[attribute] (Listing) [below=of BookingList] {Listing} edge (BookingList);
+  % \node[attribute] (Listing) [below=of BookingList] {Listing} edge (BookingList);
+\end{tikzpicture}
+\end{document}

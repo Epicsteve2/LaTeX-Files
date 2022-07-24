@@ -1,0 +1,102 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
+\usepackage{fancyhdr}	% header
+\usepackage{hyperref} % links
+
+\usepackage{amsmath,amsthm,amssymb}	%math stuff
+% \usepackage{graphicx} \graphicspath{ {./images/} }
+\usepackage{setspace} % increase line spacing
+% \usepackage{tabularx} % long tables
+% \usepackage{enumitem} % labelling itmes
+% \usepackage{lmodern} % bolding \texttt{}
+% \usepackage[T1]{fontenc} % for {} in \texttt{}
+% \usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+\usepackage{relsize} % Scaling the font
+\usepackage{tikz-er2} % need local './tikz-er2.sty'
+% Entity relation!
+\usepackage{bm} % bold in math mode
+
+\usepackage{pifont} % \ding
+\usepackage{harmony} % \AAcht (music symbol)
+\usepackage{bclogo} % a lot of cool bc logos. should google / read docs
+\usepackage{fontawesome} % a lot of icons ofc
+\usepackage{textcomp} % Leaf symbol
+\usepackage{marvosym} % Coffeecup and Football
+
+\usepackage{qtree}
+
+\tikzstyle{every entity} = [top color=white, bottom color=blue!30,
+                            draw=blue!50!black!100, drop shadow]
+\tikzstyle{every weak entity} = [drop shadow={shadow xshift=.7ex,
+                                 shadow yshift=-.7ex}]
+\tikzstyle{every attribute} = [top color=white, bottom color=yellow!20,
+                               draw=yellow, node distance=1cm, drop shadow]
+\tikzstyle{every relationship} = [top color=white, bottom color=red!20,
+                                  draw=red!50!black!100, drop shadow]
+\tikzstyle{every isa} = [top color=white, bottom color=green!20,
+                         draw=green!50!black!100, drop shadow]
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{shadows}
+
+\DeclareSymbolFont{extraup}{U}{zavm}{m}{n}
+\DeclareMathSymbol{\varheart}{\mathalpha}{extraup}{86}
+\DeclareMathSymbol{\vardiamond}{\mathalpha}{extraup}{87}
+\newcommand{\heart}{\ensuremath\varheartsuit}
+\newcommand{\flower}{\text{\ding{95}}}
+
+\newcommand{\bigbracket}[1]{\big(#1\big)}
+\newcommand{\Bigbracket}[1]{\Big(#1\Big)}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCC24 Lab08}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\newenvironment{proofindent}{\vspace*{2mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}}{\end{minipage}}
+
+\everymath{\displaystyle}
+
+\begin{document}
+% \begin{center}
+    \Tree[
+        .$<$stmt$>$ [
+            .$<$cond$>$ [
+                ."if" [
+                    .$<$test$>$ [ ."T1" ]
+                ]
+            ] [
+                ."then" [
+                    .$<$stmt$>$ [
+                        .$<$cond$>$ [
+                            ."if" [
+                                .$<$test$>$ [ ."T2" ]
+                            ]
+                        ] [
+                            ."then" [
+                                .$<$stmt$>$ [ ."A" ]
+                            ]
+                        ] [
+                            ."else" [
+                                .$<$stmt$>$ [ ."B" ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ]
+% \end{center}
+\end{document}
