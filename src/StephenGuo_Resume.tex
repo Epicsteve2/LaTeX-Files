@@ -1,14 +1,14 @@
-%% start of file `template.tex'.
+%1% start of file `template.tex'.
 %% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
 
-\documentclass[12pt,letterpaper,roman]{moderncv}      
-% possible options include 
-% font size ('10pt', '11pt' and '12pt'), 
-% paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') 
+\documentclass[12pt,letterpaper,roman]{moderncv}
+% possible options include
+% font size ('10pt', '11pt' and '12pt'),
+% paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape')
 % font family ('sans' and 'roman')
 
 % modern themes
@@ -18,7 +18,6 @@
 %----------------------------------------------------------------------------------
 %            packages
 %----------------------------------------------------------------------------------
-
 \usepackage{fontawesome} % icons
 \usepackage{xcolor} % color text
 \usepackage{relsize} % Scaling the font
@@ -26,24 +25,33 @@
 \usepackage{setspace} % line spacing
 % \usepackage[none]{hyphenat} % for removing word-breaks
 %\hyphenpenalty=10000
-  
+
+
+%----------------------------------------------------------------------------------
+%            variables
+%----------------------------------------------------------------------------------
+\def \scaleFont {1.00} % increase font size!
+\name{Stephen}{Guo}
+\def \headingSpace {-11mm} % vertical space after every header
+\def \skillSpacing {1mm} % space after every kills in technical skills
+\def \sectionSpacing {-10mm} % idk what this is for lol
+\def \scaleHeadings {1.19}
+
 %----------------------------------------------------------------------------------
 %            custom commands
 %----------------------------------------------------------------------------------
-\def \scaleHeadings {1.19}
-
 \newcommand*{\customcventry}[7][.25em]{
-  \begin{tabular}{@{}l} 
+  \begin{tabular}{@{}l}
     {\relscale{\scaleHeadings}\bfseries #4}
   \end{tabular}
   \hfill% move it to the right
   \begin{tabular}{l@{}}
      {\bfseries #5}
   \end{tabular} \\
-  \begin{tabular}{@{}l} 
+  \begin{tabular}{@{}l}
     {#3}
   \end{tabular}
-  \hfill% move it to the right 
+  \hfill% move it to the right
   \begin{tabular}{l@{}}
      {#2}
   \end{tabular}
@@ -55,7 +63,7 @@
   \par\addvspace{#1}}
 
 \newcommand*{\customcvproject}[4][.25em]{
-  \begin{tabular}{@{}l} 
+  \begin{tabular}{@{}l}
     {\relscale{\scaleHeadings}\bfseries #2}
   \end{tabular}
   \hfill% move it to the right
@@ -67,48 +75,70 @@
     \begin{minipage}{\maincolumnwidth}
       \small#4
     \end{minipage}}\fi
-  \par\addvspace{#1}\leavevmode \\[0mm]} 
+  \par\addvspace{#1}\leavevmode \\[0mm]}
 
 \setlength{\tabcolsep}{12pt}
 
-%----------------------------------------------------------------------------------
-%            variables
-%----------------------------------------------------------------------------------
-\def \scaleFont {1.17} % increase font size!
-\def \spaceTop {12.5mm}
-\name{Stephen}{Guo}
-\def \headingSpace {-11mm}
-\def \skillSpacing {1mm}
-\def \sectionSpacing {-10mm}
-%----------------------------------------------------------------------------------
-%            cover letter
-%----------------------------------------------------------------------------------
 \begin{document}
-\newpage
 \setstretch{1.2} % line spacing
 \relscale{\scaleFont} % increase font size!
 %----------------------------------------------------------------------------------
 %            resume
 %----------------------------------------------------------------------------------
 \makecvtitle
-\vspace*{-27mm} 
+\vspace*{-21mm}
 
-\begin{center} 
-	\faMapO\enspace Scarborough, Ontario, Canada  \qquad \faEnvelopeO\enspace \href{mailto:steve.guo@mail.utoronto.ca}{steve.guo@mail.utoronto.ca} \\
-	\faMobile\enspace (437) 231-1263  \hspace*{\spaceTop}  \href{https://epicsteve2.github.io/}{\faGlobe\enspace Website}   \hspace*{\spaceTop}  \href{https://github.com/Epicsteve2}{\faGithub\enspace Github}   \hspace*{\spaceTop}  \href{https://www.linkedin.com/in/stephen-guo-399959192/}{\faLinkedin\enspace Linkedin}\\
+\begin{center}
+	\faMapO\enspace Scarborough, Ontario, Canada \qquad
+  \faEnvelopeO\enspace \href{mailto:steve.guo@mail.utoronto.ca}{steve.guo@mail.utoronto.ca} \\
+	\faMobile\enspace (437) 231-1263 \hspace*{22mm}
+  % \href{https://epicsteve2.github.io/}{\faGlobe\enspace Website} \hspace*{20mm}
+  \href{https://github.com/Epicsteve2}{\faGithub\enspace Github} \hspace*{32mm}
+  \href{https://www.linkedin.com/in/stephen-guo-399959192/}{\faLinkedin\enspace Linkedin}\\
 \end{center} \leavevmode\\[-24mm]
 
-\section{TECHNICAL SKILLS} \leavevmode \\[\headingSpace] 
-\textbf{Languages:} Java,\hspace*{\skillSpacing} Python,\hspace*{\skillSpacing} C,\hspace*{\skillSpacing} Dart,\hspace*{\skillSpacing} HTML,\hspace*{\skillSpacing} CSS,\hspace*{\skillSpacing} JavaScript \\
-\textbf{Libraries/Frameworks:} Flutter,\hspace*{\skillSpacing} Bootstrap,\hspace*{\skillSpacing} React,\hspace*{\skillSpacing } JUnit \\
-\textbf{Other:} Unix/Linux,\hspace*{\skillSpacing} Windows,\hspace*{\skillSpacing} Git/SVN,\hspace*{\skillSpacing} LaTeX
+\section{TECHNICAL SKILLS} \leavevmode \\[\headingSpace]
+\textbf{Languages:}
+  Java,\hspace*{\skillSpacing}
+  Python,\hspace*{\skillSpacing}
+  JavaScript/TypeScript,\hspace*{\skillSpacing}
+  C,\hspace*{\skillSpacing}
+  Bash/Shell,\hspace*{\skillSpacing}
+  SQL,\hspace*{\skillSpacing}
+  Haskell\hspace*{\skillSpacing}\\
+\textbf{Libraries/Frameworks:}
+  Flutter,\hspace*{\skillSpacing}
+  Bootstrap,\hspace*{\skillSpacing}
+  Svelte\hspace*{\skillSpacing}\\
+\textbf{Other:}
+  Kubernetes,\hspace*{\skillSpacing}
+  Helm,\hspace*{\skillSpacing}
+  Terraform,\hspace*{\skillSpacing}
+  Pulumi,\hspace*{\skillSpacing}
+  AWS,\hspace*{\skillSpacing}
+  GitLab CI,\hspace*{\skillSpacing}
+  Docker,\hspace*{\skillSpacing}
+  Unix/Linux,\hspace*{\skillSpacing}
+  Git\hspace*{\skillSpacing}
 \\[\sectionSpacing]
-\section{EDUCATION} \leavevmode \\[\headingSpace]
-{\customcventry{Expected Graduation: April 2023}{HBSc. in Computer Science Specialist}{University of Toronto}{Toronto, ON}{}{}}
-\vspace*{-1.5mm}
-cGPA: 3.73 / 4.0
-\\[\sectionSpacing]
+
+\section{EXPERIENCE} \leavevmode \\[\headingSpace]
+{\customcventry{May 2021 - April 2022}{Software Engineer Co-op}{BlueCat Networks}{North York, ON}{}
+{\begin{itemize} \relscale{\scaleFont}
+		\item Learned to create a warm and welcoming enviroment, resulting in effective communication and managment of customers
+		\item Assisted with maintenance and repair of machinery, leading to efficient and clean workspaces to improve productivity
+	\end{itemize}
+}\vspace{2mm}
+}
+
 \section{PROJECTS} \leavevmode \\[\headingSpace]
+{\customcvproject{Alkitab}{\href{https://github.com/Epicsteve2/cscc09-alkitab}{\faGithub\enspace Github} \enspace \href{https://youtu.be/0GMP3xIboAI}{\faYoutubePlay \enspace Demo}}
+{\begin{itemize} \relscale{\scaleFont}
+    \item Developed a portfolio website using \textbf{HTML}, \textbf{CSS}, \textbf{JavaScript}, and \textbf{Bootstrap 5}
+    \item Created a responsive, clean user interface using the Bootstrap grid system
+  \end{itemize}
+}
+}
 {\customcvproject{ShopLazy}{\href{https://github.com/Epicsteve2/ShopLazy}{\faGithub\enspace Github} \enspace \href{https://youtu.be/1Oh5CRH3aMU}{\faYoutubePlay \enspace Demo}}
 {\begin{itemize} \relscale{\scaleFont}
 		\item Collaborated with a team of four to create a cross-platform application during Hack the North 2021 with \textbf{Flutter}, \textbf{Dart}, \textbf{Firebase}, and \textbf{Git}
@@ -117,28 +147,19 @@ cGPA: 3.73 / 4.0
 	\end{itemize}
 }
 }
-{\customcvproject{Professional Website}{\href{https://github.com/Epicsteve2/Epicsteve2.github.io}{\faGithub\enspace Github} \enspace \href{https://epicsteve2.github.io/}{\faGlobe\enspace Website}}
-{\begin{itemize} \relscale{\scaleFont}
-		\item Developed a portfolio website using \textbf{HTML}, \textbf{CSS}, \textbf{JavaScript}, and \textbf{Bootstrap 5}
-		\item Created a responsive, clean user interface using the Bootstrap grid system
-	\end{itemize}
-}
-}
-{\customcvproject{osu! in Java}{\href{https://github.com/Epicsteve2/Stephen-s-Bootleg-Osu}{\faGithub\enspace Github}}
-{\begin{itemize} \relscale{\scaleFont}
-		\item Implemented \textbf{Java GUI} with classes and inheritance to build a well-designed and structured game
-		\item Successfully developed a game engine resulting in smooth and stable gameplay
-		\item Fully documented and created a user manual resulting in detailed guides for navigation and gameplay
-	\end{itemize}
-}
-}
-\\[-20mm]
-\section{EXPERIENCE} \leavevmode \\[\headingSpace ]
-{\customcventry{Summer 2019}{Labourer - Packager}{Aqua Ice Inc.}{Toronto, ON}{}
-{\begin{itemize} \relscale{\scaleFont}
-		\item Learned to create a warm and welcoming enviroment, resulting in effective communication and managment of customers
-		\item Assisted with maintenance and repair of machinery, leading to efficient and clean workspaces to improve productivity
-	\end{itemize}
-}\vspace{2mm}
-}
+%% Add if java is needed
+% {\customcvproject{osu! in Java}{\href{https://github.com/Epicsteve2/Stephen-s-Bootleg-Osu}{\faGithub\enspace Github}}
+% {\begin{itemize} \relscale{\scaleFont}
+% 		\item Implemented \textbf{Java GUI} with classes and inheritance to build a well-designed and structured game
+% 		\item Successfully developed a game engine resulting in smooth and stable gameplay
+% 		\item Fully documented and created a user manual resulting in detailed guides for navigation and gameplay
+% 	\end{itemize}
+% }
+% }
+\leavevmode\\[-20mm]
+
+\section{EDUCATION} \leavevmode \\[\headingSpace]
+{\customcventry{Expected Graduation: April 2024}{HBSc. in Computer Science Specialist}{University of Toronto}{Toronto, ON}{}{}}
+\vspace*{-1.5mm}
+cGPA: 3.55 / 4.0
 \end{document}
