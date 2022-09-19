@@ -1,0 +1,41 @@
+\documentclass[preview]{standalone} % for making this into an image
+% pdflatex CSCC63_A1_5.tex
+% convert -background white -alpha remove -alpha off -trim -density 300 CSCC63_A1_5.pdf -quality 90 CSCC63_A1_5.png
+
+\usepackage{amsmath,amssymb}
+\begin{document}
+$(\Longrightarrow)$\\
+Suppose a language $L$ is decidable. \\
+Let $M$ be a decider TM such that $\mathcal{L}(M)$ = $L$\\
+Let $S = x_1,\ x_2,\ \dots$ be the sequence of words of $L$ in shortlex order.\\
+
+Here's an enumerator that prints $L$ in shortlex order\\
+$E="$Ignore the input\\
+\hspace*{8mm} \textbf{1.} for $i$ = 1 to $\infty$\\
+\hspace*{8mm} \textbf{2.} \qquad run $M$ on $x_i$\\
+\hspace*{8mm} \textbf{3.} \qquad if $M$ accepts $x_i$\\
+\hspace*{8mm} \textbf{4.} \qquad \qquad print $x_i$"\\\\
+
+$(\Longleftarrow)$\\
+Suppose enumerator $E$ enumerates $L$. \\
+
+Here's a TM that is a decider for $L$.\\
+$M="$On input $w$\\
+\hspace*{8mm} \textbf{1.} run $E$\\
+\hspace*{8mm} \textbf{2.} if $E$ prints $w$\\
+\hspace*{8mm} \textbf{3.} \qquad accept\\
+\hspace*{8mm} \textbf{4.} if the output of $E > |w|$"\\
+\hspace*{8mm} \textbf{5.} \qquad reject"\\
+
+To prove $M$ is a decider, we will look at 2 cases:\\
+Case 1: $L$ is unbounded\\
+\hspace*{8mm} $M$ never loops since $|x_i|$ is increasing as $i$ increases.\\
+\hspace*{8mm} Since $\Sigma$ is finite, $x_i$ will eventually increase as you can't\\
+\hspace*{8mm} have an infinite list of words with equal length.\\
+\hspace*{8mm} Line 4 will eventually be true which leads to $M$ rejecting.\\
+
+Case 2: $L$ is bounded\\
+\hspace*{8mm} If the length of words in $L$ is bounded by some $n \in \mathbb{N}$, then $S$ is finite.\\
+\hspace*{8mm} So even if $|w| > n$, $E$ will eventually stop printing which leads to\\
+\hspace*{8mm} $M$ rejecting.
+\end{document}

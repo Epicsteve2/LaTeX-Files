@@ -1,0 +1,52 @@
+\documentclass[preview]{standalone} % for making this into an image
+% pdflatex CSCC63_A1_5.tex
+% convert -background white -alpha remove -alpha off -trim -density 300 CSCC63_A1_5.pdf -quality 90 CSCC63_A1_5.png
+
+\usepackage{amsmath}
+\begin{document}
+Let $L_1,\ L_2$ is recognizable\\
+Let $M_1,\ M_2$ be TM's such that\\
+$\mathcal{L}(M_1) = L_1$\\
+$\mathcal{L}(M_2) = L_2$\\\\
+
+(a)\\
+Suppose $L = L_1 \cup L_2$\\
+WTS: $L$ is recognizable\\
+
+Here is a TM $M$ that recognizes $L$\\
+$M=``$On input $w$\\
+\hspace*{8mm} \textbf{1.} for $s$ = 1 to $\infty$\\
+\hspace*{8mm} \textbf{2.} \qquad run $M_1$ on $w$ for $s$ steps\\
+\hspace*{8mm} \textbf{3.} \qquad run $M_2$ on $w$ for $s$ steps\\
+\hspace*{8mm} \textbf{4.} \qquad if $M_1$ accepts $w$ or $M_2$ accepts $w$\\
+\hspace*{8mm} \textbf{5.} \qquad \qquad accept"\\\\
+
+(b)\\
+Suppose $L = L_1 \circ  L_2$\\
+WTS: $L$ is recognizable\\
+
+Create a new TM with the $q_{\text{reject}}$ from $L_1$ replaced with a state going to $q_1$ from $L_2$\\\\
+
+(c)\\
+Suppose $L = {L_1}^*$\\
+WTS: $L$ is recognizable\\
+
+(d)\\
+Suppose $L = L_1 \cap L_2$\\
+WTS: $L$ is recognizable\\
+
+Here is a TM $M$ that recognizes $L$\\
+$M=``$On input $w$\\
+\hspace*{8mm} \textbf{1.} for $s$ = 1 to $\infty$\\
+\hspace*{8mm} \textbf{2.} \qquad run $M_1$ on $w$ for $s$ steps\\
+\hspace*{8mm} \textbf{3.} \qquad run $M_2$ on $w$ for $s$ steps\\
+\hspace*{8mm} \textbf{4.} \qquad if $M_1$ accepts $w$ and $M_2$ accepts $w$\\
+\hspace*{8mm} \textbf{5.} \qquad \qquad accept"\\\\
+`
+(e')\\
+Let $f$ be a homomorphic function.\\
+Suppose $L = f(L_1)$\\
+WTS: $L$ is recognizable\\
+
+
+\end{document}
