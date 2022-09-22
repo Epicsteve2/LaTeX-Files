@@ -1,0 +1,42 @@
+% pdflatex CSCC63_A1_5.tex
+% convert -background white -alpha remove -alpha off -trim -density 300 CSCC63_A1_5.pdf -quality 90 CSCC63_A1_5.png
+
+\documentclass[preview]{standalone} % for making this into an image
+\usepackage[a4paper]{geometry}
+
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}     % to customize the enumerate environment
+\usepackage{changepage}   % for the adjustwidth environment
+\begin{document}
+Let $L = \{\langle M,\ w\rangle\ |\ \text{When $M$ runs on $w$, $M$ moves the head beyond the right-most cell of $w$}\}$\\
+
+WTS: $L$ is decidable\\
+
+Here is a TM that decides $L$\\
+$\mathcal{M} = $ ``On input $\langle M,\ w\rangle$
+\begin{enumerate}[leftmargin=14mm, nosep, label=\textbf{\arabic*}.]
+    \item run $M$ on $w$ for $\big(|Q|\times|w|\times|\Gamma|^{|w|} + 1\big)$ steps
+    \item if $M$ moves the head beyond $w$ then accept else reject''
+\end{enumerate}~\\
+For the number of possible configurations of $M$ where the head is within $w$, there are $|Q|$ states,
+the head can be in $|w|$ positions, and every character in $\Gamma$ can be in each of $w$ cells.\\
+
+So we have
+\begin{align*}\begin{split}
+    n & = \text{Number of states} \times \text{Number of head positions} \times \text{Number of possible tapes} \\
+      & = |Q|\times|w|\times|\Gamma|^{|w|}
+\end{split}\end{align*}
+
+To prove $\mathcal{M}$ recognizes $L$, we will look at 2 cases\\
+Case 1: $M$'s head stays within $w$ for $n+1$ steps
+\begin{adjustwidth}{10mm}{}
+    We run $M$ for $n+1$ steps, but there are only $n$ possible configurations where $M$'s head is within $w$.
+    By the pigeon hole principle, a configuration must be visited at least twice. This implies that $M$
+    loops on $w$ with the head never reading beyond $w$. This leads to $\langle M,\ w\rangle \not \in L$
+    which we reject as wanted.
+\end{adjustwidth}
+Case 2: $M$'s head moves beyond $w$ within $n+1$ steps
+\begin{adjustwidth}{10mm}{}
+    This implies $\langle M,\ w\rangle \in L$ which we accept as wanted.
+\end{adjustwidth}
+\end{document}

@@ -1,0 +1,78 @@
+% pdflatex CSCC63_A2_6.tex
+% convert -background white -alpha remove -alpha off -trim -density 300 CSCC63_A2_6.pdf -quality 90 CSCC63_A2_6.png
+
+\documentclass[preview]{standalone} % for making this into an image
+\usepackage[a3paper]{geometry}
+
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}     % to customize the enumerate environment
+\usepackage{changepage}   % for the adjustwidth environment
+\usepackage{tabularx} % long tables
+
+\begin{document}
+Let $L=\{\langle M\rangle\ |\ \exists w \in \Sigma^*
+\text{ such that when $M$ runs on $w$, $M$ prints a blank on a non-blank cell}\}$\\
+
+WTS: $L$ is undecidable\\
+$\Longrightarrow HALT \leq_\text{m} L$\\
+
+Consider the following TM $F$ and the reudction it computes:\\
+$F=$ ``On input $\langle M,\ w\rangle$:
+\begin{enumerate}[leftmargin=13mm, nosep, label=\textbf{\arabic*}.]
+    \item Construct a TM $M_1$ as follows:\\
+        $M_1 = $ ``On input $\langle M,\ w\rangle$:
+        \begin{enumerate}[leftmargin=15mm, nosep, label=\textbf{\arabic*}.]
+            \item for $s = 1$ to $\infty$
+            \item \qquad run $M$ on $w$ for $s$ steps
+            \item \qquad if $M$ writes a blank on a non-blank cell then accept''
+        \end{enumerate}
+    \item Construct a TM $M_2$ as follows:\\
+        $M_2 = $ ``On input $x$:
+        \begin{enumerate}[leftmargin=15mm, nosep, label=\textbf{\arabic*}.]
+            \item $\rhd$ empty Part1
+            \item run $M_1$ on $\langle M,\ w\rangle$
+            \item accept''
+        \end{enumerate}
+    \item return $\langle M_2\rangle$''
+\end{enumerate}~
+
+We argue that $\langle M,\ w\rangle \in HALT \Longleftrightarrow \langle M_2\rangle \in L$\\
+
+$(\Longrightarrow)$\\
+Suppose $\langle M,\ w\rangle \in HALT$
+% \begin{flalign*}
+%     & M \text{ halts on } w & [\text{definition of } HALT]  &&\\
+%     \Longrightarrow\ & M_2  & [\text{description of } M_2] &&
+% \end{flalign*}
+% ~\\
+% \begin{alignat*}{3} % max. # of '&' symbols in any row: 5. (5+1)/2 = 3
+%     & M \text{ halts on } w && [\text{definition of } HALT]  & \\
+%     \Longrightarrow\ &  M_2  && [\text{description of } M_2] & \\
+% \end{alignat*}
+% ~\\
+% ${\begin{aligned}
+%     &  && M \text{ halts on } w  && [\text{definition of } HALT] \\
+%     &\Longrightarrow &&  M_2          && [\text{description of } M_2]
+% \end{aligned}}$
+% ~\\
+
+$\begin{array}{r@{}>{\displaystyle}ll}
+	&{} M \text{ halts on } w \hspace*{10mm} & [\text{definition of } HALT] \\
+	\Longrightarrow ~&{} M_2 \text{ accepts }\langle M,\ w\rangle \text{ such that $M$ prints a blank in a non-blank cell} & [\text{description of } M_2]\\
+	\Longrightarrow ~&{} \mathcal{L}(M_2) = \{\langle M\rangle\ |\ \exists w \in \Sigma^*
+    \text{ such that when $M$ runs on $w$, $M$ prints a blank on a non-blank cell}\} & \\
+	\Longrightarrow ~&{} \langle M_2 \rangle \in L & [\text{definition of } L]
+\end{array}$\\
+as wanted.\\
+
+$(\Longleftarrow)$\\
+Suppose $\langle M,\ w\rangle \not \in HALT$\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+	&{} M \text{ loops on } w \hspace*{10mm} & [\text{definition of } HALT] \\
+	\Longrightarrow ~&{} M_2 \text{ loops on every input } & [\text{description of } M_2]\\
+	\Longrightarrow ~&{} \mathcal{L}(M_2) \not = \{\langle M\rangle\ |\ \exists w \in \Sigma^*
+    \text{ such that when $M$ runs on $w$, $M$ prints a blank on a non-blank cell}\} & \\
+	\Longrightarrow ~&{} \langle M_2 \rangle \not \in L & [\text{definition of } L]
+\end{array}$\\
+as wanted.
+\end{document}
