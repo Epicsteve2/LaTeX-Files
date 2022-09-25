@@ -23,6 +23,7 @@
 \usepackage{relsize} % Scaling the font
 \usepackage[scale=0.8, margin=1cm]{geometry} % change this for margins
 \usepackage{setspace} % line spacing
+\usepackage{calc} % use arithmetic for lengths
 % \usepackage[none]{hyphenat} % for removing word-breaks
 %\hyphenpenalty=10000
 
@@ -30,9 +31,9 @@
 %----------------------------------------------------------------------------------
 %            variables
 %----------------------------------------------------------------------------------
-\def \scaleFont {1.00} % increase font size!
+\def \scaleFont {1.20} % increase font size!
 \name{Stephen}{Guo}
-\def \headingSpace {-11mm} % vertical space after every header
+\def \headingSpace {-10mm * \real{\scaleFont}} % vertical space after every header
 \def \skillSpacing {1mm} % space after every kills in technical skills
 \def \sectionSpacing {-10mm} % idk what this is for lol
 \def \scaleHeadings {1.19}
@@ -86,14 +87,14 @@
 %            resume
 %----------------------------------------------------------------------------------
 \makecvtitle
-\vspace*{-21mm}
+\vspace*{-19mm * \real{\scaleFont}}
 
 \begin{center}
 	\faMapO\enspace Scarborough, Ontario, Canada \qquad
   \faEnvelopeO\enspace \href{mailto:steve.guo@mail.utoronto.ca}{steve.guo@mail.utoronto.ca} \\
-	\faMobile\enspace (437) 231-1263 \hspace*{22mm}
+	\faMobile\enspace (437) 231-1263 \hspace*{20mm * \real{\scaleFont}}
   % \href{https://epicsteve2.github.io/}{\faGlobe\enspace Website} \hspace*{20mm}
-  \href{https://github.com/Epicsteve2}{\faGithub\enspace Github} \hspace*{32mm}
+  \href{https://github.com/Epicsteve2}{\faGithub\enspace Github} \hspace*{34mm * \real{\scaleFont}}
   \href{https://www.linkedin.com/in/stephen-guo-399959192/}{\faLinkedin\enspace Linkedin}\\
 \end{center} \leavevmode\\[-24mm]
 
@@ -125,23 +126,29 @@
 \section{EXPERIENCE} \leavevmode \\[\headingSpace]
 {\customcventry{May 2021 - April 2022}{Software Engineer Co-op}{BlueCat Networks}{North York, ON}{}
 {\begin{itemize} \relscale{\scaleFont}
-		\item Learned to create a warm and welcoming enviroment, resulting in effective communication and managment of customers
-		\item Assisted with maintenance and repair of machinery, leading to efficient and clean workspaces to improve productivity
+    \item Deployed and configured \textbf{Kubernetes} clusters using \textbf{Helm} and \textbf{Helmfile}
+		\item Created a \textbf{Python} query microservice using \textbf{Trino}, \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}
+    \item Exposed metrics and created custom alerts in the \textbf{Prometheus Alertmanager}
+		\item Configured \textbf{AWS} EKS, IAM roles, and VPC using \textbf{Terraform} and \textbf{Terragrunt}
+		\item Wrote horizontal pod autoscalers for a Helm chart, and created Kubernetes node groups with vertical pod autoscaling
+		\item Maintained \textbf{GitLab CI} and Docker images used across teams
 	\end{itemize}
 }\vspace{2mm}
 }
 
 \section{PROJECTS} \leavevmode \\[\headingSpace]
-{\customcvproject{Alkitab}{\href{https://github.com/Epicsteve2/cscc09-alkitab}{\faGithub\enspace Github} \enspace \href{https://youtu.be/0GMP3xIboAI}{\faYoutubePlay \enspace Demo}}
+{\customcvproject{Alkitab}{\href{https://github.com/Epicsteve2/cscc09-alkitab}{\faGithub\enspace Github} \enspace \href{https://youtu.be/0GMP3xIboAI}{\faYoutubePlay \enspace Demo}} % {\footnotesize June 2022 - August 2022}\\[-20mm]
 {\begin{itemize} \relscale{\scaleFont}
-    \item Developed a portfolio website using \textbf{HTML}, \textbf{CSS}, \textbf{JavaScript}, and \textbf{Bootstrap 5}
+    \item Developed a EPUB sharing web app using \textbf{Svelte}, \textbf{Bootstrap}, \textbf{TypeScript}, \textbf{MongoDB}, \textbf{Express.js}, and Socket.IO
+    \item Deployed to the Linode cloud service using \textbf{Docker}, \textbf{Kubernetes}, \textbf{Helm}, and \textbf{Pulumi}
     \item Created a responsive, clean user interface using the Bootstrap grid system
+    \item Used the cert-manager Helm chart to \textbf{NGINX} ingress controller
   \end{itemize}
 }
 }
 {\customcvproject{ShopLazy}{\href{https://github.com/Epicsteve2/ShopLazy}{\faGithub\enspace Github} \enspace \href{https://youtu.be/1Oh5CRH3aMU}{\faYoutubePlay \enspace Demo}}
 {\begin{itemize} \relscale{\scaleFont}
-		\item Collaborated with a team of four to create a cross-platform application during Hack the North 2021 with \textbf{Flutter}, \textbf{Dart}, \textbf{Firebase}, and \textbf{Git}
+		\item Collaborated with a team of four to create a cross-platform application during Hack the North 2021 with \textbf{Flutter}, \textbf{Dart}, and \textbf{Firebase}
 		\item Planned and designed a simple-to-use, intuitive user interface using the Material UI library
 		\item Discussed and created a blueprint of the app design with the team
 	\end{itemize}
