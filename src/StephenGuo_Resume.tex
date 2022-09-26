@@ -31,12 +31,13 @@
 %----------------------------------------------------------------------------------
 %            variables
 %----------------------------------------------------------------------------------
-\def \scaleFont {1.20} % increase font size!
+\def \scaleFont {1.13} % increase font size!
 \name{Stephen}{Guo}
-\def \headingSpace {-10mm * \real{\scaleFont}} % vertical space after every header
+\def \headingSpace {-9mm * \real{\scaleFont}} % vertical space after every header
 \def \skillSpacing {1mm} % space after every kills in technical skills
 \def \sectionSpacing {-10mm} % idk what this is for lol
 \def \scaleHeadings {1.19}
+\def \nameSpace {-21mm}
 
 %----------------------------------------------------------------------------------
 %            custom commands
@@ -87,7 +88,7 @@
 %            resume
 %----------------------------------------------------------------------------------
 \makecvtitle
-\vspace*{-19mm * \real{\scaleFont}}
+\vspace*{\nameSpace * \real{\scaleFont}}
 
 \begin{center}
 	\faMapO\enspace Scarborough, Ontario, Canada \qquad
@@ -126,31 +127,31 @@
 \section{EXPERIENCE} \leavevmode \\[\headingSpace]
 {\customcventry{May 2021 - April 2022}{Software Engineer Co-op}{BlueCat Networks}{North York, ON}{}
 {\begin{itemize} \relscale{\scaleFont}
-    \item Deployed and configured \textbf{Kubernetes} clusters using \textbf{Helm} and \textbf{Helmfile}
-		\item Created a \textbf{Python} query microservice using \textbf{Trino}, \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}
-    \item Exposed metrics and created custom alerts in the \textbf{Prometheus Alertmanager}
-		\item Configured \textbf{AWS} EKS, IAM roles, and VPC using \textbf{Terraform} and \textbf{Terragrunt}
-		\item Wrote horizontal pod autoscalers for a Helm chart, and created Kubernetes node groups with vertical pod autoscaling
-		\item Maintained \textbf{GitLab CI} and Docker images used across teams
+    \item Deployed and configured \textbf{Kubernetes} clusters using \textbf{Helm}, \textbf{Helmfile}, \textbf{Makefile}, and \textbf{GitLab CI}
+		\item Created a \textbf{Python} query microservice using \textbf{Trino}, \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}, producing daily reports efficiently from terabytes of data
+    % \item Exposed metrics and created custom alerts in the \textbf{Prometheus Alertmanager}, allowing for urgent fixes within 15 minutes across all teams
+		\item Wrote horizontal pod autoscalers for a Helm chart, and created Kubernetes node groups with vertical pod autoscaling, increasing our service's max load by over 9$\times$
+		\item Configured \textbf{AWS} EKS, IAM roles, and VPC using \textbf{Terraform} and \textbf{Terragrunt}, resulting in automated and safe deployments to production
+    \item \textit{\footnotesize ADD SOFT SKILL? wwriting docs>??>?}
 	\end{itemize}
-}\vspace{2mm}
+}
 }
 
 \section{PROJECTS} \leavevmode \\[\headingSpace]
 {\customcvproject{Alkitab}{\href{https://github.com/Epicsteve2/cscc09-alkitab}{\faGithub\enspace Github} \enspace \href{https://youtu.be/0GMP3xIboAI}{\faYoutubePlay \enspace Demo}} % {\footnotesize June 2022 - August 2022}\\[-20mm]
 {\begin{itemize} \relscale{\scaleFont}
-    \item Developed a EPUB sharing web app using \textbf{Svelte}, \textbf{Bootstrap}, \textbf{TypeScript}, \textbf{MongoDB}, \textbf{Express.js}, and Socket.IO
-    \item Deployed to the Linode cloud service using \textbf{Docker}, \textbf{Kubernetes}, \textbf{Helm}, and \textbf{Pulumi}
-    \item Created a responsive, clean user interface using the Bootstrap grid system
-    \item Used the cert-manager Helm chart to \textbf{NGINX} ingress controller
+    \item Developed an EPUB sharing platform in a team of 2 using \textbf{Svelte}, \textbf{Bootstrap}, \textbf{TypeScript}, \textbf{MongoDB}, \textbf{Express.js}, and Socket.IO
+    \item Deployed to the Linode cloud service using \textbf{Docker}, \textbf{Kubernetes}, \textbf{Helm}, and \textbf{Pulumi}, allowing for safe and easy-to-understand deployments
+    % \item Created a responsive, clean user interface using the Bootstrap grid system
+    \item Used the cert-manager Helm chart on our \textbf{NGINX} ingress controller, resulting in automated securing of our domain
   \end{itemize}
 }
 }
 {\customcvproject{ShopLazy}{\href{https://github.com/Epicsteve2/ShopLazy}{\faGithub\enspace Github} \enspace \href{https://youtu.be/1Oh5CRH3aMU}{\faYoutubePlay \enspace Demo}}
 {\begin{itemize} \relscale{\scaleFont}
 		\item Collaborated with a team of four to create a cross-platform application during Hack the North 2021 with \textbf{Flutter}, \textbf{Dart}, and \textbf{Firebase}
+		\item Discussed and created a blueprint of the app design with the team \textit{\footnotesize maybe change this? or rewrord}
 		\item Planned and designed a simple-to-use, intuitive user interface using the Material UI library
-		\item Discussed and created a blueprint of the app design with the team
 	\end{itemize}
 }
 }

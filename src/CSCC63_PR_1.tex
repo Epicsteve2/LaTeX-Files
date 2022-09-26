@@ -1,0 +1,70 @@
+% latexmk --pdf CSCC63_PR_1.tex
+% convert -background white -alpha remove -alpha off -trim -density 300 CSCC63_PR_1.pdf -quality 90 CSCC63_PR_1.png
+
+\documentclass[preview]{standalone} % for making this into an image
+\usepackage[a3paper]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}     % to customize the enumerate environment
+\usepackage{changepage}   % for the adjustwidth environment
+\usepackage{tabularx} % long tables
+
+\begin{document}
+
+\begin{enumerate}
+    \item Let $L=\{\langle M_1,\ M_2\rangle\ |\ M_1,\ M_2 \text{ is a TM and } |\mathcal{L}(M_1)| < |\mathcal{L}(M_2)| < \infty\}$
+    \item $L$ is recognizable
+    \item $L$ is not co-recognizable
+\end{enumerate}
+
+WTS: $L$ is not co-recognizable\\
+$\Longrightarrow HALT \leq_\text{m} \overline{L}$\\
+
+Consider the following TM $F$ and the reduction it computes:\\
+$F=$ ``On input $\langle M,\ w\rangle$:
+\begin{enumerate}[leftmargin=13mm, nosep, label=\textbf{\arabic*}.]
+    \item Construct a TM $M_1$ as follows:\\
+        $M_1 = $ ``On input $x$:
+        \begin{enumerate}[leftmargin=15mm, nosep, label=\textbf{\arabic*}.]
+            \item $\rhd$ empty Part1
+            \item run $M$ on $w$
+            \item if $x = 0$ then accept else loop''
+        \end{enumerate}
+    \item Construct a TM $M_2$ as follows:\\
+        $M_2 = $ ``On input $x$:
+        \begin{enumerate}[leftmargin=15mm, nosep, label=\textbf{\arabic*}.]
+            \item $\rhd$ empty Part1
+            \item run $M$ on $w$
+            \item if $x = 0$ or $x = 1$ then accept else loop''
+        \end{enumerate}
+    \item return $\langle M_1,\ M_2\rangle$''
+\end{enumerate}~
+
+We argue that $\langle M,\ w\rangle \in HALT \Longleftrightarrow \langle M_1,\ M_2\rangle \in L$\\
+
+$(\Longrightarrow)$\\
+Suppose $\langle M,\ w\rangle \in HALT$\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+	                 &{} M \text{ halts on } w
+	                    & [\text{definition of } HALT] \\
+	\Longrightarrow ~&{} M_1 \text{ accepts only the string 0}
+	                    & \text{[description of $M_1$]}\\
+	                 &{} M_2 \text{ accepts only the strings 0 and 1}
+	                    & \text{[description of $M_2$]}\\
+	\Longrightarrow ~&{} |\mathcal{L}(M_1)| < |\mathcal{L}(M_2)| < \infty\
+	                    & [\mathcal{L}(M_1) = \{0\} \text{ so } |\mathcal{L}(M_1)| = 1 \text{ and } \mathcal{L}(M_2) = \{0, 1\} \text{ so } |\mathcal{L}(M_2)| = 2] \\
+	\Longrightarrow ~&{} \langle M_1,\ M_2 \rangle \in L
+	                    & [\text{definition of } L]
+\end{array}$\\
+as wanted.\\
+
+$(\Longleftarrow)$\\
+Suppose $\langle M,\ w\rangle \not \in HALT$\\
+$\begin{array}{r@{}>{\displaystyle}ll}
+	&{} M \text{ loops on } w \hspace*{10mm} & [\text{definition of } HALT] \\
+	\Longrightarrow ~&{} M_1 \text{ loops on every input } & [\text{description of } M_1]\\
+	                 &{} M_2 \text{ loops on every input } & [\text{description of } M_2]\\
+	\Longrightarrow ~&{} |\mathcal{L}(M_1)| = |\mathcal{L}(M_2)| & [\mathcal{L}(M_1) = \emptyset \text{ so } |\mathcal{L}(M_1)| = 0 \text{ and } \mathcal{L}(M_2) = \emptyset \text { so } |\mathcal{L}(M_2)| = 0] \\
+	\Longrightarrow ~&{} \langle M_1,\ M_2 \rangle \not \in L & [\text{definition of } L]
+\end{array}$\\
+as wanted.
+\end{document}
