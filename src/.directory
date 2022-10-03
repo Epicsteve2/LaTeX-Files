@@ -1,0 +1,10 @@
+[Dolphin]
+SortOrder=1
+SortRole=modificationtime
+Timestamp=2022,6,25,23,26,50.426
+Version=4
+ViewMode=1
+VisibleRoles=Details_text,Details_modificationtime,Details_size,Details_type,CustomizedDetails
+
+[Settings]
+HiddenFilesShown=true

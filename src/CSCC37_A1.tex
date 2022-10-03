@@ -15,6 +15,9 @@
 \usepackage{listings}
 \usepackage[table]{xcolor}
 \usepackage[edges]{forest}
+% \usepackage{array}
+% \usepackage{booktabs}
+% \usepackage{siunitx}
 % \usepackage{alltt}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -98,11 +101,174 @@
 % !                                    1
 %----------------------------------------------------------------------------------
 \noindent \hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}\\\\
+The most-significant digit of the sum is a $\#$ in the $b^3$ column. However, we are only adding two 2-digit numbers, which cannot be more than $2\times b^3$\\
+This means that $\# = 1$.\\
+
+So we have\\
+% \begin{tabular}{lS}
+% 	    & 1 $*$          \\
+% 	$+$ & 1 $*$          \\
+% 	\hline %or \bottomrule if using the `booktabs` package
+% 	    & 1 $\lozenge$ 1 \\
+% \end{tabular}\\
+\[
+	\begin{array}{@{}cccc}
+		  &   & 1        & * \\
+		+ &   & 1        & * \\
+		\hline
+		= & 1 & \lozenge & 1
+	\end{array}
+\]
+In the $b^1$ column, two identical digits adding up to one must mean that the sum carries over, so \\
+$* + * = b + 1$\\
+This also means that $b$ is odd, since $* + *$ must be even.\\
+
+In the  $b^2$ column, we have a carry over from the $b^1$ column. So \\
+$1+1+1 = b+\lozenge $\\
+Since $LS$ is odd, and $b$ is odd, this means $\lozenge$ is even.\\
+Since $1+1+1$ carries over, this means that $b<=3$. And since $b$ is odd, then $b = 3 \Longrightarrow \lozenge = 0$
+
+
+~\\\\Answer:
+\[
+	\begin{array}{@{}cccc}
+		  &   & 1 & 2 \\
+		+ &   & 1 & 2 \\
+		\hline
+		= & 1 & 0 & 1
+	\end{array}
+\]
+Where $b = 3$
+
 \newpage
 %----------------------------------------------------------------------------------
 % !                                    2
 %----------------------------------------------------------------------------------
 \noindent \hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Question 2.}}}}\\\\
+\begin{minipage}[t]{0.5\textwidth}
+	$(0.1)_{10} = ()_2?$
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \cellcolor{gray!25}Multiplier &
+			\cellcolor{gray!25}Base &
+			\cellcolor{gray!25}Product &
+			\cellcolor{gray!25}Integral &
+			\cellcolor{gray!25}Fraction \\
+			\hline\hline
+			\texttt{0.1} & \texttt{2} & \texttt{0.2} & \texttt{0} & \hl{\texttt{0.2}} \\\hline
+			\texttt{0.2} & \texttt{2} & \texttt{0.4} & \texttt{0} & \texttt{0.4} \\\hline
+			\texttt{0.4} & \texttt{2} & \texttt{0.8} & \texttt{0} & \texttt{0.8} \\\hline
+			\texttt{0.8} & \texttt{2} & \texttt{1.6} & \texttt{1} & \texttt{0.6} \\\hline
+			\texttt{0.6} & \texttt{2} & \texttt{1.2} & \texttt{1} & \hl{\texttt{0.2}} \\\hline
+		\end{tabular}
+	\end{center}
+	$(0.1)_{10} = ()_3?$
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \cellcolor{gray!25}Multiplier &
+			\cellcolor{gray!25}Base &
+			\cellcolor{gray!25}Product &
+			\cellcolor{gray!25}Integral &
+			\cellcolor{gray!25}Fraction \\
+			\hline\hline
+			\texttt{0.1} & \texttt{3} & \texttt{0.3} & \texttt{0} & \hl{\texttt{0.3}} \\\hline
+			\texttt{0.3} & \texttt{3} & \texttt{0.9} & \texttt{0} & \texttt{0.9} \\\hline
+			\texttt{0.9} & \texttt{3} & \texttt{2.7} & \texttt{2} & \texttt{0.7} \\\hline
+			\texttt{0.7} & \texttt{3} & \texttt{2.1} & \texttt{2} & \texttt{0.1} \\\hline
+			\texttt{0.1} & \texttt{3} & \texttt{0.3} & \texttt{0} & \hl{\texttt{0.3}} \\\hline
+		\end{tabular}
+	\end{center}
+	$(0.1)_{10} = ()_4?$
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \cellcolor{gray!25}Multiplier &
+			\cellcolor{gray!25}Base &
+			\cellcolor{gray!25}Product &
+			\cellcolor{gray!25}Integral &
+			\cellcolor{gray!25}Fraction \\
+			\hline\hline
+			\texttt{0.1} & \texttt{4} & \texttt{0.4} & \texttt{0} & \hl{\texttt{0.4}} \\\hline
+			\texttt{0.4} & \texttt{4} & \texttt{1.6} & \texttt{1} & \texttt{0.6} \\\hline
+			\texttt{0.6} & \texttt{4} & \texttt{2.4} & \texttt{2} & \hl{\texttt{0.4}} \\\hline
+		\end{tabular}
+	\end{center}
+	$(0.1)_{10} = ()_5?$
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \cellcolor{gray!25}Multiplier &
+			\cellcolor{gray!25}Base &
+			\cellcolor{gray!25}Product &
+			\cellcolor{gray!25}Integral &
+			\cellcolor{gray!25}Fraction \\
+			\hline\hline
+			\texttt{0.1} & \texttt{5} & \texttt{0.5} & \texttt{0} & \hl{\texttt{0.5}} \\\hline
+			\texttt{0.5} & \texttt{5} & \texttt{2.5} & \texttt{2} & \hl{\texttt{0.5}} \\\hline
+		\end{tabular}
+	\end{center}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+	$(0.1)_{10} = ()_6?$
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \cellcolor{gray!25}Multiplier &
+			\cellcolor{gray!25}Base &
+			\cellcolor{gray!25}Product &
+			\cellcolor{gray!25}Integral &
+			\cellcolor{gray!25}Fraction \\
+			\hline\hline
+			\texttt{0.1} & \texttt{6} & \texttt{0.6} & \texttt{0} & \hl{\texttt{0.6}} \\\hline
+			\texttt{0.6} & \texttt{6} & \texttt{3.6} & \texttt{3} & \hl{\texttt{0.6}} \\\hline
+		\end{tabular}
+	\end{center}
+	$(0.1)_{10} = ()_7?$
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \cellcolor{gray!25}Multiplier &
+			\cellcolor{gray!25}Base &
+			\cellcolor{gray!25}Product &
+			\cellcolor{gray!25}Integral &
+			\cellcolor{gray!25}Fraction \\
+			\hline\hline
+			\texttt{0.1} & \texttt{7} & \texttt{0.7} & \texttt{0} & \hl{\texttt{0.7}} \\\hline
+			\texttt{0.7} & \texttt{7} & \texttt{4.9} & \texttt{4} & \texttt{0.9} \\\hline
+			\texttt{0.9} & \texttt{7} & \texttt{6.3} & \texttt{6} & \texttt{0.3} \\\hline
+			\texttt{0.3} & \texttt{7} & \texttt{2.1} & \texttt{2} & \texttt{0.1} \\\hline
+			\texttt{0.1} & \texttt{7} & \texttt{0.7} & \texttt{0} & \hl{\texttt{0.7}} \\\hline
+		\end{tabular}
+	\end{center}
+	$(0.1)_{10} = ()_8?$
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \cellcolor{gray!25}Multiplier &
+			\cellcolor{gray!25}Base &
+			\cellcolor{gray!25}Product &
+			\cellcolor{gray!25}Integral &
+			\cellcolor{gray!25}Fraction \\
+			\hline\hline
+			\texttt{0.1} & \texttt{8} & \texttt{0.8} & \texttt{0} & \hl{\texttt{0.8}} \\\hline
+			\texttt{0.8} & \texttt{8} & \texttt{6.4} & \texttt{6} & \texttt{0.4} \\\hline
+			\texttt{0.4} & \texttt{8} & \texttt{3.2} & \texttt{3} & \texttt{0.2} \\\hline
+			\texttt{0.2} & \texttt{8} & \texttt{1.6} & \texttt{1} & \texttt{0.6} \\\hline
+			\texttt{0.6} & \texttt{8} & \texttt{4.8} & \texttt{4} & \hl{\texttt{0.8}} \\\hline
+		\end{tabular}
+	\end{center}
+	$(0.1)_{10} = ()_9?$
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \cellcolor{gray!25}Multiplier &
+			\cellcolor{gray!25}Base &
+			\cellcolor{gray!25}Product &
+			\cellcolor{gray!25}Integral &
+			\cellcolor{gray!25}Fraction \\
+			\hline\hline
+			\texttt{0.1} & \texttt{9} & \texttt{0.9} & \texttt{0} & \hl{\texttt{0.9}} \\\hline
+			\texttt{0.9} & \texttt{9} & \texttt{8.1} & \texttt{8} & \texttt{0.1} \\\hline
+			\texttt{0.1} & \texttt{9} & \texttt{0.9} & \texttt{0} & \hl{\texttt{0.9}} \\\hline
+		\end{tabular}
+	\end{center}
+\end{minipage}\\
+
+In every base from 2 to 9, the decimal expansion loops. $\therefore (0.1)_{10}$ cannot be represented exactly with a finite mantissa.
 \newpage
 %----------------------------------------------------------------------------------
 % !                                    3
