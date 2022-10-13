@@ -1,0 +1,21 @@
+% latexmk --pdf matrix-norms.tex
+% convert -background white -alpha remove -alpha off -trim -density 300 matrix-norms.pdf -quality 90 matrix-norms.png
+
+\documentclass[preview]{standalone} % for making this into an image
+\usepackage[a4paper]{geometry}
+
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}     % to customize the enumerate environment
+\usepackage{changepage}   % for the adjustwidth environment
+\begin{document}
+For $A\in M^{n \times n}$, a matrix norm $\Vert\ \Vert: \mathbb{R}^{n \times n} \rightarrow \mathbb{R}$ satisfies the following properties:
+\begin{enumerate}
+    \item $\Vert A \Vert > 0 \text{ if } A \not = 0$
+    \item $\Vert \alpha A \Vert = | \alpha|\ \Vert  A \Vert,\ \alpha \in \mathbb{R}$
+    \item $\Vert A + B\Vert \leq \Vert A\Vert + \Vert B\Vert $ for $A,\ B \in \mathbb{R}^{n \times n}$
+    \item $\Vert A B\Vert \leq \Vert A\Vert \Vert B\Vert $ for $A,\ B \in \mathbb{R}^{n \times n}$
+    \item $\Vert A \vec{x}\Vert \leq \Vert A\Vert \Vert \vec{x}\Vert $ for $A \in \mathbb{R}^{n \times n},\ \vec{x} \in \mathbb{R}^{n}$
+\end{enumerate}
+Example:\\
+$\displaystyle \|A\| \stackrel{\text{def}}{\equiv}\ \stackrel{\text{max}}{\text{j}} \Sigma^{n}_{i=1}|a_{ij}|$ (maximum absolute column sum)
+\end{document}
