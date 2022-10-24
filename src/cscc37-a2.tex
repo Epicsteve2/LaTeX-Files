@@ -15,6 +15,7 @@
 \usepackage{listings}
 \usepackage[table]{xcolor}
 \usepackage[edges]{forest}
+\usepackage{xfrac} % slanted fractions
 % \usepackage{array}
 % \usepackage{booktabs}
 % \usepackage{siunitx}
@@ -77,7 +78,12 @@
 \noindent \hyperlink{3}{\textbf{Question 3:}}
 \vspace{1mm}
 \hrule
-\vspace{1mm} \leavevmode \\
+\vspace{1mm}
+\noindent
+\hyperlink{3.1}{(a)}\\
+\hyperlink{3.2}{(b)}\\
+\hyperlink{3.3}{(c)}\\
+\hyperlink{3.4}{(d)}\\
 
 \noindent \hyperlink{4}{\textbf{Question 4:}}
 \vspace{1mm}
@@ -227,20 +233,80 @@ as wanted
 {\setstretch{1.5}$
     \begin{array}{rrr@{}>{\displaystyle}ll}
         PA=LU
-         & \Longleftrightarrow &\det(PA)       & {}= \det(LU)       & [\text{det both sides}] \\
-         & \Longleftrightarrow &\det(P)\det(A) & {}= \det(L)\det(U) & [\text{by det laws}] \\
-         & \Longleftrightarrow &       \det(A) & {}= \det(L)\det(U) & [\text{since $\det(P) = 1$}] \\
-         & \Longleftrightarrow &               & {}=                & [\text{}] \\
-         & \Longleftrightarrow &               & {}=                & [\text{}] \\
-         & \Longleftrightarrow &               & {}=                & [\text{}] \\
-         & \Longleftrightarrow &               & {}=                & [\text{}] \\
-         & \Longleftrightarrow &               & {}=                & [\text{}] \\
+         & \Longleftrightarrow & \det(PA)       & {}= \det(LU)                      & [\text{det both sides}]      \\
+         & \Longleftrightarrow & \det(P)\det(A) & {}= \det(L)\det(U) \hspace*{15mm} & [\text{by det laws}]         \\
+         & \Longleftrightarrow & \det(A)        & {}= \det(L)\det(U)                & [\text{since $\det(P) = 1$}] \\
     \end{array}$
-}
+}\\[1cm]
+This is much more efficient than just finding the determinant of $A$ since the determinant
+of a triangular matrix is just the product of the diagonal.
 \newpage
 %----------------------------------------------------------------------------------
 % !                                    3
 %----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{{\LARGE \underline{\textbf{Question 3.}}}}\\\\
+\noindent \hyperlink{toc}{\hypertarget{3.1}{(a)}}\\
+$$
+    A=
+    \begin{bmatrix}
+        3 & 3 & 9 & 6 \\
+        4 & 4 & 4 & 4 \\
+        1 & 1 & 5 & 5 \\
+        2 & 2 & 4 & 6 \\
+    \end{bmatrix},\hspace*{1cm}
+    b=
+    \begin{bmatrix}
+        21 \\
+        24 \\
+        10 \\
+        16 \\
+    \end{bmatrix}
+$$
+
+Eliminate $1^\text{st}$ column:\\
+$$
+    P_1 = P_{12} =
+    \begin{bmatrix}
+        0 & 1 & 0 & 0 \\
+        1 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1 \\
+    \end{bmatrix},\hspace*{1cm}
+    P_1A=
+    \begin{bmatrix}
+        4 & 4 & 4 & 4 \\
+        3 & 3 & 9 & 6 \\
+        1 & 1 & 5 & 5 \\
+        2 & 2 & 4 & 6 \\
+    \end{bmatrix},\hspace*{1cm}
+    L_1=
+    \begin{bmatrix}
+        1             & 0 & 0 & 0 \\
+        \sfrac{-3}{4} & 1 & 0 & 0 \\
+        \sfrac{-1}{4} & 0 & 1 & 0 \\
+        \sfrac{-1}{2} & 0 & 0 & 1 \\
+    \end{bmatrix}
+$$
+
+$$
+    \begin{bmatrix}
+         &  &  & \\
+         &  &  & \\
+         &  &  & \\
+         &  &  & \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1 \\
+    \end{bmatrix}
+$$
+
+\noindent ~\\\hyperlink{toc}{\hypertarget{3.2}{(b)}}\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{3.3}{(c)}}\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{3.4}{(d)}}\\
+
 \newpage
 %----------------------------------------------------------------------------------
 % !                                    4
