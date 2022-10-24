@@ -28,7 +28,7 @@
 \setlength{\parindent}{0pt}
 
 \pagestyle{fancy}
-\fancyhead[LO,L]{CSCC63 A3}
+\fancyhead[LO,L]{CSCC37 A1}
 \fancyhead[CO,C]{Stephen Guo}
 \fancyhead[RO,R]{1006313231}
 \fancyfoot[LO,L]{}
@@ -294,11 +294,21 @@ $x - fl(x) = d_{k-t-2} \times b^{k-t-2} + d_{k-t-3} \times b^{k-t-3} + \ldots $\
 Which is bounded above by $$
 	\left\{
 	\begin{aligned}
-		\ 1 \times b^{k-t-1}           & \hspace*{3mm}\text{ chopping } & \hspace*{3mm} \text{[max value is 1 decimal place above ]}            \\
+		\ 1 \times b^{k-t-1}           & \hspace*{3mm}\text{ chopping } & \hspace*{3mm} \text{[max value is 1 decimal place above]}            \\
 		\ \frac{1}{2} \times b^{k-t-1} & \hspace*{3mm}\text{ rounding } & \hspace*{3mm} \text{[since adding $\frac{1}{2}$ reduces reduces RRO]} \\
 	\end{aligned}
 	\right.
 $$
+
+if $t$ is the mantissa length, then the amount of significant digits $b^{k-t-1}$ has is $b^1-t$. So $$
+\epsilon = \left\{
+	\begin{aligned}
+		\ 1 \times b^{k-t-1}           & \hspace*{3mm}\text{ chopping } \\
+		\ \frac{1}{2} \times b^{k-t-1} & \hspace*{3mm}\text{ rounding } \\
+	\end{aligned}
+\right.
+$$
+
 \newpage
 %----------------------------------------------------------------------------------
 % !                                    4

@@ -1,0 +1,249 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
+\usepackage{fancyhdr}	% header
+\usepackage{hyperref} % links
+
+\usepackage{amsmath,amsthm,amssymb}	%math stuff
+\usepackage{graphicx} \graphicspath{ {./images/} }
+\usepackage{setspace} % increase line spacing
+\usepackage{tabularx} % long tables
+\usepackage{enumitem} % labelling itmes
+\usepackage{color, soul}
+\usepackage{lmodern} % bolding \texttt{}
+\usepackage[T1]{fontenc} % for {} in \texttt{}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage[edges]{forest}
+% \usepackage{array}
+% \usepackage{booktabs}
+% \usepackage{siunitx}
+% \usepackage{alltt}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCC37 A2}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rplus}{\mathbb{R}^{+}}
+\newcommand{\bigbracket}[1]{\big(#1\big)}
+\newcommand{\Bigbracket}[1]{\Big(#1\Big)}
+\newcommand{\floorSurround}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\ceilingSurround}[1]{\left\lceil#1\right\rceil}
+\newcommand{\code}[1]{{\ttfamily \fontseries{b}\selectfont #1}}
+\definecolor{codegray}{gray}{0.9}
+\def \calO {\mathcal{O}}
+\newcommand{\bigO}[1]{\ensuremath{\calO(#1)}}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\newenvironment{proofindent}{\vspace*{2mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}}{\end{minipage}}
+
+\everymath{\displaystyle}
+
+\begin{document}
+%----------------------------------------------------------------------------------
+%                              Table of Contents
+%----------------------------------------------------------------------------------
+\begin{center}
+    \hypertarget{toc}{\LARGE \noindent \underline{\textbf{Table of Contents}}}\\
+\end{center}
+
+\noindent {\textbf{Question 1:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent
+\hyperlink{1.1}{(a)}\\
+\hyperlink{1.2}{(b)}\\
+\hyperlink{1.3}{(c)}\\
+\hyperlink{1.4}{(d)}\\
+
+\noindent \hyperlink{2}{\textbf{Question 2:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\noindent \hyperlink{3}{\textbf{Question 3:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\noindent \hyperlink{4}{\textbf{Question 4:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\newpage
+
+%{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}l}  \end{array}$}
+% {\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}l}
+% 	&{} \\
+% 	&{} \\
+% 	&{} \\
+% 	&{} \\
+% 	&{} \\
+% \end{array}$}
+%----------------------------------------------------------------------------------
+%                                   Questions
+%----------------------------------------------------------------------------------
+\setstretch{1.2}
+%----------------------------------------------------------------------------------
+% !                                    1
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\LARGE \underline{\textbf{Question 1.}}}\\\\
+\noindent \hyperlink{toc}{\hypertarget{1.1}{(a)}}\\
+Let $\mathcal{L}_k$ be a Gauss Transform. Then it has the form\\
+$
+    \mathcal{L}_k =
+    \begin{bmatrix}
+        1      & 0      & \cdots & 0      & 0       & 0      & \cdots & 0      \\
+        0      & 1      & \cdots & 0      & 0       & 0      & \cdots & 0      \\
+        \vdots & \vdots & \ddots & \vdots & \vdots  & \vdots & \ddots & \vdots \\
+        0      & 0      & \cdots & 1      & 0       & 0      & \cdots & 0      \\
+        0      & 0      & \cdots & 0      & 1       & 0      & \cdots & 0      \\
+        0      & 0      & \cdots & 0      & a_{k+1} & 1      & \cdots & 0      \\
+        \vdots & \vdots & \ddots & \vdots & \vdots  & \vdots & \ddots & \vdots \\
+        0      & 0      & \cdots & 0      & a_{n}   & 0      & \cdots & 1      \\
+    \end{bmatrix}
+$ \hspace*{3cm}
+Then let $m_k =
+    \begin{bmatrix}
+        0        \\
+        0        \\
+        \vdots   \\
+        0        \\
+        0        \\
+        -a_{k+1} \\
+        \vdots   \\
+        -a_{n}   \\
+    \end{bmatrix}$\\[1cm]
+
+Now $-m_k {e_k}^T =
+    \begin{bmatrix}
+        0      & 0      & \cdots & 0      & 0       & 0      & \cdots & 0      \\
+        0      & 0      & \cdots & 0      & 0       & 0      & \cdots & 0      \\
+        \vdots & \vdots & \ddots & \vdots & \vdots  & \vdots & \ddots & \vdots \\
+        0      & 0      & \cdots & 0      & 0       & 0      & \cdots & 0      \\
+        0      & 0      & \cdots & 0      & 0       & 0      & \cdots & 0      \\
+        0      & 0      & \cdots & 0      & a_{k+1} & 0      & \cdots & 0      \\
+        \vdots & \vdots & \ddots & \vdots & \vdots  & \vdots & \ddots & \vdots \\
+        0      & 0      & \cdots & 0      & a_{n}   & 0      & \cdots & 0      \\
+    \end{bmatrix}
+$\\[1cm]
+
+So $\mathcal{L}_k = I - m_k {e_k}^T$
+
+\newpage
+\noindent \hyperlink{toc}{\hypertarget{1.2}{(b)}}\\
+By definition, the inverse of a Gauss Transform is simply flipping the signs of the non-identity values. \\
+So if we invert the signs of $-m_k$, we have
+$$m_k =
+    \begin{bmatrix}
+        0       \\
+        0       \\
+        \vdots  \\
+        0       \\
+        0       \\
+        a_{k+1} \\
+        \vdots  \\
+        a_{n}   \\
+    \end{bmatrix}
+$$
+Then $$I + m_k {e_k}^T =
+    \begin{bmatrix}
+        1      & 0      & \cdots & 0      & 0        & 0      & \cdots & 0      \\
+        0      & 1      & \cdots & 0      & 0        & 0      & \cdots & 0      \\
+        \vdots & \vdots & \ddots & \vdots & \vdots   & \vdots & \ddots & \vdots \\
+        0      & 0      & \cdots & 1      & 0        & 0      & \cdots & 0      \\
+        0      & 0      & \cdots & 0      & 1        & 0      & \cdots & 0      \\
+        0      & 0      & \cdots & 0      & -a_{k+1} & 1      & \cdots & 0      \\
+        \vdots & \vdots & \ddots & \vdots & \vdots   & \vdots & \ddots & \vdots \\
+        0      & 0      & \cdots & 0      & -a_{n}   & 0      & \cdots & 1      \\
+    \end{bmatrix}
+    = {\mathcal{L}_k}^{-1}$$\newpage
+
+\noindent \hyperlink{toc}{\hypertarget{1.3}{(c)}}\\
+WTS: $(L_kL_j)^{-1} = (I + m_k {e_k}^T) + (m_j {e_j}^T) - I$\\
+
+{
+\setstretch{1.5}
+$
+    \begin{array}{r@{}>{\displaystyle}ll}
+        LHS
+         & {}= (L_kL_j)^{-1}                                                           & [\text{given}]                             \\
+         & {}= {L_j}^{-1} {L_k}^{-1}                                                   & [\text{by inverse laws}]                   \\
+         & {}= (I + m_j {e_j}^T)(I + m_k {e_k}^T)                                      & [\text{by (b)}]                            \\
+         & {}= I + m_j {e_j}^T + m_k {e_k}^T + m_j {e_j}^T m_k {e_k}^T \hspace*{1.5cm} & [\text{expanding}]                         \\
+         & {}= I + m_j {e_j}^T + m_k {e_k}^T + 0                                       & [\text{since $j<k$ and ${e_j}^T m_k = 0$}] \\
+         & {}= I + m_j {e_j}^T + m_k {e_k}^T + I - I                                   & [I - I = 0]                                \\
+         & {}= (I + m_k {e_k}^T) + (I + m_j {e_j}^T) - I                               & [\text{rearranging}]                       \\
+         & {}= RHS                                                                     & [\text{given}]                             \\
+    \end{array}
+$\\
+as wanted
+}
+\\[5mm]
+
+\newpage
+\noindent \hyperlink{toc}{\hypertarget{1.4}{(d)}}\\
+WTS: $\widetilde{\mathcal{L}_k} = \mathcal{L}_k$ with multipliers $i$ and $j$ swapped\\
+
+{
+\setstretch{1.5}
+$
+    \begin{array}{r@{}>{\displaystyle}ll}
+        LHS
+         & {}= \widetilde{\mathcal{L}_k}                                                  & [\text{given}]                                      \\
+         & {}= P_i \mathcal{L}_k P_i                                                      & [\text{given}]                                      \\
+         & {}= P_i (I - m_k {e_k}^T) P_i                                                  & [\text{by (a)}]                                     \\
+         & {}= (P_i - P_i m_k {e_k}^T) P_i                                                & [\text{expanding}]                                  \\
+         & {}= P_i P_i - P_i m_k {e_k}^T P_i                                              & [\text{expanding}]                                  \\
+         & {}= I - P_i m_k {e_k}^T P_i                                                    & [\text{since $P_i P_i = I$}]                        \\
+         & {}= \mathcal{L}_k \text{ with multipliers $i$ and $j$ swapped} \hspace*{1.5cm} & [\text{since $m_k {e_k}^T$ multiplers got swapped}] \\
+         & {}= RHS                                                                        & [\text{given}]                                      \\
+    \end{array}
+$\\
+as wanted
+}
+\\[5mm]
+
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    2
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Question 2.}}}}\\\\
+% I GET IT. You put the equal sign in its own column to "align" it!!!
+{\setstretch{1.5}$
+    \begin{array}{rrr@{}>{\displaystyle}ll}
+        PA=LU
+         & \Longleftrightarrow &\det(PA)       & {}= \det(LU)       & [\text{det both sides}] \\
+         & \Longleftrightarrow &\det(P)\det(A) & {}= \det(L)\det(U) & [\text{by det laws}] \\
+         & \Longleftrightarrow &       \det(A) & {}= \det(L)\det(U) & [\text{since $\det(P) = 1$}] \\
+         & \Longleftrightarrow &               & {}=                & [\text{}] \\
+         & \Longleftrightarrow &               & {}=                & [\text{}] \\
+         & \Longleftrightarrow &               & {}=                & [\text{}] \\
+         & \Longleftrightarrow &               & {}=                & [\text{}] \\
+         & \Longleftrightarrow &               & {}=                & [\text{}] \\
+    \end{array}$
+}
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    3
+%----------------------------------------------------------------------------------
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    4
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\hypertarget{4}{\LARGE \underline{\textbf{Question 4.}}}}\\\\
+\end{document}
