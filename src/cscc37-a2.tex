@@ -236,6 +236,8 @@ as wanted
          & \Longleftrightarrow & \det(PA)       & {}= \det(LU)                      & [\text{det both sides}]      \\
          & \Longleftrightarrow & \det(P)\det(A) & {}= \det(L)\det(U) \hspace*{15mm} & [\text{by det laws}]         \\
          & \Longleftrightarrow & \det(A)        & {}= \det(L)\det(U)                & [\text{since $\det(P) = 1$}] \\
+         & \Longleftrightarrow & \det(A)        & {}= 1\times \det(U)                & [\text{since $L$ is a unit lower triangle}] \\
+         & \Longleftrightarrow & \det(A)        & {}= \prod_{i=1}^{n}a_{ii}                & [\text{since $U$ is an upper triangle}] \\
     \end{array}$
 }\\[1cm]
 This is much more efficient than just finding the determinant of $A$ since the determinant
@@ -262,55 +264,146 @@ $$
         16 \\
     \end{bmatrix}
 $$
-
+\newcommand{\pushright}[1]{\ifmeasuring@#1\else\omit\hfill$\displaystyle#1$\fi\ignorespaces}
 Eliminate $1^\text{st}$ column:\\
-$$
-    P_1 = P_{12} =
-    \begin{bmatrix}
-        0 & 1 & 0 & 0 \\
-        1 & 0 & 0 & 0 \\
-        0 & 0 & 1 & 0 \\
-        0 & 0 & 0 & 1 \\
-    \end{bmatrix},\hspace*{1cm}
-    P_1A=
-    \begin{bmatrix}
-        4 & 4 & 4 & 4 \\
-        3 & 3 & 9 & 6 \\
-        1 & 1 & 5 & 5 \\
-        2 & 2 & 4 & 6 \\
-    \end{bmatrix},\hspace*{1cm}
-    L_1=
-    \begin{bmatrix}
-        1             & 0 & 0 & 0 \\
-        -\sfrac{3}{4} & 1 & 0 & 0 \\
-        -\sfrac{1}{4} & 0 & 1 & 0 \\
-        -\sfrac{1}{2} & 0 & 0 & 1 \\
-    \end{bmatrix},\hspace*{1cm}
-    L_1P_1A=
-    \begin{bmatrix}
-        4 & 4 & 4 & 4 \\
-        0 & 3 & 9 & 6 \\
-        0 & 1 & 5 & 5 \\
-        0 & 2 & 4 & 6 \\
-    \end{bmatrix}
-$$
+\begin{minipage}[t]{0.5\textwidth}
+    $$
+        P_1 = P_{12} =
+        \begin{bmatrix}
+            0 & 1 & 0 & 0 \\
+            1 & 0 & 0 & 0 \\
+            0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 1 \\
+        \end{bmatrix}
+    $$
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+    $$
+        P_1A=
+        \begin{bmatrix}
+            4 & 4 & 4 & 4 \\
+            3 & 3 & 9 & 6 \\
+            1 & 1 & 5 & 5 \\
+            2 & 2 & 4 & 6 \\
+        \end{bmatrix}
+    $$
+\end{minipage}\\
+\begin{minipage}[t]{0.5\textwidth}
+    $$
+        L_1=
+        \begin{bmatrix}
+            1             & 0 & 0 & 0 \\
+            -\sfrac{3}{4} & 1 & 0 & 0 \\
+            -\sfrac{1}{4} & 0 & 1 & 0 \\
+            -\sfrac{1}{2} & 0 & 0 & 1 \\
+        \end{bmatrix}
+    $$
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+    $$
+        L_1P_1A=
+        \begin{bmatrix}
+            4 & 4 & 4 & 4 \\
+            0 & 0 & 6 & 3 \\
+            0 & 0 & 4 & 4 \\
+            0 & 0 & 2 & 5 \\
+        \end{bmatrix}
+    $$
+\end{minipage}
 
-$$
-    \begin{bmatrix}
-         &  &  & \\
-         &  &  & \\
-         &  &  & \\
-         &  &  & \\
-    \end{bmatrix}
-    \begin{bmatrix}
-        1 & 0 & 0 & 0 \\
-        0 & 1 & 0 & 0 \\
-        0 & 0 & 1 & 0 \\
-        0 & 0 & 0 & 1 \\
-    \end{bmatrix}
-$$
+% $$
+%     L_1=
+%     \begin{bmatrix}
+%         1             & 0 & 0 & 0 \\
+%         -\sfrac{3}{4} & 1 & 0 & 0 \\
+%         -\sfrac{1}{4} & 0 & 1 & 0 \\
+%         -\sfrac{1}{2} & 0 & 0 & 1 \\
+%     \end{bmatrix},\hspace*{1cm}
+%     L_1P_1A=
+%     \begin{bmatrix}
+%         4 & 4 & 4 & 4 \\
+%         0 & 0 & 6 & 3 \\
+%         0 & 0 & 4 & 4 \\
+%         0 & 0 & 2 & 5 \\
+%     \end{bmatrix}
+% $$
+Eliminate $3^\text{rd}$ column:\\
+\begin{minipage}[t]{0.5\textwidth}
+    $$
+        P_3 = I =
+        \begin{bmatrix}
+            1 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 1 \\
+        \end{bmatrix}
+    $$
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+    $$
+        P_3L_1P_1A =
+        \begin{bmatrix}
+            4 & 4 & 4 & 4 \\
+            0 & 0 & 6 & 3 \\
+            0 & 0 & 4 & 4 \\
+            0 & 0 & 2 & 5 \\
+        \end{bmatrix}
+    $$
+\end{minipage}\\
+\begin{minipage}[t]{0.5\textwidth}
+    $$
+        L_3 =
+        \begin{bmatrix}
+            1 & 0 & 0             & 0 \\
+            0 & 1 & 0             & 0 \\
+            0 & 0 & 1             & 0 \\
+            0 & 0 & -\sfrac{1}{2} & 1 \\
+        \end{bmatrix}
+    $$
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+    $$
+        L_3P_31L_1P_1A =
+        \begin{bmatrix}
+            4 & 4 & 4 & 4 \\
+            0 & 0 & 6 & 3 \\
+            0 & 0 & 4 & 4 \\
+            0 & 0 & 0 & 3 \\
+        \end{bmatrix}
+    $$
+\end{minipage}
 
-\noindent ~\\\hyperlink{toc}{\hypertarget{3.2}{(b)}}\\
+
+% \begin{minipage}[t]{0.5\textwidth}
+%     $$
+
+%     $$
+% \end{minipage}
+% \begin{minipage}[t]{0.5\textwidth}
+%     $$
+
+%     $$
+% \end{minipage}
+
+% $$
+%     \begin{bmatrix}
+%          &  &  & \\
+%          &  &  & \\
+%          &  &  & \\
+%          &  &  & \\
+%     \end{bmatrix}
+%     \begin{bmatrix}
+%         1 & 0 & 0 & 0 \\
+%         0 & 1 & 0 & 0 \\
+%         0 & 0 & 1 & 0 \\
+%         0 & 0 & 0 & 1 \\
+%     \end{bmatrix}
+% $$
+
+\newpage\hyperlink{toc}{\hypertarget{3.2}{(b)}}\\
+$\det(A) = \prod_{i=1}^{n}a_{ii} = 0$\\
+So there's either infinite, or no solutions to $A\vec{x} = \vec{b}$
+
 \noindent ~\\\hyperlink{toc}{\hypertarget{3.3}{(c)}}\\
 \noindent ~\\\hyperlink{toc}{\hypertarget{3.4}{(d)}}\\
 
