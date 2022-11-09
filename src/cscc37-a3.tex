@@ -1,0 +1,197 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
+\usepackage{fancyhdr}	% header
+\usepackage{hyperref} % links
+
+\usepackage{amsmath,amsthm,amssymb}	%math stuff
+\usepackage{graphicx} \graphicspath{ {./images/} }
+\usepackage{setspace} % increase line spacing
+\usepackage{tabularx} % long tables
+\usepackage{enumitem} % labelling itmes
+\usepackage{color, soul}
+\usepackage{lmodern} % bolding \texttt{}
+\usepackage[T1]{fontenc} % for {} in \texttt{}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage[edges]{forest}
+\usepackage{xfrac} % slanted fractions
+% \usepackage{array}
+% \usepackage{booktabs}
+% \usepackage{siunitx}
+% \usepackage{alltt}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCC37 A3}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rplus}{\mathbb{R}^{+}}
+\newcommand{\bigbracket}[1]{\big(#1\big)}
+\newcommand{\Bigbracket}[1]{\Big(#1\Big)}
+\newcommand{\floorSurround}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\ceilingSurround}[1]{\left\lceil#1\right\rceil}
+\newcommand{\code}[1]{{\ttfamily \fontseries{b}\selectfont #1}}
+\definecolor{codegray}{gray}{0.9}
+\def \calO {\mathcal{O}}
+\newcommand{\bigO}[1]{\ensuremath{\calO(#1)}}
+\renewcommand{\qed}{\hfill$\blacksquare$}
+\newenvironment{proofindent}{\vspace*{2mm}\hfill\begin{minipage}{\dimexpr\textwidth-10mm}}{\end{minipage}}
+
+\everymath{\displaystyle}
+
+\begin{document}
+%----------------------------------------------------------------------------------
+%                              Table of Contents
+%----------------------------------------------------------------------------------
+\begin{center}
+    \hypertarget{toc}{\LARGE \noindent \underline{\textbf{Table of Contents}}}\\
+\end{center}
+
+\noindent {\textbf{Question 1:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent
+\hyperlink{1.1}{(a)}\\
+\hyperlink{1.2}{(b)}\\
+\hyperlink{1.3}{(c)}\\
+\hyperlink{1.4}{(d)}\\
+
+\noindent \textbf{Question 2:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\hyperlink{2.1}{(a)}\\
+\hyperlink{2.2}{(b)}\\
+
+\noindent \textbf{Question 3:}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent
+\hyperlink{3.1}{(a)}\\
+\hyperlink{3.2}{(b)}\\
+\hyperlink{3.3}{(c)}\\
+
+\noindent \hyperlink{4}{\textbf{Question 4:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\noindent {\textbf{Question 5:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\noindent
+\hyperlink{5.1}{(a)}\\
+\hyperlink{5.2}{(b)}\\
+\hyperlink{5.3}{(c)}\\
+\hyperlink{5.4}{(d)}\\
+
+\newpage
+
+%{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}l}  \end{array}$}
+% {\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}l}
+% 	&{} \\
+% 	&{} \\
+% 	&{} \\
+% 	&{} \\
+% 	&{} \\
+% \end{array}$}
+%----------------------------------------------------------------------------------
+%                                   Questions
+%----------------------------------------------------------------------------------
+\setstretch{1.2}
+%----------------------------------------------------------------------------------
+% !                                    1
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\LARGE \underline{\textbf{Question 1.}}}\\\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{1.1}{(a)}}\\
+If there is an interval $[a,\ b]$ such that
+\begin{enumerate}
+    \item $g(x) \in [a,\ b] \qquad \forall x\in [a,\ b]$
+    \item $|g'(x)| \leq L < 1 \qquad \forall x\in [a,\ b]$
+\end{enumerate}
+Then $g(x)$ has a unique fixed point in $[a,\ b]$
+
+\noindent ~\\\hyperlink{toc}{\hypertarget{1.2}{(b)}}\\
+Suppose 1. and 2. \\
+Start with any $x_0\in [a,\ b]$ and iterate\\
+$x_{k+1} = g(x_k) \qquad k = 1,\ 2,\ \cdots$\\
+
+Then $x_k \in [a,\ b]$ by 1.\\
+
+Moreover,
+{
+        \setstretch{1.5}
+        $$
+            \begin{array}{r@{}>{\displaystyle}ll}
+                x_{k+1} - x_{k}
+                 & {}= g(x_{k}) - x_{k-1}          & \\
+                 & {}= g'(\eta_k)(x_{k+1} - x_{k}) &
+            \end{array}
+        $$
+        \begin{center}
+            for some $\eta_k \in [x_{k-1},\ x_k] \subset [a,\ b] \qquad$ (condition 2)
+        \end{center}
+    }
+So
+$$
+    \begin{array}{r@{}>{\displaystyle}ll}
+        x_{k+1} - x_{k}
+         & {}\leq L |x_{k} - x_{k-1}|     & \\
+         & {}\leq L^2 |x_{k-1} - x_{k-2}| & \\
+         & {}\leq \hspace*{15mm}\vdots                  & \\
+         & {}\leq L^{k-1} |x_{2} - x_{1}| & \\
+         & {}\leq L^k |x_{1} - x_{0}|     & \\
+    \end{array}
+$$
+$L_k$ approaches 0 as $k$ appraoches $\infty$. So $|x_{1} - x_{0}|$ approaches 0 as well\\
+$\therefore x_k$ converges to some point $\widetilde{x}\in [a,\ b]$\\
+
+\noindent ~\\\hyperlink{toc}{\hypertarget{1.3}{(c)}}\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{1.4}{(d)}}\\
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    2
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\LARGE \underline{\textbf{Question 2.}}}\\\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{2.1}{(a)}}\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{2.2}{(b)}}\\
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    3
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{{\LARGE \underline{\textbf{Question 3.}}}}\\\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{3.1}{(a)}}\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{3.2}{(b)}}\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{3.3}{(c)}}\\
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    4
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{\hypertarget{4}{\LARGE \underline{\textbf{Question 4.}}}}\\\\
+\newpage
+%----------------------------------------------------------------------------------
+% !                                    5
+%----------------------------------------------------------------------------------
+\noindent \hyperlink{toc}{{\LARGE \underline{\textbf{Question 5.}}}}\\\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{5.1}{(a)}}\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{5.2}{(b)}}\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{5.3}{(c)}}\\
+\noindent ~\\\hyperlink{toc}{\hypertarget{5.4}{(d)}}\\
+\newpage
+\end{document}
