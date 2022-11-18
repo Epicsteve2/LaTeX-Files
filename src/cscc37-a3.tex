@@ -100,14 +100,19 @@
 
 \newpage
 
-%{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}l}  \end{array}$}
-% {\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}l}
-% 	&{} \\
-% 	&{} \\
-% 	&{} \\
-% 	&{} \\
-% 	&{} \\
-% \end{array}$}
+{\setstretch{1.5}$\begin{array}{r@{}>{\displaystyle}l}  \end{array}$}
+% {
+%     \setstretch{1.5}
+%     $
+%         \begin{array}{r@{}>{\displaystyle}l}
+%              & {} \\
+%              & {} \\
+%              & {} \\
+%              & {} \\
+%              & {} \\
+%         \end{array}
+%     $
+% }
 %----------------------------------------------------------------------------------
 %                                   Questions
 %----------------------------------------------------------------------------------
@@ -181,7 +186,7 @@ Taking the limit of both sides...\\
 $
     \begin{array}{r@{}>{\displaystyle}ll}
         f(\widetilde{x})
-         & {}= \lim_{k->\infty} f\left(x_{k+1}\right) & [x_k \text{ converges to } \widetilde{x}]       \\
+         & {}= \lim_{k->\infty} f\left(x_{k+1}\right)                                                      & [x_k \text{ converges to } \widetilde{x}]       \\
          & {}= \lim_{k->\infty} g^\prime(\eta) (x_{k+1} - x_k) \text{ for some $\eta \in [x_{k+1},\ x_k]$} & [\text{limit both sides}]                       \\
          & {}= g^\prime(\eta) \lim_{k->\infty} (x_{k+1} - x_k)                                             & [g^\prime(\eta) \text{ does not depend on $x$}] \\
          & {}= g^\prime(\eta) \lim_{k->\infty} (\widetilde{x} - \widetilde{x})                             & [x_k \text{ converges to } \widetilde{x}]       \\
@@ -194,43 +199,69 @@ $
 Since $\widetilde{x}$ is a root for $f(x)$\\
 $\therefore \widetilde{x}$ is a fixed point.
 
-% {
-% \setstretch{1.5}
-% $
-%     \begin{array}{r@{}>{\displaystyle}ll}
-%         g(\widetilde{x}) - \widetilde{x}
-%          & {}= g(\widetilde{x}) - g(x_k)                                                       & [\text{since $x_k$ converges to $\widetilde{x}$}] \\
-%          & {}= g(\eta) (\widetilde{x} - x_k) \text{ for some $\eta \in [\widetilde{x},\ x_k]$} & [\text{by MVT}]                                   \\
-%     \end{array}
-% $
-% }\\
-% $\Longleftrightarrow$\\
-% {
-% \setstretch{1.5}
-% $
-%     \begin{array}{r@{}>{\displaystyle}ll}
-%         |g(\widetilde{x}) - \widetilde{x}|
-%          & {}= |g(\eta) (\widetilde{x} - x_k)| \text{ for some $\eta \in [\widetilde{x},\ x_k]$} & [\text{applying absolute values to both sides}] \\
-%          & {}\leq |g(\eta)| |\widetilde{x} - x_k|                                                & [\text{by triangle inequality}]                 \\
-%          & {}\leq L^k |\widetilde{x} - x_k|                                                      & [\text{condition 2}]                            \\
-%     \end{array}
-% $
-% }\\
+\newpage\hyperlink{toc}{\hypertarget{1.4}{(d)}}\\
+Suppose $\widetilde{x_1},\ \widetilde{x_2}$ are fixed points of $g(x)$\\
 
-% Taking the limit of both sides:\\
-% {
-% \setstretch{1.5}
-% $
-%     \begin{array}{r@{}>{\displaystyle}ll}
-%         \lim_{k->\infty}|g(\widetilde{x}) - \widetilde{x}|
-%          & {}\leq \lim_{k->\infty} L^k |\widetilde{x} - x_k| & [\text{limit both sides}] \\
-%          & {}\leq                0 & [\text{since $L < 1$}] \\
-%     \end{array}
-% $
-% }
+WTS: $\widetilde{x_1} = \widetilde{x_2}$\\
+
+WLOG: Assume $\widetilde{x_1} > \widetilde{x_2}$\\
+
+{
+    \setstretch{1.5}
+    $
+        \begin{array}{r@{}>{\displaystyle}ll}
+            \widetilde{x_1} - \widetilde{x_2}
+             & {}= g(\widetilde{x_1}) - g(\widetilde{x_2})& [\text{since $g(x) = x$}] \\
+             & {}= g^\prime(\eta) (\widetilde{x_1} - \widetilde{x_2}) \text{ for some $\eta \in [\widetilde{x_1},\ \widetilde{x_2}]$}& [\text{by MVT}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+        \end{array}
+    $
+}\\
+Taking the absolute values of both sides:\\
+{
+    \setstretch{1.5}
+    $
+        \begin{array}{r@{}>{\displaystyle}ll}
+            |\widetilde{x_1} - \widetilde{x_2}|
+             & {}= |g^\prime(\eta) (\widetilde{x_1} - \widetilde{x_2})| & [\text{absolute value both sides}] \\
+             & {}\leq \big|g^\prime(\eta)\big|\ \big|(\widetilde{x_1} - \widetilde{x_2})\big| & [\text{by triangle inequality}] \\
+            %  & {}> |(\widetilde{x_1} - \widetilde{x_2})|& [\text{since $|g^\prime(\eta)| < 1$ by assumption 2}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+        \end{array}
+    $
+}\\
+$\Longleftrightarrow$
+{
+    \setstretch{1.5}
+    $
+        \begin{array}{r@{}>{\displaystyle}ll}
+            |\widetilde{x_1} - \widetilde{x_2}|
+             & {}= |g^\prime(\eta) (\widetilde{x_1} - \widetilde{x_2})| & [\text{absolute value both sides}] \\
+             & {}= |g^\prime(\eta) \widetilde{x_1} - g^\prime(\eta) \widetilde{x_2})| & [\text{absolute value both sides}] \\
+             & {}\geq |g^\prime(\eta) \widetilde{x_1} | - | g^\prime(\eta) \widetilde{x_2})| & [\text{absolute value both sides}] \\
+             & {}\leq \big|g^\prime(\eta)\big|\ \big|(\widetilde{x_1} - \widetilde{x_2})\big| & [\text{by triangle inequality}] \\
+            %  & {}> |(\widetilde{x_1} - \widetilde{x_2})|& [\text{since $|g^\prime(\eta)| < 1$ by assumption 2}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+             & {}= & [\text{}] \\
+        \end{array}
+    $
+}
 
 
-~\\\hyperlink{toc}{\hypertarget{1.4}{(d)}}\\
+
 \newpage
 %----------------------------------------------------------------------------------
 % !                                    2
