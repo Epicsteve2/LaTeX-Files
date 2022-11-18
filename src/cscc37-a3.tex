@@ -162,31 +162,73 @@ $\therefore x_k$ converges to some point $\widetilde{x}\in [a,\ b]$\\
 \newpage\hyperlink{toc}{\hypertarget{1.3}{(c)}}\\
 WTS: $g(\widetilde{x}) = \widetilde{x}$\\
 This is equivalent as setting $f(x) = g(x) - x$ and showing $\widetilde{x}$ is a root of $f(x)$\\
+
 {
 \setstretch{1.5}
 $
     \begin{array}{r@{}>{\displaystyle}ll}
-        g(\widetilde{x}) - \widetilde{x}
-         & {}= g(\widetilde{x}) - g(x_k)                                                       & [\text{since $x_k$ converges to $\widetilde{x}$}] \\
-         & {}= g(\eta) (\widetilde{x} - x_k) \text{ for some $\eta \in [\widetilde{x},\ x_k]$} & [\text{by MVT}]                                   \\
+        f(x_{k+1})
+         & {}= g(x_{k+1}) - x_{k+1}                                                       & [\text{by definition}]                                \\
+         & {}= g(x_{k+1}) - g(x_{k})                                                      & [\text{since $x_{k+1} = g(x_k)$}]                     \\
+         & {}= g^\prime(\eta) (x_{k+1} - x_k) \text{ for some $\eta \in [x_{k+1},\ x_k]$} & [\text{since $f(x)$ is differentiable by assumption,} \\
+         & {}                                                                             & \text{\qquad we use MVT}]                             \\
     \end{array}
 $
 }\\
-$\Longleftrightarrow$\\
+Taking the limit of both sides...\\
 {
 \setstretch{1.5}
 $
     \begin{array}{r@{}>{\displaystyle}ll}
-        |g(\widetilde{x}) - \widetilde{x}|
-         & {}= |g(\eta) (\widetilde{x} - x_k)| \text{ for some $\eta \in [\widetilde{x},\ x_k]$} & [\text{applying absolute values to both sides}] \\
-         & {}\leq |g(\eta)| |\widetilde{x} - x_k|                                                & [\text{by triangle inequality}]                 \\
-         & {}\leq L |\widetilde{x} - x_k|                                                        & [\text{condition 2}]                            \\
-         & {}=                                                                                   & [\text{}]                                       \\
-         & {}=                                                                                   & [\text{}]                                       \\
-         & {}=                                                                                   & [\text{}]                                       \\
+        f(\widetilde{x})
+         & {}= \lim_{k->\infty} f\left(x_{k+1}\right) & [x_k \text{ converges to } \widetilde{x}]       \\
+         & {}= \lim_{k->\infty} g^\prime(\eta) (x_{k+1} - x_k) \text{ for some $\eta \in [x_{k+1},\ x_k]$} & [\text{limit both sides}]                       \\
+         & {}= g^\prime(\eta) \lim_{k->\infty} (x_{k+1} - x_k)                                             & [g^\prime(\eta) \text{ does not depend on $x$}] \\
+         & {}= g^\prime(\eta) \lim_{k->\infty} (\widetilde{x} - \widetilde{x})                             & [x_k \text{ converges to } \widetilde{x}]       \\
+         & {}= g^\prime(\eta) \lim_{k->\infty} 0                                                           & [\text{arithmetic}]                             \\
+         & {}= 0                                                                                           & [\text{$g^\prime(\eta)$ is not infinite}]       \\
     \end{array}
 $
-}
+}\\
+
+Since $\widetilde{x}$ is a root for $f(x)$\\
+$\therefore \widetilde{x}$ is a fixed point.
+
+% {
+% \setstretch{1.5}
+% $
+%     \begin{array}{r@{}>{\displaystyle}ll}
+%         g(\widetilde{x}) - \widetilde{x}
+%          & {}= g(\widetilde{x}) - g(x_k)                                                       & [\text{since $x_k$ converges to $\widetilde{x}$}] \\
+%          & {}= g(\eta) (\widetilde{x} - x_k) \text{ for some $\eta \in [\widetilde{x},\ x_k]$} & [\text{by MVT}]                                   \\
+%     \end{array}
+% $
+% }\\
+% $\Longleftrightarrow$\\
+% {
+% \setstretch{1.5}
+% $
+%     \begin{array}{r@{}>{\displaystyle}ll}
+%         |g(\widetilde{x}) - \widetilde{x}|
+%          & {}= |g(\eta) (\widetilde{x} - x_k)| \text{ for some $\eta \in [\widetilde{x},\ x_k]$} & [\text{applying absolute values to both sides}] \\
+%          & {}\leq |g(\eta)| |\widetilde{x} - x_k|                                                & [\text{by triangle inequality}]                 \\
+%          & {}\leq L^k |\widetilde{x} - x_k|                                                      & [\text{condition 2}]                            \\
+%     \end{array}
+% $
+% }\\
+
+% Taking the limit of both sides:\\
+% {
+% \setstretch{1.5}
+% $
+%     \begin{array}{r@{}>{\displaystyle}ll}
+%         \lim_{k->\infty}|g(\widetilde{x}) - \widetilde{x}|
+%          & {}\leq \lim_{k->\infty} L^k |\widetilde{x} - x_k| & [\text{limit both sides}] \\
+%          & {}\leq                0 & [\text{since $L < 1$}] \\
+%     \end{array}
+% $
+% }
+
 
 ~\\\hyperlink{toc}{\hypertarget{1.4}{(d)}}\\
 \newpage
