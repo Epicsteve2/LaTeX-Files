@@ -16,6 +16,7 @@
 \usepackage[table]{xcolor}
 \usepackage[edges]{forest}
 \usepackage{xfrac} % slanted fractions
+\usepackage{changepage}   % for the adjustwidth environment
 % \usepackage{array}
 % \usepackage{booktabs}
 % \usepackage{siunitx}
@@ -298,17 +299,17 @@ $$
 $$\\
 
 $$
-A\vec{x} = \vec{b}
-\Longleftrightarrow PA\vec{x} = P\vec{b}
-\Longleftrightarrow LU\vec{x} = P\vec{b}
-\Longleftrightarrow L(U\vec{x}) = P\vec{b}
-\Longleftrightarrow L\vec{d} = P\vec{b}
+    A\vec{x} = \vec{b}
+    \Longleftrightarrow PA\vec{x} = P\vec{b}
+    \Longleftrightarrow LU\vec{x} = P\vec{b}
+    \Longleftrightarrow L(U\vec{x}) = P\vec{b}
+    \Longleftrightarrow L\vec{d} = P\vec{b}
 $$
 
 $
-P\vec{b} = \begin{bmatrix}
-    4\\12\\6
-\end{bmatrix}
+    P\vec{b} = \begin{bmatrix}
+        4 \\12\\6
+    \end{bmatrix}
 $\\
 Forward solve $L\vec{d} = \vec{b}$ for $\vec{d}$:\\
 $
@@ -345,7 +346,7 @@ $
     \end{bmatrix}
     =
     \begin{bmatrix}
-        4\\8\\-2
+        4 \\8\\-2
     \end{bmatrix}
 $\\
 
@@ -354,7 +355,93 @@ $x_2 = 4$\\
 $x_1 = 6$\\
 
 $\therefore p(x) = 6 + 4x + 2x^2$
-~\\\hyperlink{toc}{\hypertarget{1.2}{(b)}}\\
+\newpage\hyperlink{toc}{\hypertarget{1.2}{(b)}}\\
+$$
+    \displaystyle l_i(x) = \prod_{\substack{j=0\\j\not=i}}^{n}\frac{x-x_j}{x_i-x_j}
+    \qquad i =0,\ 1,\ 2
+$$\\
+{
+\setstretch{1.5}
+$
+    \begin{array}{r@{}>{\displaystyle}l}
+        x_{0} & {}= -1 \\
+        x_{1} & {}= 0  \\
+        x_{2} & {}= 1  \\
+    \end{array}
+$
+}
+{
+\setstretch{1.5}
+$
+    \begin{array}{r@{}>{\displaystyle}l}
+        y_{0} & {}= 4  \\
+        y_{1} & {}= 6  \\
+        y_{2} & {}= 12 \\
+    \end{array}
+$
+}\\
+
+\begin{minipage}[t]{0.3333333333333333333333333\textwidth}
+    \begin{center}
+        $i=0$
+    \end{center}
+    $j = 1,\ 2$\\
+    {
+    \setstretch{2.5}
+    $
+        \begin{array}{r@{}>{\displaystyle}l}
+            l_{0}(x) & {}= \left(\frac{x-0}{-1-0}\right)\left(\frac{x-1}{-1-1}\right) \\
+                     & {}= \left(-x\right)\left(\frac{x-1}{-2}\right)                 \\
+                     & {}= \frac{1}{2} x(x-1)                                         \\
+        \end{array}
+    $
+    }
+\end{minipage}
+\begin{minipage}[t]{0.3333333333333333333333333\textwidth}
+    \begin{center}
+        $i=1$
+    \end{center}
+    $j = 0,\ 2$\\
+    {
+    \setstretch{2.5}
+    $
+        \begin{array}{r@{}>{\displaystyle}l}
+            l_{1}(x) & {}= \left(\frac{x-(-1)}{0-(-1)}\right)\left(\frac{x-1}{0-1}\right) \\
+                     & {}= (x+1)(1-x)                                                     \\
+        \end{array}
+    $
+    }
+\end{minipage}
+\begin{minipage}[t]{0.3333333333333333333333333\textwidth}
+    \begin{center}
+        $i=2$
+    \end{center}
+    $j = 0,\ 1$\\
+    {
+    \setstretch{2.5}
+    $
+        \begin{array}{r@{}>{\displaystyle}l}
+            l_{2}(x) & {}= \left(\frac{x-(-1)}{1-(-1)}\right)\left(\frac{x-0}{1-0}\right) \\
+                     & {}= \left(\frac{x+1}{2}\right)(x)                                  \\
+                     & {}=\frac{1}{2}x(x+1)                                               \\
+        \end{array}
+    $
+    }
+\end{minipage}
+
+{
+\setstretch{2.5}
+$$
+    \begin{array}{r@{}>{\displaystyle}l}
+        p(x) & {}= \sum^{n}_{i=0}l_i(x)y_i                                       \\
+             & {}= l_0(x)y_0 + l_1(x)y_1 + l_2(x)y_2                             \\
+             & {}= \frac{1}{2} x(x-1)(4) + (x+1)(1-x)(6) + \frac{1}{2}x(x+1)(12) \\
+             & {}= 2 x^2-2x + (-6x^2) + 6 + 6x^2 + 6x                            \\
+             & {}= 2 x^2+4x + 6                                                  \\
+    \end{array}
+$$
+}
+
 ~\\\hyperlink{toc}{\hypertarget{1.3}{(c)}}\\
 ~\\\hyperlink{toc}{\hypertarget{1.4}{(d)}}\\
 ~\\\hyperlink{toc}{\hypertarget{1.5}{(e)}}\\
