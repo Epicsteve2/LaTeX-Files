@@ -658,16 +658,19 @@ $$
     \end{array}
 $$
 
-To calculate the number of flops for divided difference, we can look at the table constructed in 1 c)\\
-We can see that the first 2 cells are free to compute. For every cell after that, we have 2 additions and one division,
-which equals 3 flops per cell. So in total, we have
-$$
-    \sum_{n=1}^{n-1} n = \frac{1}{2}(n-1) (n) = \frac{n^2}{2} - \frac{n}{2}
-$$\\
+Assuming $y[]$ has already been computed, then we only have $n-1$ additions, $n-1$ subtractions, and $n-1$ multiplications.\\
+So in total, we have $3n + \mathcal{O}(1)$ flops.
 
-In total, we have $n-1$ subtractions, $n-1$ additions, $n-1$ multiplications, and
-$\frac{n^2}{2} - \frac{n}{2}$ flops for evaluating the divided difference. Adding all of those up, we have
-$\frac{n^2}{2} + \mathcal{O}(n)$ flops.
+% To calculate the number of flops for divided difference, we can look at the table constructed in 1 c)\\
+% We can see that the first 2 cells are free to compute. For every cell after that, we have 2 additions and one division,
+% which equals 3 flops per cell. So in total, we have
+% $$
+%     \sum_{n=1}^{n-1} n = \frac{1}{2}(n-1) (n) = \frac{n^2}{2} - \frac{n}{2}
+% $$\\
+
+% In total, we have $n-1$ subtractions, $n-1$ additions, $n-1$ multiplications, and
+% $\frac{n^2}{2} - \frac{n}{2}$ flops for evaluating the divided difference. Adding all of those up, we have
+% $\frac{n^2}{2} + \mathcal{O}(n)$ flops.
 
 % $$y[x_i] = y_i \qquad \text{no flops}$$
 % $$y[x_{i+k},\ \cdots\ ,\ x_i] = \frac{y[x_{i+k},\ \cdots\ ,\ x_i] - y[x_{i+k-1},\ \cdots\ ,\ x_{i+1}]}{x_{i+k} - x_i}$$
@@ -687,11 +690,25 @@ Then\\
 $
     \begin{array}{r@{}>{\displaystyle}l}
         p(x) & {}= \sum_{i=0}^{n}b_i(x-c)^i                                       \\
-             & {}= \sum_{i=0}^{n}b_i\sum_{k=0}^{i} \binom{i}{k} {x_i}^{i-k}(-c)^k \\
-             & {}=                                                                \\
+             & {}= \sum_{i=0}^{n}b_i\sum_{k=0}^{i} \binom{i}{k} {x}^{i-k}(-c)^k \\
+             & {}= \sum_{i=0}^{n}\sum_{k=0}^{i}b_i \binom{i}{k} {x}^{i-k}(-c)^k\\
+             & {}= \sum_{k=0}^{0}b_0 \binom{0}{k} {x}^{0-k}(-c)^k\\
+             & {}\qquad + \sum_{k=0}^{1}b_1 \binom{1}{k} {x}^{1-k}(-c)^k\\
+             & {}\qquad + \sum_{k=0}^{2}b_2 \binom{2}{k} {x}^{2-k}(-c)^k\\
+             & {}\hspace*{10.25mm} \vdots\\
+             & {}\qquad + \sum_{k=0}^{n-1}b_{n-1} \binom{n-1}{k} {x}^{(n-1)-k}(-c)^k\\
+             & {}\qquad + \sum_{k=0}^{n}b_n \binom{n}{k} {x}^{n-k}(-c)^k\\
+            & {}= b_0 \binom{0}{0} {x}^{0-0}(-c)^0\\
+            & {}\qquad + b_1 \binom{1}{0} {x}^{1-0}(-c)^0 + b_1 \binom{1}{1} {x}^{1-1}(-c)^1\\
+            & {}\qquad + b_2 \binom{2}{0} {x}^{2-0}(-c)^0 + b_2 \binom{2}{1} {x}^{2-1}(-c)^1 + b_2 \binom{2}{2} {x}^{2-2}(-c)^2\\
+            & {}\hspace*{10.25mm} \vdots\\
+            & {}\qquad + b_{n-1} \binom{n-1}{0} {x}^{(n-1)-0}(-c)^0 + b_{n-1} \binom{n-1}{1} {x}^{(n-1)-1}(-c)^1 + \ldots + b_{n-1} \binom{n-1}{n-2} {x}^{(n-1)-(n-2)}(-c)^{n-2}+ b_{n-1} \binom{n-1}{n-1} {x}^{(n-1)-(n-1)}(-c)^{n-1}\\
+            & {}\qquad + \sum_{k=0}^{n}b_n \binom{n}{k} {x}^{n-k}(-c)^k\\
     \end{array}
 $
 }
+
+
 
 % c        rcnd
 % ___    __________
