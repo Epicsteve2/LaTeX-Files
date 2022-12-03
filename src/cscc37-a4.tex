@@ -227,7 +227,7 @@ Eliminate 2$^{\text{nd}}$ column:\\
             0 & 0  & -1 \\
         \end{bmatrix}
     $$
-\end{minipage}\\
+\end{minipage}\\\\
 
 {
 \setstretch{1.5}
@@ -241,7 +241,7 @@ $
          & \Longleftrightarrow & PA                         & {}= L U                             \\
     \end{array}
 $
-}\\
+}\newpage
 
 \begin{minipage}[t]{0.5\textwidth}
     $
@@ -299,21 +299,27 @@ $$
         0 & 2  & 0  \\
         0 & 0  & -1 \\
     \end{bmatrix}
-$$\\
-
-$$
-    A\vec{x} = \vec{b}
-    \Longleftrightarrow PA\vec{x} = P\vec{b}
-    \Longleftrightarrow LU\vec{x} = P\vec{b}
-    \Longleftrightarrow L(U\vec{x}) = P\vec{b}
-    \Longleftrightarrow L\vec{d} = P\vec{b}
 $$
 
-$
-    P\vec{b} = \begin{bmatrix}
-        4 \\12\\6
-    \end{bmatrix}
-$\\
+{
+        \setstretch{1.5}
+        $$
+            \begin{array}{r@{}>{\displaystyle}l}
+                A\vec{x} = \vec{b} & {}\Longleftrightarrow PA\vec{x} = P\vec{b}   \\
+                                   & {}\Longleftrightarrow LU\vec{x} = P\vec{b}   \\
+                                   & {}\Longleftrightarrow L(U\vec{x}) = P\vec{b} \\
+                                   & {}\Longleftrightarrow L\vec{d} = P\vec{b}    \\
+            \end{array}
+        $$
+
+        $$
+            P\vec{b} =
+            \begin{bmatrix}
+                4 \\12\\6
+            \end{bmatrix}
+        $$
+    }\newpage
+
 Forward solve $L\vec{d} = \vec{b}$ for $\vec{d}$:\\
 $
     \begin{bmatrix}
@@ -362,27 +368,29 @@ $\therefore p(x) = 6 + 4x + 2x^2$
 $$
     \displaystyle l_i(x) = \prod_{\substack{j=0\\j\not=i}}^{n}\frac{x-x_j}{x_i-x_j}
     \qquad i =0,\ 1,\ 2
-$$\\
-{
-\setstretch{1.5}
-$
-    \begin{array}{r@{}>{\displaystyle}l}
-        x_{0} & {}= -1 \\
-        x_{1} & {}= 0  \\
-        x_{2} & {}= 1  \\
-    \end{array}
-$
-}
-{
-\setstretch{1.5}
-$
-    \begin{array}{r@{}>{\displaystyle}l}
-        y_{0} & {}= 4  \\
-        y_{1} & {}= 6  \\
-        y_{2} & {}= 12 \\
-    \end{array}
-$
-}\\
+$$
+\begin{center}
+    {
+    \setstretch{1.5}
+    $
+        \begin{array}{r@{}>{\displaystyle}l}
+            x_{0} & {}= -1 \\
+            x_{1} & {}= 0  \\
+            x_{2} & {}= 1  \\
+        \end{array}
+    $
+    }
+    {
+    \setstretch{1.5}
+    $
+        \begin{array}{r@{}>{\displaystyle}l}
+            y_{0} & {}= 4  \\
+            y_{1} & {}= 6  \\
+            y_{2} & {}= 12 \\
+        \end{array}
+    $
+    }
+\end{center}~\\\\
 
 \begin{minipage}[t]{0.3333333333333333333333333\textwidth}
     \begin{center}
@@ -430,7 +438,7 @@ $
         \end{array}
     $
     }
-\end{minipage}
+\end{minipage}\\\\
 
 {
 \setstretch{2.5}
@@ -685,74 +693,112 @@ Suppose we are given $p(x)$ of the form $p(x) = \sum_{i=0}^{n}b_i(x-c)^i$\\
 By the binomial theorem, $(x-y)^i = \sum_{k=0}^{n} \binom{n}{k} x^{n-k}(-y)^k = \sum_{k=0}^{n} \binom{n}{k} x^k(-y)^{n-k}$\\
 
 Then\\
-{
-\setstretch{2.5}
-$
-    \begin{array}{r@{}>{\displaystyle}l}
-        p(x) & {}= \sum_{i=0}^{n}b_i(x-c)^i                                       \\
-             & {}= \sum_{i=0}^{n}b_i\sum_{k=0}^{i} \binom{i}{k} {x}^{i-k}(-c)^k \\
-             & {}= \sum_{i=0}^{n}\sum_{k=0}^{i}b_i \binom{i}{k} {x}^{i-k}(-c)^k\\
-             & {}= \sum_{k=0}^{0}b_0 \binom{0}{k} {x}^{0-k}(-c)^k\\
-             & {}\qquad + \sum_{k=0}^{1}b_1 \binom{1}{k} {x}^{1-k}(-c)^k\\
-             & {}\qquad + \sum_{k=0}^{2}b_2 \binom{2}{k} {x}^{2-k}(-c)^k\\
-             & {}\hspace*{10.25mm} \vdots\\
-             & {}\qquad + \sum_{k=0}^{n-1}b_{n-1} \binom{n-1}{k} {x}^{(n-1)-k}(-c)^k\\
-             & {}\qquad + \sum_{k=0}^{n}b_n \binom{n}{k} {x}^{n-k}(-c)^k\\
-            & {}= b_0 \binom{0}{0} {x}^{0-0}(-c)^0\\
-            & {}\qquad + b_1 \binom{1}{0} {x}^{1-0}(-c)^0 + b_1 \binom{1}{1} {x}^{1-1}(-c)^1\\
-            & {}\qquad + b_2 \binom{2}{0} {x}^{2-0}(-c)^0 + b_2 \binom{2}{1} {x}^{2-1}(-c)^1 + b_2 \binom{2}{2} {x}^{2-2}(-c)^2\\
-            & {}\hspace*{10.25mm} \vdots\\
-            & {}\qquad + b_{n-1} \binom{n-1}{0} {x}^{(n-1)-0}(-c)^0 + b_{n-1} \binom{n-1}{1} {x}^{(n-1)-1}(-c)^1 + \ldots + b_{n-1} \binom{n-1}{n-2} {x}^{(n-1)-(n-2)}(-c)^{n-2}+ b_{n-1} \binom{n-1}{n-1} {x}^{(n-1)-(n-1)}(-c)^{n-1}\\
-            & {}\qquad + \sum_{k=0}^{n}b_n \binom{n}{k} {x}^{n-k}(-c)^k\\
-    \end{array}
-$
-}
+\scalebox{0.7}{
+    \setstretch{2.5}
+    $
+        \begin{array}{r@{}>{\displaystyle}l}
+            p(x) & {}= \sum_{i=0}^{n}b_i(x-c)^i                                                                                                                                                                                               \\
+                 & {}= \sum_{i=0}^{n}b_i\sum_{k=0}^{i} \binom{i}{k} {x}^{i-k}(-c)^k                                                                                                                                                           \\
+                 & {}= \sum_{i=0}^{n}\sum_{k=0}^{i}b_i \binom{i}{k} {x}^{i-k}(-c)^k                                                                                                                                                           \\
+                 & {}= \sum_{k=0}^{0}b_0 \binom{0}{k} {x}^{0-k}(-c)^k                                                                                                                                                                         \\
+                 & {}\qquad + \sum_{k=0}^{1}b_1 \binom{1}{k} {x}^{1-k}(-c)^k                                                                                                                                                                  \\
+                 & {}\qquad + \sum_{k=0}^{2}b_2 \binom{2}{k} {x}^{2-k}(-c)^k                                                                                                                                                                  \\
+                 & {}\hspace*{10.25mm} \vdots                                                                                                                                                                                                 \\
+                 & {}\qquad + \sum_{k=0}^{n-1}b_{n-1} \binom{n-1}{k} {x}^{(n-1)-k}(-c)^k                                                                                                                                                      \\
+                 & {}\qquad + \sum_{k=0}^{n}b_n \binom{n}{k} {x}^{n-k}(-c)^k                                                                                                                                                                  \\
+                 & {}= b_0 \binom{0}{0} {x}^{0-0}(-c)^0                                                                                                                                                                                       \\
+                 & {}\qquad + b_1 \binom{1}{0} {x}^{1-0}(-c)^0 + b_1 \binom{1}{1} {x}^{1-1}(-c)^1                                                                                                                                             \\
+                 & {}\qquad + b_2 \binom{2}{0} {x}^{2-0}(-c)^0 + b_2 \binom{2}{1} {x}^{2-1}(-c)^1 + b_2 \binom{2}{2} {x}^{2-2}(-c)^2                                                                                                          \\
+                 & {}\hspace*{10.25mm} \vdots                                                                                                                                                                                                 \\
+                 & {}\qquad + b_{n-1} \binom{n-1}{0} {x}^{(n-1)-0}(-c)^0 + b_{n-1} \binom{n-1}{1} {x}^{(n-1)-1}(-c)^1 +\ \ldots\ + b_{n-1} \binom{n-1}{n-2} {x}^{(n-1)-(n-2)}(-c)^{n-2}+ b_{n-1} \binom{n-1}{n-1} {x}^{(n-1)-(n-1)}(-c)^{n-1} \\
+                 & {}\qquad + b_{n} \binom{n}{0} {x}^{n-0}(-c)^0 + b_{n} \binom{n}{1} {x}^{n-1}(-c)^1 +\ \ldots\ + b_{n} \binom{n}{n-1} {x}^{n-(n-1)}(-c)^{n-1}+ b_{n-1} \binom{n}{n} {x}^{n-n}(-c)^{n}                                       \\
+        \end{array}
+    $
+}\\
 
+\newpage We can notice the last element of all sums are $x^0$, 2$^\text{nd}$ last element (if it has one) are $x^1$, and so on.\\
+We can factor out all the $x$'s with the same power.\\
 
+\scalebox{0.92}{
+    \setstretch{2.5}
+    $
+        \begin{array}{r@{}>{\displaystyle}l}
+            p(x) & {}= x^0\left(b_0\binom{0}{0}(-c)^0 + b_1\binom{1}{1}(-c)^1 + b_2\binom{2}{2}(-c)^2 +\ \ldots\ + b_{n-1}\binom{n-1}{n-1}(-c)^{n-1} + b_n\binom{n}{n}(-c)^n \right)                \\
+                 & {}\qquad + x^1\left(b_1\binom{1}{0}(-c)^0 + b_2\binom{2}{1}(-c)^1 + b_3\binom{3}{2}(-c)^2 +\ \ldots\ + b_{n-1}\binom{n-1}{n-2}(-c)^{n-2} + b_{n}\binom{n}{n-1}(-c)^{n-1} \right) \\
+                 & {}\qquad + x^2\left(b_2\binom{2}{0}(-c)^0 + b_3\binom{3}{1}(-c)^1 + b_4\binom{4}{2}(-c)^2 +\ \ldots\ + b_{n-1}\binom{n-1}{n-3}(-c)^{n-3} + b_{n}\binom{n}{n-2}(-c)^{n-2} \right) \\
+                 & {}\hspace*{10.25mm} \vdots                                                                                                                                                       \\
+                 & {}\qquad + x^{n-1}\left(b_{n-1}\binom{n-1}{0}(-c)^0 + b_{n}\binom{n}{1}(-c)^1\right)                                                                                             \\
+                 & {}\qquad + x^{n}\left(b_{n}\binom{n}{0}(-c)^0\right)                                                                                                                             \\
+        \end{array}
+    $
+}\\
 
-% c        rcnd
-% ___    __________
+so $$p(x) = \sum_{i=0}^{n} \left(\sum_{k=i}^{n}b_{k}\binom{k}{k-i}(-c)^{k-i}\right) x^i$$
+$$\Longrightarrow p(x) = \sum_{i=0}^{n} a_ix^i \text{ where } a_i = \sum_{k=i}^{n}b_{k}\binom{k}{k-i}(-c)^{k-i}$$
 
-%   0
-% 0.5
-%   1
-% 1.5
-%   2
-% 2.5
-%   3
-% 3.5
-%   4
-% 4.5
-%   5
-% 5.5
-%   6
-
-~\\\hyperlink{toc}{\hypertarget{3.2}{(b)}}\\
+\newpage\hyperlink{toc}{\hypertarget{3.2}{(b)}}\\
 When calculating the reciprocal condition of the Vandermode matrix for values of $c$,
 we get the following table:
 \begin{center}
-    \begin{tabular}{|c|c|}
-        \hline
-        \texttt{c}   & Reciprocal condition \\
-        \hline
-        \hline
-        \texttt{0}   & \texttt{4.2535e-07}  \\
-        \texttt{0.5} & \texttt{1.9436e-06}  \\
-        \texttt{1}   & \texttt{7.5962e-06}  \\
-        \texttt{1.5} & \texttt{2.6885e-05}  \\
-        \texttt{2}   & \texttt{5.3226e-05}  \\
-        \texttt{2.5} & \texttt{0.0001131}   \\
-        \hl{\texttt{3}}   & \hl{\texttt{0.00030227}}  \\
-        \texttt{3.5} & \texttt{0.00016034}  \\
-        \texttt{4}   & \texttt{0.00014415}  \\
-        \texttt{4.5} & \texttt{3.5049e-05}  \\
-        \texttt{5}   & \texttt{4.8742e-05}  \\
-        \texttt{5.5} & \texttt{1.9436e-06}  \\
-        \texttt{6}   & \texttt{4.2535e-07}  \\
-        \hline
-    \end{tabular}
+    \scalebox{0.8}{
+        \begin{tabular}{|c|c|}
+            \hline
+            \texttt{c}      & Reciprocal condition     \\
+            \hline
+            \hline
+            \texttt{0}      & \texttt{4.2535e-07}      \\
+            \texttt{0.5}    & \texttt{1.9436e-06}      \\
+            \texttt{1}      & \texttt{7.5962e-06}      \\
+            \texttt{1.5}    & \texttt{2.6885e-05}      \\
+            \texttt{2}      & \texttt{5.3226e-05}      \\
+            \texttt{2.5}    & \texttt{0.0001131}       \\
+            \hl{\texttt{3}} & \hl{\texttt{0.00030227}} \\
+            \texttt{3.5}    & \texttt{0.00016034}      \\
+            \texttt{4}      & \texttt{0.00014415}      \\
+            \texttt{4.5}    & \texttt{3.5049e-05}      \\
+            \texttt{5}      & \texttt{4.8742e-05}      \\
+            \texttt{5.5}    & \texttt{1.9436e-06}      \\
+            \texttt{6}      & \texttt{4.2535e-07}      \\
+            \hline
+        \end{tabular}
+    }
 \end{center}
 We can see that for $c=3$, we get the biggest reciprocal condition $\Longrightarrow$ it minimizes the condition of the Vandermonde matrix.
+
+
+To check more accurately, we can use finer values of \texttt{c}. So we have:
+\begin{center}
+    \scalebox{0.8}{
+        \begin{tabular}{|c|c|}
+            \hline
+            \texttt{c}      & Reciprocal condition     \\
+            \hline
+            \hline
+            \texttt{2.5}    & \texttt{0.0001131}       \\
+            \texttt{2.55}   & \texttt{0.00011994}      \\
+            \texttt{2.6}    & \texttt{0.00012769}      \\
+            \texttt{2.65}   & \texttt{0.00013636}      \\
+            \texttt{2.7}    & \texttt{0.00014597}      \\
+            \texttt{2.75}   & \texttt{0.00015654}      \\
+            \texttt{2.8}    & \texttt{0.00016809}      \\
+            \texttt{2.85}   & \texttt{0.00018069}      \\
+            \texttt{2.9}    & \texttt{0.00019448}      \\
+            \texttt{2.95}   & \texttt{0.00020968}      \\
+            \hl{\texttt{3}} & \hl{\texttt{0.00030227}} \\
+            \texttt{3.05}   & \texttt{0.00028431}      \\
+            \texttt{3.1}    & \texttt{0.0002672}       \\
+            \texttt{3.15}   & \texttt{0.00025084}      \\
+            \texttt{3.2}    & \texttt{0.00023527}      \\
+            \texttt{3.25}   & \texttt{0.00022053}      \\
+            \texttt{3.3}    & \texttt{0.00020671}      \\
+            \texttt{3.35}   & \texttt{0.00019392}      \\
+            \texttt{3.4}    & \texttt{0.00018223}      \\
+            \texttt{3.45}   & \texttt{0.00017171}      \\
+            \texttt{3.5}    & \texttt{0.00016034}      \\
+            \hline
+        \end{tabular}
+    }
+\end{center}
 \newpage
 %----------------------------------------------------------------------------------
 % !                                     4
