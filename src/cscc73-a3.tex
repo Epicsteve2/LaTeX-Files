@@ -1,0 +1,205 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
+\usepackage{fancyhdr} % header
+\usepackage{hyperref} % links
+\usepackage{amsmath,amsthm,amssymb}	%math stuff
+\usepackage{setspace} % increase line spacing
+\usepackage[table]{xcolor} % align environment
+\usepackage{changepage} % for the adjustwidth environment
+\usepackage{relsize} % Scaling the font
+\usepackage{algorithm} % for algorithms
+\usepackage{caption} % captioning the algorithm
+\usepackage[export]{adjustbox}% http://ctan.org/pkg/adjustbox
+\usepackage{graphicx} \graphicspath{ {./images/} } % images
+\usepackage[noend]{algpseudocode} % pseudo code
+\usepackage[T1]{fontenc} % for {} in \texttt{}
+
+% indenting in pseudocode
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+\setlength{\parindent}{0pt}
+\everymath{\displaystyle}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCC73 A3}
+\fancyhead[CO,C]{Stephen Guo, Ezzeldin Ismail}
+\fancyhead[RO,R]{1006313231, 1005798861}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\begin{document}
+%----------------------------------------------------------------------------------
+%                              Table of Contents
+%----------------------------------------------------------------------------------
+\begin{center}
+	\hypertarget{toc}{\LARGE \underline{\textbf{Table of Contents}}}\\
+\end{center}
+
+\hyperlink{1}{\textbf{Question 1:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\hyperlink{2}{\textbf{Question 2:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\newpage
+
+%----------------------------------------------------------------------------------
+%                                   Questions
+%----------------------------------------------------------------------------------
+\setstretch{1.2}
+%----------------------------------------------------------------------------------
+% !                                     1
+%----------------------------------------------------------------------------------
+\hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}\\
+
+First, we pick a random magnet. This algorithm will split the arrays until they are of size one.
+Then, check every size-one arrays to see if it attracts or repels the random magnet.
+We add them to the respective global linked lists, and we concatenate them in the end.
+\begin{algorithm}
+	\caption*{\textbf{Algorithm}\\Sort\_Mangets \big(\texttt{magnets}: \texttt{[}array of north and south magnets\texttt{]}\big)}\label{alg:cap}
+	\begin{algorithmic}[1]
+		\State \texttt{random\_magnet} = \texttt{magnets}\texttt{[}random()*\texttt{magnets}.length - 1\texttt{]}
+		\State \texttt{attracts} = \textbf{new} linked\_list()
+		\State \texttt{repels} = \textbf{new} linked\_list()
+		\State
+		\State \textbf{function} \texttt{split\_and\_merge} (\texttt{magnets})\Indent
+			\If{\texttt{magnets}.length == 1}	
+				\If{\texttt{magnets} repels \texttt{random\_magnet}}
+					\State\texttt{repels}.append(\texttt{magnet})
+				\Else
+					\State\texttt{attracts}.append(\texttt{magnet})
+				\EndIf
+				\State\Return
+			\EndIf
+			\State
+			\State \texttt{split\_and\_merge}(\texttt{magnets[}:\texttt{magnets}.length/2\texttt{]})
+			\State \texttt{split\_and\_merge}(\texttt{magnets[}\texttt{magnets}.length/2:\texttt{]})
+		\EndIndent
+		\State
+		\State \texttt{split\_and\_merge}(\texttt{magnets})
+		\State \texttt{result\_magnets} = \texttt{attracts} + \texttt{[random\_magnet]} + \texttt{repels}
+		\State\Return \texttt{result\_magnets}
+	\end{algorithmic}
+\end{algorithm}
+
+\texttt{Sort\_Mangets()} is feasible since we return a list of magnets.
+
+\newpage
+\textbf{Proof of complexity}:\\
+This algorithm consists of three parts
+\begin{enumerate}
+	\itemsep0em
+	\item Picking a random magnet
+	\item Divide and Conquer
+	\item Merging the final two lists and the random magnet
+\end{enumerate}
+\textbf{Note}: All container elements are lists with head and tail pointers, except the initial given array of magnets.
+Thus, merging and appending to the end is O(1).\\
+
+Picking a random magnet is clearly O(1) from the magnets array.
+Merging the two final linked lists with the extra element is also O(1) since everything is in a linked list.\\
+
+The divide and conquer only works on the base case, and returns nothing. Therefore, the recurrence relation is T(n) = 2T(n/2).
+Assuming T(1) is a constant, we can recurse this relation to its base case giving us T(n) = $2^{\log_2(n)}\text{T}(1) = n\text{T}(1) \in O(n)$.\\
+
+$\therefore O(1) + O(1) + O(n) \in O(n)$\\
+
+\textbf{Proof of Correctness} (by Induction):
+\begin{adjustwidth}{10mm}{}
+	\textsc{Base Case}:
+	\begin{adjustwidth}{10mm}{}
+		Test the single magnet against our indicator magnet:\\
+		Case 1: The magnets repel so add it to the repels list\\
+		Case 2: The magnets attract so add it to the attracts list\\
+	\end{adjustwidth}
+
+	Since the base case is applied over all elements then they will be in the appropriate list. So when all lists are merged all the elements will be sorted.
+\end{adjustwidth}
+\newpage
+%----------------------------------------------------------------------------------
+% !                                     2
+%----------------------------------------------------------------------------------
+\hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Question 2.}}}}\\
+
+This algorithm is pretty much the counting inversions algorithm we saw in class, but we also call
+it with the right array doubled.
+\begin{algorithm}
+	\caption*{\textbf{Algorithm}\\Sort\_and\_Count \big(\texttt{list}: \texttt{[}array of list\texttt{]}\big)}\label{alg:cap}
+	\begin{algorithmic}[1]
+		\State \textbf{function} \texttt{merge\_and\_count} (\texttt{left\_half}, \texttt{right\_half})\Indent
+			\State \texttt{i} = 0, \texttt{j} = 0, \texttt{count} = 0
+			\State \texttt{merged} = \texttt{[]}
+			\State
+			\While{\texttt{i} $\not =$ \texttt{left\_half}.length and \texttt{j} $\not =$ \texttt{right\_half}.length}
+				\If{\texttt{j} == \texttt{right\_half}.length}
+				\State \texttt{merged}.append(\texttt{left\_half[i]})
+					\State \texttt{i}++
+				\EndIf
+				\If{\texttt{i} == \texttt{left\_half}.length}
+					\State \texttt{merged}.append(\texttt{right\_half[j]})  
+					\State \texttt{j}++
+					\State \texttt{count}++
+				\EndIf
+				\If{\texttt{left\_half[i]} $\geq$ \texttt{right\_half[j]}}
+					\State \texttt{merged}.append(\texttt{left\_half[i]})
+				\Else
+					\State \texttt{merged}.append(\texttt{right\_half[j]})  
+					\State \texttt{count}++
+				\EndIf
+			\EndWhile
+			\State\Return \texttt{count}, \texttt{merged}
+		\EndIndent
+		\State
+		\If{\texttt{list}.length == 1}
+			\State\Return \big(0, \texttt{list}\big)
+		\EndIf
+		\State
+		\State \texttt{left\_half} = \texttt{list[:list}.length\texttt{]}
+		\State \texttt{right\_half} = \texttt{list[list}.length\texttt{:]}
+		\State
+		\State \texttt{left\_inversions}, \texttt{left\_half} = \texttt{Sort\_and\_Count}(\texttt{left\_half})
+		\State \texttt{right\_inversions}, \texttt{right\_half} = \texttt{Sort\_and\_Count}(\texttt{right\_half})
+		\State
+		\State \texttt{inversions}, \_ = \texttt{merge\_and\_count}\big(\texttt{left\_half}, \texttt{right\_half}.map(n => 2*n)\big)
+		\State \_, \texttt{list} = \texttt{merge\_and\_count}(\texttt{left\_half}, \texttt{right\_half})
+		\State\Return \texttt{left\_inversions} + \texttt{right\_inversions} + \texttt{inversions}, \texttt{list}
+	\end{algorithmic}
+\end{algorithm}
+
+\newpage
+\texttt{Sort\_and\_Count()} is feasible since we return a number of inversions.\\
+
+\textbf{Proof of complexity}:\\
+This algorithm is similar to \texttt{sort-and-count()} which was discussed in class.
+The only difference is that we use one more \texttt{merge-and-count()} call.
+This adds one more $O(n)$ call to our algorithm so overall the recurrence relation is
+$$T(n) = 2T\left(\frac{n}{2}\right) + 2O(n) + O(1) = 2T\left(\frac{n}{2}\right) + O(n) + O(1) \in O(n\log n)$$
+as shown in lecture.\\
+
+\textbf{Proof of Correctness} (by Induction):
+\begin{adjustwidth}{10mm}{}
+	\textsc{Base Case}:
+	\begin{adjustwidth}{10mm}{}
+		Test with one element: return that one element has 0 inversions.
+	\end{adjustwidth}
+	\textsc{Induction Hypothesis}:
+	\begin{adjustwidth}{10mm}{}
+		Assume that our algorithm works for lists of size $0 \leq i < n$.
+	\end{adjustwidth}
+	\textsc{Induction Step}:
+	\begin{adjustwidth}{10mm}{}
+		Consider $n$:\\
+		When we call \texttt{merge-and-count()} with the right array doubled, we will count inversions where $i<j,\;a_i>2a_{j}$ similar to \texttt{merge-and-count()} in lecture.
+		Adding this to the counts from the left and right subarrays with element $n/2$ we will get the total amount of inversions from the entire merged
+		array as smaller subsets are correct by our induction hypothesis.\\
+	\end{adjustwidth}
+\end{adjustwidth}
+\end{document}

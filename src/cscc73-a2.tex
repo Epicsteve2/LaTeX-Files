@@ -1,0 +1,220 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
+\usepackage{fancyhdr} % header
+\usepackage{hyperref} % links
+\usepackage{amsmath,amsthm,amssymb}	%math stuff
+\usepackage{setspace} % increase line spacing
+\usepackage[table]{xcolor} % align environment
+\usepackage{changepage} % for the adjustwidth environment
+\usepackage{relsize} % Scaling the font
+\usepackage{algorithm} % for algorithms
+\usepackage{caption} % captioning the algorithm
+\usepackage[export]{adjustbox}% http://ctan.org/pkg/adjustbox
+\usepackage{graphicx} \graphicspath{ {./images/} } % images
+\usepackage[noend]{algpseudocode} % pseudo code
+\usepackage[T1]{fontenc} % for {} in \texttt{}
+
+\setlength{\parindent}{0pt}
+\everymath{\displaystyle}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCC73 A2}
+\fancyhead[CO,C]{Stephen Guo, Ezzeldin Ismail}
+\fancyhead[RO,R]{1006313231, 1005798861}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\begin{document}
+%----------------------------------------------------------------------------------
+%                              Table of Contents
+%----------------------------------------------------------------------------------
+\begin{center}
+	\hypertarget{toc}{\LARGE \underline{\textbf{Table of Contents}}}\\
+\end{center}
+
+\hyperlink{1}{\textbf{Question 1:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\hyperlink{2}{\textbf{Question 2:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\newpage
+
+%----------------------------------------------------------------------------------
+%                                   Questions
+%----------------------------------------------------------------------------------
+\setstretch{1.2}
+%----------------------------------------------------------------------------------
+% !                                     1
+%----------------------------------------------------------------------------------
+\hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}\\
+
+The algorithm to create a graph of the best bottleneck for $G$ is simply making a maximum spanning tree of $G$.
+We will do this using Kruskal's algorithm using the disjoint-set data structure.
+\begin{algorithm}
+	\caption*{\textbf{Algorithm}\\Max\_Spanning\_Tree \big(\texttt{graph}: undirected graph $= (V,\ E)$\big)}\label{alg:cap}
+	\begin{algorithmic}[1]
+		\State let \texttt{result} = \texttt{\{\}}
+		\State let \texttt{sorted-edges} = \texttt{E} sorted by bandwidth decreasing
+		\State let \texttt{sorted-edges-cluster} = \texttt{[]}
+		\State
+		\For{\texttt{edge} in \texttt{sorted-edges}}
+		  \State \texttt{sorted-edges-cluster}.append\big(MAKE-CLUSTER(\texttt{edge})\big)
+		\EndFor
+		\State
+		\For{\texttt{edge = (u, v)} in \texttt{sorted-edges-cluster}}
+			% \If{adding \texttt{edge} does not create a cycle}
+		\If{\texttt{u}.cluster $\not =$ \texttt{v}.cluster}
+				\State \texttt{result} = \texttt{result} $\cup$ \texttt{edge}
+				\State UNION(\texttt{u}.cluster,\ \texttt{v}.cluster)
+			\EndIf
+		\EndFor
+    \State
+		\State\Return{\texttt{result}}
+	\end{algorithmic}
+\end{algorithm}
+
+The algorithm \texttt{Max\_Spanning\_Tree()} is a greedy algorithm with the choice of longest edge length that does not create a cycle.\\
+
+\texttt{Max\_Spanning\_Tree()} gives a feasible solution since we output a spanning tree with no cycles.\\
+
+The complexity of \texttt{Max\_Spanning\_Tree()} is just $\mathcal{O}(n \log n)$ since we sort which is $\mathcal{O}(n \log n)$.
+The 2 \texttt{for} loops all loop $\mathcal{O}(n)$ times and have $\mathcal{O}(1)$ operations.
+Every other line is $\mathcal{O}(1)$, so the final time compelxity is $\mathcal{O}(n \log n)$\\
+
+\newpage
+\textbf{Theorem}: All spanning trees have the same number of edges\\
+\textbf{Proof}:
+\begin{adjustwidth}{10mm}{}
+	Let $G = (V,\ E)$ be an arbitrary graph.\\
+
+	We will show that any spanning tree of a connected graph $G$ must have $|V|-1$ edges.\\
+
+	\textsc{Base Case}:
+	\begin{adjustwidth}{10mm}{}
+		For a graph of size $|V| = 1$, the a spanning tree would have no edges.
+	\end{adjustwidth}
+	\textsc{Induction Hypothesis}:
+	\begin{adjustwidth}{10mm}{}
+		Suppose for a graph $G = (V,\ E)$ with $|V| = n$, we can create a spanning tree $T$ with $n-1$ edges.
+	\end{adjustwidth}
+	\textsc{Induction Step}:
+	\begin{adjustwidth}{10mm}{}
+		\textbf{WTS}: A spanning tree $T^\prime$ for a graph $G^\prime$ with $|V^\prime| = n+1$ has $n$ edges.\\
+
+		The spanning tree from [IH] has all nodes except for 1. Since by assumption, the graph is connected,
+		then there is an edge in $G^\prime$ to the new vertex. Then use $T$ from [IH] and connect one edge in $G^\prime$ to the new node to create $T^\prime$.\\
+		We now have a spanning tree $T^\prime$ for $G^\prime$ with $n$ edges. $\hspace*{\fill}\blacksquare$
+	\end{adjustwidth}
+\end{adjustwidth}~\\[-5mm]
+
+\textbf{Theorem}: Greedy spanning tree $T$ given by \texttt{Max\_Spanning\_Tree()} is optimal\\
+\textbf{Proof} (Greedy stays ahead):
+\begin{adjustwidth}{10mm}{}
+	Let $G = \{g_1,\ g_2,\ \cdots,\ g_{n-1},\ g_{n}\}$ be the spanning tree given by \texttt{Max\_Spanning\_Tree()}, ordered by add order\\
+	Let $O = \{o_1,\ o_2,\ \cdots,\ o_{n-1},\ o_{n}\}$ be a maximum spanning tree that's most similar to $G$, ordered by add order\\
+	We know they have to be the same size by the theorem above.\\
+
+	\textbf{WTS}: We can change $O$ to be more similar to $G$ while keeping optimality.\\
+
+	{
+	\setstretch{1.5}
+	$
+		\begin{array}{r@{}>{\displaystyle}l}
+			\text{Suppose\hspace*{10mm}} {g}_{1} & {}= {s}_{1}                                                         \\
+			{g}_{2}                              & {}= {o}_{2}                                                         \\
+			                                     & \hspace*{2.5mm} \vdots                                              \\[-3mm]
+			{g}_{k-2}                            & {}= {o}_{k-2}                                                       \\
+			{g}_{k-1}                            & {}= {o}_{k-1}                                                       \\
+			\text{but\hspace*{10mm}}{g}_{k}      & {}\not= {o}_{k}\hspace*{9mm}\text{for some } k \in [0,\ \cdots,\ n] \\
+		\end{array}
+	$
+	}\\
+
+	since ${g}_{k} \not= {o}_{k}$, then $b_{o_k} \leq b_{g_k}$ because if $b_{o_k} > b_{g_k}$, then the greedy algorithm would've chosen that edge.\\
+
+	Let $g_k = (u,\ v)$\\
+	Now replace $o_k$ with $g_k$ for $O^\prime$\\
+
+	We know that $b(P)$ with $P$ going to the verticies $u$ and $v$ in $O$ still has the best bottleneck since \texttt{Max\_Spanning\_Tree()}
+	selected the biggest bandwidth edge going to them.\\
+
+	Repeat until $O = G$\\
+	$\therefore O$ becomes more similar to $G$ with every path still having the best bottleneck. $\hspace*{\fill}\blacksquare$
+
+	% We will prove correctness by Induction.\\
+	% \textsc{Base Case}:
+	% \begin{adjustwidth}{10mm}{}
+	% 	For a graph of size $|E| = 1$, \texttt{Max\_Spanning\_Tree()} will output that one edge which is a max spanning tree
+	% \end{adjustwidth}
+	% \textsc{Induction Hypothesis}:
+	% \begin{adjustwidth}{10mm}{}
+	% 	Suppose \texttt{Max\_Spanning\_Tree()} outputs a max spanning tree for a graph of size $|E| = k$
+	% \end{adjustwidth}
+	% \textsc{Induction Step}:
+	% \begin{adjustwidth}{10mm}{}
+	% 	\textbf{WTS}: \texttt{Max\_Spanning\_Tree()} outputs a max spaninng tree for a grpah of size $|E| = k+1$
+	% \end{adjustwidth}
+\end{adjustwidth}
+\newpage
+%----------------------------------------------------------------------------------
+% !                                     2
+%----------------------------------------------------------------------------------
+\hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Question 2.}}}}\\\\
+To prove that the degrees of a graph are valid, we just need to find one graph that supports those degrees.
+The following algorithm creates a graph with the most clustering possible,
+as each node tries to connect to the nodes that come after it in descending order of degrees.\\
+
+\begin{algorithm}
+	\caption*{\textbf{Algorithm}\\Validate\_Degrees \big(\texttt{graph}: undirected graph $= (V,\ E)$\big)}\label{alg:cap}
+	\begin{algorithmic}[1]
+		\State let \texttt{degrees} = $V$ sorted in descending order
+		\If{\texttt{degrees}.[0] > $|E|$}
+			\State \Return false
+		\EndIf
+		\State
+		\For{\texttt{degree} in \texttt{degrees}}
+		\State subtract 1 from the next degree elements in \texttt{degrees}
+		\If{any element went below 0}
+			\State \Return false
+		\EndIf
+		\State resort \texttt{degrees}
+		\EndFor
+		\State
+		\State\Return{\texttt{true}}
+	\end{algorithmic}
+\end{algorithm}
+
+\textbf{Complexity}: The complexity of \texttt{Validate\_Degrees()} is $\mathcal{O}(n^2\log n)$.\\
+
+Firstly we sort the degrees which is $\mathcal{O}(n\log n)$ and then we go over every element,
+and visit its right neighbours depending on its degree, and finally resorting the array.
+Since we know that the max degree is bounded by $n$ due to the early return on line 2, the worst case is if its a complete graph,
+in which case every element will visit every other right element, giving $\mathcal{O}(n + n\log n)$ done $n$ times which is $\mathcal{O}(n^2\log n)$.\\
+
+\newpage
+\textbf{Proof} (contradiction):
+\begin{adjustwidth}{10mm}{}
+	It is clear that a graph created by \texttt{Validate\_Degrees()} is valid, so if \texttt{Validate\_Degrees()} returns \texttt{true} then the input is valid.
+	Let's assume that \texttt{Validate\_Degrees()} returned \texttt{false} on a valid graph.\\
+
+	Assumption: Let $G$ be a valid graph and \texttt{Validate\_Degrees()} be false.\\
+
+	Let \texttt{e} be the node with a degree that caused \texttt{Validate\_Degrees()} to fail (and therefore have a remaining degree greater than 0).
+	That means that when attempting to connect \texttt{e} to its right neighbours to complete its degree,
+	we attempted to connect it to a node with a remaining degree of 0. Therefore, there are not enough remaining nodes to for \texttt{e} to connect
+	to so that it has its supposed degree.
+	This is because we have already connected \texttt{e} to all of its left neighbours according to our algorithm,
+	and our right neighbours are in descending order, so if we hit a neighbour with no degrees remaining,
+	then none of the remaining nodes have any remaining degrees to connect to us, so the $G$ cannot be valid.
+	This goes against our assumption so \texttt{Validate\_Degrees()} also returns \texttt{false} on incorrect graphs.\\
+
+	$\therefore$ \texttt{Validate\_Degrees()} always gives the correct answer.
+\end{adjustwidth}
+\end{document}
