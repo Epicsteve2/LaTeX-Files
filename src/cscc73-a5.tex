@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
+\usepackage{fancyhdr} % header
+\usepackage{hyperref} % links
+\usepackage{amsmath,amsthm,amssymb}	%math stuff
+\usepackage{setspace} % increase line spacing
+\usepackage[table]{xcolor} % align environment
+\usepackage{changepage} % for the adjustwidth environment
+\usepackage{relsize} % Scaling the font
+\usepackage{algorithm} % for algorithms
+\usepackage{caption} % captioning the algorithm
+\usepackage[export]{adjustbox}% http://ctan.org/pkg/adjustbox
+\usepackage{graphicx} \graphicspath{ {./images/} } % images
+\usepackage[noend]{algpseudocode} % pseudo code
+\usepackage[T1]{fontenc} % for {} in \texttt{}
+\usepackage{mathtools} % \raisebox
+
+\makeatletter
+\newcommand{\oset}[2]{%
+  {\mathop{#2}\limits^{\vbox to -.5\ex@{\kern-\tw@\ex@
+   \hbox{\scriptsize #1}\vss}}}}
+\makeatother
+
+% indenting in pseudocode
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+\setlength{\parindent}{0pt}
+\everymath{\displaystyle}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCC73 A5}
+\fancyhead[CO,C]{Stephen Guo, Ezzeldin Ismail}
+\fancyhead[RO,R]{1006313231, 1005798861}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\begin{document}
+%----------------------------------------------------------------------------------
+%                              Table of Contents
+%----------------------------------------------------------------------------------
+\begin{center}
+	\hypertarget{toc}{\LARGE \underline{\textbf{Table of Contents}}}\\
+\end{center}
+
+\hyperlink{1}{\textbf{Question 1:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\hyperlink{2}{\textbf{Question 2:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm} \leavevmode \\
+
+\newpage
+
+%----------------------------------------------------------------------------------
+%                                   Questions
+%----------------------------------------------------------------------------------
+\setstretch{1.2}
+%----------------------------------------------------------------------------------
+% !                                     1
+%----------------------------------------------------------------------------------
+\hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}\\
+\newpage
+%----------------------------------------------------------------------------------
+% !                                     2
+%----------------------------------------------------------------------------------
+\hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Question 2.}}}}\\
+\end{document}
