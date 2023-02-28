@@ -3,7 +3,7 @@
 \usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
 \usepackage{fancyhdr} % header
 \usepackage{hyperref} % links
-\usepackage{amsmath,amsthm,amssymb}	%math stuff
+\usepackage{amsmath,amsthm,amssymb} %math stuff
 \usepackage{setspace} % increase line spacing
 \usepackage[table]{xcolor} % align environment
 \usepackage{changepage} % for the adjustwidth environment
@@ -65,10 +65,300 @@
 %----------------------------------------------------------------------------------
 % !                                     1
 %----------------------------------------------------------------------------------
-\hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}\\
+\hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}\\\\
+This problem asks us to find the maximum bytes processable given a schedule of data $x_1, x_2, \ldots x_n$ and computer efficiency
+$s_1, s_2, \ldots, s_n$ where $s_i$ is the efficiency $i$ days after a reboot. The subproblems that we will be using to
+solve for day $n$ is the solutions for day $n-1$ or $n-2$. This is because on each day we have two options, we can continue from the previous day,
+or reboot the computer, not processing anything but resetting our efficiency. Therefore, we can either:
+\begin{enumerate}
+	\item use the optimal solution for yesterday and continue processing today
+	\item we use the optimal solution for before yesterday, reset yesterday, and process today with optimal efficiency
+\end{enumerate}
+This works because in an optimal processing sequence, we must have the optimal amount processed in sub sequences
+with respect to our choice of resetting or not. This is because if our previous options are not optimal, then we
+can find a better way to process the previous days, which would increase our overall bytes processed and give us a better solution.
+$$
+	\text{Opt}(i) =
+	\left\{
+	\begin{array}{ll}
+		(0,\ 0)                       & \hspace*{1.5mm}\text{if } i = 0  \\
+		\big(\min(x_1,\ s_1),\ 1\big) & \hspace*{1.5mm} \text{if } i = 1 \\
+		\begin{array}{l}
+			\big(                                                                     \\
+			\hspace*{10mm} \min(x_i,\ s_{\text{Opt}(i-1)[1]+1} )+ \text{Opt}(i-1)[0], \\
+			\hspace*{10mm} {\text{Opt}(i-1)[1]+1}                                     \\
+			\big)
+		\end{array}
+		                              & \begin{array}{l}
+			\text{if } \min(x_i,\ s_{\text{Opt}(i-1)[1]+1}) + \text{Opt}(i-1)[0] > \\
+			\hspace*{4.5mm}\min(x_i,\ s_{1}) + \text{Opt}(i-2)[0]
+		\end{array}        \\
+		\big(\min(x_i,\ s_{1} )+ \text{Opt}(i-2)[0],\ 1 \big)
+		                              & \begin{array}{l}
+			\text{if } \min(x_i,\ s_{\text{Opt}(i-1)[1]+1}) + \text{Opt}(i-1)[0] \leq \\
+			\hspace*{4.5mm}\min(x_i,\ s_{1}) + \text{Opt}(i-2)[0]
+		\end{array}        \\
+	\end{array}
+	\right.
+$$
+In the recurrence formula, we return 2 values represented as a tuple: the optimal total amount processed for day $i$,
+and how many days it has been since the last reset. This allows us to track resets by checking if the value for day $i$ is 1,
+signifying there was a reset the day before. We have a base value of (0, 0) to represent that with an empty list we do nothing.
+Then on our first day, the best option would be to process the data, since resetting would mean processing 0
+total data and as our data is non-negative processing it would give us a larger total. The following two options return either
+yesterdays optimal added to processing todays data with the next efficiency, or before yesterdays optimal added to processing
+today with the best (initial) efficiency depending on which is greater.
+
+\newpage
+Proof of correctness:\\
+Base Cases:\\
+\hspace*{1em} Let $n$ = 0.\\
+\hspace*{2em} Since we have no days, we have no data, and therefore we can only return (0, 0).\\
+\hspace*{1em} Let $n$ = 1.
+\begin{adjustwidth}{2em}{}
+	Since we only have one day, our best option is to process data, as our only other option is to reboot, but then we would
+	not be able to process any data and have a total amount of data processed of 0. Since the amount of data we can process
+	is $\geq 0$, processing data will be equal to if not better than rebooting, so we return $\big(\min(x_1, s_1), s_1\big)$
+\end{adjustwidth}
+
+Induction Step:\\
+\hspace*{1em} Let $n \geq 1$.\\
+\hspace*{1em} Suppose Opt$(i)$ holds whenever $0 \leq i < n$.
+\begin{adjustwidth}{2em}{}
+	return
+	\begin{equation*}
+		\begin{array}{l}
+			\max\Big(\left(\min\left(x_i, s_{Opt(i-1)[1]+1}\right) + Opt(i-1)[0],\, S_{opt(i-1)[1]+1}\right),\, \\\hspace*{2.5em} \left(\min\left(x_i, s_1\right) + Opt(i-2)[0],\, 1\right),\\\hspace*{2.5em} key=(e)=>e[0]\Big)
+		\end{array}
+	\end{equation*}\\
+	We know Opt$(i-1)$, Opt$(i-2)$ return the optimal values for day $i-1$ and $i-2$ respectively by the induction hypothesis.
+	Therefore, to increase our total amount of data processed, we have to process data today. Therefore we can either
+	continue processing data without rebooting, or process with the best efficiency by rebooting yesterday.
+	Since we pick the maximum of those two options, we return the maximum amount of data processed overall.
+\end{adjustwidth}
+\vspace{1em}
+$\therefore$ By induction, Opt$(i)$ holds for all $i \geq 0$. \hfill $\blacksquare$
+
+Time complexity:\\
+This algorithm is $O(n)$ as there is only one loop which is at line 15 which runs for the length of the input array + 1,
+and inside that loop we only do $O(1)$ operations line min, addition, array access and array pushes.    \vspace{1em}
+
+Space complexity:\\
+This algorithm has space complexity $O(n)$, as the only variable that changes size with the input is the process array,
+and it holds $n+1$ elements which is $O(n)$. All other variables are primitives or data structures with primitive attributes.\\
+
+% Explanation of psuedocode in relation to recurrence. Is this needed?
+Since in our algorithm we return a tuple, we created a struct to represent that called ProcessProgress.
+The first element represents the optimal total amount processed for the corresponding day, and the second
+element represents the amount of days since last reset. On line 6 and 8 we have initial return statements
+because the answers to the base case of the recurrence relation are immediately knowable.
+The recurrence part works bottom up by filling in the values of the table from the start and
+then returning the last index's value. We store all the values in the progress array.
+We appropriately fill in the base cases on lines 12 and 13. Since we have an 'extra day' (empty list day),
+we loop from 2 (past our base case) to the length of terrabytes array + 1 and index the terrabytes with $i-1$
+since it is 0 indexed unlike our recurrence relation data which is 1 indexed. On line 16 we calculate
+the option where we reboot yesterday, and on line 20 we calculate the option where we continue processing
+without a reboot. In lines 25-28 we push the larger of the two options to the progress array.
+Finally we return the the final index's max attribute, which is the optimal total amount processed for the entire sequence.
+
+
+\begin{algorithm}
+  \caption*{\textbf{Algorithm}\\Process\_Terabytes \big(\texttt{terabytes}: array of terabytes to process, \texttt{decay}: array of computation power\big)}\label{alg:cap}
+	\begin{algorithmic}[1]
+    \State \textbf{struct} \texttt{ProcessProgress} \texttt{\{} \Indent
+      \State \texttt{max}: int,
+      \State \texttt{runtime}: int
+    \EndIndent \State \texttt{\}}
+    \State
+    \If{\texttt{terabytes}.len == 0}
+      \State \Return 0
+    \EndIf
+    \If{\texttt{terabytes}.len == 1}
+      \State \Return min(\texttt{terabytes[0]}, \texttt{decay[0]})
+    \EndIf
+    \State
+    \State \texttt{progress} = \texttt{[]}
+    \State \texttt{progress[0]} = \texttt{ProcessProgress \{max:0, runtime:0\}}
+  \State \texttt{progress[1]} = \texttt{ProcessProgress \{max:}min(\texttt{terabytes[0]}, \texttt{decay[0]}), \texttt{runtime:1\}}
+  \State
+  \For{\texttt{i} in 2..\texttt{terabytes}.len()+1}
+    \State \texttt{skip\_yesterday} = \texttt{ProcessProgress \{}\Indent
+      \State \texttt{max: progress[i-2].max} + min(\texttt{terabytes[i-1], decay[0]}),
+      \State \texttt{runtime: 1}
+    \EndIndent \State \texttt{\}}
+    \State \texttt{continue} = \texttt{ProcessProgress \{}\Indent
+      \State \texttt{max: progress[i-1].max} + min(\texttt{terabytes[i-1], decay[progress[i-1].runtime]}),
+      \State \texttt{runtime: progress[i-1].runtime + 1}
+    \EndIndent \State \texttt{\}}
+    \State
+    \If{\texttt{skip\_yesterday.max} > \texttt{continue.max}}
+      \State \texttt{progress}.push(\texttt{skip\_yesterday})
+    \Else
+      \State \texttt{progress}.push(\texttt{continue})
+    \EndIf
+  \EndFor
+  \State
+  \State \Return \texttt{progress[-1].max}
+	\end{algorithmic}
+\end{algorithm}
 \newpage
 %----------------------------------------------------------------------------------
 % !                                     2
 %----------------------------------------------------------------------------------
-\hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Question 2.}}}}\\
+\hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Question 2.}}}}\\\\
+This problem asks us to find the optimal amount of stocks to sell on each day given a certain amount of stocks,
+the prices over the days, and the decay function for how much the prices decrease by for each stock sold.
+The subproblems to solve this algorithm are how much stock needs to be sold on previous days. This is because for each stock added,
+we can either sell it today or on a previous day. And for each day added, if we have the optimal profit if a certain amount of
+stocks are sold on a certain day, we can check if we can sell them better using the extra day or not. The optimal profit for
+all the stocks using all the days, is calculated using the optimal amount of stocks sold on each day.
+
+$\text{Opt}(\texttt{day}, \texttt{stock}) =$
+$$
+	\left\{
+	\begin{array}{ll}
+		(0,\ 0,\ 0)                & \hspace*{1.5mm}\begin{array}{l}
+			\hspace*{-2mm}\text{if \texttt{day}} = 0 \\
+			\hspace*{-2mm}\text{or } \texttt{stock} = 0
+		\end{array} \\
+
+		\begin{array}{l}
+			\big(                                                                                               \\
+			\hspace*{10mm}
+			\max_{0 \leq \texttt{best} \leq \texttt{stock}}
+			\raisebox{-1.5mm}{
+				$
+					\begin{array}{l}
+						\text{Opt}(\texttt{day}-1,\ \texttt{stock $-$ best})\texttt{[0]}\ + \\
+						\texttt{best} \times\big(p_\texttt{day} - \text{Opt}(\texttt{day}-1,\ \texttt{stock $-$ best})\texttt{[1]} - f(\texttt{best})\big),
+					\end{array}
+				$
+			}                                                                                                   \\
+			% \text{Opt}(\texttt{day}-1,\ \texttt{stock})\\
+			\hspace*{10mm} \text{Opt}(\texttt{day}-1,\ \texttt{stock $-$ best})\texttt{[1]} + f(\texttt{best}), \\
+			\hspace*{10mm} \texttt{best},                                                                       \\
+			\big)
+		\end{array} & \hspace*{1.5mm}\text{otherwise}          \\
+	\end{array}
+	\right.
+$$
+
+The recurrence relation uses a tuple: the first value is the optimal profit possible for selling the stocks given the number of days.
+This is calculated by finding the best value to sell on that day, having sold the rest on a previous day.
+So we can partition the shares into the ones sold today and the ones sold before. This allows us
+to use the sub problems to find the best amount to sell by finding the amount that would maximize
+our profit from today's sale added to the optimal profit from selling the rest of the shares on the previous days.
+The second value is the total amount our price has been reduced by because of all the shares sold so far.
+The third value is the amount of shares that would give us the optimal value in the first position of the tuple.
+
+\newpage
+Proof of correctness:\\
+Base Cases:\\
+\hspace*{1em} Let \texttt{day} = 0.
+\begin{adjustwidth}{2em}{}
+	Since we have no days,
+	we cannot sell any of our stocks so our profit will be 0 so we return\\ (0, 0, 0).
+\end{adjustwidth}
+\hspace*{1em} Let \texttt{stock} = 0.
+\begin{adjustwidth}{2em}{}
+	Since we have no stocks, we cannot sell anything on any day so our profit will be 0 so we return\\ (0, 0, 0).
+\end{adjustwidth}
+
+Induction Step:\\
+\hspace*{1em} Let $\texttt{day} \geq 0,\; \texttt{stock} \geq 0$.\\
+\hspace*{1em} Suppose Opt($i,\ j)$ holds whenever $0 \leq i < \texttt{day},\;0 \leq j < \texttt{stock}$.
+\begin{adjustwidth}{2em}{}
+	return
+	\begin{equation*}
+		\begin{array}{l}
+			\big(                                                                                               \\
+			\hspace*{10mm}
+			\max\limits_{0 \leq \texttt{best} \leq \texttt{stock}}
+			\raisebox{-1.5mm}{
+				$
+					\begin{array}{l}
+						\text{Opt}(\texttt{day}-1,\ \texttt{stock $-$ best})\texttt{[0]}\ + \\
+						\texttt{best} \times\big(p_\texttt{day} - \text{Opt}(\texttt{day}-1,\ \texttt{stock $-$ best})\texttt{[1]} - f(\texttt{best})\big),
+					\end{array}
+				$
+			}                                                                                                   \\
+			\hspace*{10mm} \text{Opt}(\texttt{day}-1,\ \texttt{stock $-$ best})\texttt{[1]} + f(\texttt{best}), \\
+			\hspace*{10mm} \texttt{best},                                                                       \\
+			\big)
+		\end{array}
+	\end{equation*}
+	If we have $i$ days and $j$ stocks, the best amount to sell on day $i$ is the amount that maximizes
+	our profit if we sell it today and have sold the remaining on a previous day. Therefore, we can partition our stocks into those
+	sold today and those sold on another day. The best amount to sell today is the amount so that the
+	profit from today's sale and the previous sales of all the stocks are maximized. Since we return
+	this value, we return the optimal profit possible on $i$ days and $j$ stocks.
+\end{adjustwidth}
+
+\vspace{1em}
+$\therefore$ By induction, Opt$(i, j)$ holds for all $i \geq 0,\;j \geq 0$. \hfill $\blacksquare$\vspace{1em}
+
+\newpage
+Time complexity:\\
+Opt$(i,\ j)$ is $O(ij^2)$ where $i$ is the number of days and $j$ is the number of stocks.
+The algorithm has 2 for loops on line 9 and 25. The loop on line 25 runs for the
+amount of days so its $O(i)$. The loop on line 9 is a triple for loop.
+The outer loop runs for the amount of days, the middle loop runs for the amount of stocks,
+and the inner loop runs as much as the index of the middle loop.
+The middle and inner loop together run $\sum_i^n i = \frac{n(n+1)}{2} \in O(n^2)$.
+Combined with the outer loop, the total is $O(ij^2)$. Inside the inner loop only $O(1)$ operations are done like array accesses,
+addition and comparisons. Since the decay function is given as a list of values,
+we also know that calling it is $O(1)$ so the total of the inner loop is $O(1)$.
+Therefore the time complexity is $O(i) + O(ij^2) \in O(ij^2)$.\vspace{1em}
+
+Space complexity:\\
+Opt$(i,\ j)$ uses $O(ij)$ space where $i$ is the number of days and $j$ is the number of stocks.
+This is because all the variables used are primitives or data structures with primitive
+attributes except the \texttt{profit\_table} array and \texttt{optimal\_sold\_per\_day} array.
+The \texttt{profit\_table} array stores the data structure of the optimal profit for selling $j$ shares on up to $i$ days,
+which can be used to find out how much shares should be sold on which day for optimal profit.
+Since this is a 2d array with dimensions $i+1$ and $j+1$ so it uses $O(ij)$ space.
+The \texttt{optimal\_sold\_per\_day} array backtraces through the \texttt{profit\_table} and stores the amount optimal amount of shares sold per day.
+It is $i+1$ elements long and therefore uses $O(i)$ space.
+Therefore the algorithm uses $O(ij) + O(i) \in O(ij)$ space.
+
+\begin{algorithm}
+  \caption*{\textbf{Algorithm}\\Sell\_Stocks \big(\texttt{stocks}: number of stocks, \texttt{model}: model of stock market, \texttt{stock\_decay}: function \big)}\label{alg:cap}
+	\begin{algorithmic}[1]
+    \State \textbf{struct} \texttt{OptimalStockInfo} \texttt{\{} \Indent
+      \State \texttt{optimal\_profit}: int,
+      \State \texttt{stock\_decay}: int
+      \State \texttt{stocks\_sold}: int
+    \EndIndent \State \texttt{\}}
+    \State
+    \State \texttt{profit\_table} = \texttt{[[}\texttt{OptimalStockInfo} \{0, 0, 0\}$\times$ (\texttt{stocks} + 1)\texttt{]} $\times$ \texttt{model}.len() + 1\texttt{]}
+    \State
+    \For{\texttt{day} in 1..=\texttt{model}.len()}
+      \For{\texttt{max\_stock} in 0..=\texttt{stocks}}
+        \For{\texttt{stock} in 0..=\texttt{max\_stock}}
+          \State \texttt{price\_drop} = \texttt{profit\_table[day-1][max\_stock-stock]} + \texttt{stock\_decay(stock)}
+          \State \texttt{profit} = \texttt{profit\_table[day-1][max\_stock-stock]} +
+          \State \hspace*{30mm} \texttt{stock}$\times$\texttt{(model[day-1] - price\_drop)}
+          \State
+          \If{\texttt{profit} > \texttt{profit\_table[day][max\_stock].optimal\_profit}}
+            \State \texttt{profit\_table[day][max\_stock]} = \texttt{OptimalStockInfo} \texttt{\{} \Indent
+              \State \texttt{optimal\_profit}: \texttt{profit},
+              \State \texttt{stock\_decay}: \texttt{price\_drop},
+              \State \texttt{stocks\_sold}: \texttt{stock}
+            \EndIndent \State \texttt{\}}
+          \EndIf
+        \EndFor
+      \EndFor
+    \EndFor
+    \State
+    \State \texttt{stocks\_left} = \texttt{stocks}
+    \State \texttt{optimal\_sold\_per\_day} = \texttt{[0 * model}.len() + 1\texttt{]}
+    \For{\texttt{day} in 0..\texttt{model}.len()}
+      \State \texttt{optimal\_sold\_per\_day[model}.len() - \texttt{day]} =
+      \State \hspace*{30mm} \texttt{profit\_table[model}.len() - \texttt{day][stocks\_left].stocks\_sold}
+      \State \texttt{stocks\_left} $-$= \texttt{optimal\_sold\_per\_day[model}.len() - \texttt{day]}
+    \EndFor
+    \State
+    \State\Return \texttt{optimal\_sold\_per\_day}
+	\end{algorithmic}
+\end{algorithm}
 \end{document}
