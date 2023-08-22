@@ -91,12 +91,12 @@
 \vspace*{\nameSpace * \real{\scaleFont}}
 
 \begin{center}
-	\faMap[regular]\enspace Scarborough, Ontario, Canada \hspace*{10.5mm}
+	\faMap[regular]\enspace Toronto, Ontario, Canada \hspace*{21.5mm}
 	\faEnvelope[regular]\enspace \href{mailto:steve.guo@mail.utoronto.ca}{steve.guo@mail.utoronto.ca} \\
 	\faMobile*\enspace (437) 231-1263 \hspace*{22mm * \real{\scaleFont}}
 	% \href{https://epicsteve2.github.io/}{\faGlobe\enspace Website} \hspace*{20mm}
-	\href{https://github.com/Epicsteve2}{\faGithub\enspace Github} \hspace*{32mm * \real{\scaleFont}}
-	\href{https://www.linkedin.com/in/stephen-guo-399959192/}{\faLinkedin\enspace Linkedin}\\
+	\href{https://github.com/Epicsteve2}{\color{blue}\faGithub\enspace GitHub} \hspace*{32mm * \real{\scaleFont}}
+	\href{https://www.linkedin.com/in/stephen-guo-399959192/}{\color{blue}\faLinkedin\enspace LinkedIn}\\
 \end{center} \leavevmode\\[-24mm]
 
 \section{TECHNICAL SKILLS} \leavevmode \\[\headingSpace]
@@ -110,11 +110,12 @@ Bash/Shell,\hspace*{\skillSpacing}
 SQL\hspace*{\skillSpacing}
 \\
 \textbf{Libraries/Frameworks:}
-Flutter,\hspace*{\skillSpacing}
-Bootstrap,\hspace*{\skillSpacing}
-Svelte,\hspace*{\skillSpacing}
 React,\hspace*{\skillSpacing}
-Next.js\hspace*{\skillSpacing}
+Next.js,\hspace*{\skillSpacing}
+Flutter,\hspace*{\skillSpacing}
+Svelte,\hspace*{\skillSpacing}
+Bootstrap,\hspace*{\skillSpacing}
+Tailwind CSS\hspace*{\skillSpacing}
 \\
 \textbf{Other:}
 Kubernetes,\hspace*{\skillSpacing}
@@ -133,11 +134,11 @@ Vim\hspace*{\skillSpacing}
 {\customcventry{May 2021 - April 2022}{Software Engineer Co-op}{BlueCat Networks}{North York, ON}{}
 {\begin{itemize} \relscale{\scaleFont}
 		\item Deployed and configured \textbf{Kubernetes} clusters using \textbf{Helm}, \textbf{Helmfile}, \textbf{Makefile}, and \textbf{GitLab CI}, resulting in automated and safe deployments to production
-		\item Created and demoed a \textbf{Python} query microservice using \textbf{Trino}, \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}, producing daily reports efficiently from terabytes of data
+		\item Created and demoed a \textbf{Python} query microservice using \textbf{Trino}, \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}, producing daily reports from dozens of terabytes of data within 5 minutes
 		      % \item Exposed metrics and created custom alerts in the \textbf{Prometheus Alertmanager}, allowing for urgent fixes within 15 minutes across all teams
 		\item Wrote horizontal pod autoscalers for a Helm chart, and created Kubernetes node groups with vertical pod autoscaling, increasing our service's max load by over 9$\times$
-		\item Configured and conducted code reviews of \textbf{AWS} EKS, IAM roles, and VPC, using \textbf{Terraform} and \textbf{Terragrunt}, resulting in secure and efficient role managment
-		\item Documented a full step-by-step guide for \textbf{Prometheus} alertmanager on Confluence, allowing for \\instantaneous Slack alerts from error reports
+		\item Configured and conducted code reviews of \textbf{AWS} EKS, IAM roles, and VPC, using \textbf{Terraform} and \textbf{Terragrunt}, reducing time spent in secure role managment by 94\%
+		\item Documented a full step-by-step guide for \textbf{Prometheus} alertmanager on Confluence, resulting in response time speedups for error reports by 5$\times$
 		      % \item \textit{\footnotesize ADD SOFT SKILL? wwriting docs>??>?}
 	\end{itemize}
 }
@@ -145,25 +146,32 @@ Vim\hspace*{\skillSpacing}
 % \\[\sectionSpacing]
 
 \section{PROJECTS} \leavevmode \\[\headingSpace]
-{\customcvproject{Alkitab}{\href{https://github.com/Epicsteve2/cscc09-alkitab}{\faGithub\enspace Github} \enspace \href{https://youtu.be/0GMP3xIboAI}{\faYoutube \enspace Demo}} % {\footnotesize June 2022 - August 2022}\\[-20mm]
+{\customcvproject{Alkitab}{\href{https://github.com/Epicsteve2/cscc09-alkitab}{\faGithub\enspace GitHub} \enspace \href{https://youtu.be/0GMP3xIboAI}{\faYoutube \enspace Demo}} % {\footnotesize June 2022 - August 2022}\\[-20mm]
 {\begin{itemize} \relscale{\scaleFont}
-		\item Developed an EPUB sharing platform in a team of 2 using \textbf{Svelte}, \textbf{Bootstrap}, \textbf{TypeScript}, \textbf{MongoDB}, \textbf{Express.js}, and sockets
-		\item Deployed to the Linode cloud service using \textbf{Docker}, \textbf{Kubernetes}, \textbf{Helm}, and \textbf{Pulumi}, along with \textbf{NGINX} Ingress Controller for HTTPs, allowing for safe and easy-to-understand deployments
+		\item Developed an e-book sharing platform in a team of 2 using \textbf{Svelte}, \textbf{Bootstrap}, \textbf{TypeScript}, \textbf{MongoDB}, \textbf{Express.js}, and sockets
+		\item Deployed to the Linode cloud service using \textbf{Docker}, \textbf{Kubernetes}, \textbf{Helm}, and \textbf{Pulumi}, along with \textbf{NGINX} Ingress Controller for HTTPs, reducing deployment times by 85\%
 		      % \item Created a responsive, clean user interface using the Bootstrap grid system
 		      % \item Used the cert-manager Helm chart on our \textbf{NGINX} ingress controller, resulting in automated securing of our domain
 	\end{itemize}
 }
-}
-{\customcvproject{ShopLazy}{\href{https://github.com/Epicsteve2/ShopLazy}{\faGithub\enspace Github} \enspace \href{https://youtu.be/1Oh5CRH3aMU}{\faYoutube \enspace Demo}}
+}~\\[-9mm]
+{\customcvproject{Rust Recipe Gallery}{\href{https://github.com/Epicsteve2/rust-recipe-gallery}{\faGithub\enspace GitHub}}
 {\begin{itemize} \relscale{\scaleFont}
-		\item Collaborated with a team of four to create a cross-platform application during Hack the North 2021 with \textbf{Flutter}, \textbf{Dart}, and \textbf{Firebase}
+		\item Created a fullstack recipe sharing application fully in \textbf{Rust} with \textbf{PostgreSQL}, \textbf{Tailwind CSS}, and server side rendering
+		\item Fully end-to-end tested using \textbf{Playwright}, increasing bug detection rates by 50\%
+	\end{itemize}
+}
+}~\\[-9mm]
+{\customcvproject{ShopLazy}{\href{https://github.com/Epicsteve2/ShopLazy}{\faGithub\enspace GitHub} \enspace \href{https://youtu.be/1Oh5CRH3aMU}{\faYoutube \enspace Demo}}
+{\begin{itemize} \relscale{\scaleFont}
+		\item Collaborated with a team of four to create a cross-platform grocery delivery and pick-up application during the Hack the North 2021 hackathon with \textbf{Flutter}, \textbf{Dart}, and \textbf{Firebase}
 		\item Discussed designs and created a blueprint of the app with the team, resulting in a simple-to-use and intuitive user interface
 		      % \item Planned and designed a simple-to-use, intuitive user interface using the Material UI library
 	\end{itemize}
 }
 }
 %% Add if java is needed
-% {\customcvproject{osu! in Java}{\href{https://github.com/Epicsteve2/Stephen-s-Bootleg-Osu}{\faGithub\enspace Github}}
+% {\customcvproject{osu! in Java}{\href{https://github.com/Epicsteve2/Stephen-s-Bootleg-Osu}{\faGithub\enspace GitHub}}
 % {\begin{itemize} \relscale{\scaleFont}
 % 		\item Implemented \textbf{Java GUI} with classes and inheritance to build a well-designed and structured game
 % 		\item Successfully developed a game engine resulting in smooth and stable gameplay
@@ -172,17 +180,10 @@ Vim\hspace*{\skillSpacing}
 % }
 % }
 %% Rust?
-{\customcvproject{Rust Recipe Gallery}{\href{https://github.com/Epicsteve2/rust-recipe-gallery}{\faGithub\enspace Github}}
-{\begin{itemize} \relscale{\scaleFont}
-		\item Created a fullstack web app fully in \textbf{Rust} with \textbf{PostgreSQL} \textbf{Tailwind CSS}, and server side rendering
-		\item Fully end-to-end tested using \textbf{Playwright}, fixing bugs and increasing developing efficiency
-	\end{itemize}
-}
-}
-\leavevmode\\[-24mm]
+\leavevmode\\[-20mm]
 
 \section{EDUCATION} \leavevmode \\[\headingSpace]
-{\customcventry{Expected Graduation: April 2024}{HBSc. in Computer Science Specialist}{University of Toronto}{Toronto, ON}{}{}}
+{\customcventry{September 2019 - April 2024}{HBSc. in Computer Science Specialist}{University of Toronto}{Toronto, ON}{}{}}
 \vspace*{-1.5mm}
 cGPA: 3.51 / 4.0
 \end{document}
