@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
+\usepackage{fancyhdr} % header
+\usepackage{hyperref} % links
+\usepackage{amsmath,amsthm,amssymb} %math stuff
+\usepackage{setspace} % increase line spacing
+\usepackage[table]{xcolor} % align environment
+\usepackage{changepage} % for the adjustwidth environment
+\usepackage{relsize} % Scaling the font
+\usepackage{algorithm} % for algorithms
+\usepackage{caption} % captioning the algorithm
+\usepackage[export]{adjustbox}% http://ctan.org/pkg/adjustbox
+\usepackage{graphicx} \graphicspath{ {./images/} } % images
+\usepackage[noend]{algpseudocode} % pseudo code
+\usepackage[T1]{fontenc} % for {} in \texttt{}
+\usepackage{mathtools} % \raisebox
+\usepackage{xfrac} % slanted fractions
+
+\makeatletter
+\newcommand{\oset}[2]{%
+  {\mathop{#2}\limits^{\vbox to -.5\ex@{\kern-\tw@\ex@
+   \hbox{\scriptsize #1}\vss}}}}
+\makeatother
+
+% indenting in pseudocode
+\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
+\algtext*{Indent}
+\algtext*{EndIndent}
+
+\setlength{\parindent}{0pt}
+\everymath{\displaystyle}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCD58 Lab Report 1}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\begin{document}
+%----------------------------------------------------------------------------------
+%                              Table of Contents
+%----------------------------------------------------------------------------------
+\begin{center}
+	\hypertarget{toc}{\LARGE \underline{\textbf{Table of Contents}}}\\
+\end{center}
+
+\hyperlink{1}{\textbf{Question 1:}}
+\vspace{1mm}
+\hrule
+~\\
+
+{\textbf{Question 2:}}
+\vspace{1mm}
+\hrule
+\vspace{1mm}
+\hyperlink{2.1}{(2.1)}\\
+\hyperlink{2.2}{(2.2)}\\
+\hyperlink{2.3}{(2.3)}\\
+\hyperlink{2.4}{(2.4)}\\
+\hyperlink{2.5}{(2.5)}\\
+\hyperlink{2.6}{(2.6)}
+
+\newpage
+
+%----------------------------------------------------------------------------------
+%                                   Questions
+%----------------------------------------------------------------------------------
+\setstretch{1.2}
+%----------------------------------------------------------------------------------
+% !                                     1
+%----------------------------------------------------------------------------------
+\hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}\\
+\newpage
+%----------------------------------------------------------------------------------
+% !                                     2
+%----------------------------------------------------------------------------------
+\hyperlink{toc}{\LARGE \underline{\textbf{Question 2.}}}\\
+~\\\hyperlink{toc}{\hypertarget{2.1}{(2.1)}}\\
+~\\\hyperlink{toc}{\hypertarget{2.2}{(2.2)}}\\
+~\\\hyperlink{toc}{\hypertarget{2.3}{(2.3)}}\\
+~\\\hyperlink{toc}{\hypertarget{2.4}{(2.4)}}\\
+~\\\hyperlink{toc}{\hypertarget{2.5}{(2.5)}}\\
+~\\\hyperlink{toc}{\hypertarget{2.6}{(2.6)}}\\
+\end{document}
