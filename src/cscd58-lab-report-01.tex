@@ -6,6 +6,7 @@
 \usepackage{amsmath,amsthm,amssymb} %math stuff
 \usepackage{setspace} % increase line spacing
 \usepackage[table]{xcolor} % align environment
+\usepackage{color, soul}
 \usepackage{changepage} % for the adjustwidth environment
 \usepackage{relsize} % Scaling the font
 \usepackage{algorithm} % for algorithms
@@ -16,6 +17,12 @@
 \usepackage[T1]{fontenc} % for {} in \texttt{}
 \usepackage{mathtools} % \raisebox
 \usepackage{xfrac} % slanted fractions
+\usepackage{tabularx} % long tables
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \makeatletter
 \newcommand{\oset}[2]{%
@@ -73,6 +80,18 @@
 % !                                     1
 %----------------------------------------------------------------------------------
 \hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}\\
+\begin{center}\begin{tabular}{|cc|c|c|c|}
+  \hline \multicolumn{2}{|c|}{\cellcolor{gray!25}command} & \cellcolor{gray!25}description & \cellcolor{gray!25}example& \cellcolor{gray!25}rationale/obs\\
+		\hline\hline
+    1 \texttt{} & & & & \\\hline
+		2 \texttt{} & & & & \\\hline
+		3 \texttt{} & & & & \\\hline
+		4 \texttt{} & & & & \\\hline
+		5 \texttt{} & & & & \\\hline
+		6 \texttt{} & & & & \\\hline
+		7 \texttt{} & & & & \\\hline
+		8 \texttt{} & & & & \\\hline
+\end{tabular}\end{center}
 \newpage
 %----------------------------------------------------------------------------------
 % !                                     2
