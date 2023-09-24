@@ -3,40 +3,20 @@
 \usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
 \usepackage{fancyhdr} % header
 \usepackage{hyperref} % links
-\usepackage{amsmath,amsthm,amssymb} %math stuff
+% \usepackage{amsmath,amsthm,amssymb} %math stuff
 \usepackage{setspace} % increase line spacing
 \usepackage[table]{xcolor} % align environment
-\usepackage{color, soul}
+% \usepackage{color, soul}
 \usepackage{changepage} % for the adjustwidth environment
 \usepackage{relsize} % Scaling the font
-\usepackage{algorithm} % for algorithms
-\usepackage{caption} % captioning the algorithm
-\usepackage[export]{adjustbox}% http://ctan.org/pkg/adjustbox
 \usepackage{graphicx} \graphicspath{ {./images/} } % images
-\usepackage[noend]{algpseudocode} % pseudo code
-\usepackage[T1]{fontenc} % for {} in \texttt{}
-\usepackage{mathtools} % \raisebox
-\usepackage{xfrac} % slanted fractions
 \usepackage{tabularx} % long tables
+\usepackage{makecell} % newlines in a table cell
 
-\definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
-\makeatletter
-\newcommand{\oset}[2]{%
-  {\mathop{#2}\limits^{\vbox to -.5\ex@{\kern-\tw@\ex@
-   \hbox{\scriptsize #1}\vss}}}}
-\makeatother
-
-% indenting in pseudocode
-\algdef{SE}[SUBALG]{Indent}{EndIndent}{}{\algorithmicend\ }%
-\algtext*{Indent}
-\algtext*{EndIndent}
 
 \setlength{\parindent}{0pt}
-\everymath{\displaystyle}
+% \everymath{\displaystyle}
 
 \pagestyle{fancy}
 \fancyhead[LO,L]{CSCD58 Lab Report 1}
@@ -80,27 +60,137 @@
 % !                                     1
 %----------------------------------------------------------------------------------
 \hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}\\
-\begin{center}\begin{tabular}{|cc|c|c|c|}
-  \hline \multicolumn{2}{|c|}{\cellcolor{gray!25}command} & \cellcolor{gray!25}description & \cellcolor{gray!25}example& \cellcolor{gray!25}rationale/obs\\
-		\hline\hline
-    1 \texttt{} & & & & \\\hline
-		2 \texttt{} & & & & \\\hline
-		3 \texttt{} & & & & \\\hline
-		4 \texttt{} & & & & \\\hline
-		5 \texttt{} & & & & \\\hline
-		6 \texttt{} & & & & \\\hline
-		7 \texttt{} & & & & \\\hline
-		8 \texttt{} & & & & \\\hline
-\end{tabular}\end{center}
+
+\begin{center}\scalebox{0.88}{\begin{tabular}{|cc|c|c|c|}
+			\hline \multicolumn{2}{|c|}{\cellcolor{gray!25}command} & \cellcolor{gray!25}description & \cellcolor{gray!25}example                   & \cellcolor{gray!25}rationale/obs                                      \\
+			\hline\hline
+			1                                                       & \texttt{whois}                 & \makecell{Searches a database                                                                                        \\for information about\\the owners of a server} & \texttt{whois google.ca} & \makecell{To validate the\\authenticity of a server} \\\hline
+			2                                                       & \texttt{ping}                  & \makecell{Sends internet requests                                                                                    \\to a server} & \texttt{ping google.ca} & \makecell{To see if a server\\is available, and how\\fast you can connect} \\\hline
+			3                                                       & \texttt{traceroute}            & \makecell{Prints the hops of                                                                                         \\a packet during the\\sending of a packet} & \texttt{traceroute google.ca} & \makecell{See how long a packet\\takes to get to\\its destination} \\\hline
+			4                                                       & \texttt{nslookup}              & \makecell{Looks up DNS information                                                                                   \\about a server} & \texttt{nslookup google.ca} & \makecell{To get the IP\\address of a domain} \\\hline
+			5                                                       & \texttt{nmap}                  & \makecell{Scans ports of a server}           & \makecell{\texttt{nmap -p- google.ca}} & \makecell{To find security   \\vulernibilities and holes\\in a network} \\\hline
+			6                                                       & \texttt{tcpdump}               & \makecell{Captures packets coming                                                                                    \\from or to a\\network interface}                                    &\texttt{tcpdump --interface eth0}                                        &\makecell{To monitor network\\traffic}                            \\\hline
+			7                                                       & \texttt{ssh}                   & \makecell{Login to a remote                                                                                          \\machine securely\\to run commands}                                    & \makecell{\texttt{ssh utorid@iits-b473-13}\\\texttt{.utsc-labs.utoronto.ca}}                                        & \makecell{To run or deploy\\applicatinos on\\another machine}                            \\\hline
+			8                                                       & \texttt{arp}                   & \makecell{Maniuplate and show the ARP cache} & \texttt{arp -d 10.0.0.2}               & \makecell{To check what IP's \\goes to what\\hardware address}                            \\\hline
+		\end{tabular}}\end{center}
+
 \newpage
 %----------------------------------------------------------------------------------
 % !                                     2
 %----------------------------------------------------------------------------------
 \hyperlink{toc}{\LARGE \underline{\textbf{Question 2.}}}\\
 ~\\\hyperlink{toc}{\hypertarget{2.1}{(2.1)}}\\
+TCP, and HTTP\\
 ~\\\hyperlink{toc}{\hypertarget{2.2}{(2.2)}}\\
+0.040223931 seconds (0.334008437 - 0.293784506)\\
 ~\\\hyperlink{toc}{\hypertarget{2.3}{(2.3)}}\\
+The internet address of \texttt{gaia.cs.umass.edu} is 128.119.245.15.\\
+The internet address of my computer is 192.168.1.15\\
 ~\\\hyperlink{toc}{\hypertarget{2.4}{(2.4)}}\\
+Firefox/117.0\\
 ~\\\hyperlink{toc}{\hypertarget{2.5}{(2.5)}}\\
+80\newpage
 ~\\\hyperlink{toc}{\hypertarget{2.6}{(2.6)}}\\
+GET Request:
+% \relscale{0.74}
+% \begin{scriptsize}
+
+{\fontsize{3.3mm}{3.3mm}\selectfont
+\begin{verbatim}
+15	1.779065577	192.168.1.15	128.119.245.12	HTTP	436	GET /wireshark-labs/INTRO-wireshark-file1.html HTTP/1.1
+Frame 15: 436 bytes on wire (3488 bits), 436 bytes captured (3488 bits) on interface wlp6s0, id 0
+Ethernet II, Src: Tp-LinkT_19:7c:3f (18:d6:c7:19:7c:3f), Dst: KasdaNet_c8:a1:6c (00:0e:f4:c8:a1:6c)
+Internet Protocol Version 4, Src: 192.168.1.15, Dst: 128.119.245.12
+Transmission Control Protocol, Src Port: 36996, Dst Port: 80, Seq: 1, Ack: 1, Len: 382
+    Source Port: 36996
+    Destination Port: 80
+    [Stream index: 0]
+    [Conversation completeness: Incomplete, DATA (15)]
+    [TCP Segment Len: 382]
+    Sequence Number: 1    (relative sequence number)
+    Sequence Number (raw): 1766915886
+    [Next Sequence Number: 383    (relative sequence number)]
+    Acknowledgment Number: 1    (relative ack number)
+    Acknowledgment number (raw): 806556979
+    0101 .... = Header Length: 20 bytes (5)
+    Flags: 0x018 (PSH, ACK)
+    Window: 502
+    [Calculated window size: 64256]
+    [Window size scaling factor: 128]
+    Checksum: 0x9331 [unverified]
+    [Checksum Status: Unverified]
+    Urgent Pointer: 0
+    [Timestamps]
+    [SEQ/ACK analysis]
+    TCP payload (382 bytes)
+Hypertext Transfer Protocol
+    GET /wireshark-labs/INTRO-wireshark-file1.html HTTP/1.1\r\n
+    Host: gaia.cs.umass.edu\r\n
+    User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0\r\n
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8\r\n
+    Accept-Language: en-US,en;q=0.5\r\n
+    Accept-Encoding: gzip, deflate\r\n
+    Connection: keep-alive\r\n
+    Upgrade-Insecure-Requests: 1\r\n
+    \r\n
+    [Full request URI: http://gaia.cs.umass.edu/wireshark-labs/INTRO-wireshark-file1.html]
+    [HTTP request 1/2]
+    [Response in frame: 17]
+    [Next request in frame: 19]
+\end{verbatim}}
+% \end{scriptsize}
+
+% \fontsize{12pt}{12pt}\selectfont
+OK Response:
+% \begin{scriptsize}
+{\fontsize{3.3mm}{3.3mm}\selectfont
+\begin{verbatim}
+17	1.819752288	128.119.245.12	192.168.1.15	HTTP	492	HTTP/1.1 200 OK  (text/html)
+Frame 17: 492 bytes on wire (3936 bits), 492 bytes captured (3936 bits) on interface wlp6s0, id 0
+Ethernet II, Src: KasdaNet_c8:a1:6c (00:0e:f4:c8:a1:6c), Dst: Tp-LinkT_19:7c:3f (18:d6:c7:19:7c:3f)
+Internet Protocol Version 4, Src: 128.119.245.12, Dst: 192.168.1.15
+Transmission Control Protocol, Src Port: 80, Dst Port: 36996, Seq: 1, Ack: 383, Len: 438
+    Source Port: 80
+    Destination Port: 36996
+    [Stream index: 0]
+    [Conversation completeness: Incomplete, DATA (15)]
+    [TCP Segment Len: 438]
+    Sequence Number: 1    (relative sequence number)
+    Sequence Number (raw): 806556979
+    [Next Sequence Number: 439    (relative sequence number)]
+    Acknowledgment Number: 383    (relative ack number)
+    Acknowledgment number (raw): 1766916268
+    0101 .... = Header Length: 20 bytes (5)
+    Flags: 0x018 (PSH, ACK)
+    Window: 237
+    [Calculated window size: 30336]
+    [Window size scaling factor: 128]
+    Checksum: 0xc9b0 [unverified]
+    [Checksum Status: Unverified]
+    Urgent Pointer: 0
+    [Timestamps]
+    [SEQ/ACK analysis]
+    TCP payload (438 bytes)
+Hypertext Transfer Protocol
+    HTTP/1.1 200 OK\r\n
+    Date: Sat, 09 Sep 2023 04:57:13 GMT\r\n
+    Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.33 mod_perl/2.0.11 Perl/v5.16.3\r\n
+    Last-Modified: Fri, 08 Sep 2023 05:59:02 GMT\r\n
+    ETag: "51-604d2ac658c62"\r\n
+    Accept-Ranges: bytes\r\n
+    Content-Length: 81\r\n
+    Keep-Alive: timeout=5, max=100\r\n
+    Connection: Keep-Alive\r\n
+    Content-Type: text/html; charset=UTF-8\r\n
+    \r\n
+    [HTTP response 1/2]
+    [Time since request: 0.040686711 seconds]
+    [Request in frame: 15]
+    [Next requ{\fontsize{3.3mm}{3.3mm}\selectfontest in frame: 19]
+    [Next response in frame: 20]
+    [Request URI: http://gaia.cs.umass.edu/wireshark-labs/INTRO-wireshark-file1.html]
+    File Data: 81 bytes
+Line-based text data: text/html (3 lines)
+\end{verbatim}}
+% \end{scriptsize}
 \end{document}
