@@ -1,3 +1,5 @@
+# The big downside of this Makefile is that it uses timestamps to check if a file needs to be built
+# but... git doesn't preserve timestamps. So, it'll rebuild on a new clone, or pull. damn
 SHELL := $(shell which bash)
 .SHELLFLAGS := -eu -o pipefail -c
 .DEFAULT_GOAL := all
@@ -18,7 +20,10 @@ PDF_FILES := $(shell find src -name '*.tex' -exec basename {} .tex ';' | sed -e 
 all: $(PDF_FILES)
 	
 # I should really use taskfile or something huh...
-pdf/%.pdf: src/%.tex $(wildcard images/%*)
+# source: https://stackoverflow.com/a/43956926
+# basically matching all images as well optionally
+.SECONDEXPANSION:
+pdf/%.pdf: src/%.tex $$(wildcard images/$$**)
 	@cd src && \
 	latexmk --pdf --quiet --output-directory=../pdf/ '$*.tex'
 
