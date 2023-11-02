@@ -78,34 +78,166 @@
 % !                                     1
 %----------------------------------------------------------------------------------
 \hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Question 1.}}}}\\
-\newpage
+the two links are: \texttt{h1-eth0} to \texttt{s1-eth1}, and \texttt{h2-eth0} to \texttt{s1-eth2}
+
 %----------------------------------------------------------------------------------
 % !                                     2
 %----------------------------------------------------------------------------------
-\hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Question 2.}}}}\\
-\newpage
+~\\\hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Question 2.}}}}\\
+You would need to run \texttt{h2 ifconfig}. There are 2 interfaces.\\
+\texttt{h2-eth0} has the IP address of \texttt{10.0.0.2}\\
+\texttt{lo} has the IP address of \texttt{127.0.0.1}\\
+
 %----------------------------------------------------------------------------------
 % !                                     3
 %----------------------------------------------------------------------------------
-\hyperlink{toc}{\hypertarget{3}{\LARGE \underline{\textbf{Question 3.}}}}\\
-\newpage
+~\\\hyperlink{toc}{\hypertarget{3}{\LARGE \underline{\textbf{Question 3.}}}}\\
+The source IP address is \texttt{10.0.0.2}
+
 %----------------------------------------------------------------------------------
 % !                                     4
 %----------------------------------------------------------------------------------
-\hyperlink{toc}{\hypertarget{4}{\LARGE \underline{\textbf{Question 4.}}}}\\
+~\\\hyperlink{toc}{\hypertarget{4}{\LARGE \underline{\textbf{Question 4.}}}}\\
+The first ping took 4.51 ms, while the next ones took less than 0.005 ms.
+I think this is happening because \texttt{h1} is able to cache information such as addresses to reduce ping time.
 \newpage
 %----------------------------------------------------------------------------------
 % !                                     5
 %----------------------------------------------------------------------------------
 \hyperlink{toc}{\hypertarget{5}{\LARGE \underline{\textbf{Question 5.}}}}\\
+The python version being run in \texttt{h1} and \texttt{h2} is Python 2.7.17.
+The output of the request is:
+{\fontsize{4mm}{4mm}\selectfont
+\begin{verbatim}
+--2023-09-29 20:41:41--  http://10.0.0.1/
+Connecting to 10.0.0.1:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 966 [text/html]
+Saving to: 'STDOUT'
+
+-                     0%[                    ]       0  --.-KB/s
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html>
+<title>Directory listing for /</title>
+<body>
+<h2>Directory listing for /</h2>
+<hr>
+<ul>
+<li><a href=".bash_history">.bash_history</a>
+<li><a href=".bash_logout">.bash_logout</a>
+<li><a href=".bashrc">.bashrc</a>
+<li><a href=".cache/">.cache/</a>
+<li><a href=".config/">.config/</a>
+<li><a href=".gitconfig">.gitconfig</a>
+<li><a href=".gnupg/">.gnupg/</a>
+<li><a href=".local/">.local/</a>
+<li><a href=".mininet_history">.mininet_history</a>
+<li><a href=".profile">.profile</a>
+<li><a href=".sudo_as_admin_successful">.sudo_as_admin_successful</a>
+<li><a href=".wget-hsts">.wget-hsts</a>
+<li><a href=".wireshark/">.wireshark/</a>
+<li><a href=".Xauthority">.Xauthority</a>
+<li><a href="idk.txt">idk.txt</a>
+<li><a href="mininet/">mininet/</a>
+<li><a href="oflops/">oflops/</a>
+<li><a href="oftest/">oftest/</a>
+<li><a href="openflow/">openflow/</a>
+<li><a href="pox/">pox/</a>
+</ul>
+<hr>
+</body>
+</html>
+-                   100%[===================>]     966  --.-KB/s    in 0s
+
+2023-09-29 20:41:41 (136 MB/s) - written to stdout [966/966]
+\end{verbatim}
+}
 \newpage
 %----------------------------------------------------------------------------------
 % !                                     6
 %----------------------------------------------------------------------------------
 \hyperlink{toc}{\LARGE \underline{\textbf{Question 6.}}}\\
 ~\\\hyperlink{toc}{\hypertarget{6.1}{(a)}}\\
+The output is:
+\begin{verbatim}
+*** Iperf: testing TCP bandwidth between h1 and h2
+*** Results: ['18.7 Gbits/sec', '18.6 Gbits/sec']
+\end{verbatim}
+Which says that the bandwidth between \texttt{h1} \texttt{h2} is 18.7 Gbits/sec
 ~\\\hyperlink{toc}{\hypertarget{6.2}{(b)}}\\
+\texttt{sudo mn --topo single,3}
+\begin{adjustwidth}{10mm}{}
+	Running \texttt{iperf h1 h3}
+	\begin{verbatim}
+Results: ['26.4 Gbits/sec', '26.4 Gbits/sec']
+  \end{verbatim}
+	Running \texttt{pingallfull}
+	\begin{verbatim}
+h1->h2: 1/1, rtt min/avg/max/mdev 2.526/2.526/2.526/0.000 ms
+h1->h3: 1/1, rtt min/avg/max/mdev 1.264/1.264/1.264/0.000 ms
+h2->h1: 1/1, rtt min/avg/max/mdev 1.342/1.342/1.342/0.000 ms
+h2->h3: 1/1, rtt min/avg/max/mdev 1.425/1.425/1.425/0.000 ms
+h3->h1: 1/1, rtt min/avg/max/mdev 1.499/1.499/1.499/0.000 ms
+h3->h2: 1/1, rtt min/avg/max/mdev 1.703/1.703/1.703/0.000 ms
+  \end{verbatim}
+	Running \texttt{iperfudp 10M h1 h3}
+	\begin{verbatim}
+Results: ['10M', '10.5 Mbits/sec', '10.5 Mbits/sec']
+  \end{verbatim}
+\end{adjustwidth}
+
+\texttt{sudo mn --topo linear,4}
+\begin{adjustwidth}{10mm}{}
+	Running \texttt{iperf h1 h4}
+	\begin{verbatim}
+Results: ['23.9 Gbits/sec', '23.9 Gbits/sec']
+  \end{verbatim}
+	Running \texttt{pingallfull}
+	\begin{verbatim}
+h1->h2: 1/1, rtt min/avg/max/mdev 7.446/7.446/7.446/0.000 ms
+h1->h3: 1/1, rtt min/avg/max/mdev 11.293/11.293/11.293/0.000 ms
+h1->h4: 1/1, rtt min/avg/max/mdev 14.803/14.803/14.803/0.000 ms
+h2->h1: 1/1, rtt min/avg/max/mdev 4.131/4.131/4.131/0.000 ms
+h2->h3: 1/1, rtt min/avg/max/mdev 8.264/8.264/8.264/0.000 ms
+h2->h4: 1/1, rtt min/avg/max/mdev 10.689/10.689/10.689/0.000 ms
+h3->h1: 1/1, rtt min/avg/max/mdev 6.685/6.685/6.685/0.000 ms
+h3->h2: 1/1, rtt min/avg/max/mdev 3.899/3.899/3.899/0.000 ms
+h3->h4: 1/1, rtt min/avg/max/mdev 6.490/6.490/6.490/0.000 ms
+h4->h1: 1/1, rtt min/avg/max/mdev 6.674/6.674/6.674/0.000 ms
+h4->h2: 1/1, rtt min/avg/max/mdev 9.459/9.459/9.459/0.000 ms
+h4->h3: 1/1, rtt min/avg/max/mdev 2.999/2.999/2.999/0.000 ms
+  \end{verbatim}
+	Running \texttt{iperfudp 10M h1 h4}
+	\begin{verbatim}
+Results: ['10M', '10.5 Mbits/sec', '10.5 Mbits/sec']
+  \end{verbatim}
+\end{adjustwidth}
+
+\texttt{sudo mn --link tc,bw=10,delay=10ms}
+\begin{adjustwidth}{10mm}{}
+	Running \texttt{iperf h1 h2}
+	\begin{verbatim}
+Results: ['8.16 Mbits/sec', '10.0 Mbits/sec']
+  \end{verbatim}
+	Running \texttt{pingallfull}
+	\begin{verbatim}
+h1->h2: 1/1, rtt min/avg/max/mdev 83.200/83.200/83.200/0.000 ms
+h2->h1: 1/1, rtt min/avg/max/mdev 41.795/41.795/41.795/0.000 ms
+  \end{verbatim}
+	Running \texttt{iperfudp 10M h1 h2}
+	\begin{verbatim}
+Results: ['10M', '7.90 Mbits/sec', '7.90 Mbits/sec']
+  \end{verbatim}
+\end{adjustwidth}
+% Running \texttt{iperf h1 h2} for \texttt{sudo mn --topo single,3}
+% \begin{verbatim}
+% Results: ['26.1 Gbits/sec', '26.1 Gbits/sec'
+% \end{verbatim}
+% Running \texttt{iperf h2 h3} for \texttt{sudo mn --topo single,3}
+% \begin{verbatim}
+% Results: ['27.4 Gbits/sec', '27.5 Gbits/sec']
+% \end{verbatim}
 ~\\\hyperlink{toc}{\hypertarget{6.3}{(c)}}\\
-\newpage
+The theoretical RTT is 40ms, since there would be 10ms going to the switch, 10 going to the node, double that going back.\\
+The RTT reported by the ping command ranges from 45.9ms to 40.2ms.
 \end{document}
 
