@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+
+tasks:
+  default:
+    cmd: 
+      task: build
+
+  build:
+    method: none
+    dir: src/
+    sources:
+      - "*.tex"
+    cmds:
+      - for: sources 
+        task: build-pdf
+        vars: 
+          FILE: '{{.ITEM}}'
+    desc: |
+      builds all tex files if they haven't changed
+
+  build-pdf:
+    label: 'build-{{.FILE}}'
+    requires:
+      vars:
+        - FILE
+    dir: src/
+    sources: 
+      - '{{.FILE}}'
+      - 'images/{{trimSuffix ".tex" .FILE }}*'
+    cmd: latexmk --pdf --quiet --output-directory=../pdf/ {{.FILE | shellQuote}}
+    generates:
+      - ../pdf/{{trimSuffix ".tex" .FILE }}.pdf
+
+  clean:
+    dir: src/
+    cmds:
+      - latexmk -C
+      - latexmk -c --output-directory=../pdf/
+    desc: |
+      clean all build files except for PDFs
