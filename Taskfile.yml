@@ -20,6 +20,7 @@ tasks:
       builds all tex files if they haven't changed
 
   build-pdf:
+    internal: true
     label: 'build-{{.FILE}}'
     requires:
       vars:
