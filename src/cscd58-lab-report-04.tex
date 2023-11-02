@@ -1,0 +1,64 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in, left=0.6in, right=0.6in]{geometry}
+\usepackage{fancyhdr} % header
+\usepackage{hyperref} % links
+% \usepackage{amsmath,amsthm,amssymb} %math stuff
+\usepackage{setspace} % increase line spacing
+% \usepackage[table]{xcolor} % align environment
+% \usepackage{color, soul}
+\usepackage{changepage} % for the adjustwidth environment
+\usepackage{relsize} % Scaling the font
+% \usepackage{graphicx} \graphicspath{ {./images/} } % images
+% \usepackage{tabularx} % long tables
+% \usepackage{makecell} % newlines in a table cell
+
+% \definecolor{gray}{rgb}{0.5,0.5,0.5}
+
+\setlength{\parindent}{0pt}
+% \everymath{\displaystyle}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{CSCD58 Lab Report 4}
+\fancyhead[CO,C]{Stephen Guo}
+\fancyhead[RO,R]{1006313231}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+
+\begin{document}
+%----------------------------------------------------------------------------------
+%                              Table of Contents
+%----------------------------------------------------------------------------------
+\begin{center}
+	\hypertarget{toc}{\LARGE \underline{\textbf{Table of Contents}}}\\
+\end{center}
+
+\hyperlink{1}{\textbf{Package 1}}
+\vspace{1mm}
+\hrule
+~\\
+
+\hyperlink{2}{\textbf{Package 2}}
+\vspace{1mm}
+\hrule
+~\\
+
+\newpage
+
+%----------------------------------------------------------------------------------
+%                                   Questions
+%----------------------------------------------------------------------------------
+\setstretch{1.2}
+%----------------------------------------------------------------------------------
+% !                                     1
+%----------------------------------------------------------------------------------
+\hyperlink{toc}{\hypertarget{1}{\LARGE \underline{\textbf{Package 1}}}}\\
+\newpage
+%----------------------------------------------------------------------------------
+% !                                     2
+%----------------------------------------------------------------------------------
+\hyperlink{toc}{\hypertarget{2}{\LARGE \underline{\textbf{Package 2}}}}\\
+\newpage
+\end{document}
+
