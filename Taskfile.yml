@@ -1,4 +1,5 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
+# version: '3.28'
 version: '3'
 
 tasks:
@@ -20,7 +21,6 @@ tasks:
       builds all tex files if they haven't changed
 
   build-pdf:
-    internal: true
     label: 'build-{{.FILE}}'
     requires:
       vars:
