@@ -31,13 +31,11 @@
 %----------------------------------------------------------------------------------
 %            variables
 %----------------------------------------------------------------------------------
-\def \scaleFont {1.09} % increase font size!
+\def \scaleFont {1.14} % increase font size!
 \name{Stephen}{Guo}
-\def \headingSpace {-9mm * \real{\scaleFont}} % vertical space after every header
+\def \headingSpace {-10mm * \real{\scaleFont}} % vertical space after every header
 \def \skillSpacing {1mm} % space after every kills in technical skills
-\def \sectionSpacing {-12mm} % idk what this is for lol
 \def \scaleHeadings {1.15}
-\def \nameSpace {-18.5mm}
 
 %----------------------------------------------------------------------------------
 %            custom commands
@@ -88,75 +86,64 @@
 %            resume
 %----------------------------------------------------------------------------------
 \makecvtitle
-\vspace*{\nameSpace * \real{\scaleFont}}
+~\\[-40mm]
 
 \begin{center}
 	\faMap[regular]\enspace Toronto, Ontario, Canada \hspace*{23mm}
 	\faEnvelope[regular]\enspace \href{mailto:stephenguo14@gmail.com}{stephenguo14@gmail.com} \\
-	\faMobile*\enspace (437) 231-1263 \hspace*{10.5mm * \real{\scaleFont}}
-	\href{https://epicsteve2.github.io/}{\color{blue}\faGlobeAmericas\enspace Website} \hspace*{10.5mm}
-	\href{https://github.com/Epicsteve2}{\color{blue}\faGithub\enspace GitHub} \hspace*{10.5mm * \real{\scaleFont}}
+	\faMobile*\enspace +1 (437) 231-1263 \hspace*{8.25mm * \real{\scaleFont}}
+	\href{https://epicsteve2.github.io/}{\color{blue}\faGlobeAmericas\enspace Website} \hspace*{8mm}
+	\href{https://github.com/Epicsteve2}{\color{blue}\faGithub\enspace GitHub} \hspace*{8mm * \real{\scaleFont}}
 	\href{https://www.linkedin.com/in/stephen-guo-399959192/}{\color{blue}\faLinkedin\enspace LinkedIn}\\
-\end{center} \leavevmode\\[-24mm]
+\end{center}
 
+~\\[-24mm]
 \section{EDUCATION} \leavevmode \\[\headingSpace]
 {\customcventry{Sept 2019 - April 2024}{HBSc. in Computer Science Specialist}{University of Toronto}{Toronto, ON}{}{}}
 \vspace*{-1.5mm}
 cGPA: 3.57 / 4.0
-\\[\sectionSpacing]
 
+~\\[-18mm]
 \section{EXPERIENCE} \leavevmode \\[\headingSpace]
 {\customcventry{May 2021 - April 2022}{Software Engineer Co-op}{BlueCat Networks}{Toronto, ON}{}
 {\begin{itemize} \relscale{\scaleFont}
-		\item Deployed and configured \textbf{Kubernetes} clusters using \textbf{Helm}, \textbf{Helmfile}, \textbf{Makefile}, and \textbf{GitLab CI}, resulting in automated and safe deployments to production
-		\item Created and demoed a \textbf{Python} query microservice using \textbf{Trino}, \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}, producing daily reports from dozens of terabytes of data within 5 minutes
+		\item Deployed and configured \textbf{Kubernetes} clusters using \textbf{Helm} and \textbf{GitLab CI}, resulting in automated and safe deployments to production
+		\item Created and demoed a \textbf{Python} query microservice using \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}, producing daily reports from dozens of terabytes of data within 5 minutes
 		      % \item Exposed metrics and created custom alerts in the \textbf{Prometheus Alertmanager}, allowing for urgent fixes within 15 minutes across all teams
-		\item Wrote horizontal pod autoscalers for a Helm chart, and created Kubernetes node groups with vertical pod autoscaling, increasing our service's max load by over 9$\times$
-		\item Configured and conducted code reviews of \textbf{AWS} EKS, IAM roles, and VPC, using \textbf{Terraform} and \textbf{Terragrunt}, reducing time spent in secure role management by 94\%
-		\item Documented a full step-by-step guide for \textbf{Prometheus} alertmanager on Confluence, resulting in response time speedups for error reports by 5$\times$
-		      % \item \textit{\footnotesize ADD SOFT SKILL? wwriting docs>??>?}
+		      % \item Wrote horizontal pod autoscalers for a Helm chart, and created Kubernetes node groups with vertical pod autoscaling, increasing our service's max load by over 9$\times$
+		\item Contributed to an open source Helm package, resulting in 7 merged pull requests for critical features
+		\item Configured \textbf{AWS} roles and deployments using \textbf{Terraform} and \textbf{Terragrunt}
+		\item Documented a full step-by-step guide for \textbf{Prometheus} Alertmanager on Confluence
 	\end{itemize}
 }
-}~\\[-14mm]
-% \\[\sectionSpacing]
+}
 
+~\\[-14mm]
 \section{PROJECTS} \leavevmode \\[\headingSpace]
 {\customcvproject{Alkitab}{\href{https://github.com/Epicsteve2/cscc09-alkitab}{\faGithub\enspace GitHub} \enspace \href{https://youtu.be/0GMP3xIboAI}{\faYoutube \enspace Demo}} % {\footnotesize June 2022 - August 2022}\\[-20mm]
 {\begin{itemize} \relscale{\scaleFont}
-		\item Developed an e-book sharing platform in a team of 2 using \textbf{Svelte}, \textbf{Bootstrap}, \textbf{TypeScript}, \textbf{MongoDB}, \textbf{Express.js}, and sockets
-		\item Deployed to the Linode cloud service using \textbf{Docker}, \textbf{Kubernetes}, \textbf{Helm}, and \textbf{Pulumi}, along with \textbf{NGINX} Ingress Controller for HTTPs, reducing deployment times by 85\%
-		      % \item Created a responsive, clean user interface using the Bootstrap grid system
-		      % \item Used the cert-manager Helm chart on our \textbf{NGINX} ingress controller, resulting in automated securing of our domain
+		\item Developed an e-book sharing platform with a partner using \textbf{Svelte}, \textbf{Bootstrap}, \textbf{TypeScript}, \textbf{MongoDB}, \textbf{Express.js}, and sockets
+		\item Deployed to the Linode cloud service using \textbf{Docker}, \textbf{Kubernetes}, \textbf{Helm}, and \textbf{Pulumi}, along with \textbf{NGINX} Ingress Controller for HTTPs
 	\end{itemize}
 }
-}~\\[-9mm]
+}~\\[-8mm]
 {\customcvproject{Rust Recipe Gallery}{\href{https://github.com/Epicsteve2/rust-recipe-gallery}{\faGithub\enspace GitHub}}
 {\begin{itemize} \relscale{\scaleFont}
-		\item Created a full stack recipe sharing application fully in \textbf{Rust} with \textbf{PostgreSQL}, \textbf{Tailwind CSS}, and server side rendering
-		\item Fully end-to-end tested using \textbf{Playwright}, increasing bug detection rates by 50\%
+		\item Created a full stack recipe sharing application fully in \textbf{Rust}, with \textbf{PostgreSQL}, \textbf{Tailwind CSS}, and server side rendering
+		\item Fully end-to-end tested using \textbf{Playwright}
 	\end{itemize}
 }
-}~\\[-9mm]
+}~\\[-8mm]
 {\customcvproject{ShopLazy}{\href{https://github.com/Epicsteve2/ShopLazy}{\faGithub\enspace GitHub} \enspace \href{https://youtu.be/1Oh5CRH3aMU}{\faYoutube \enspace Demo}}
 {\begin{itemize} \relscale{\scaleFont}
 		\item Collaborated with a team of four to create a cross-platform grocery delivery and pick-up application during the Hack the North 2021 hackathon with \textbf{Flutter}, \textbf{Dart}, and \textbf{Firebase}
-		\item Discussed designs and created a blueprint of the app with the team, resulting in a simple-to-use and intuitive user interface
-		      % \item Planned and designed a simple-to-use, intuitive user interface using the Material UI library
 	\end{itemize}
 }
 }
-%% Add if java is needed
-% {\customcvproject{osu! in Java}{\href{https://github.com/Epicsteve2/Stephen-s-Bootleg-Osu}{\faGithub\enspace GitHub}}
-% {\begin{itemize} \relscale{\scaleFont}
-% 		\item Implemented \textbf{Java GUI} with classes and inheritance to build a well-designed and structured game
-% 		\item Successfully developed a game engine resulting in smooth and stable gameplay
-% 		\item Fully documented and created a user manual resulting in detailed guides for navigation and gameplay
-% 	\end{itemize}
-% }
-% }
-%% Rust?
-\leavevmode\\[-20mm]
-\section{TECHNICAL SKILLS} \leavevmode \\[\headingSpace]
+
+~\\[-32mm]
+\section{TECHNICAL SKILLS} \leavevmode \\[\headingSpace] % ~\\[-10mm]
+{\relscale{0.93}
 \textbf{Languages:}
 JavaScript/TypeScript,\hspace*{\skillSpacing}
 Python,\hspace*{\skillSpacing}
@@ -165,7 +152,7 @@ Rust,\hspace*{\skillSpacing}
 C,\hspace*{\skillSpacing}
 Bash/Shell,\hspace*{\skillSpacing}
 SQL\hspace*{\skillSpacing}
-\\
+\\[-0.5mm]
 \textbf{Libraries/Frameworks:}
 React,\hspace*{\skillSpacing}
 Next.js,\hspace*{\skillSpacing}
@@ -173,7 +160,7 @@ Flutter,\hspace*{\skillSpacing}
 Svelte,\hspace*{\skillSpacing}
 Bootstrap,\hspace*{\skillSpacing}
 Tailwind CSS\hspace*{\skillSpacing}
-\\
+\\[-0.5mm]
 \textbf{Other:}
 Kubernetes,\hspace*{\skillSpacing}
 Helm,\hspace*{\skillSpacing}
@@ -184,6 +171,5 @@ GitLab CI,\hspace*{\skillSpacing}
 Docker,\hspace*{\skillSpacing}
 Unix/Linux,\hspace*{\skillSpacing}
 Git,\hspace*{\skillSpacing}
-Vim\hspace*{\skillSpacing}
+Vim\hspace*{\skillSpacing}}
 \end{document}
-
