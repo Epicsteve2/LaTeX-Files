@@ -1,10 +1,9 @@
-%1% start of file `template.tex'.
+%1% start offile `template.tex'.
 %% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License version 1.3c,
 % available at http://www.latex-project.org/lppl/.
-
 \documentclass[12pt,letterpaper,roman]{moderncv}
 % possible options include
 % font size ('10pt', '11pt' and '12pt'),
@@ -24,16 +23,17 @@
 \usepackage[scale=0.8, margin=1cm]{geometry} % change this for margins
 \usepackage{setspace} % line spacing
 \usepackage{calc} % use arithmetic for lengths
-% \usepackage[none]{hyphenat} % for removing word-breaks
-%\hyphenpenalty=10000
 
+\usepackage[none]{hyphenat} % for removing word-breaks
+\hyphenpenalty=10000
 
+% \raggedleft
 %----------------------------------------------------------------------------------
 %            variables
 %----------------------------------------------------------------------------------
-\def \scaleFont {1.14} % increase font size!
+\def \scaleFont {1.13} % increase font size!
 \name{Stephen}{Guo}
-\def \headingSpace {-10mm * \real{\scaleFont}} % vertical space after every header
+\def \headingSpace {-9mm * \real{\scaleFont}} % vertical space after every header
 \def \skillSpacing {1mm} % space after every kills in technical skills
 \def \scaleHeadings {1.15}
 
@@ -47,14 +47,14 @@
   \hfill% move it to the right
   \begin{tabular}{l@{}}
      {\bfseries #5}
-  \end{tabular} \\
+   \end{tabular} \\[-1mm]
   \begin{tabular}{@{}l}
     {#3}
   \end{tabular}
   \hfill% move it to the right
   \begin{tabular}{l@{}}
      {#2}
-  \end{tabular}
+   \end{tabular}
   \ifx&#7&
   \else{\\
     \begin{minipage}{\maincolumnwidth}
@@ -86,8 +86,8 @@
 %            resume
 %----------------------------------------------------------------------------------
 \makecvtitle
-~\\[-40mm]
-
+~\\[-33mm]~
+\vspace*{-1mm}~
 \begin{center}
 	\faMap[regular]\enspace Toronto, Ontario, Canada \hspace*{23mm}
 	\faEnvelope[regular]\enspace \href{mailto:stephenguo14@gmail.com}{stephenguo14@gmail.com} \\
@@ -97,53 +97,19 @@
 	\href{https://www.linkedin.com/in/stephen-guo-399959192/}{\color{blue}\faLinkedin\enspace LinkedIn}\\
 \end{center}
 
-~\\[-24mm]
+~\\[-22mm]
 \section{EDUCATION} \leavevmode \\[\headingSpace]
-{\customcventry{Sept 2019 - April 2024}{HBSc. in Computer Science Specialist}{University of Toronto}{Toronto, ON}{}{}}
-\vspace*{-1.5mm}
-cGPA: 3.57 / 4.0
-
-~\\[-18mm]
-\section{EXPERIENCE} \leavevmode \\[\headingSpace]
-{\customcventry{May 2021 - April 2022}{Software Engineer Co-op}{BlueCat Networks}{Toronto, ON}{}
-{\begin{itemize} \relscale{\scaleFont}
-		\item Deployed and configured \textbf{Kubernetes} clusters using \textbf{Helm} and \textbf{GitLab CI}, resulting in automated and safe deployments to production
-		\item Created and demoed a \textbf{Python} query microservice using \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}, producing daily reports from dozens of terabytes of data within 5 minutes
-		      % \item Exposed metrics and created custom alerts in the \textbf{Prometheus Alertmanager}, allowing for urgent fixes within 15 minutes across all teams
-		      % \item Wrote horizontal pod autoscalers for a Helm chart, and created Kubernetes node groups with vertical pod autoscaling, increasing our service's max load by over 9$\times$
-		\item Contributed to an open source Helm package, resulting in 7 merged pull requests for critical features
-		\item Configured \textbf{AWS} roles and deployments using \textbf{Terraform} and \textbf{Terragrunt}
-		\item Documented a full step-by-step guide for \textbf{Prometheus} Alertmanager on Confluence
-	\end{itemize}
+{\customcventry{Sept 2019 - April 2024}{Honours Bachelor of Science, Computer Science}{University of Toronto}{Toronto, ON}{}
+{\relscale{1.25}
+	% \vspace*{-1.5mm15}
+	cGPA: 3.57 / 4.0
 }
 }
 
-~\\[-14mm]
-\section{PROJECTS} \leavevmode \\[\headingSpace]
-{\customcvproject{Alkitab}{\href{https://github.com/Epicsteve2/cscc09-alkitab}{\faGithub\enspace GitHub} \enspace \href{https://youtu.be/0GMP3xIboAI}{\faYoutube \enspace Demo}} % {\footnotesize June 2022 - August 2022}\\[-20mm]
-{\begin{itemize} \relscale{\scaleFont}
-		\item Developed an e-book sharing platform with a partner using \textbf{Svelte}, \textbf{Bootstrap}, \textbf{TypeScript}, \textbf{MongoDB}, \textbf{Express.js}, and sockets
-		\item Deployed to the Linode cloud service using \textbf{Docker}, \textbf{Kubernetes}, \textbf{Helm}, and \textbf{Pulumi}, along with \textbf{NGINX} Ingress Controller for HTTPs
-	\end{itemize}
-}
-}~\\[-8mm]
-{\customcvproject{Rust Recipe Gallery}{\href{https://github.com/Epicsteve2/rust-recipe-gallery}{\faGithub\enspace GitHub}}
-{\begin{itemize} \relscale{\scaleFont}
-		\item Created a full stack recipe sharing application fully in \textbf{Rust}, with \textbf{PostgreSQL}, \textbf{Tailwind CSS}, and server side rendering
-		\item Fully end-to-end tested using \textbf{Playwright}
-	\end{itemize}
-}
-}~\\[-8mm]
-{\customcvproject{ShopLazy}{\href{https://github.com/Epicsteve2/ShopLazy}{\faGithub\enspace GitHub} \enspace \href{https://youtu.be/1Oh5CRH3aMU}{\faYoutube \enspace Demo}}
-{\begin{itemize} \relscale{\scaleFont}
-		\item Collaborated with a team of four to create a cross-platform grocery delivery and pick-up application during the Hack the North 2021 hackathon with \textbf{Flutter}, \textbf{Dart}, and \textbf{Firebase}
-	\end{itemize}
-}
-}
-
-~\\[-32mm]
+~\\[-19mm]
 \section{TECHNICAL SKILLS} \leavevmode \\[\headingSpace] % ~\\[-10mm]
-{\relscale{0.93}
+% this relscale does nothing. this was used before to make the text smaller
+{\relscale{1.0}
 \textbf{Languages:}
 JavaScript/TypeScript,\hspace*{\skillSpacing}
 Python,\hspace*{\skillSpacing}
@@ -172,4 +138,50 @@ Docker,\hspace*{\skillSpacing}
 Unix/Linux,\hspace*{\skillSpacing}
 Git,\hspace*{\skillSpacing}
 Vim\hspace*{\skillSpacing}}
+
+~\\[-18mm]
+\section{EXPERIENCE} \leavevmode \\[\headingSpace]
+{\customcventry{May 2021 - April 2022}{Software Engineer Co-op}{BlueCat Networks}{Toronto, ON}{}
+{\begin{itemize} \relscale{\scaleFont}
+		\item Deployed and configured \textbf{Kubernetes} clusters on \textbf{AWS} using \textbf{Helm}, \textbf{Terraform}, and \textbf{GitLab CI}, resulting in automated, scalable, and safe deployments to production
+		\item Created and demoed a \textbf{Python} query microservice using \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}, producing daily reports from dozens of terabytes of data within 5 minutes
+		      % \item Exposed metrics and created custom alerts in the \textbf{Prometheus Alertmanager}, allowing for urgent fixes within 15 minutes across all teams
+		\item Wrote Kubernetes horizontal and vertical pod autoscalers, increasing max traffic by over 9 times
+		\item Developed REST APIs, integration tests, and end-to-end tests for a \textbf{Java} codebase with \textbf{Gradle} and \textbf{Jenkins}
+		\item Configured \textbf{Prometheus} Alertmanager and \textbf{Grafana} dashboards, generating production logs and monitoring of errors to improve alert response times by 85\%
+		\item Merged 7 pull requests for highly requested features for the open source Trino Helm chart on GitHub, such as increasing security and scalability for the database
+		      % \item Configured \textbf{AWS} roles and deployments using \textbf{Terraform} and \textbf{Terragrunt}, allowing for easy and automated infrastructure reousrce provisioning
+		      % \item Documented a full step-by-step guide for using and configuring \textbf{Prometheus} Alertmanager on Confluence
+		      % used confluence and jira to discuss agile 
+		      % \item Used Confluence and Jira for Agile Scrum % to ALSO ADD prometheus somewhere. maybe jenkins??? and java???
+	\end{itemize}
+}
+}
+
+~\\[-13mm]
+\section{PROJECTS} \leavevmode \\[\headingSpace]
+{\customcvproject{Alkitab}{\href{https://github.com/Epicsteve2/cscc09-alkitab}{\faGithub\enspace GitHub} \enspace \href{https://youtu.be/0GMP3xIboAI}{\faYoutube \enspace Demo}} % {\footnotesize June 2022 - August 2022}\\[-20mm]
+{\begin{itemize} \relscale{\scaleFont}
+		\item Developed an e-book sharing platform with a partner using \textbf{Svelte}, \textbf{Bootstrap}, \textbf{TypeScript}, \textbf{MongoDB}, \textbf{Express.js}, with sockets for real-time text highlighting between users
+		\item Deployed to the Linode cloud service using \textbf{Docker}, \textbf{Kubernetes}, \textbf{Helm}, and \textbf{Pulumi}, with \textbf{NGINX} for HTTPS
+	\end{itemize}
+}
+}~\\[-7mm]
+{\customcvproject{Rust Recipe Gallery}{\href{https://github.com/Epicsteve2/rust-recipe-gallery}{\faGithub\enspace GitHub}}
+{\begin{itemize} \relscale{\scaleFont}
+		\item Created a highly performant and fault tolerant recipe sharing application fully in \textbf{Rust}, with \textbf{PostgreSQL}, and \textbf{Tailwind CSS}
+		\item Implemented REST APIs, with full end-to-end test coverage using \textbf{Playwright}
+	\end{itemize}
+}
+}~\\[-9mm]
+{\customcvproject{ShopLazy}{\href{https://github.com/Epicsteve2/ShopLazy}{\faGithub\enspace GitHub} \enspace \href{https://youtu.be/1Oh5CRH3aMU}{\faYoutube \enspace Demo}}
+{\begin{itemize} \relscale{\scaleFont}
+		\item Collaborated with a team of four to create a grocery delivery and pick-up mobile application during the Hack the North 2021 hackathon using \textbf{Flutter}, with \textbf{Firebase} for user authentication% lol this just remove an extra page
+	\end{itemize}
+}
+}
+% force remove new page
+% https://stackoverflow.com/a/62581982
+% seems like this tends to break if there isn't a new page or smth, idk
+\let\clearpage\relax
 \end{document}
