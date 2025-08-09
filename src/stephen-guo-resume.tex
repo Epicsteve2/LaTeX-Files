@@ -33,12 +33,13 @@
 %----------------------------------------------------------------------------------
 %            variables
 %----------------------------------------------------------------------------------
-\def \scaleFont {1.00} % increase font size!
+\def \scaleFont {0.945} % increase font size!
+\renewcommand{\RSpercentTolerance}{1} % default is 5. Change step size for relsize for more fine-tune conrtrol of font sizes
 \name{Stephen}{Guo}
-\def \headingSpace {-8mm * \real{\scaleFont}} % vertical space after every header
+\def \headingSpace {-7.5mm * \real{\scaleFont}} % vertical space after every header
 \def \skillSpacing {1mm} % space after every kills in technical skills
 \def \scaleHeadings {1.15}
-\def \itemSpacing {-4mm}
+\def \itemSpacing {-3.5mm}
 
 %----------------------------------------------------------------------------------
 %            custom commands
@@ -50,7 +51,7 @@
   \hfill% move it to the right
   \begin{tabular}{l@{}}
      {\bfseries #5}
-   \end{tabular} \\[-1mm]
+   \end{tabular} \\[-0mm]
   \begin{tabular}{@{}l}
     {#3}
   \end{tabular}
@@ -83,20 +84,20 @@
 \setlength{\tabcolsep}{12pt}
 
 \begin{document}
-\setstretch{1.05} % line spacing
+\setstretch{1.04} % line spacing
 \relscale{\scaleFont} % increase font size!
 %----------------------------------------------------------------------------------
 %            resume
 %----------------------------------------------------------------------------------
 \makecvtitle
-~\\[-20mm]~
+~\\[-19mm]~
 \vspace*{-1mm}~
 \begin{center}
 	\faMap[regular]\enspace Toronto, Ontario, Canada \hspace*{23mm}
 	\faEnvelope[regular]\enspace \href{mailto:stephenguo14@gmail.com}{stephenguo14@gmail.com} \\
-	\faMobile*\enspace +1 (437) 231-1263 \hspace*{8.5mm * \real{\scaleFont}}
-	\href{https://epicsteve2.github.io/}{\color{blue}\faGlobeAmericas\enspace Website} \hspace*{8.5mm}
-	\href{https://github.com/Epicsteve2}{\color{blue}\faGithub\enspace GitHub} \hspace*{8.5mm * \real{\scaleFont}}
+	\faMobile*\enspace +1 (437) 231-1263 \hspace*{8.75mm * \real{\scaleFont}}
+	\href{https://epicsteve2.github.io/}{\color{blue}\faGlobeAmericas\enspace Website} \hspace*{8.75mm}
+	\href{https://github.com/Epicsteve2}{\color{blue}\faGithub\enspace GitHub} \hspace*{8.75mm * \real{\scaleFont}}
 	\href{https://www.linkedin.com/in/stephen-guo-399959192/}{\color{blue}\faLinkedin\enspace LinkedIn}\\
 \end{center}
 
@@ -108,44 +109,45 @@
 }
 }
 
-~\\[-16mm]
+~\\[-14mm]
 \section{EXPERIENCE} \leavevmode \\[\headingSpace]
 {\customcventry{October 2024 - Present}{Software Engineer}{Leap Softwares}{Toronto, ON}{}
 {\begin{itemize} \relscale{\scaleFont}
-		\item Built secure, type-safe \textbf{GraphQL} endpoints and automated PDF/Excel reporting tools for a financial services management system, using \textbf{TypeScript}, \textbf{NestJS}, \textbf{PostgreSQL}, \textbf{TypeORM}, and \textbf{Redis}, ensuring reliable data delivery and improved decision-making~\\[\itemSpacing]
-		\item Introduced \textbf{Azure} Monitor alerts and health checks integrated with Slack via \textbf{Terraform}, \textbf{Rust}, and websockets, cutting service downtime by 95\% and improving ticket response times to under 5 minutes~\\[\itemSpacing]
-		\item Optimized core reporting features by analyzing \textbf{PostgreSQL} query plans and adding targeted indexes, cutting average response times from 2s to under 400ms~\\[\itemSpacing]
-		\item Migrated data from a legacy financial application with a non-normalized schema and redundant records to a modern platform, designing scripts that cleaned, and transformed 100,000+ rows with zero downtime or data loss
+		\item Built secure, type-safe \textbf{GraphQL} endpoints and automated PDF/Excel reporting tools for a financial services management system, using \textbf{TypeScript}, \textbf{NestJS}, \textbf{PostgreSQL}, \textbf{TypeORM}, and \textbf{Redis}, ensuring reliable data delivery and improved financial decision-making~\\[\itemSpacing]
+		\item Introduced \textbf{Azure} Monitor alerts and health checks integrated with Slack via \textbf{Terraform}, \textbf{Rust}, and websockets, cutting service downtime by \textbf{95\%} and reducing on-call load for engineers~\\[\itemSpacing]
+		\item Responded directly to customer support tickets, troubleshooting production issues and coordinating fixes across teammates, improving average resolution time from 1 hour to under \textbf{5 minutes} and ensuring a consistent positive customer experience.~\\[\itemSpacing]
+		\item Migrated data from a legacy financial application with a non-normalized schema and redundant records to a modern platform, designing scripts that cleaned, and transformed \textbf{100,000+} rows with zero downtime or data loss~\\[\itemSpacing]
+		\item Optimized core reporting features by analyzing \textbf{PostgreSQL} query plans and adding targeted indexes, cutting average response times from 2 seconds to under \textbf{400 milliseconds}
 	\end{itemize}
 }
 }~\\[0mm]
 {\customcventry{May 2021 - April 2022}{Software Engineer Co-op}{BlueCat Networks}{Toronto, ON}{}
 {\begin{itemize} \relscale{\scaleFont}
-		\item Deployed and configured \textbf{Kubernetes} clusters on \textbf{AWS} using \textbf{Helm}, \textbf{Terraform}, \textbf{Terragrunt} and \textbf{GitLab CI}, to automate and scale production deployments, reducing errors and accelerating release cycles.~\\[\itemSpacing]
-		\item Developed a \textbf{Python} query microservice using \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}, to automate daily report generation from terabytes of data, cutting report time to under 5 minutes~\\[\itemSpacing]
-		\item Wrote Kubernetes horizontal and vertical pod autoscalers to dynamically adjust resources, increasing max traffic by over 9 times and improving service stability during spikes.~\\[\itemSpacing]
-		\item Built REST APIs, integration tests, and end-to-end tests for a \textbf{Java} codebase with \textbf{Gradle} and \textbf{Jenkins}, ensuring higher code quality and seamless deployment in CI/CD pipelines.~\\[\itemSpacing]
-		\item Configured \textbf{Prometheus} Alertmanager and \textbf{Grafana} dashboards for production monitoring, reducing alert response times by 85\% through improved error tracking and timely notifications.~\\[\itemSpacing]
-		\item Merged 7 pull requests for highly requested features for the open source Trino Helm chart on GitHub, enhancing database security and scalability features based on user feedback, leading to broader adoption and improved reliability.
+		\item Deployed and configured \textbf{Kubernetes} clusters for our data platform on \textbf{AWS} using \textbf{Helm}, \textbf{Terraform}, \textbf{Terragrunt} and \textbf{GitLab CI}, to automate and scale production deployments, reducing errors and accelerating release cycles for Fortune 500 companies serving \textbf{100 million+} people worldwide~\\[\itemSpacing]
+		\item Developed a \textbf{Python} query microservice using \textbf{SQL}, \textbf{Docker}, and \textbf{Apache Airflow}, to automate daily report generation from terabytes of DNS and advertising data, cutting report time to under \textbf{5 minutes}~\\[\itemSpacing]
+		\item Wrote Kubernetes horizontal and vertical pod autoscalers to dynamically adjust resources, increasing max traffic by over \textbf{9 times} and improving service stability during spikes~\\[\itemSpacing]
+		\item Built REST APIs, integration tests, and end-to-end tests for a \textbf{Java} codebase with \textbf{Gradle} and \textbf{Jenkins}, ensuring higher code quality and seamless deployment in CI/CD pipelines~\\[\itemSpacing]
+		\item Configured \textbf{Prometheus} Alertmanager and \textbf{Grafana} dashboards for production monitoring, reducing alert response times by \textbf{85\%} through improved error tracking and timely notifications~\\[\itemSpacing]
+		\item Merged 7 pull requests for highly requested features for the open source Trino Helm chart on GitHub, enhancing database security and scalability features based on user feedback, leading to broader adoption and improved reliability
 	\end{itemize}
 }
-}~\\[-12mm]
+}~\\[-10mm]
 
 \section{PROJECTS} \leavevmode \\[\headingSpace]
-{\customcvproject{GoRust Recipe Gallery}{\href{https://github.com/Epicsteve2/go-rust-recipe-gallery}{\faGithub\enspace GitHub}}~\\[-22mm]
+{\customcvproject{GoRust Recipe Gallery}{\href{https://github.com/Epicsteve2/go-rust-recipe-gallery}{\faGithub\enspace GitHub}}~\\[-20mm]
 {\begin{itemize} \relscale{\scaleFont}
-	\item Developed a fault-tolerant recipe sharing application featuring a responsive, modern UI styled with \textbf{Tailwind CSS}, leveraging \textbf{Rust} for the frontend and \textbf{Go} for the backend to deliver high performance and maintainable code.~\\[\itemSpacing]
+	\item Developed a fault-tolerant recipe sharing application featuring a responsive, modern UI styled with \textbf{Tailwind CSS}, leveraging \textbf{Rust} for the frontend and \textbf{Go} for the backend to deliver high performance and maintainable code~\\[\itemSpacing]
 	\item Designed and implemented RESTful APIs, complemented by comprehensive end-to-end test coverage using \textbf{Playwright}, ensuring code reliability and enabling automated validation of complex user interactions.
 \end{itemize}
 }
-~\\[-15mm]
+~\\[-13mm]
 
 %% force remove new page
 %% https://stackoverflow.com/a/62581982
 %% seems like this tends to break if there isn't a new page or smth, idk
 % \let\clearpage\relax
 \section{TECHNICAL SKILLS} \leavevmode \\[\headingSpace]
-{\relscale{0.9}
+{\relscale{\scaleFont}
 \textbf{Languages:}
 JavaScript/TypeScript,\hspace*{\skillSpacing}
 Python,\hspace*{\skillSpacing}
@@ -155,16 +157,16 @@ Rust,\hspace*{\skillSpacing}
 C,\hspace*{\skillSpacing}
 Bash/Shell,\hspace*{\skillSpacing}
 SQL\hspace*{\skillSpacing}
-\\[-0.5mm]
+\\[0mm]
 \textbf{Libraries/Frameworks:}
 GraphQL,\hspace*{\skillSpacing}
 NestJS,\hspace*{\skillSpacing}
 TypeORM,\hspace*{\skillSpacing}
 Tailwind CSS,\hspace*{\skillSpacing}
-Svelte,\hspace*{\skillSpacing}
+Jenkins,\hspace*{\skillSpacing}
 Jest,\hspace*{\skillSpacing}
-Playwright
-\\[-0.5mm]
+Svelte\hspace*{\skillSpacing}
+\\[0mm]
 \textbf{Other:}
 Kubernetes,\hspace*{\skillSpacing}
 Helm,\hspace*{\skillSpacing}
