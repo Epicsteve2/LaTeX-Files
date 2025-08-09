@@ -1,10 +1,10 @@
 # yaml-language-server: $schema=https://taskfile.dev/schema.json
 # version: '3.28'
-version: '3'
+version: "3"
 
 tasks:
   default:
-    cmd: 
+    cmd:
       task: build
 
   build:
@@ -13,21 +13,21 @@ tasks:
     sources:
       - "*.tex"
     cmds:
-      - for: sources 
+      - for: sources
         task: build-pdf
-        vars: 
-          FILE: '{{.ITEM}}'
+        vars:
+          FILE: "{{.ITEM}}"
     desc: |
       builds all tex files if they haven't changed
 
   build-pdf:
-    label: 'build-{{.FILE}}'
+    label: "build-{{.FILE}}"
     requires:
       vars:
         - FILE
     dir: src/
-    sources: 
-      - '{{.FILE}}'
+    sources:
+      - "{{.FILE}}"
       - 'images/{{trimSuffix ".tex" .FILE }}*'
     cmd: latexmk --pdf --quiet --output-directory=../pdf/ {{.FILE | shellQuote}}
     generates:
@@ -40,3 +40,13 @@ tasks:
       - latexmk -c --output-directory=../pdf/
     desc: |
       clean all build files except for PDFs
+
+  read-resume:
+    dir: src/
+    env:
+      TEXT_FILE: /tmp/stephen-guo-resume.txt
+      SOUND_FILE: /tmp/stephen-guo-resume.wav
+    cmds:
+      - pdftotext stephen-guo-resume.pdf "${TEXT_FILE}"
+      - espeak -f "${TEXT_FILE}" -w "${SOUND_FILE}"
+      - mpv "${SOUND_FILE}"

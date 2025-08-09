@@ -31,6 +31,8 @@
               texlive.combined.scheme-full
               texlab
               tectonic
+              espeak
+              poppler_utils
             ];
           };
         }
