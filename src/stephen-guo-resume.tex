@@ -14,7 +14,9 @@
 % big breaking changes from v2.3.1 to v2.4.1. Color must be before style, and first name color is lighter
 \moderncvcolor{blue}                              % color options 'blue' (default), 'orange', 'green', 'red', 'purple', 'grey' and 'black'
 \moderncvstyle{banking}                           % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
-\colorlet{firstnamecolor}{lastnamecolor}
+
+%% breaking change again. lol
+% \colorlet{firstnamecolor}{lastnamecolor}
 
 %----------------------------------------------------------------------------------
 %            packages
@@ -111,13 +113,26 @@
 
 ~\\[-14mm]
 \section{EXPERIENCE} \leavevmode \\[\headingSpace]
-{\customcventry{October 2025 - Present}{Backend Engineer}{Ridges}{Toronto, ON}{}
+{\customcventry{September 2025 - Present}{Backend Engineer}{Ridges}{Toronto, ON}{}
 {\begin{itemize} \relscale{\scaleFont}
 		\item Python, AWS~\\[\itemSpacing]
+		\item Developed and maintained a platform enabling users to build AI agents, benchmark model performance, and participate in ranking systems.~\\[\itemSpacing]
+		      % What did i do?
+		      % tech stack, python, aws, 
+		      % created and maintained a platform for users to develop ai agents, benchmark them, and rank them
+		      % write a lot of postgresql scripts with a lot of complex aggregation, and window functions. also improve performance, by turning views into regular tables, or adding indexes
+		      % basically, site reliability engineering. ssh into machines, grepping for logs, making live patches, preformance increases, and added caching
+		      % setup aws infrastructure. but it's just ec2, and a few SQS queues nad lambdas.
+		      % python fastapi CRUD. but also implemented a crypto payment system on the bittensor network
+		      % it's a startup, so i did long work hours. making sure system is efficient 
+		      % dealt with customer tickets as well, doing dataabse queries to fix issues 
+		      % started Kubernetes cluister wth a bunch of technologies like argocd, opentofu, helm, kustomize, but was never released
+		      % nextjs
+		      % wrote a lot of docs, both for external and internal use
 	\end{itemize}
 }
 }~\\[0mm]
-{\customcventry{October 2024 - Present}{Software Engineer}{Leap Softwares}{Toronto, ON}{}
+{\customcventry{October 2024 - September 2025}{Software Engineer}{Leap Softwares}{Toronto, ON}{}
 {\begin{itemize} \relscale{\scaleFont}
 		\item Built secure, type-safe \textbf{GraphQL} endpoints and automated PDF/Excel reporting tools for a financial services management system, using \textbf{TypeScript}, \textbf{NestJS}, \textbf{PostgreSQL}, \textbf{TypeORM}, and \textbf{Redis}, ensuring reliable data delivery and improved financial decision-making~\\[\itemSpacing]
 		\item Introduced \textbf{Azure} Monitor alerts and health checks integrated with Slack via \textbf{Terraform}, \textbf{Rust}, and websockets, cutting service downtime by \textbf{95\%} and reducing on-call load for engineers~\\[\itemSpacing]
@@ -145,6 +160,7 @@
 % 	\item Developed a fault-tolerant recipe sharing application featuring a responsive, modern UI styled with \textbf{Tailwind CSS}, leveraging \textbf{Rust} for the frontend and \textbf{Go} for the backend to deliver high performance and maintainable code~\\[\itemSpacing]
 % 	\item Designed and implemented RESTful APIs, complemented by comprehensive end-to-end test coverage using \textbf{Playwright}, ensuring code reliability and enabling automated validation of complex user interactions.
 % \end{itemize}
+% }
 % }
 % ~\\[-13mm]
 
@@ -178,13 +194,12 @@ Kubernetes,\hspace*{\skillSpacing}
 Helm,\hspace*{\skillSpacing}
 Terraform,\hspace*{\skillSpacing}
 AWS,\hspace*{\skillSpacing}
-% Microsoft Azure,\hspace*{\skillSpacing}
 Azure,\hspace*{\skillSpacing}
 GitLab CI,\hspace*{\skillSpacing}
 Docker,\hspace*{\skillSpacing}
 Unix/Linux,\hspace*{\skillSpacing}
 Git,\hspace*{\skillSpacing}
-Vim\hspace*{\skillSpacing}}
+Vim\hspace*{\skillSpacing}
 }
 
 \end{document}
