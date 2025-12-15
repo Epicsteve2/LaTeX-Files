@@ -32,7 +32,7 @@
               texlab
               tectonic
               espeak
-              poppler_utils
+              poppler-utils
             ];
           };
         }
