@@ -29,7 +29,7 @@ tasks:
     sources:
       - "{{.FILE}}"
       - 'images/{{trimSuffix ".tex" .FILE }}*'
-    cmd: latexmk --pdf --quiet --output-directory=../pdf/ {{.FILE | shellQuote}}
+    cmd: latexmk --pdf --quiet -g --output-directory=../pdf/ {{.FILE | shellQuote}}
     generates:
       - ../pdf/{{trimSuffix ".tex" .FILE }}.pdf
 

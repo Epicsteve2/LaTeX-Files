@@ -16,7 +16,7 @@
 \moderncvstyle{banking}                           % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
 
 %% breaking change again. lol
-% \colorlet{firstnamecolor}{lastnamecolor}
+\colorlet{firstnamecolor}{lastnamecolor}
 
 %----------------------------------------------------------------------------------
 %            packages
@@ -35,7 +35,7 @@
 %----------------------------------------------------------------------------------
 %            variables
 %----------------------------------------------------------------------------------
-\def \scaleFont {0.9} % increase font size!
+\def \scaleFont {0.87} % increase font size!
 \renewcommand{\RSpercentTolerance}{1} % default is 5. Change step size for relsize for more fine-tune conrtrol of font sizes
 \name{Stephen}{Guo}
 \def \headingSpace {-7.5mm * \real{\scaleFont}} % vertical space after every header
@@ -106,17 +106,23 @@
 ~\\[-18mm]
 \section{EDUCATION} \leavevmode \\[\headingSpace]
 {\customcventry{September 2019 - April 2024}{Honours Bachelor of Science, Computer Science}{University of Toronto}{Toronto, ON}{}
-{\relscale{1.15}
+{\relscale{0.9}
 	cGPA: 3.57 / 4.0
 }
 }
 
 ~\\[-14mm]
 \section{EXPERIENCE} \leavevmode \\[\headingSpace]
-{\customcventry{September 2025 - Present}{Backend Engineer}{Ridges}{Toronto, ON}{}
+{\customcventry{September 2025 - Present}{Backend Software Engineer}{Ridges}{Toronto, ON}{}
 {\begin{itemize} \relscale{\scaleFont}
-		\item Python, AWS~\\[\itemSpacing]
-		\item Developed and maintained a platform enabling users to build AI agents, benchmark model performance, and participate in ranking systems.~\\[\itemSpacing]
+		% \item Python, AWS~\\[\itemSpacing]
+		\item Developed and maintained a \textbf{Python FastAPI}, \textbf{PostgreSQL}, and \textbf{Next.js} platform enabling \textbf{1200+} users to build AI agents, benchmark model performance, and participate in ranking systems, resulting in a state of the art agent solving \textbf{96\%} of Polyglot Python problems~\\[\itemSpacing]
+		\item Took cross-functional ownership in a high-pressure startup environment by balancing backend development, SRE tasks, support tickets, and infra work, accelerating feature delivery by \textbf{30\%} and reducing dependency on specialized roles~\\[\itemSpacing]
+		\item Maintained production reliability for a high-uptime AI platform by SSHing into machines, analyzing logs, deploying live patches and applying targeted caching strategies, resulting in \textbf{99\% uptime}~\\[\itemSpacing]
+		\item Reduced cloud infrastructure costs by implementing EC2 autoscaling policies, automatically shutting down idle development environments, and migrating workloads off Vercel to self-managed infrastructure, resulting in \textbf{45\%} lower monthly cloud spend and \textbf{\$60k+} annualized savings while maintaining system performance~\\[\itemSpacing]
+		\item Prototyped a \textbf{Kubernetes} deployment platform using \textbf{ArgoCD}, \textbf{Helm}, \textbf{Kustomize}, and \textbf{OpenTofu}, creating a launch-ready infrastructure foundation that was later deprioritized due to shifting product priorities~\\[\itemSpacing]
+		      % \item Designed a Kubernetes-based deployment pipeline (S/T) using ArgoCD, Helm, Kustomize, and OpenTofu (A), creating a cluster design capable of supporting 10k+ concurrent jobs and improving deployment consistency by 50\% (R), even though it was not launched.
+		      % \item Addressed platform performance bottlenecks by rewriting complex \textbf{PostgreSQL} queries, applying window functions, adding indexes, and converting costly views into materialized tables, yielding a \textbf{5 times} improvement in query latency and \textbf{85\%} lower DB load.
 		      % What did i do?
 		      % tech stack, python, aws, 
 		      % created and maintained a platform for users to develop ai agents, benchmark them, and rank them
@@ -174,13 +180,14 @@
 JavaScript/TypeScript,\hspace*{\skillSpacing}
 Python,\hspace*{\skillSpacing}
 Java,\hspace*{\skillSpacing}
-Go,\hspace*{\skillSpacing}
 Rust,\hspace*{\skillSpacing}
-C,\hspace*{\skillSpacing}
+Go,\hspace*{\skillSpacing}
 Bash/Shell,\hspace*{\skillSpacing}
 SQL\hspace*{\skillSpacing}
 \\[0mm]
 \textbf{Libraries/Frameworks:}
+React,\hspace*{\skillSpacing}
+Next.js,\hspace*{\skillSpacing}
 GraphQL,\hspace*{\skillSpacing}
 NestJS,\hspace*{\skillSpacing}
 TypeORM,\hspace*{\skillSpacing}
